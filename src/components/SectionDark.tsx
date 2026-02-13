@@ -26,7 +26,7 @@ export default function SectionDark() {
         <p className="section-label section-label-teal">PRICING</p>
         <h2 className="section-title section-title-light">Tailored Packages</h2>
         <p className="section-desc section-desc-light section-desc-center">We offer flexible packages to suit different needs and budgets. Choose the plan that fits your recovery journey.</p>
-        <div className="section-cta"><a href="#" className="btn btn-primary">View Packages</a></div>
+        <div className="section-cta"><a href="#" className="btn btn-primary">View Packages →</a></div>
       </div>
     </section>
   );

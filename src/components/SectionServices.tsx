@@ -68,7 +68,7 @@ export default function SectionServices() {
           ))}
         </div>
         <p className="section-extra">Our integrated approach ensures you receive coordinated care from initial consultation through to full recovery. We work closely with physicians and families to achieve the best outcomes.</p>
-        <div className="section-cta"><a href="#" className="btn btn-primary">View All Services</a></div>
+        <div className="section-cta"><a href="#" className="btn btn-primary">View All Services →</a></div>
       </div>
     </section>
   );

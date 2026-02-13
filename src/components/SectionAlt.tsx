@@ -109,7 +109,7 @@ export default function SectionAlt() {
           ))}
         </div>
         <div className="section-cta section-alt-cta">
-          <Link to="/contact" className="btn btn-primary btn-alt-cta">Book an Appointment →</Link>
+          <Link to="/contact" className="btn btn-primary">Book an Appointment →</Link>
         </div>
       </div>
     </section>

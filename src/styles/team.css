@@ -193,11 +193,8 @@
   padding: 0 8px;
 }
 
-.btn-sm {
-  padding: 10px 20px;
-  font-size: 13px;
-  margin-bottom: 24px;
-}
+/* Buttons use global .btn .btn-primary (same size everywhere) */
+.team-cta-text .cta-buttons .btn { margin-bottom: 0; }
 
 /* CTA Section at Bottom */
 .team-cta-content {

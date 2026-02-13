@@ -82,10 +82,6 @@
   margin-bottom: 20px;
 }
 
-.whatsapp-icon {
-  background: #25D366;
-}
-
 .booking-card-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -143,25 +139,7 @@
   min-height: 100px;
 }
 
-.btn-submit,
-.btn-calculate {
-  width: 100%;
-  padding: 14px 24px;
-  background: #00A79E;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.btn-submit:hover,
-.btn-calculate:hover {
-  background: #008c84;
-  transform: translateY(-1px);
-}
+/* Submit / Calculate use global .btn .btn-primary */
 
 /* WhatsApp Card */
 .whatsapp-info {
@@ -179,27 +157,8 @@
   margin: 0;
 }
 
-.btn-whatsapp {
-  width: 100%;
-  padding: 14px 24px;
-  background: #25D366;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.btn-whatsapp:hover {
-  background: #20ba5a;
-  transform: translateY(-1px);
-}
+/* WhatsApp button uses .btn .btn-secondary; green icon only here */
+.booking-card .btn-whatsapp svg { color: #25D366; }
 
 /* Calculator Section */
 .calculator-section {
@@ -346,22 +305,9 @@
   flex-wrap: wrap;
 }
 
-.btn-outline-light {
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
+.contact-cta-buttons .btn-whatsapp svg { color: #25D366; }
 
-.btn-outline-light:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
+/* .btn-outline-light defined in index.css (dark-section variant) */
 
 /* Responsive Design */
 @media (max-width: 1024px) {

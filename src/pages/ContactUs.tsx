@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { WhatsAppIcon } from '../components/Icons';
 import '../styles/contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -176,7 +177,7 @@ export default function ContactUs() {
                   />
                 </div>
 
-                <button type="submit" className="btn-submit">Submit</button>
+                <button type="submit" className="btn btn-primary btn-block">Submit</button>
               </form>
             </div>
 
@@ -200,9 +201,10 @@ export default function ContactUs() {
 
               <button 
                 type="button" 
-                className="btn-whatsapp"
+                className="btn btn-secondary btn-whatsapp"
                 onClick={handleWhatsAppClick}
               >
+                <WhatsAppIcon className="whatsapp-icon" />
                 Book on WhatsApp →
               </button>
             </div>
@@ -260,7 +262,7 @@ export default function ContactUs() {
                   </div>
                 </div>
 
-                <button type="submit" className="btn-calculate">Calculate BMI</button>
+                <button type="submit" className="btn btn-primary btn-block">Calculate BMI</button>
 
                 {bmiResult && (
                   <div className="calculator-result">
@@ -293,8 +295,11 @@ export default function ContactUs() {
               Discover personalized rehabilitation programs designed to help you regain strength, mobility, and quality of life. Our expert team is ready to create a tailored plan that addresses your needs and accelerates your path to wellness.
             </p>
             <div className="contact-cta-buttons">
-              <button className="btn btn-primary">Book an Appointment</button>
-              <button className="btn-outline-light">WhatsApp Us</button>
+              <button className="btn btn-primary">Book an Appointment →</button>
+              <button type="button" className="btn btn-outline-light btn-whatsapp" aria-label="WhatsApp">
+              <WhatsAppIcon className="whatsapp-icon" />
+              WhatsApp Us
+            </button>
             </div>
           </div>
         </section>

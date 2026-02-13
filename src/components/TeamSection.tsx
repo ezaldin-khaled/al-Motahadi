@@ -34,7 +34,7 @@ export default function TeamSection() {
           <p className="section-label">OUR TEAM</p>
           <h2 className="section-title">Expert Professionals Dedicated to You</h2>
           <p className="section-desc">Our multidisciplinary team brings together specialists in physical therapy, occupational therapy, and rehabilitation to deliver coordinated, compassionate care.</p>
-          <a href="#" className="btn btn-primary">Meet Our Team</a>
+          <a href="#" className="btn btn-primary">Meet Our Team →</a>
         </div>
         <div className="team-image-wrap" ref={imageRef}>
           <img src="/team-image.png" alt="AL MOTAHADI medical team — expert professionals dedicated to your care" className="team-image" />

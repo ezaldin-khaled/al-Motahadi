@@ -123,8 +123,8 @@ export default function Services() {
                 and a clear path to recovery.
               </p>
               <div className="services-cta-buttons">
-                <a href="#" className="btn-primary-cta">Book an Appointment</a>
-                <a href="#" className="btn-secondary-cta">Call Us Now</a>
+                <a href="/contact" className="btn btn-primary">Book an Appointment →</a>
+                <a href="tel:+971501234567" className="btn btn-secondary">Call Us Now</a>
               </div>
             </div>
             <div className="services-cta-info">

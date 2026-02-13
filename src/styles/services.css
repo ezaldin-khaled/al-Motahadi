@@ -179,46 +179,8 @@
   flex-wrap: wrap;
 }
 
-.btn-primary-cta {
-  display: inline-block;
-  background: #ffffff;
-  color: #0D9688;
-  padding: 16px 40px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: 2px solid #ffffff;
-  letter-spacing: 0.3px;
-}
-
-.btn-primary-cta:hover {
-  background: transparent;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn-secondary-cta {
-  display: inline-block;
-  background: transparent;
-  color: #ffffff;
-  padding: 16px 40px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.3px;
-}
-
-.btn-secondary-cta:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
-  transform: translateY(-2px);
-}
+/* Uses global .btn .btn-primary / .btn-secondary — same unified style */
+.services-cta-buttons .btn { display: inline-flex; }
 
 .services-cta-info {
   display: grid;
@@ -345,10 +307,9 @@
     flex-direction: column;
   }
 
-  .btn-primary-cta,
-  .btn-secondary-cta {
+  .services-cta-buttons .btn {
     width: 100%;
-    text-align: center;
+    justify-content: center;
   }
 
   .service-card-image {

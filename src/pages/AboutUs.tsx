@@ -47,7 +47,7 @@ export default function AboutUs() {
               personalized care that meets the needs of each patient. We strive for innovation and excellence 
               in all aspects of our services.
             </p>
-            <button className="read-more-btn">READ MORE</button>
+            <button type="button" className="btn btn-primary">READ MORE</button>
           </div>
         </section>
 
@@ -223,7 +223,7 @@ export default function AboutUs() {
                 />
               </div>
             </div>
-            <button className="read-more-btn">READ MORE</button>
+            <button type="button" className="btn btn-primary">READ MORE</button>
           </div>
         </section>
 
@@ -249,7 +249,7 @@ export default function AboutUs() {
                   advancement of healthcare in our region.
                 </p>
               </div>
-              <button className="read-more-btn">READ MORE</button>
+              <button type="button" className="btn btn-primary">READ MORE</button>
             </div>
           </div>
         </section>
@@ -284,7 +284,7 @@ export default function AboutUs() {
                   <input type="number" id="height" placeholder="" />
                 </div>
               </div>
-              <button className="calculate-btn">CALCULATE</button>
+              <button type="button" className="btn btn-primary">CALCULATE</button>
             </div>
           </div>
         </section>

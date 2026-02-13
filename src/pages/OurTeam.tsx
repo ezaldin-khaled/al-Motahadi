@@ -39,7 +39,7 @@ function OurTeam() {
             long-term success.
           </p>
           <div className="section-cta">
-            <a href="/contact" className="btn btn-primary">Schedule a Consultation</a>
+            <a href="/contact" className="btn btn-primary">Schedule a Consultation →</a>
           </div>
         </div>
       </section>
@@ -160,7 +160,7 @@ function OurTeam() {
             lasting recovery.
           </p>
           <div className="section-cta">
-            <a href="/contact" className="btn btn-primary">Get in Touch Today</a>
+            <a href="/contact" className="btn btn-primary">Get in Touch Today →</a>
           </div>
         </div>
       </section>
@@ -180,7 +180,7 @@ function OurTeam() {
                 Board-certified in addiction medicine with over 15 years of experience. Dr. Al-Mutahadi 
                 leads our clinical team with a focus on evidence-based treatment and patient-centered care.
               </p>
-              <a href="/contact" className="btn btn-primary btn-sm">Book Appointment</a>
+              <a href="/contact" className="btn btn-primary">Book Appointment →</a>
             </div>
 
             <div className="team-member-card">
@@ -193,7 +193,7 @@ function OurTeam() {
                 Specializing in trauma-informed therapy and cognitive behavioral approaches, Dr. Johnson 
                 provides compassionate psychological support tailored to each patient's needs.
               </p>
-              <a href="/contact" className="btn btn-primary btn-sm">Book Appointment</a>
+              <a href="/contact" className="btn btn-primary">Book Appointment →</a>
             </div>
 
             <div className="team-member-card">
@@ -206,7 +206,7 @@ function OurTeam() {
                 With extensive experience in rehabilitation nursing, Fatima ensures seamless coordination 
                 of care and provides hands-on support throughout the recovery process.
               </p>
-              <a href="/contact" className="btn btn-primary btn-sm">Book Appointment</a>
+              <a href="/contact" className="btn btn-primary">Book Appointment →</a>
             </div>
           </div>
         </div>
@@ -224,8 +224,8 @@ function OurTeam() {
                 personalized care and evidence-based treatment approaches.
               </p>
               <div className="cta-buttons">
-                <a href="/contact" className="btn btn-primary">Schedule Consultation</a>
-                <a href="tel:+966123456789" className="btn btn-outline-light">Call Now</a>
+                <a href="/contact" className="btn btn-primary">Schedule Consultation →</a>
+                <a href="tel:+966123456789" className="btn btn-outline-light" aria-label="Call now">Call Now</a>
               </div>
             </div>
             <div className="team-cta-form">
