@@ -37,7 +37,7 @@ export default function TeamSection() {
           <a href="#" className="btn btn-primary">Meet Our Team</a>
         </div>
         <div className="team-image-wrap" ref={imageRef}>
-          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" alt="Our team" className="team-image" />
+          <img src="/team-image.png" alt="AL MOTAHADI medical team — expert professionals dedicated to your care" className="team-image" />
         </div>
       </div>
     </section>

@@ -34,8 +34,8 @@ export default function SectionValues() {
       <div className="section-values-inner">
         <div className="about-section">
           <div className="about-images" ref={imagesRef}>
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80" alt="Therapy session" className="about-img-main" />
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80" alt="Facility" className="about-img-inset" />
+            <img src="/about-main.png" alt="Therapist working with patient at AL MOTAHADI — compassionate rehabilitation care" className="about-img-main" />
+            <img src="/about-overlay.png" alt="Modern clinic interior at AL MOTAHADI — bright, spacious rehabilitation facility" className="about-img-inset" />
           </div>
           <div className="about-content" ref={contentRef}>
             <p className="section-label section-label-about">About Our Center</p>

@@ -47,7 +47,7 @@ export default function Hero() {
         </div>
         <div className="hero-image-wrap" ref={imageRef}>
           <div className="hero-image-container">
-            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Healthcare professional with patient" className="hero-image" />
+            <img src="/hero-image.png" alt="Compassionate rehabilitation care at AL MOTAHADI center — healthcare professional with patient" className="hero-image" />
             <div className="image-badge image-badge-dark" ref={badgeRef}>
               <strong>Trusted Healthcare</strong>
               <span>500+ patients rehabilitated</span>

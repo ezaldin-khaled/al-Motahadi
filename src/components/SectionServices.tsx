@@ -6,22 +6,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80',
+    img: '/service-left.png',
     title: 'Physical Therapy',
     desc: 'Restore mobility and reduce pain through evidence-based techniques and personalized exercise programs.',
-    alt: 'Physical Therapy',
+    alt: 'Therapist assisting patient with arm exercises in a comfortable setting',
   },
   {
-    img: 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&q=80',
-    title: 'Occupational Therapy',
-    desc: 'Regain independence in daily activities with targeted interventions and adaptive strategies.',
-    alt: 'Occupational Therapy',
+    img: '/service-middle.png',
+    title: 'Neurological & Organic Rehabilitation',
+    desc: 'Specialized programs for neurological and organic conditions with comprehensive, evidence-based care.',
+    alt: 'Neurological and Organic Rehabilitation Services',
   },
   {
-    img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&q=80',
+    img: '/service-right.png',
     title: 'Rehabilitation',
     desc: 'Comprehensive programs for post-surgery, injury, and chronic condition management.',
-    alt: 'Rehabilitation',
+    alt: 'Therapist guiding patient with resistance band exercise in wheelchair',
   },
 ];
 

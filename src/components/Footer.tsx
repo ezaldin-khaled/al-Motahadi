@@ -25,6 +25,9 @@ export default function Footer() {
       <div className="footer-divider" />
       <div className="footer-main" ref={mainRef}>
         <div className="footer-brand">
+          <div className="footer-logo-wrap">
+            <img src="/SVG.png" alt="" className="footer-logo-img" />
+          </div>
           <span className="footer-logo">AL MOTAHADI</span>
           <p className="footer-desc">Committed to restoring movement and improving lives through expert rehabilitation care.</p>
           <div className="footer-social">
