@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Header from '../components/Header';
+import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import '../styles/about.css';
 
@@ -12,24 +13,27 @@ export default function AboutUs() {
     <div className="page-wrapper">
       <Header />
       <main className="about-page">
-        {/* Hero Section */}
-        <section className="about-hero">
-          <div className="about-hero-content">
-            <h1 className="about-hero-title">
-              Together for a<br />
-              <span className="text-accent">Healthier Future</span>
-            </h1>
-            <p className="about-hero-desc">
-              We provide personalized care through expert teams and advanced facilities, 
-              committed to a comprehensive journey from diagnosis to recovery.
-            </p>
-          </div>
-          <div className="about-hero-image">
-            <div className="hero-image-card">
-              <img 
-                src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=80" 
-                alt="Medical professionals in consultation" 
-              />
+        {/* Hero Section - full-bleed gradient background per design */}
+        <section className="about-hero" aria-label="About us hero">
+          <div className="about-hero-bg" aria-hidden="true" />
+          <div className="about-hero-inner">
+            <div className="about-hero-content">
+              <span className="about-hero-label">ABOUT US</span>
+              <h1 className="about-hero-title">
+                Together for a <span className="text-accent">Healthier Future</span>
+              </h1>
+              <p className="about-hero-desc">
+                Your journey toward recovery begins here… where pain turns into hope, and treatment 
+                becomes a fully integrated human experience that brings together science, precision, and care.
+              </p>
+            </div>
+            <div className="about-hero-image">
+              <div className="hero-image-card">
+                <img 
+                  src="/rehab-about-hero.png"
+                  alt="Rehabilitation session with therapist and patient"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -39,34 +43,15 @@ export default function AboutUs() {
           <div className="who-we-are-container">
             <h2 className="section-heading">WHO WE ARE</h2>
             <p className="who-we-are-text">
-              At Almotahadi Leisure Trust, we stand as a symbol of sustainable healthcare in our community. 
-              We are dedicated to providing comprehensive medical care in a professional environment that 
-              focuses on the patient and the individual. We believe that health is not just about treating 
-              illness, but about enhancing the quality of life and promoting overall well-being. Our team 
-              comprises a select group of experienced medical professionals committed to delivering 
-              personalized care that meets the needs of each patient. We strive for innovation and excellence 
-              in all aspects of our services.
+              AL Motahadi Medical Rehabilitation Center is dedicated to providing exceptional rehabilitation care that goes beyond just treatment. Our focus is on restoring a patient&apos;s movement, confidence, and quality of life through personalized and evidence-based therapy. As a leading center in physical therapy and medical rehabilitation, we operate with the highest medical standards, using the latest global treatment protocols. We stand out as the founders of an international research network that spans over 100 centers in 19 countries, allowing us to continuously update our treatment plans based on the most current scientific advancements. We offer flexible treatment options tailored to each patient&apos;s needs, whether at our center or at home, with a dedicated transportation service to ensure continuous care. Our sessions are personalized and focused on individual treatment plans rather than fixed time durations, making the patient experience more effective and impactful. At AL Motahadi, we prioritize the human aspect of rehabilitation, placing the patient&apos;s comfort and needs at the core of every step of their therapeutic journey.
             </p>
-            <button type="button" className="btn btn-primary">READ MORE</button>
+            <button type="button" className="btn btn-primary">View detail →</button>
           </div>
         </section>
 
-        {/* Two Info Cards Section */}
+        {/* Our Vision & Our Mission Section */}
         <section className="info-cards-section">
           <div className="info-cards-container">
-            <div className="info-card">
-              <div className="info-card-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 11l3 3L22 4"></path>
-                  <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                </svg>
-              </div>
-              <h3 className="info-card-title">Our Mission</h3>
-              <p className="info-card-text">
-                To provide exceptional healthcare services that improve the quality of life for our patients 
-                through compassionate care, medical excellence, and innovative treatment approaches.
-              </p>
-            </div>
             <div className="info-card">
               <div className="info-card-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -76,52 +61,110 @@ export default function AboutUs() {
               </div>
               <h3 className="info-card-title">Our Vision</h3>
               <p className="info-card-text">
-                To be the leading healthcare provider recognized for excellence in patient care, 
-                medical innovation, and community health advancement in the region.
+                To be a leading and reference center in the Sultanate of Oman and the region in the field of medical rehabilitation and physical therapy, by delivering therapeutic and research services of global quality and transforming the rehabilitation journey into a true story of life restoration.
+              </p>
+            </div>
+            <div className="info-card">
+              <div className="info-card-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </div>
+              <h3 className="info-card-title">Our Mission</h3>
+              <p className="info-card-text">
+                To provide comprehensive medical rehabilitation services based on advanced scientific treatment protocols, while respecting privacy, personalizing treatment for each patient, and strengthening mutual trust between the patient and the medical team.
               </p>
             </div>
           </div>
         </section>
 
         {/* Our Values Section */}
-        <section className="our-values">
-          <h2 className="section-heading">Our Values</h2>
+        <section className="our-values" aria-label="Our values">
+          <span className="our-values-subheading">WHAT WE STAND FOR</span>
+          <h2 className="our-values-title">Our Values</h2>
           <div className="values-grid">
             <div className="value-card">
               <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
               </div>
-              <h3 className="value-title">Care and Compassion</h3>
+              <h3 className="value-title">Human First</h3>
               <p className="value-desc">
-                We treat every patient with the care and respect they deserve.
+                We place the patient at the center of every decision and step.
               </p>
             </div>
 
             <div className="value-card">
               <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 3v5l-4 10h14L15 8V3"></path>
+                  <path d="M9 3h6"></path>
                 </svg>
               </div>
-              <h3 className="value-title">Professionalism</h3>
+              <h3 className="value-title">Scientific Excellence</h3>
               <p className="value-desc">
-                We maintain the highest standards in medical practice.
+                We innovate and lead through the latest global research-based protocols.
               </p>
             </div>
 
             <div className="value-card">
               <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              </div>
+              <h3 className="value-title">Transparency and Trust</h3>
+              <p className="value-desc">
+                We build our relationship with patients and the community on honesty and clarity.
+              </p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </div>
+              <h3 className="value-title">Professional Confidentiality</h3>
+              <p className="value-desc">
+                We adhere to the highest standards of patient data protection and privacy.
+              </p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18h6"></path>
+                  <path d="M10 22h4"></path>
+                  <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 2a4 4 0 0 0-4 4v2"></path>
+                  <path d="M12 2a4 4 0 0 1 4 4v2"></path>
                 </svg>
               </div>
               <h3 className="value-title">Innovation</h3>
               <p className="value-desc">
-                Utilizing the latest medical technologies and treatments.
+                We integrate science, experience, and technology to make a real difference.
+              </p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h3 className="value-title">Responsibility</h3>
+              <p className="value-desc">
+                Serving the community is a core and firmly rooted part of our identity.
               </p>
             </div>
           </div>
@@ -288,6 +331,9 @@ export default function AboutUs() {
             </div>
           </div>
         </section>
+
+        {/* CTA Section */}
+        <CtaSection />
       </main>
       <Footer />
     </div>

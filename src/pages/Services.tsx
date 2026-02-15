@@ -1,6 +1,13 @@
 import { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import {
+  CTA_DESCRIPTION,
+  CTA_HEADING,
+  CTA_HEADING_ACCENT,
+  CONTACT_PATH,
+  PRIMARY_CTA_LABEL,
+} from '../constants/cta';
 import '../styles/services.css';
 
 export default function Services() {
@@ -117,13 +124,12 @@ export default function Services() {
         <section className="services-cta-section">
           <div className="services-cta-container">
             <div className="services-cta-content">
-              <h2 className="services-cta-title">Begin Your Recovery Journey</h2>
+              <h2 className="services-cta-title">{CTA_HEADING} <span className="services-cta-title-accent">{CTA_HEADING_ACCENT}</span></h2>
               <p className="services-cta-desc">
-                Take the first step today. Our team is ready to support you with personalized care 
-                and a clear path to recovery.
+                {CTA_DESCRIPTION}
               </p>
               <div className="services-cta-buttons">
-                <a href="/contact" className="btn btn-primary">Book an Appointment →</a>
+                <a href={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</a>
                 <a href="tel:+971501234567" className="btn btn-secondary">Call Us Now</a>
               </div>
             </div>

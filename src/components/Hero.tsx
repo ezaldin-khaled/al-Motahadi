@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { WhatsAppIcon } from './Icons';
+import { CONTACT_PATH, PRIMARY_CTA_LABEL, WHATSAPP_LABEL } from '../constants/cta';
 
 export default function Hero() {
   const brandRef = useRef<HTMLParagraphElement>(null);
@@ -37,10 +39,10 @@ export default function Hero() {
             Your journey toward recovery begins here. A compassionate approach in physical rehabilitation for a transformative return to movement, strength, and independence.
           </p>
           <div className="cta-buttons" ref={ctaRef}>
-            <a href="#" className="btn btn-primary">Book an Appointment →</a>
+            <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
             <a href="#" className="btn btn-secondary btn-whatsapp">
               <WhatsAppIcon className="whatsapp-icon" />
-              Whatsapp Us
+              {WHATSAPP_LABEL}
             </a>
           </div>
         </div>

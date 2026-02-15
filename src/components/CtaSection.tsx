@@ -2,6 +2,15 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WhatsAppIcon } from './Icons';
+import {
+  CONTACT_PATH,
+  CTA_DESCRIPTION,
+  CTA_HEADING,
+  CTA_HEADING_ACCENT,
+  CTA_SECTION_LABEL,
+  PRIMARY_CTA_LABEL_SHORT,
+  WHATSAPP_LABEL,
+} from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,24 +82,24 @@ export default function CtaSection() {
         <div className="cta-content" ref={contentRef}>
           <p className="cta-label">
             <span className="cta-label-line" />
-            Get Started Today
+            {CTA_SECTION_LABEL}
           </p>
           <h2 className="cta-title">
-            Begin Your <span className="cta-title-accent">Recovery Journey</span>
+            {CTA_HEADING} <span className="cta-title-accent">{CTA_HEADING_ACCENT}</span>
           </h2>
           <p className="cta-desc">
-            Take the first step toward restored movement and improved quality of life. Our expert team is ready to create a personalized rehabilitation plan tailored to your needs.
+            {CTA_DESCRIPTION}
           </p>
           <div className="cta-buttons">
-            <a href="/contact" className="btn btn-primary">
-              Book an Appointment
+            <a href={CONTACT_PATH} className="btn btn-primary">
+              {PRIMARY_CTA_LABEL_SHORT}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
             <a href="#" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
               <WhatsAppIcon className="whatsapp-icon" />
-              Whatsapp Us
+              {WHATSAPP_LABEL}
             </a>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+import { CONTACT_PATH, PRIMARY_CTA_LABEL } from '../constants/cta';
 
 export default function Header() {
   const lineRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ export default function Header() {
             <Link to="/about">About</Link>
             <Link to="/contact">Contact Us</Link>
           </nav>
-          <Link to="/contact" className="nav-cta btn btn-primary">Book an Appointment →</Link>
+          <Link to={CONTACT_PATH} className="nav-cta btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
         </div>
       </header>
     </>

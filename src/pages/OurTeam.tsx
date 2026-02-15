@@ -1,5 +1,13 @@
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import {
+  CONTACT_PATH,
+  CTA_DESCRIPTION,
+  CTA_HEADING,
+  CTA_HEADING_ACCENT,
+  PRIMARY_CTA_LABEL,
+} from '../constants/cta';
 import '../styles/team.css';
 
 function OurTeam() {
@@ -39,7 +47,7 @@ function OurTeam() {
             long-term success.
           </p>
           <div className="section-cta">
-            <a href="/contact" className="btn btn-primary">Schedule a Consultation →</a>
+            <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
           </div>
         </div>
       </section>
@@ -160,7 +168,7 @@ function OurTeam() {
             lasting recovery.
           </p>
           <div className="section-cta">
-            <a href="/contact" className="btn btn-primary">Get in Touch Today →</a>
+            <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
           </div>
         </div>
       </section>
@@ -180,7 +188,7 @@ function OurTeam() {
                 Board-certified in addiction medicine with over 15 years of experience. Dr. Al-Mutahadi 
                 leads our clinical team with a focus on evidence-based treatment and patient-centered care.
               </p>
-              <a href="/contact" className="btn btn-primary">Book Appointment →</a>
+              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
             </div>
 
             <div className="team-member-card">
@@ -193,7 +201,7 @@ function OurTeam() {
                 Specializing in trauma-informed therapy and cognitive behavioral approaches, Dr. Johnson 
                 provides compassionate psychological support tailored to each patient's needs.
               </p>
-              <a href="/contact" className="btn btn-primary">Book Appointment →</a>
+              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
             </div>
 
             <div className="team-member-card">
@@ -206,7 +214,7 @@ function OurTeam() {
                 With extensive experience in rehabilitation nursing, Fatima ensures seamless coordination 
                 of care and provides hands-on support throughout the recovery process.
               </p>
-              <a href="/contact" className="btn btn-primary">Book Appointment →</a>
+              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
             </div>
           </div>
         </div>
@@ -218,13 +226,12 @@ function OurTeam() {
           <div className="team-cta-content">
             <div className="team-cta-text">
               <span className="section-label section-label-teal">GET STARTED</span>
-              <h2 className="section-title section-title-light">Begin Your<br />Recovery Journey</h2>
+              <h2 className="section-title section-title-light">{CTA_HEADING}<br />{CTA_HEADING_ACCENT}</h2>
               <p className="section-desc section-desc-light">
-                Take the first step toward healing. Our compassionate team is ready to support you with 
-                personalized care and evidence-based treatment approaches.
+                {CTA_DESCRIPTION}
               </p>
               <div className="cta-buttons">
-                <a href="/contact" className="btn btn-primary">Schedule Consultation →</a>
+                <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
                 <a href="tel:+966123456789" className="btn btn-outline-light" aria-label="Call now">Call Now</a>
               </div>
             </div>

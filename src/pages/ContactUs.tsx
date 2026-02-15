@@ -1,9 +1,18 @@
 import { useEffect, useRef, useState, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { WhatsAppIcon } from '../components/Icons';
+import {
+  CONTACT_PATH,
+  CTA_DESCRIPTION,
+  CTA_HEADING,
+  CTA_HEADING_ACCENT,
+  PRIMARY_CTA_LABEL,
+  WHATSAPP_LABEL,
+} from '../constants/cta';
 import '../styles/contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -290,16 +299,16 @@ export default function ContactUs() {
         <section className="contact-cta-section" ref={ctaRef}>
           <div className="contact-cta-content">
             <p className="section-label-teal">THE RECOVERY STARTS</p>
-            <h2 className="contact-cta-title">Begin Your<br /><span className="accent-text">Recovery Journey</span></h2>
+            <h2 className="contact-cta-title">{CTA_HEADING}<br /><span className="accent-text">{CTA_HEADING_ACCENT}</span></h2>
             <p className="contact-cta-desc">
-              Discover personalized rehabilitation programs designed to help you regain strength, mobility, and quality of life. Our expert team is ready to create a tailored plan that addresses your needs and accelerates your path to wellness.
+              {CTA_DESCRIPTION}
             </p>
             <div className="contact-cta-buttons">
-              <button className="btn btn-primary">Book an Appointment →</button>
-              <button type="button" className="btn btn-outline-light btn-whatsapp" aria-label="WhatsApp">
-              <WhatsAppIcon className="whatsapp-icon" />
-              WhatsApp Us
-            </button>
+              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
+              <a href="#" className="btn btn-outline-light btn-whatsapp" aria-label="WhatsApp">
+                <WhatsAppIcon className="whatsapp-icon" />
+                {WHATSAPP_LABEL}
+              </a>
             </div>
           </div>
         </section>

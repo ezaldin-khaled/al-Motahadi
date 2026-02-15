@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { CONTACT_PATH, PRIMARY_CTA_LABEL } from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,7 +110,7 @@ export default function SectionAlt() {
           ))}
         </div>
         <div className="section-cta section-alt-cta">
-          <Link to="/contact" className="btn btn-primary">Book an Appointment →</Link>
+          <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
         </div>
       </div>
     </section>
