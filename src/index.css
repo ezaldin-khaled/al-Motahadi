@@ -231,6 +231,7 @@ body {
 .section-desc-light { color: rgba(255,255,255,0.85); }
 .section-contact-form .content-inner { max-width: 560px; margin-left: auto; margin-right: auto; text-align: center; }
 .contact-form { text-align: left; margin-top: 24px; }
+.contact-form .form-error { margin-bottom: 16px; padding: 12px; background: #fef2f2; color: #b91c1c; border-radius: 8px; font-size: 14px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .form-input, .form-textarea {
   width: 100%; padding: 14px 16px; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 16px;

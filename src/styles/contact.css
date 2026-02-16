@@ -97,6 +97,15 @@
 }
 
 /* Form Styles */
+.form-error {
+  padding: 12px;
+  margin-bottom: 16px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
 .booking-form {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,11 @@
+{
+    "name": "almotahadi/api",
+    "description": "PHP API for Al Motahadi (contact form SMTP)",
+    "require": {
+        "php": ">=7.4",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

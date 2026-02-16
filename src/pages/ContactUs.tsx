@@ -13,6 +13,7 @@ import {
   PRIMARY_CTA_LABEL,
   WHATSAPP_LABEL,
 } from '../constants/cta';
+import { sendContact } from '../lib/api';
 import '../styles/contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,6 +28,13 @@ export default function ContactUs() {
   const [bmiHeight, setBmiHeight] = useState('');
   const [bmiResult, setBmiResult] = useState<number | null>(null);
   const [activeCalculator, setActiveCalculator] = useState<'bmi' | 'bmr'>('bmi');
+
+  const [bookingFullName, setBookingFullName] = useState('');
+  const [bookingEmail, setBookingEmail] = useState('');
+  const [bookingPhone, setBookingPhone] = useState('');
+  const [bookingMessage, setBookingMessage] = useState('');
+  const [bookingSending, setBookingSending] = useState(false);
+  const [bookingError, setBookingError] = useState('');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -96,9 +104,31 @@ export default function ContactUs() {
     return () => ctx.revert();
   }, []);
 
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('Thank you! Your appointment request has been submitted.');
+    setBookingError('');
+    setBookingSending(true);
+    try {
+      const result = await sendContact({
+        full_name: bookingFullName,
+        email: bookingEmail,
+        phone: bookingPhone || undefined,
+        message: bookingMessage || undefined,
+      });
+      if (result.success) {
+        setBookingFullName('');
+        setBookingEmail('');
+        setBookingPhone('');
+        setBookingMessage('');
+        alert(result.message || 'Thank you! Your appointment request has been submitted.');
+      } else {
+        setBookingError(result.error);
+      }
+    } catch {
+      setBookingError('Failed to send. Please try again or contact us via WhatsApp.');
+    } finally {
+      setBookingSending(false);
+    }
   };
 
   const handleWhatsAppClick = () => {
@@ -148,12 +178,17 @@ export default function ContactUs() {
               <p className="booking-card-desc">Fill out the form below and we'll get back to you shortly</p>
               
               <form className="booking-form" onSubmit={handleFormSubmit}>
+                {bookingError && (
+                  <div className="form-error" role="alert">{bookingError}</div>
+                )}
                 <div className="form-group">
                   <label className="form-label">Full Name</label>
                   <input 
                     type="text" 
                     placeholder="Enter your full name" 
                     className="form-input-contact"
+                    value={bookingFullName}
+                    onChange={(e) => setBookingFullName(e.target.value)}
                     required 
                   />
                 </div>
@@ -164,6 +199,8 @@ export default function ContactUs() {
                     type="email" 
                     placeholder="Enter your email" 
                     className="form-input-contact"
+                    value={bookingEmail}
+                    onChange={(e) => setBookingEmail(e.target.value)}
                     required 
                   />
                 </div>
@@ -174,6 +211,8 @@ export default function ContactUs() {
                     type="tel" 
                     placeholder="Enter your phone number" 
                     className="form-input-contact"
+                    value={bookingPhone}
+                    onChange={(e) => setBookingPhone(e.target.value)}
                   />
                 </div>
 
@@ -183,10 +222,14 @@ export default function ContactUs() {
                     placeholder="Tell us about any conditions or any special requirements" 
                     className="form-textarea-contact"
                     rows={4}
+                    value={bookingMessage}
+                    onChange={(e) => setBookingMessage(e.target.value)}
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                <button type="submit" className="btn btn-primary btn-block" disabled={bookingSending}>
+                  {bookingSending ? 'Sending…' : 'Submit'}
+                </button>
               </form>
             </div>
 
