@@ -73,8 +73,8 @@ export default function WhoWeAre() {
             <div className="wwa-hero-image">
               <div className="wwa-hero-image-card">
                 <img
-                  src="/rehab-about-hero.png"
-                  alt="Healthcare professional with patient in therapy room"
+                  src="/therapist-patient-rehab.png"
+                  alt="Therapist assisting patient in a calm rehabilitation environment"
                 />
               </div>
             </div>

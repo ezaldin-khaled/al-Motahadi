@@ -33,6 +33,49 @@ Then open **http://localhost:5173** in your browser.
 
 ---
 
+## Deploy to Hostinger (shared hosting)
+
+Hostinger shared hosting serves your site from `public_html/` (Apache). This project is a React SPA, so you must:
+
+- **Upload the built static files** (Vite output)
+- **Add SPA routing rewrites** so React Router routes work on refresh
+- **Upload the PHP API** folder to `public_html/api/`
+
+### Build the site locally
+
+```bash
+npm install
+npm run build
+```
+
+This produces `dist/`.
+
+### Upload static files
+
+- Upload **the contents of** `dist/` into `public_html/` (not the `dist` folder itself).
+- The SPA rewrite file is included automatically because it lives in `public/.htaccess` and Vite copies `public/` into `dist/`.
+
+### Upload the PHP API
+
+- Upload the repo’s `api/` folder to `public_html/api/`.
+- Copy `api/config.sample.php` to `api/config.php` and fill in your SMTP credentials.
+
+If you use Composer/PHPMailer, run this locally before uploading:
+
+```bash
+cd api
+composer install --no-dev
+```
+
+Then upload `api/vendor/` with the rest of `api/`.
+
+### Optional: API base URL
+
+By default the frontend calls the API at **same origin**: `/api/contact.php`.
+If your API lives elsewhere, set `VITE_API_BASE_URL` at build time.
+
+---
+
 ## Project structure
 
 ```
