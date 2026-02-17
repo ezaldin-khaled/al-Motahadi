@@ -11,7 +11,6 @@ const SERVICES_DATA = [
     description:
       'Focuses on precision medicine for pain relief, mobility, and strength, covering various conditions.',
     image: '/service-images/2.png',
-    link: '#',
   },
   {
     id: 2,
@@ -19,7 +18,6 @@ const SERVICES_DATA = [
     description:
       'Addresses injuries and post-surgical recovery, aiming for functional movement, strength, and endurance.',
     image: '/service-images/1.png',
-    link: '#',
   },
   {
     id: 3,
@@ -27,7 +25,6 @@ const SERVICES_DATA = [
     description:
       'Improves functional capacity for patients post-stroke or with chronic conditions.',
     image: '/service-images/3.png',
-    link: '#',
   },
   {
     id: 4,
@@ -35,7 +32,6 @@ const SERVICES_DATA = [
     description:
       'Treatments for dizziness, vertigo, unsteadiness, and imbalance, with personalized programs.',
     image: '/service-images/4.png',
-    link: '#',
   },
   {
     id: 5,
@@ -43,7 +39,6 @@ const SERVICES_DATA = [
     description:
       'Tailored programs for elderly individuals to maintain independence, addressing conditions like osteoporosis and dementia.',
     image: '/service-images/5.png',
-    link: '#',
   },
   {
     id: 6,
@@ -51,7 +46,6 @@ const SERVICES_DATA = [
     description:
       'High-precision, long-term care for neurological conditions like Parkinson\'s disease, muscular dystrophy, and Down syndrome.',
     image: '/service-images/6.png',
-    link: '#',
   },
   {
     id: 7,
@@ -59,7 +53,6 @@ const SERVICES_DATA = [
     description:
       "Comprehensive care for women's health needs throughout various life stages, ensuring high standards.",
     image: '/service-images/7.png',
-    link: '#',
   },
   {
     id: 8,
@@ -67,7 +60,6 @@ const SERVICES_DATA = [
     description:
       'Integrated rehabilitation programs for cancer patients to help with physical and psychological therapy at different stages.',
     image: '/service-images/8.png',
-    link: '#',
   },
   {
     id: 9,
@@ -75,7 +67,6 @@ const SERVICES_DATA = [
     description:
       'Focuses on reducing swelling and improving mobility for patients post-cancer treatment or other conditions.',
     image: '/service-images/9.png',
-    link: '#',
   },
   {
     id: 10,
@@ -83,7 +74,6 @@ const SERVICES_DATA = [
     description:
       'Customized programs using advanced techniques for weight reduction and improved fitness.',
     image: '/service-images/10.png',
-    link: '#',
   },
   {
     id: 11,
@@ -91,7 +81,6 @@ const SERVICES_DATA = [
     description:
       'Addresses speech and language difficulties in children and adults, using evidence-based programs.',
     image: '/service-images/11.png',
-    link: '#',
   },
   {
     id: 12,
@@ -99,7 +88,6 @@ const SERVICES_DATA = [
     description:
       'Specialized programs for amputees to restore movement, mobility, and support for daily life.',
     image: '/service-images/12.png',
-    link: '#',
   },
 ];
 
@@ -114,6 +102,7 @@ export default function Services() {
       <main className="services-page">
         {/* Hero Section — design: WHAT WE OFFER, Our Services, two paragraphs */}
         <section className="services-hero">
+          <div className="page-hero-bg" aria-hidden="true" />
           <div className="services-hero-content">
             <p className="services-hero-label">WHAT WE OFFER</p>
             <h1 className="services-hero-title">Our Services</h1>
@@ -126,7 +115,7 @@ export default function Services() {
           </div>
         </section>
 
-        {/* Services Grid — title overlaid on image, then description, Learn About the Service → */}
+        {/* Services Grid — title overlaid on image, then description */}
         <section className="services-grid-section">
           <div className="services-grid-container">
             <div className="services-grid">
@@ -138,9 +127,6 @@ export default function Services() {
                   </div>
                   <div className="service-card-content">
                     <p className="service-card-desc">{service.description}</p>
-                    <a href={service.link} className="service-card-link">
-                      Learn About the Service <span className="arrow">→</span>
-                    </a>
                   </div>
                 </article>
               ))}

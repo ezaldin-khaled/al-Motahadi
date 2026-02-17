@@ -13,7 +13,8 @@ function OurTeam() {
       
       {/* Hero Section */}
       <section className="team-hero">
-        <div className="content-inner">
+        <div className="page-hero-bg" aria-hidden="true" />
+        <div className="content-inner team-hero-inner">
           <h1 className="team-hero-title">Medical Team</h1>
           <p className="team-hero-desc">
             At Al Matahdi Rehabilitation Center, our medical team is comprised of highly trained, 

@@ -1,9 +1,15 @@
 /* Our Team Page Styles */
 
 .team-hero {
-  background: linear-gradient(135deg, #e8f6f5 0%, #f0faf9 100%);
+  position: relative;
+  overflow: hidden;
   padding: 80px 0 60px;
   text-align: center;
+}
+.team-hero .team-hero-inner,
+.team-hero .content-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .team-hero-title {

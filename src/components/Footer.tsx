@@ -75,6 +75,7 @@ export default function Footer() {
           <h4 className="footer-heading">COMPANY</h4>
           <Link to="/about">About Us</Link>
           <Link to="/who-we-are">Who We Are</Link>
+          <Link to="/packages">Packages & Pricing</Link>
           <Link to="/about">Our Process</Link>
           <Link to="/contact">Contact</Link>
         </div>

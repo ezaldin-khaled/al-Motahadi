@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
@@ -46,7 +47,7 @@ export default function AboutUs() {
             <p className="who-we-are-text">
               AL Motahadi Medical Rehabilitation Center is dedicated to providing exceptional rehabilitation care that goes beyond just treatment. Our focus is on restoring a patient&apos;s movement, confidence, and quality of life through personalized and evidence-based therapy. As a leading center in physical therapy and medical rehabilitation, we operate with the highest medical standards, using the latest global treatment protocols. We stand out as the founders of an international research network that spans over 100 centers in 19 countries, allowing us to continuously update our treatment plans based on the most current scientific advancements. We offer flexible treatment options tailored to each patient&apos;s needs, whether at our center or at home, with a dedicated transportation service to ensure continuous care. Our sessions are personalized and focused on individual treatment plans rather than fixed time durations, making the patient experience more effective and impactful. At AL Motahadi, we prioritize the human aspect of rehabilitation, placing the patient&apos;s comfort and needs at the core of every step of their therapeutic journey.
             </p>
-            <button type="button" className="btn btn-primary">View detail →</button>
+            <Link to="/who-we-are" className="btn btn-primary">View detail →</Link>
           </div>
         </section>
 
@@ -239,7 +240,7 @@ export default function AboutUs() {
                 <p className="medical-teams-desc">
                   They are not just a therapeutic team... but partners in creating impact.
                 </p>
-                <a href="/team" className="btn btn-primary">Meet the Medical Team →</a>
+                <Link to="/who-we-are" className="btn btn-primary">Meet the Medical Team →</Link>
               </div>
               <div className="medical-teams-image-wrap">
                 <div className="medical-teams-image">

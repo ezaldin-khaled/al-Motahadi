@@ -111,6 +111,7 @@ export default function ContactUs() {
       <main className="main-content">
         {/* Hero Section */}
         <section className="contact-hero" ref={heroRef}>
+          <div className="page-hero-bg" aria-hidden="true" />
           <div className="contact-hero-content">
             <p className="contact-hero-label">GET STARTED</p>
             <h1 className="contact-hero-title">Book Your Appointment Now</h1>

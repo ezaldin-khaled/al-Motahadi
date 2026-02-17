@@ -25,10 +25,8 @@ export default function Header() {
           <nav className="nav-links">
             <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Home</NavLink>
             <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Services</NavLink>
-            <NavLink to="/packages" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Packages & Pricing</NavLink>
             <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Our Team</NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>About</NavLink>
-            <NavLink to="/who-we-are" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Who We Are</NavLink>
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Contact Us</NavLink>
           </nav>
           <Link to={CONTACT_PATH} className="nav-cta btn btn-primary">{PRIMARY_CTA_LABEL}</Link>

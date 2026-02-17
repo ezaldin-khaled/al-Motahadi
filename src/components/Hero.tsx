@@ -28,7 +28,8 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <div className="content-inner">
+      <div className="hero-bg" aria-hidden="true" />
+      <div className="content-inner hero-inner">
         <div className="hero-text">
           <p className="brand" ref={brandRef}>AL MOTAHADI REHABILITATION CENTER</p>
           <h1 className="headline" ref={headlineRef}>

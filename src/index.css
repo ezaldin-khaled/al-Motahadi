@@ -71,8 +71,52 @@ h1, h2, h3,
 .section-process .content-inner,
 .section-dark .content-inner { padding-left: 0; padding-right: 0; }
 .section-services .content-inner { padding-top: 64px; padding-bottom: 64px; }
-.hero { margin-bottom: 0; padding-bottom: 0; }
+/* Hero: same background as about-hero (full-bleed teal gradient layer) */
+.hero {
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  min-height: 520px;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  /* Identical to .about-hero-bg: light teal tint at top and bottom */
+  background: linear-gradient(
+    180deg,
+    rgba(13, 150, 136, 0.03) 0%,
+    rgba(13, 150, 136, 0.10) 15%,
+    rgba(13, 150, 136, 0.20) 50%,
+    rgba(13, 150, 136, 0.10) 85%,
+    rgba(13, 150, 136, 0.03) 100%
+  );
+}
+.hero .hero-inner,
+.hero .content-inner { position: relative; z-index: 1; }
 .hero .content-inner { flex-wrap: wrap; display: flex; gap: 60px; align-items: center; }
+
+/* Shared page hero background — same gradient as .about-hero-bg (Contact, Services, Team, Packages) */
+.page-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 150, 136, 0.03) 0%,
+    rgba(13, 150, 136, 0.10) 15%,
+    rgba(13, 150, 136, 0.20) 50%,
+    rgba(13, 150, 136, 0.10) 85%,
+    rgba(13, 150, 136, 0.03) 100%
+  );
+}
 .hero-text { flex: 1; min-width: 280px; max-width: 520px; }
 .brand { font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #00A79E; margin-bottom: 16px; }
 .headline { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 20px; }

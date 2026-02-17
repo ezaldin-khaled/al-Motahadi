@@ -27,21 +27,16 @@
 /* ===== HERO (same background style as About Us page) ===== */
 .packages-hero {
   position: relative;
+  overflow: hidden;
   padding: 128px 80px 80px;
   max-width: 1440px;
   margin: 0 auto;
   text-align: center;
-  overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    rgba(13, 150, 136, 0.03) 0%,
-    rgba(13, 150, 136, 0.10) 15%,
-    rgba(13, 150, 136, 0.20) 50%,
-    rgba(13, 150, 136, 0.10) 85%,
-    rgba(13, 150, 136, 0.03) 100%
-  );
 }
-
+.packages-hero .packages-hero-inner {
+  position: relative;
+  z-index: 1;
+}
 .packages-hero-inner {
   max-width: 720px;
   margin: 0 auto;

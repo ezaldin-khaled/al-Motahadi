@@ -58,6 +58,7 @@ export default function PackagesPricing() {
       <main className="packages-page">
         {/* Hero Section */}
         <section className="packages-hero">
+          <div className="page-hero-bg" aria-hidden="true" />
           <div className="packages-hero-inner">
             <h1 className="packages-hero-title">Packages & Pricing</h1>
             <p className="packages-hero-desc">
@@ -128,7 +129,7 @@ export default function PackagesPricing() {
           </div>
         </section>
 
-        <CtaSection variant="packages" />
+        <CtaSection />
       </main>
       <Footer />
     </div>
