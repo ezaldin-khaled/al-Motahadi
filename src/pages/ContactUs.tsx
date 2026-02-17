@@ -1,18 +1,11 @@
-import { useEffect, useRef, useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../components/Header';
+import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
+import HealthCalculator from '../components/HealthCalculator';
 import { WhatsAppIcon } from '../components/Icons';
-import {
-  CONTACT_PATH,
-  CTA_DESCRIPTION,
-  CTA_HEADING,
-  CTA_HEADING_ACCENT,
-  PRIMARY_CTA_LABEL,
-  WHATSAPP_LABEL,
-} from '../constants/cta';
 import { sendContact } from '../lib/api';
 import '../styles/contact.css';
 
@@ -22,12 +15,6 @@ export default function ContactUs() {
   const heroRef = useRef<HTMLElement>(null);
   const bookingRef = useRef<HTMLElement>(null);
   const calculatorRef = useRef<HTMLElement>(null);
-  const ctaRef = useRef<HTMLElement>(null);
-
-  const [bmiWeight, setBmiWeight] = useState('');
-  const [bmiHeight, setBmiHeight] = useState('');
-  const [bmiResult, setBmiResult] = useState<number | null>(null);
-  const [activeCalculator, setActiveCalculator] = useState<'bmi' | 'bmr'>('bmi');
 
   const [bookingFullName, setBookingFullName] = useState('');
   const [bookingEmail, setBookingEmail] = useState('');
@@ -82,29 +69,12 @@ export default function ContactUs() {
           }
         );
       }
-
-      // CTA animation
-      if (ctaRef.current) {
-        gsap.fromTo(ctaRef.current,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            scrollTrigger: {
-              trigger: ctaRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none none'
-            }
-          }
-        );
-      }
     });
 
     return () => ctx.revert();
   }, []);
 
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setBookingError('');
     setBookingSending(true);
@@ -135,17 +105,6 @@ export default function ContactUs() {
     window.open('https://wa.me/YOUR_PHONE_NUMBER', '_blank');
   };
 
-  const calculateBMI = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const weight = parseFloat(bmiWeight);
-    const height = parseFloat(bmiHeight) / 100; // convert cm to m
-    
-    if (weight && height) {
-      const bmi = weight / (height * height);
-      setBmiResult(parseFloat(bmi.toFixed(1)));
-    }
-  };
-
   return (
     <div className="page-wrapper">
       <Header />
@@ -174,7 +133,7 @@ export default function ContactUs() {
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
               </div>
-              <h2 className="booking-card-title">Book Us Form</h2>
+              <h2 className="booking-card-title">Book via Form</h2>
               <p className="booking-card-desc">Fill out the form below and we'll get back to you shortly</p>
               
               <form className="booking-form" onSubmit={handleFormSubmit}>
@@ -219,7 +178,7 @@ export default function ContactUs() {
                 <div className="form-group">
                   <label className="form-label">Message (Optional)</label>
                   <textarea 
-                    placeholder="Tell us about any conditions or any special requirements" 
+                    placeholder="Tell us about your condition or any specific requirements" 
                     className="form-textarea-contact"
                     rows={4}
                     value={bookingMessage}
@@ -240,121 +199,33 @@ export default function ContactUs() {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
               </div>
-              <h2 className="booking-card-title">Book Us WhatsApp</h2>
+              <h2 className="booking-card-title">Book via WhatsApp</h2>
               <p className="booking-card-desc">
-                Prefer a quick chat? Reach us directly on WhatsApp for quick responses and easy appointment scheduling.
+                Prefer a quick chat? Reach us directly on WhatsApp
               </p>
-
-              <div className="whatsapp-info">
-                <p className="whatsapp-text">
-                  Connect with our team directly through WhatsApp for instant communication and easy appointment reminders.
-                </p>
-              </div>
+              <p className="whatsapp-extra">
+                Connect with our team instantly through WhatsApp for quick responses and easy appointment scheduling.
+              </p>
 
               <button 
                 type="button" 
-                className="btn btn-secondary btn-whatsapp"
+                className="btn btn-whatsapp-green"
                 onClick={handleWhatsAppClick}
               >
                 <WhatsAppIcon className="whatsapp-icon" />
-                Book on WhatsApp →
+                Book via WhatsApp
               </button>
             </div>
           </div>
         </section>
 
-        {/* Health Calculator Section */}
+        {/* Health Calculator Section — unified component */}
         <section className="calculator-section" ref={calculatorRef}>
-          <div className="calculator-container">
-            <p className="section-label">HEALTH TOOLS</p>
-            <h2 className="section-title">Calculate Your Health</h2>
-
-            <div className="calculator-tabs">
-              <button 
-                className={`calculator-tab ${activeCalculator === 'bmi' ? 'active' : ''}`}
-                onClick={() => setActiveCalculator('bmi')}
-              >
-                BMI Calculator
-              </button>
-              <button 
-                className={`calculator-tab ${activeCalculator === 'bmr' ? 'active' : ''}`}
-                onClick={() => setActiveCalculator('bmr')}
-              >
-                BMR Calculator
-              </button>
-            </div>
-
-            {activeCalculator === 'bmi' && (
-              <form className="calculator-form" onSubmit={calculateBMI}>
-                <div className="calculator-inputs">
-                  <div className="form-group">
-                    <label className="form-label">Weight (kg)</label>
-                    <input 
-                      type="number" 
-                      placeholder="e.g. 70" 
-                      className="form-input-contact"
-                      value={bmiWeight}
-                      onChange={(e) => setBmiWeight(e.target.value)}
-                      step="0.1"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label">Height (cm)</label>
-                    <input 
-                      type="number" 
-                      placeholder="e.g. 170" 
-                      className="form-input-contact"
-                      value={bmiHeight}
-                      onChange={(e) => setBmiHeight(e.target.value)}
-                      step="0.1"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-block">Calculate BMI</button>
-
-                {bmiResult && (
-                  <div className="calculator-result">
-                    <p className="result-label">Your BMI</p>
-                    <p className="result-value">{bmiResult}</p>
-                    <p className="result-category">
-                      {bmiResult < 18.5 ? 'Underweight' : 
-                       bmiResult < 25 ? 'Normal weight' : 
-                       bmiResult < 30 ? 'Overweight' : 'Obese'}
-                    </p>
-                  </div>
-                )}
-              </form>
-            )}
-
-            {activeCalculator === 'bmr' && (
-              <div className="calculator-form">
-                <p className="calculator-coming-soon">BMR Calculator coming soon...</p>
-              </div>
-            )}
-          </div>
+          <HealthCalculator variant="default" />
         </section>
 
-        {/* CTA Section */}
-        <section className="contact-cta-section" ref={ctaRef}>
-          <div className="contact-cta-content">
-            <p className="section-label-teal">THE RECOVERY STARTS</p>
-            <h2 className="contact-cta-title">{CTA_HEADING}<br /><span className="accent-text">{CTA_HEADING_ACCENT}</span></h2>
-            <p className="contact-cta-desc">
-              {CTA_DESCRIPTION}
-            </p>
-            <div className="contact-cta-buttons">
-              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
-              <a href="#" className="btn btn-outline-light btn-whatsapp" aria-label="WhatsApp">
-                <WhatsAppIcon className="whatsapp-icon" />
-                {WHATSAPP_LABEL}
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* CTA Section (landing-page default) */}
+        <CtaSection variant="dark-cards" />
       </main>
       <Footer />
     </div>

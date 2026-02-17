@@ -1,0 +1,348 @@
+/* ================================================================
+   Packages & Pricing — Original design layout (100% similarity)
+   Hero: teal gradient, "Inquire Now" + "View All".
+   Sections: "VIEW MORE" label, alternating white / light gray.
+   Cards: white, rounded, subtle shadow/border, LEFT-aligned content:
+   title → description → price (dark) → full-width teal button.
+   Grids: 5 cards = 3 + 2 rows; 4 cards = 2x2.
+   ================================================================ */
+
+:root {
+  --pkg-teal: #0d9688;
+  --pkg-teal-alt: #1a9e7d;
+  --pkg-dark: #2c2c2c;
+  --pkg-muted: #888888;
+  --pkg-desc: #6b7280;
+  --pkg-border: #e5e7eb;
+  --pkg-gray-bg: #f5f7f8;
+  --pkg-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --pkg-radius: 12px;
+}
+
+.packages-page {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* ===== HERO (same background style as About Us page) ===== */
+.packages-hero {
+  position: relative;
+  padding: 128px 80px 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 150, 136, 0.03) 0%,
+    rgba(13, 150, 136, 0.10) 15%,
+    rgba(13, 150, 136, 0.20) 50%,
+    rgba(13, 150, 136, 0.10) 85%,
+    rgba(13, 150, 136, 0.03) 100%
+  );
+}
+
+.packages-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.packages-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 60px;
+  line-height: 60px;
+  letter-spacing: -1.5px;
+  text-align: center;
+  color: var(--pkg-dark);
+  margin-bottom: 24px;
+}
+
+.packages-hero-desc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4b5563;
+  margin: 0 0 16px;
+}
+
+.packages-hero-desc-secondary {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin-bottom: 32px;
+}
+
+.packages-hero-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.packages-btn-outline {
+  border: 2px solid var(--pkg-teal-alt) !important;
+  color: var(--pkg-teal-alt) !important;
+  background: #ffffff !important;
+}
+.packages-btn-outline:hover {
+  background: rgba(26, 158, 125, 0.06) !important;
+  border-color: var(--pkg-teal-alt) !important;
+}
+
+/* ===== SECTIONS ===== */
+.packages-section {
+  padding: 80px 80px;
+  width: 100%;
+}
+
+.packages-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.packages-section-white {
+  background: #ffffff;
+}
+
+.packages-section-gray {
+  background: var(--pkg-gray-bg);
+}
+
+.packages-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pkg-muted);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.packages-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2rem;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  text-align: center;
+  color: var(--pkg-dark);
+  margin-bottom: 48px;
+}
+
+/* ===== GRIDS ===== */
+.packages-grid {
+  display: grid;
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* 5 cards: first row 3, second row 2 */
+.packages-grid-5 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 100%;
+}
+
+/* 4 cards: 2x2 */
+.packages-grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ===== PACKAGE CARD (design: left-aligned, title + description + price + full-width button) ===== */
+.package-card {
+  background: #ffffff;
+  border: 1px solid var(--pkg-border);
+  border-radius: var(--pkg-radius);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  box-shadow: var(--pkg-shadow);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.package-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border-color: #d1d5db;
+}
+
+.package-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.125rem;
+  letter-spacing: -0.3px;
+  color: var(--pkg-dark);
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.package-card-desc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--pkg-desc);
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.package-card-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pkg-dark);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.package-card-currency {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--pkg-dark);
+}
+
+.package-card-btn {
+  width: 100%;
+  justify-content: center;
+  border-radius: 9999px;
+  min-height: 46px;
+  font-size: 14px;
+  padding: 12px 20px;
+  margin-top: auto;
+}
+
+/* ===== SINGLE THERAPY SESSION CARD ===== */
+.packages-section-single .packages-section-inner {
+  display: flex;
+  justify-content: center;
+}
+
+.packages-single-wrap {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.package-card-single {
+  padding: 40px 48px;
+  text-align: center;
+}
+
+.package-card-single .package-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.package-card-single .package-card-price {
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+.package-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.package-card-single .package-card-btn {
+  width: auto;
+  min-width: 140px;
+}
+
+.package-card-link {
+  font-size: 14px;
+  color: var(--pkg-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.package-card-link:hover {
+  color: var(--pkg-teal-alt);
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .packages-hero {
+    padding: 96px 64px 64px;
+  }
+  .packages-section {
+    padding: 64px 64px;
+  }
+  .packages-hero-title {
+    font-size: 48px;
+    line-height: 48px;
+  }
+  .packages-grid-4 {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 968px) {
+  .packages-hero {
+    padding: 80px 40px 60px;
+  }
+  .packages-hero-title {
+    font-size: 40px;
+    line-height: 44px;
+  }
+  .packages-section {
+    padding: 56px 40px;
+  }
+  .packages-section-title {
+    font-size: 1.75rem;
+    margin-bottom: 36px;
+  }
+  .packages-grid-5 {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .packages-hero {
+    padding: 60px 24px 48px;
+  }
+  .packages-hero-title {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .packages-hero-desc,
+  .packages-hero-desc-secondary {
+    font-size: 15px;
+  }
+  .packages-hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .packages-hero-buttons .btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+  .packages-section {
+    padding: 48px 24px;
+  }
+  .packages-section-title {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+  .package-card-single {
+    padding: 32px 28px;
+  }
+  .package-card-actions {
+    flex-direction: column;
+  }
+  .package-card-single .package-card-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

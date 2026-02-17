@@ -1,154 +1,154 @@
 import { useEffect } from 'react';
 import Header from '../components/Header';
+import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
-import {
-  CTA_DESCRIPTION,
-  CTA_HEADING,
-  CTA_HEADING_ACCENT,
-  CONTACT_PATH,
-  PRIMARY_CTA_LABEL,
-} from '../constants/cta';
 import '../styles/services.css';
+
+const SERVICES_DATA = [
+  {
+    id: 1,
+    title: 'Musculoskeletal and Joint Therapy',
+    description:
+      'Focuses on precision medicine for pain relief, mobility, and strength, covering various conditions.',
+    image: '/service-images/2.png',
+    link: '#',
+  },
+  {
+    id: 2,
+    title: 'Sports Rehabilitation',
+    description:
+      'Addresses injuries and post-surgical recovery, aiming for functional movement, strength, and endurance.',
+    image: '/service-images/1.png',
+    link: '#',
+  },
+  {
+    id: 3,
+    title: 'Cardiac Pulmonary & Stroke Rehabilitation',
+    description:
+      'Improves functional capacity for patients post-stroke or with chronic conditions.',
+    image: '/service-images/3.png',
+    link: '#',
+  },
+  {
+    id: 4,
+    title: 'Head & Balance Disorders',
+    description:
+      'Treatments for dizziness, vertigo, unsteadiness, and imbalance, with personalized programs.',
+    image: '/service-images/4.png',
+    link: '#',
+  },
+  {
+    id: 5,
+    title: 'Geriatric Rehabilitation',
+    description:
+      'Tailored programs for elderly individuals to maintain independence, addressing conditions like osteoporosis and dementia.',
+    image: '/service-images/5.png',
+    link: '#',
+  },
+  {
+    id: 6,
+    title: 'Neurological Rehabilitation',
+    description:
+      'High-precision, long-term care for neurological conditions like Parkinson\'s disease, muscular dystrophy, and Down syndrome.',
+    image: '/service-images/6.png',
+    link: '#',
+  },
+  {
+    id: 7,
+    title: "Women's Health",
+    description:
+      "Comprehensive care for women's health needs throughout various life stages, ensuring high standards.",
+    image: '/service-images/7.png',
+    link: '#',
+  },
+  {
+    id: 8,
+    title: 'Oncology Rehabilitation',
+    description:
+      'Integrated rehabilitation programs for cancer patients to help with physical and psychological therapy at different stages.',
+    image: '/service-images/8.png',
+    link: '#',
+  },
+  {
+    id: 9,
+    title: 'Lymphedema Therapy',
+    description:
+      'Focuses on reducing swelling and improving mobility for patients post-cancer treatment or other conditions.',
+    image: '/service-images/9.png',
+    link: '#',
+  },
+  {
+    id: 10,
+    title: 'Weight Loss & Management',
+    description:
+      'Customized programs using advanced techniques for weight reduction and improved fitness.',
+    image: '/service-images/10.png',
+    link: '#',
+  },
+  {
+    id: 11,
+    title: 'Speech Therapy',
+    description:
+      'Addresses speech and language difficulties in children and adults, using evidence-based programs.',
+    image: '/service-images/11.png',
+    link: '#',
+  },
+  {
+    id: 12,
+    title: 'Post-Amputational Rehabilitation',
+    description:
+      'Specialized programs for amputees to restore movement, mobility, and support for daily life.',
+    image: '/service-images/12.png',
+    link: '#',
+  },
+];
 
 export default function Services() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const services = [
-    {
-      id: 1,
-      title: 'Physical Therapy',
-      description: 'Comprehensive physical rehabilitation programs designed to restore movement, reduce pain, and improve your overall physical function through evidence-based therapeutic techniques.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 2,
-      title: 'Aquatic Therapy',
-      description: 'Specialized water-based rehabilitation exercises that utilize the unique properties of water to enhance recovery, reduce joint stress, and improve mobility in a safe environment.',
-      image: 'https://images.unsplash.com/photo-1600881333168-2ef49b341f20?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 3,
-      title: 'Speech Therapy',
-      description: 'Expert speech and language therapy services to address communication disorders, swallowing difficulties, and cognitive-linguistic challenges with personalized treatment plans.',
-      image: 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 4,
-      title: 'Functional Assessment',
-      description: 'Comprehensive evaluation of your physical abilities and limitations to develop targeted treatment strategies and measure progress throughout your rehabilitation journey.',
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 5,
-      title: 'Cardiac Rehabilitation',
-      description: 'Medically supervised programs designed to improve cardiovascular health, enhance physical endurance, and reduce the risk of future heart problems through exercise and education.',
-      image: 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 6,
-      title: 'Nutritional Counseling',
-      description: 'Personalized nutrition guidance and meal planning to support your recovery, optimize health outcomes, and establish sustainable healthy eating habits for long-term wellness.',
-      image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 7,
-      title: 'Pain Management',
-      description: 'Advanced pain relief strategies combining therapeutic modalities, manual therapy, and exercise programs to help you manage chronic pain and improve your quality of life.',
-      image: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 8,
-      title: 'Post-Surgical Rehabilitation',
-      description: 'Specialized recovery programs following surgery to restore strength, flexibility, and function while ensuring safe healing and preventing complications during your recovery.',
-      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=600&q=80',
-      link: '#'
-    },
-    {
-      id: 9,
-      title: 'Home Health Care',
-      description: 'Professional healthcare services delivered in the comfort of your home, providing convenient access to quality rehabilitation care when mobility or transportation is limited.',
-      image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=600&q=80',
-      link: '#'
-    }
-  ];
-
   return (
     <div className="page-wrapper">
       <Header />
       <main className="services-page">
-        {/* Hero Section */}
+        {/* Hero Section — design: WHAT WE OFFER, Our Services, two paragraphs */}
         <section className="services-hero">
           <div className="services-hero-content">
+            <p className="services-hero-label">WHAT WE OFFER</p>
             <h1 className="services-hero-title">Our Services</h1>
             <p className="services-hero-desc">
-              At Al Motahadi, we offer a comprehensive range of rehabilitation services tailored to meet your 
-              unique needs. Our expert team is dedicated to helping you achieve optimal health and wellness 
-              through personalized care and evidence-based treatment approaches. From physical therapy to 
-              specialized rehabilitation programs, we're here to support you every step of your recovery journey.
+              At AL Motahadi Medical Rehabilitation Center, we do not offer ordinary therapy solutions… we design a fully integrated treatment journey for each case.
+            </p>
+            <p className="services-hero-desc">
+              Here, treatment is not a general protocol applied to everyone, but a precise plan tailored specifically for each patient, based on a comprehensive assessment and implemented using the latest technologies and advanced rehabilitation methods—by a specialist that places the human being at the heart of every therapeutic decision.
             </p>
           </div>
         </section>
 
-        {/* Services Grid Section */}
+        {/* Services Grid — title overlaid on image, then description, Learn About the Service → */}
         <section className="services-grid-section">
           <div className="services-grid-container">
             <div className="services-grid">
-              {services.map((service) => (
-                <div key={service.id} className="service-card">
+              {SERVICES_DATA.map((service) => (
+                <article key={service.id} className="service-card">
                   <div className="service-card-image">
                     <img src={service.image} alt={service.title} />
+                    <h3 className="service-card-title-overlay">{service.title}</h3>
                   </div>
                   <div className="service-card-content">
-                    <h3 className="service-card-title">{service.title}</h3>
                     <p className="service-card-desc">{service.description}</p>
                     <a href={service.link} className="service-card-link">
-                      Learn More <span className="arrow">→</span>
+                      Learn About the Service <span className="arrow">→</span>
                     </a>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="services-cta-section">
-          <div className="services-cta-container">
-            <div className="services-cta-content">
-              <h2 className="services-cta-title">{CTA_HEADING} <span className="services-cta-title-accent">{CTA_HEADING_ACCENT}</span></h2>
-              <p className="services-cta-desc">
-                {CTA_DESCRIPTION}
-              </p>
-              <div className="services-cta-buttons">
-                <a href={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</a>
-                <a href="tel:+971501234567" className="btn btn-secondary">Call Us Now</a>
-              </div>
-            </div>
-            <div className="services-cta-info">
-              <div className="cta-info-card">
-                <h4>Contact</h4>
-                <p>123 Recovery Street<br />City, Country</p>
-                <p>Phone: +123 456 7890</p>
-                <p>Email: info@almotahadi.com</p>
-              </div>
-              <div className="cta-info-card">
-                <h4>Hours</h4>
-                <p>Monday - Friday<br />8:00 AM - 6:00 PM</p>
-                <p>Saturday<br />9:00 AM - 2:00 PM</p>
-                <p>Sunday: Closed</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CtaSection variant="services" />
       </main>
       <Footer />
     </div>

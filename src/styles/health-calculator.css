@@ -1,0 +1,184 @@
+/**
+ * Unified Health Calculator — field and button styling to match design.
+ * Use .health-calculator as the single wrapper; section background is controlled by the page.
+ */
+
+.health-calculator {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.health-calculator__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #00A79E;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.health-calculator__title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 24px;
+  line-height: 1.25;
+}
+
+/* Tabs — large rounded rectangular buttons; active = white + border, inactive = white + grey text */
+.health-calculator__tabs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.health-calculator__tab {
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  color: #6b7280;
+}
+
+.health-calculator__tab:hover {
+  border-color: #00A79E;
+  color: #00A79E;
+}
+
+.health-calculator__tab--active {
+  background: #fff;
+  color: #2c2c2c;
+  border-color: #d1d5db;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* Form — no card background; fields only */
+.health-calculator__form {
+  text-align: left;
+}
+
+.health-calculator__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.health-calculator__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.health-calculator__field-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Inputs — white, rounded rectangular, light grey border (design mimic) */
+.health-calculator__input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fff;
+  color: #1f2937;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.health-calculator__input::placeholder {
+  color: #9ca3af;
+}
+
+.health-calculator__input:focus {
+  outline: none;
+  border-color: #00A79E;
+  box-shadow: 0 0 0 3px rgba(0, 167, 158, 0.15);
+}
+
+/* Submit — teal, white text, rounded, full width */
+.health-calculator__submit {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: #00A79E;
+  color: #fff;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.health-calculator__submit:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 167, 158, 0.35);
+}
+
+/* Result — darker teal box, white text, rounded */
+.health-calculator__result {
+  margin-top: 24px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  background: #1e5f5a;
+  color: #fff;
+}
+
+/* Gender — two rounded buttons; active = teal + white, inactive = white + dark text */
+.health-calculator__gender {
+  display: flex;
+  gap: 12px;
+}
+
+.health-calculator__gender-btn {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  color: #4b5563;
+  transition: all 0.2s;
+}
+
+.health-calculator__gender-btn:hover {
+  border-color: #00A79E;
+  color: #00A79E;
+}
+
+.health-calculator__gender-btn--active {
+  background: #00A79E;
+  color: #fff;
+  border-color: #00A79E;
+}
+
+/* Embedded variant: no label/title (used inside section that has its own heading) */
+.health-calculator--embedded .health-calculator__tabs {
+  margin-top: 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .health-calculator__fields {
+    grid-template-columns: 1fr;
+  }
+}

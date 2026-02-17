@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
+import HealthCalculator from '../components/HealthCalculator';
 import '../styles/about.css';
 
 export default function AboutUs() {
@@ -170,33 +171,23 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* Almotahadi Leisure Trust Section */}
-        <section className="trust-section">
+        {/* Our Story Section */}
+        <section className="trust-section" aria-labelledby="our-story-heading">
           <div className="trust-container">
             <div className="trust-content">
-              <div className="trust-text">
-                <h2 className="trust-heading">
-                  At Almotahadi Leisure Trust <span className="text-accent">We Aim To</span> Opening
+              <div className="trust-header">
+                <p className="trust-label">OUR STORY</p>
+                <h2 id="our-story-heading" className="trust-heading">
+                  AL Motahadi Center: From Idea to Opening
                 </h2>
-                <p className="trust-desc">
-                  Almotahadi Leisure Trust is a pioneering healthcare institution dedicated to providing 
-                  exceptional medical services. We combine modern facilities with experienced medical staff 
-                  to ensure the highest quality of care for our patients.
-                </p>
-                <p className="trust-desc">
-                  Our center is equipped with state-of-the-art medical technology and staffed by a team of 
-                  highly qualified healthcare professionals. We offer a wide range of medical services, from 
-                  preventive care to specialized treatments, all delivered with compassion and excellence.
-                </p>
-                <p className="trust-desc">
-                  We believe in treating the whole person, not just the illness. Our holistic approach to 
-                  healthcare ensures that each patient receives personalized care tailored to their unique needs.
-                </p>
               </div>
+              <p className="trust-desc trust-desc-justify">
+                The concept of AL Motahadi Medical Rehabilitation Center originated from a visionary goal to transform the rehabilitation sector in Oman by introducing a model that blends scientific excellence, human compassion, and community service. The center aimed to bring a fundamental change to the delivery of rehabilitation services, keeping pace with global advancements and focusing on the human aspect of therapy. The trial phase of the center began on September 1, 2024, with the training of medical and administrative teams, development of patient reception systems, and establishment of a culture of professional ethics. The official opening occurred on February 15, 2025, under the patronage of Her Highness Sayyida Hajija bint Jaifer Al Said, attended by dignitaries and health professionals. Since its opening, AL Motahadi has become a leading institution in medical rehabilitation in Oman, committed to maintaining high-quality standards and continuously evolving its treatment protocols through research and evaluation.
+              </p>
               <div className="trust-image">
                 <img 
-                  src="https://images.unsplash.com/photo-1519167758481-83f29da8c79a?w=800&q=80" 
-                  alt="Medical facility setup" 
+                  src="/almotahadi-opening-ceremony.png" 
+                  alt="AL Motahadi Center official opening ceremony — ribbon-cutting with dignitaries" 
                 />
               </div>
             </div>
@@ -204,34 +195,28 @@ export default function AboutUs() {
         </section>
 
         {/* About the Founder Section */}
-        <section className="founder-section">
+        <section className="founder-section" aria-labelledby="founder-heading">
           <div className="founder-container">
             <div className="founder-content">
               <div className="founder-image-wrapper">
                 <div className="founder-image">
                   <img 
-                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" 
-                    alt="Founder portrait" 
+                    src="/founder-portrait.png" 
+                    alt="Dr. Mohammed Reda bin Naji Al-Yazidi — Founder, AL Motahadi Medical Rehabilitation Center" 
                   />
                 </div>
               </div>
               <div className="founder-text">
-                <h2 className="founder-heading">About the Founder</h2>
+                <p className="founder-label">LEADERSHIP</p>
+                <h2 id="founder-heading" className="founder-heading">About the Founder</h2>
                 <p className="founder-desc">
-                  Dr. Sarah Al-Motahadi founded our healthcare center with a vision to transform medical 
-                  care in the region. With over 20 years of experience in healthcare management and medical 
-                  practice, she has dedicated her career to improving patient outcomes and advancing medical 
-                  excellence.
+                  Behind the establishment of AL Motahadi Medical Rehabilitation Center stands Dr. Mohammed Reda bin Naji Al-Yazidi, a specialist in physical therapy and medical rehabilitation, and a pioneer in developing modern therapeutic models. He did not only establish the center, but also founded the international research network that is today considered one of the most prominent sources of advanced treatment protocols adopted by the center.
                 </p>
                 <p className="founder-desc">
-                  Her passion for healthcare innovation and patient-centered care has been the driving force 
-                  behind our institution's success. Under her leadership, we have grown to become a trusted 
-                  name in healthcare, known for our commitment to quality, compassion, and clinical excellence.
+                  His personal experience as a person with a disability shaped within him a deep human sensitivity and a unique understanding of patient needs; for him, care is not a service... but a human commitment.
                 </p>
                 <p className="founder-desc">
-                  Dr. Al-Motahadi believes that every patient deserves access to world-class medical care 
-                  delivered with empathy and respect. This philosophy continues to guide our mission and 
-                  shapes every aspect of our services.
+                  His journey combines clinical practice, scientific research, and academic influence, making AL Motahadi Center a landmark that embodies excellence in both knowledge and spirit.
                 </p>
               </div>
             </div>
@@ -239,96 +224,63 @@ export default function AboutUs() {
         </section>
 
         {/* Medical Teams Section */}
-        <section className="medical-teams">
-          <div className="content-container">
-            <h2 className="section-heading">Medical Teams</h2>
-            <p className="section-subheading">
-              Our team of dedicated healthcare professionals is committed to providing you with the highest 
-              quality care. Each member brings expertise, compassion, and dedication to their work.
-            </p>
-            <div className="team-grid">
-              <div className="team-member">
-                <img 
-                  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80" 
-                  alt="Medical team member" 
-                />
+        <section className="medical-teams" aria-labelledby="medical-team-heading">
+          <div className="medical-teams-container">
+            <div className="medical-teams-content">
+              <div className="medical-teams-text">
+                <p className="medical-teams-label">OUR EXPERTS</p>
+                <h2 id="medical-team-heading" className="medical-teams-title">Medical Team</h2>
+                <p className="medical-teams-desc">
+                  AL Motahadi Center includes an elite group of highly experienced specialists in physical therapy and rehabilitation, working according to the MDT (Multidisciplinary Team) model, which enables the development of a comprehensive and integrated treatment plan tailored to each case and regularly reviewed based on actual progress indicators.
+                </p>
+                <p className="medical-teams-desc">
+                  Our team&apos;s role is not limited to delivering treatment alone; they actively participate in scientific research conducted by the international research network, making them contributors to the creation of medical knowledge—not merely implementers of it.
+                </p>
+                <p className="medical-teams-desc">
+                  They are not just a therapeutic team... but partners in creating impact.
+                </p>
+                <a href="/team" className="btn btn-primary">Meet the Medical Team →</a>
               </div>
-              <div className="team-member">
-                <img 
-                  src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" 
-                  alt="Medical team member" 
-                />
-              </div>
-              <div className="team-member">
-                <img 
-                  src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" 
-                  alt="Medical team member" 
-                />
+              <div className="medical-teams-image-wrap">
+                <div className="medical-teams-image">
+                  <img 
+                    src="/medical-team.png" 
+                    alt="AL Motahadi medical team — healthcare professionals" 
+                  />
+                </div>
               </div>
             </div>
-            <button type="button" className="btn btn-primary">READ MORE</button>
           </div>
         </section>
 
         {/* Social Responsibility Section */}
-        <section className="social-responsibility">
+        <section className="social-responsibility" aria-labelledby="responsibility-heading">
           <div className="responsibility-container">
+            <p className="responsibility-label">GIVING BACK</p>
+            <h2 id="responsibility-heading" className="responsibility-heading">Our Social Responsibility</h2>
             <div className="responsibility-card">
-              <h2 className="responsibility-heading">Our Social Responsibility</h2>
               <div className="responsibility-content">
                 <p className="responsibility-text">
-                  At Almotahadi Leisure Trust, we believe in giving back to our community. Our social 
-                  responsibility programs focus on improving public health awareness, providing free health 
-                  screenings, and supporting underserved populations.
+                  At AL Motahadi Center, we believe that our mission goes beyond treatment to include serving the community. Through the <strong>Ehata program</strong>, directed toward those most in need of rehabilitation services, we contribute to supporting low-income patients, the elderly, women and persons with disabilities through the <strong>Hope, Charity, Care, and Step packages.</strong>
                 </p>
                 <p className="responsibility-text">
-                  We regularly organize health education seminars, wellness workshops, and community outreach 
-                  programs. We also partner with local organizations to ensure that quality healthcare is 
-                  accessible to all members of our community, regardless of their financial circumstances.
-                </p>
-                <p className="responsibility-text">
-                  Our commitment to social responsibility extends beyond our walls. We actively participate in 
-                  public health initiatives, medical research, and educational programs that contribute to the 
-                  advancement of healthcare in our region.
+                  We also offer special discounts for retirees and employees of the Royal Oman Police, and organize educational workshops and awareness courses in partnership with government and private institutions to promote rehabilitation culture and quality of life.
                 </p>
               </div>
-              <button type="button" className="btn btn-primary">READ MORE</button>
+              <div className="responsibility-cta">
+                <a href="#" className="btn btn-primary">Discover Our Community Initiatives →</a>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Calculate Your Health Section */}
+        {/* Calculate Your Health Section — unified with Contact */}
         <section className="calculate-health">
-          <div className="content-container">
-            <h2 className="section-heading-white">Calculate Your Health</h2>
-            <p className="calculate-subheading">
-              Use our BMI calculator to assess your health status and get personalized recommendations.
+          <div className="calculate-health__container">
+            <p className="calculate-health__subheading">
+              Use our BMI and BMR calculators to assess your health status and get personalized recommendations.
             </p>
-            <div className="calculator-form">
-              <div className="calculator-inputs">
-                <div className="input-group">
-                  <label htmlFor="age">Age</label>
-                  <input type="number" id="age" placeholder="" />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="gender">Gender</label>
-                  <select id="gender">
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-                <div className="input-group">
-                  <label htmlFor="weight">Weight</label>
-                  <input type="number" id="weight" placeholder="" />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="height">Height</label>
-                  <input type="number" id="height" placeholder="" />
-                </div>
-              </div>
-              <button type="button" className="btn btn-primary">CALCULATE</button>
-            </div>
+            <HealthCalculator variant="default" />
           </div>
         </section>
 

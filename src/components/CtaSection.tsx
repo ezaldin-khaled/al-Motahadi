@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WhatsAppIcon } from './Icons';
+import { Link } from 'react-router-dom';
 import {
   CONTACT_PATH,
   CTA_DESCRIPTION,
@@ -34,6 +35,12 @@ const LocationIcon = () => (
   </svg>
 );
 
+const QualityCareIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+  </svg>
+);
+
 const cards = [
   {
     icon: <ClockIcon />,
@@ -52,7 +59,34 @@ const cards = [
   },
 ];
 
-export default function CtaSection() {
+/** Services page CTA: design copy — hours 8–10 AM, phone, Visit Us button */
+const cardsServices = [
+  {
+    icon: <ClockIcon />,
+    title: 'Working Hours',
+    lines: ['Sunday - Thursday', '8:00 AM - 10:00 AM'],
+  },
+  {
+    icon: <PhoneIcon />,
+    title: 'Contact Us',
+    lines: ['+971 02 2000 3900', 'info@almotahadi.ae'],
+  },
+  {
+    icon: <LocationIcon />,
+    title: 'Visit Us',
+    lines: ['AL Motahadi Medical Center', 'Dubai, United Arab Emirates'],
+  },
+];
+
+const cardsPackages = [
+  { icon: <QualityCareIcon />, title: 'QUALITY CARE', lines: ['Expert rehabilitation care tailored to your needs.'] },
+  { icon: <QualityCareIcon />, title: 'EXPERIENCED TEAM', lines: ['Our specialists are dedicated to your recovery.'] },
+  { icon: <QualityCareIcon />, title: 'PERSONALIZED APPROACH', lines: ['Customized treatment plans for best outcomes.'] },
+];
+
+type CtaSectionProps = { variant?: 'dark-cards' | 'packages' | 'services' };
+
+export default function CtaSection({ variant }: CtaSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -75,37 +109,76 @@ export default function CtaSection() {
     return () => ctx.revert();
   }, []);
 
+  const isPackages = variant === 'packages';
+  const isServices = variant === 'services';
+  const displayCards = isPackages ? cardsPackages : isServices ? cardsServices : cards;
+
+  const ctaDescription = isServices
+    ? 'Take the first step toward restored movement and improved quality of life. Our expert team is ready to create a personalized rehabilitation tailored to your needs.'
+    : CTA_DESCRIPTION;
+
   return (
-    <section className="cta-section" ref={sectionRef}>
+    <section className={`cta-section ${variant === 'dark-cards' || isServices ? 'cta-section-dark-cards' : ''} ${isPackages ? 'cta-section-packages' : ''}`} ref={sectionRef}>
       <div className="cta-section-bg" aria-hidden />
       <div className="cta-section-inner">
         <div className="cta-content" ref={contentRef}>
-          <p className="cta-label">
-            <span className="cta-label-line" />
-            {CTA_SECTION_LABEL}
-          </p>
+          {!isServices && (
+            <p className="cta-label">
+              <span className="cta-label-line" />
+              {CTA_SECTION_LABEL}
+            </p>
+          )}
           <h2 className="cta-title">
             {CTA_HEADING} <span className="cta-title-accent">{CTA_HEADING_ACCENT}</span>
           </h2>
           <p className="cta-desc">
-            {CTA_DESCRIPTION}
+            {ctaDescription}
           </p>
           <div className="cta-buttons">
-            <a href={CONTACT_PATH} className="btn btn-primary">
-              {PRIMARY_CTA_LABEL_SHORT}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a href="#" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
-              <WhatsAppIcon className="whatsapp-icon" />
-              {WHATSAPP_LABEL}
-            </a>
+            {isPackages ? (
+              <>
+                <Link to="/services" className="btn btn-primary">
+                  EXPLORE SERVICES
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link to={CONTACT_PATH} className="btn btn-outline-light">BOOK A SESSION</Link>
+              </>
+            ) : isServices ? (
+              <>
+                <Link to={CONTACT_PATH} className="btn btn-primary">
+                  {PRIMARY_CTA_LABEL_SHORT}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link to={CONTACT_PATH} className="btn btn-secondary btn-visit">
+                  Visit Us
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </>
+            ) : (
+              <>
+                <a href={CONTACT_PATH} className="btn btn-primary">
+                  {PRIMARY_CTA_LABEL_SHORT}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a href="#" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
+                  <WhatsAppIcon className="whatsapp-icon" />
+                  {WHATSAPP_LABEL}
+                </a>
+              </>
+            )}
           </div>
         </div>
         <div className="cta-cards" ref={cardsRef}>
-          {cards.map((card) => (
-            <div key={card.title} className="cta-info-card">
+          {displayCards.map((card) => (
+            <div key={card.title} className={`cta-info-card ${isPackages ? 'cta-info-card-packages' : ''}`}>
               <div className="cta-info-card-icon" aria-hidden>
                 {card.icon}
               </div>

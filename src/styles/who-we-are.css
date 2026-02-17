@@ -1,0 +1,491 @@
+/* Who We Are Page — design match to mockup */
+
+.who-we-are-page {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* ===== HERO: WHO WE ARE ===== */
+.wwa-hero {
+  width: 100%;
+  background: #ffffff;
+  padding: 80px 0 96px;
+}
+
+.wwa-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.wwa-hero-content {
+  padding-right: 24px;
+}
+
+.wwa-hero-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #00A79E;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wwa-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #2c2c2c;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.wwa-hero-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #00A79E;
+  margin-bottom: 24px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wwa-hero-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666666;
+  margin-bottom: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wwa-hero-desc:last-of-type {
+  margin-bottom: 0;
+}
+
+.wwa-hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wwa-hero-image-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  background: #f5f5f5;
+  max-width: 520px;
+  width: 100%;
+}
+
+.wwa-hero-image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ===== SECTIONS SHARED ===== */
+.wwa-section {
+  width: 100%;
+  padding: 80px 0;
+  box-sizing: border-box;
+}
+
+.wwa-section-white {
+  background: #ffffff;
+}
+
+.wwa-section-teal {
+  background: #e5f0ef;
+}
+
+.wwa-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.wwa-section-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00A79E;
+}
+
+.wwa-section-icon svg {
+  display: block;
+}
+
+.wwa-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.wwa-section-subtitle {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #00A79E;
+  margin-bottom: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wwa-section-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666666;
+  margin-bottom: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wwa-section-desc:last-of-type {
+  margin-bottom: 24px;
+}
+
+.wwa-section-center .wwa-section-desc:last-of-type {
+  margin-bottom: 28px;
+}
+
+.wwa-section-desc-center {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wwa-section-center {
+  text-align: center;
+}
+
+.wwa-section-center .wwa-section-icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== THERAPEUTIC PROTOCOLS (pixel match to design image) ===== */
+.wwa-protocols-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 64px 64px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wwa-protocols-content {
+  max-width: 560px;
+  grid-column: 1;
+  grid-row: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wwa-protocols-card {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+}
+
+/* Section title: dark charcoal */
+.wwa-protocols-content .wwa-section-title {
+  color: #333333;
+  margin-bottom: 12px;
+}
+
+/* Body text: medium grey */
+.wwa-protocols-content .wwa-section-desc {
+  color: #555555;
+  line-height: 1.75;
+}
+
+/* Flask icon: light teal, rounded square with light fill */
+.wwa-protocols-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #66C1BA;
+  background: rgba(102, 193, 186, 0.18);
+  border: 1px solid #B2DFDB;
+  border-radius: 12px;
+}
+
+.wwa-protocols-icon-wrap svg {
+  display: block;
+}
+
+/* Tagline: italic, accent teal */
+.wwa-protocols-tagline {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #009688;
+  margin-bottom: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* CTA button: rectangular, 8–10px radius, solid teal */
+.wwa-protocols-cta {
+  border-radius: 8px !important;
+  background: #009688 !important;
+  box-shadow: 0 2px 8px rgba(0, 150, 136, 0.3);
+}
+.wwa-protocols-cta:hover {
+  background: #00897B !important;
+  box-shadow: 0 4px 12px rgba(0, 150, 136, 0.35);
+}
+
+/* Right side: white card with subtle shadow */
+.wwa-protocols-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  max-width: 380px;
+}
+
+.wwa-protocols-card-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Sub-cards: very light teal fill + thin teal border */
+.wwa-protocols-subcard {
+  background: #E8F7F4;
+  border: 1px solid #B2DFDB;
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.wwa-protocols-subcard-value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #009688;
+  line-height: 1.2;
+}
+
+.wwa-protocols-subcard-label {
+  font-size: 14px;
+  color: #555555;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.4;
+}
+
+.wwa-protocols-subcard-bottom {
+  grid-column: 1 / -1;
+  padding: 20px 24px;
+  min-height: auto;
+  background: #E8F7F4;
+  border: 1px solid #B2DFDB;
+}
+
+.wwa-protocols-subcard-bottom .wwa-protocols-subcard-label {
+  text-align: center;
+  margin: 0;
+  color: #555555;
+  font-size: 15px;
+}
+
+/* ===== PLAN-BASED SESSION (centered) ===== */
+.wwa-section-center .btn {
+  margin-top: 0;
+}
+
+/* ===== MEDICAL TEAM ===== */
+.wwa-team-grid {
+  display: grid;
+  grid-template-columns: 0.45fr 0.55fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.wwa-team-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wwa-team-image {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
+}
+
+.wwa-team-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.wwa-team-content {
+  padding-left: 0;
+}
+
+.wwa-team-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.wwa-view-more {
+  font-size: 15px;
+  font-weight: 500;
+  color: #2c2c2c;
+  text-decoration: none;
+}
+
+.wwa-view-more:hover {
+  color: #00A79E;
+}
+
+/* ===== HOME THERAPY & TRANSPORTATION (two columns) ===== */
+.wwa-cols-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.wwa-col-block {
+  padding: 0;
+}
+
+.wwa-col-block .wwa-section-desc:last-of-type {
+  margin-bottom: 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .wwa-hero-inner,
+  .wwa-container {
+    padding: 0 48px;
+  }
+
+  .wwa-protocols-grid {
+    gap: 48px;
+  }
+
+  .wwa-team-grid {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 968px) {
+  .wwa-hero {
+    padding: 60px 0 72px;
+  }
+
+  .wwa-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 0 32px;
+    gap: 40px;
+  }
+
+  .wwa-hero-content {
+    padding-right: 0;
+  }
+
+  .wwa-hero-desc {
+    text-align: left;
+  }
+
+  .wwa-section {
+    padding: 64px 0;
+  }
+
+  .wwa-container {
+    padding: 0 32px;
+  }
+
+  .wwa-protocols-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .wwa-protocols-content {
+    max-width: none;
+  }
+
+  .wwa-protocols-card {
+    max-width: none;
+    justify-self: center;
+  }
+
+  .wwa-team-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .wwa-team-image {
+    max-width: 100%;
+  }
+
+  .wwa-team-content {
+    text-align: left;
+  }
+
+  .wwa-cols-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wwa-hero-inner,
+  .wwa-container {
+    padding: 0 24px;
+  }
+
+  .wwa-hero-title {
+    font-size: 2rem;
+  }
+
+  .wwa-section-title {
+    font-size: 1.5rem;
+  }
+
+  .wwa-protocols-subcard-value {
+    font-size: 1.75rem;
+  }
+
+  .wwa-team-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

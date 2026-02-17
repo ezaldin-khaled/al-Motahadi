@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import gsap from 'gsap';
 import { CONTACT_PATH, PRIMARY_CTA_LABEL } from '../constants/cta';
 
@@ -23,11 +23,13 @@ export default function Header() {
             AL MOTAHADI
           </Link>
           <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/team">Our Team</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact Us</Link>
+            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Home</NavLink>
+            <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Services</NavLink>
+            <NavLink to="/packages" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Packages & Pricing</NavLink>
+            <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Our Team</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>About</NavLink>
+            <NavLink to="/who-we-are" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Who We Are</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Contact Us</NavLink>
           </nav>
           <Link to={CONTACT_PATH} className="nav-cta btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
         </div>

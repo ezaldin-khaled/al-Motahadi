@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
-import {
-  CONTACT_PATH,
-  CTA_DESCRIPTION,
-  CTA_HEADING,
-  CTA_HEADING_ACCENT,
-  PRIMARY_CTA_LABEL,
-} from '../constants/cta';
+import { CONTACT_PATH, PRIMARY_CTA_LABEL } from '../constants/cta';
 import '../styles/team.css';
 
 function OurTeam() {
@@ -55,96 +50,96 @@ function OurTeam() {
       {/* What Sets Our Team Apart */}
       <section className="team-features-section">
         <div className="content-inner">
+          <p className="team-features-section-label">OUR DIFFERENCE</p>
           <h2 className="section-title-team">What Sets Our Team Apart</h2>
           <div className="team-features-grid">
             <div className="team-feature-card">
-              <div className="feature-icon-circle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              <div className="feature-icon-teal">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
                 </svg>
               </div>
-              <h3 className="feature-card-title">Highly Qualified Professionals</h3>
+              <h3 className="feature-card-title">High Scientific Competence</h3>
               <p className="feature-card-desc">
-                All team members hold advanced degrees and certifications in their respective fields, 
-                ensuring you receive care from the best.
+                All specialists hold internationally recognized qualifications and extensive practical experience.
               </p>
             </div>
 
             <div className="team-feature-card">
-              <div className="feature-icon-circle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
-              </div>
-              <h3 className="feature-card-title">Evidence-Based Approaches</h3>
-              <p className="feature-card-desc">
-                We integrate the latest research in addiction medicine and psychotherapy to deliver 
-                treatments proven to work.
-              </p>
-            </div>
-
-            <div className="team-feature-card">
-              <div className="feature-icon-circle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="feature-icon-teal">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
               </div>
-              <h3 className="feature-card-title">Compassionate & Empathetic Care</h3>
+              <h3 className="feature-card-title">Effective Human Communication</h3>
               <p className="feature-card-desc">
-                Beyond credentials, our team leads with empathy, understanding that recovery is a deeply 
-                personal journey requiring compassion at every step.
+                We view the patient as a partner in treatment, not a passive recipient of care.
               </p>
             </div>
 
             <div className="team-feature-card">
-              <div className="feature-icon-circle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="feature-icon-teal">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <h3 className="feature-card-title">Individualized Attention</h3>
+              <h3 className="feature-card-title">Multiple Specialties Under One Roof</h3>
               <p className="feature-card-desc">
-                We tailor each treatment plan to fit the unique needs, goals, and circumstances of every 
-                patient, avoiding one-size-fits-all solutions.
+                We integrate movement, neurological, respiratory, and functional therapy into one comprehensive program.
               </p>
             </div>
 
             <div className="team-feature-card">
-              <div className="feature-icon-circle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="feature-icon-teal">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
-                  <path d="M12 16v-4" />
-                  <path d="M12 8h.01" />
-                </svg>
-              </div>
-              <h3 className="feature-card-title">Continuous Professional Development</h3>
-              <p className="feature-card-desc">
-                Our team regularly participates in training and stays current with emerging therapies, 
-                maintaining the highest standards in care delivery.
-              </p>
-            </div>
-
-            <div className="team-feature-card">
-              <div className="feature-icon-circle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2v20" />
                   <path d="M2 12h20" />
                   <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                 </svg>
               </div>
-              <h3 className="feature-card-title">Culturally Sensitive & Inclusive</h3>
+              <h3 className="feature-card-title">International Research Collaboration</h3>
               <p className="feature-card-desc">
-                We respect and honor diverse backgrounds, beliefs, and identities, fostering an environment 
-                where all individuals feel safe and valued.
+                Our team actively participates in scientific studies conducted by the international research network founded by the center, making them part of the global development of medical knowledge.
               </p>
             </div>
+
+            <div className="team-feature-card">
+              <div className="feature-icon-teal">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="20" x2="12" y2="10" />
+                  <line x1="18" y1="20" x2="18" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="16" />
+                </svg>
+              </div>
+              <h3 className="feature-card-title">Continuous Quality Assessment</h3>
+              <p className="feature-card-desc">
+                Patient outcomes and treatment protocols are continuously reviewed to ensure therapeutic effectiveness.
+              </p>
+            </div>
+
+            <div className="team-feature-card">
+              <div className="feature-icon-teal">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="18" cy="18" r="3" />
+                  <circle cx="6" cy="6" r="3" />
+                  <path d="M6 9v6" />
+                  <path d="M18 15V9" />
+                  <path d="M6 12h6" />
+                  <path d="M18 12h-6" />
+                </svg>
+              </div>
+              <h3 className="feature-card-title">Collaborative Clinical Decision-Making</h3>
+              <p className="feature-card-desc">
+                Treatment decisions are made through professional discussions among team members to reach the best plan tailored individually to each case.
+              </p>
+            </div>
+          </div>
+          <div className="team-features-cta">
+            <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
           </div>
         </div>
       </section>
@@ -176,78 +171,47 @@ function OurTeam() {
       {/* Meet Our Team */}
       <section className="team-members-section">
         <div className="content-inner">
+          <p className="team-members-section-label">THE SPECIALISTS</p>
           <h2 className="section-title-team">Meet Our Team</h2>
           <div className="team-members-grid">
             <div className="team-member-card">
               <div className="team-member-image">
-                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=500&fit=crop" alt="Dr. Ahmed Al-Mutahadi" />
+                <img src="/dr-mohammed-reda-al-yazidi.png" alt="Dr. Mohammed Reda bin Naji Al-Yazidi" />
               </div>
-              <h3 className="team-member-name">Dr. Ahmed Al-Mutahadi</h3>
-              <p className="team-member-title">Medical Director & Addiction Specialist</p>
-              <p className="team-member-bio">
-                Board-certified in addiction medicine with over 15 years of experience. Dr. Al-Mutahadi 
-                leads our clinical team with a focus on evidence-based treatment and patient-centered care.
-              </p>
-              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
+              <div className="team-member-card-content">
+                <h3 className="team-member-name">Dr. Mohammed Reda bin Naji Al-Yazidi</h3>
+                <p className="team-member-specialization">Physical Therapy and Medical Rehabilitation Specialist - Founder of the Center and the International Research Network.</p>
+                <Link to={CONTACT_PATH} className="btn btn-primary team-member-cta">{PRIMARY_CTA_LABEL}</Link>
+              </div>
             </div>
 
             <div className="team-member-card">
               <div className="team-member-image">
-                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=500&fit=crop" alt="Dr. Sarah Johnson" />
+                <img src="/dr-safaa-mohammed-mahrez.png" alt="Dr. Safaa Mohammed Mahrez" />
               </div>
-              <h3 className="team-member-name">Dr. Sarah Johnson</h3>
-              <p className="team-member-title">Clinical Psychologist</p>
-              <p className="team-member-bio">
-                Specializing in trauma-informed therapy and cognitive behavioral approaches, Dr. Johnson 
-                provides compassionate psychological support tailored to each patient's needs.
-              </p>
-              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
+              <div className="team-member-card-content">
+                <h3 className="team-member-name">Dr. Safaa Mohammed Mahrez</h3>
+                <p className="team-member-specialization">Physical Therapy and Rehabilitation Specialist.</p>
+                <Link to={CONTACT_PATH} className="btn btn-primary team-member-cta">{PRIMARY_CTA_LABEL}</Link>
+              </div>
             </div>
 
             <div className="team-member-card">
               <div className="team-member-image">
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=500&fit=crop" alt="Nurse Fatima Hassan" />
+                <img src="/dr-sirine-al-habib-al-qasimi.png" alt="Dr. Sirine Al-Habib Al-Qasimi" />
               </div>
-              <h3 className="team-member-name">Nurse Fatima Hassan</h3>
-              <p className="team-member-title">Head Nurse & Care Coordinator</p>
-              <p className="team-member-bio">
-                With extensive experience in rehabilitation nursing, Fatima ensures seamless coordination 
-                of care and provides hands-on support throughout the recovery process.
-              </p>
-              <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
+              <div className="team-member-card-content">
+                <h3 className="team-member-name">Dr. Sirine Al-Habib Al-Qasimi</h3>
+                <p className="team-member-specialization">Physical Therapy and Rehabilitation Specialist.</p>
+                <Link to={CONTACT_PATH} className="btn btn-primary team-member-cta">{PRIMARY_CTA_LABEL}</Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-dark">
-        <div className="content-inner">
-          <div className="team-cta-content">
-            <div className="team-cta-text">
-              <span className="section-label section-label-teal">GET STARTED</span>
-              <h2 className="section-title section-title-light">{CTA_HEADING}<br />{CTA_HEADING_ACCENT}</h2>
-              <p className="section-desc section-desc-light">
-                {CTA_DESCRIPTION}
-              </p>
-              <div className="cta-buttons">
-                <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
-                <a href="tel:+966123456789" className="btn btn-outline-light" aria-label="Call now">Call Now</a>
-              </div>
-            </div>
-            <div className="team-cta-form">
-              <h3 className="cta-form-title">Quick Contact</h3>
-              <form className="contact-form-compact">
-                <input type="text" placeholder="Full Name" className="form-input" />
-                <input type="email" placeholder="Email Address" className="form-input" />
-                <input type="tel" placeholder="Phone Number" className="form-input" />
-                <textarea placeholder="Message (Optional)" className="form-textarea" rows={3}></textarea>
-                <button type="submit" className="btn btn-primary btn-block">Send Message</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* CTA Section (landing-page default) */}
+      <CtaSection />
 
       <Footer />
     </div>

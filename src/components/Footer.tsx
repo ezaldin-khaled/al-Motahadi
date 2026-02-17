@@ -74,8 +74,8 @@ export default function Footer() {
         <div className="footer-links">
           <h4 className="footer-heading">COMPANY</h4>
           <Link to="/about">About Us</Link>
+          <Link to="/who-we-are">Who We Are</Link>
           <Link to="/about">Our Process</Link>
-          <Link to="/about">Testimonials</Link>
           <Link to="/contact">Contact</Link>
         </div>
         <div className="footer-links footer-links-empty" aria-hidden />
