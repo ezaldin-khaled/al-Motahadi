@@ -47,11 +47,10 @@ export default function Header() {
       <div className="top-line" ref={lineRef} aria-hidden="true" style={{ transformOrigin: isRtl ? 'right' : 'left' }} />
       <header className="nav-header">
         <div className="nav-inner">
-          <Link to="/" className="nav-logo" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/" className="nav-logo" onClick={() => setMobileMenuOpen(false)} aria-label="AL MOTAHADI">
             <span className="nav-logo-icon" aria-hidden="true">
-              <img src="/SVG.png" alt="" className="nav-logo-img" />
+              <img src="/logo.png" alt="" className="nav-logo-img" />
             </span>
-            AL MOTAHADI
           </Link>
           <nav className="nav-links" aria-label="Main navigation">
             <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.home')}</NavLink>

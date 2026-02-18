@@ -182,7 +182,12 @@
     "instagram": "Instagram",
     "facebook": "Facebook",
     "twitter": "Twitter",
-    "linkedin": "LinkedIn"
+    "linkedin": "LinkedIn",
+    "whatsapp": "WhatsApp",
+    "others": "Others",
+    "youtube": "YouTube",
+    "whatsappChannel": "WhatsApp Channel",
+    "snapchat": "Snapchat"
   },
   "about": {
     "heroLabel": "ABOUT US",

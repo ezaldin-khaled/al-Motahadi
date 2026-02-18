@@ -182,7 +182,12 @@
     "instagram": "إنستغرام",
     "facebook": "فيسبوك",
     "twitter": "تويتر",
-    "linkedin": "لينكدإن"
+    "linkedin": "لينكدإن",
+    "whatsapp": "واتساب",
+    "others": "أخرى",
+    "youtube": "يوتيوب",
+    "whatsappChannel": "قناة واتساب",
+    "snapchat": "سناب شات"
   },
   "about": {
     "heroLabel": "من نحن",
