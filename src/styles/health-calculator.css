@@ -276,26 +276,65 @@
 }
 
 @media (max-width: 640px) {
+  .calculate-health {
+    padding: 64px 0;
+  }
+
+  .calculate-health__container {
+    padding: 0 20px;
+  }
+
+  .health-calculator__title {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
   .health-calculator__fields {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .health-calculator__tabs {
-    flex-direction: column;
-    border-radius: 10px;
+    flex-direction: row;
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 52px;
   }
 
-  .health-calculator__tab,
-  .health-calculator__tab:first-of-type,
-  .health-calculator__tab:last-of-type {
-    border-radius: 0;
+  .health-calculator__tab {
+    min-height: 52px;
+    font-size: 16px;
+    padding: 16px 20px;
   }
 
   .health-calculator__tab:first-of-type {
-    border-radius: 10px 10px 0 0;
+    border-radius: 14px 0 0 14px;
   }
 
   .health-calculator__tab:last-of-type {
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 14px 14px 0;
+  }
+
+  .health-calculator__input {
+    min-height: 52px;
+    padding: 16px 18px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .health-calculator__submit {
+    min-height: 52px;
+    border-radius: 14px;
+    font-size: 16px;
+  }
+
+  .health-calculator__gender {
+    min-height: 52px;
+    border-radius: 12px;
+  }
+
+  .health-calculator__gender-btn {
+    padding: 16px 18px;
+    font-size: 16px;
   }
 }
