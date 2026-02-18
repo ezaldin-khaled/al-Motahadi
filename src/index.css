@@ -38,7 +38,13 @@ h1, h2, h3,
   padding: 20px 80px;
 }
 .nav-links { justify-self: center; }
+.nav-right { display: flex; align-items: center; gap: 16px; justify-self: end; }
 .nav-cta { justify-self: end; }
+.nav-lang-switcher { display: flex; align-items: center; gap: 4px; }
+.nav-lang-btn { background: none; border: none; cursor: pointer; font-size: 13px; color: #666; padding: 4px 8px; border-radius: 4px; font-weight: 500; }
+.nav-lang-btn:hover { color: #00A79E; }
+.nav-lang-btn--active { color: #00A79E; font-weight: 600; }
+.nav-lang-sep { color: #ccc; font-size: 12px; }
 .nav-logo { display: inline-flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 600; color: #212529; text-decoration: none; }
 .nav-logo-icon {
   width: 44px;
@@ -157,6 +163,13 @@ h1, h2, h3,
 }
 .image-badge strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; color: #fff; }
 .image-badge span { font-weight: 400; color: rgba(255,255,255,0.9); font-size: 12px; }
+.image-badge.image-badge-dark {
+  background: #FFFFFF;
+  border: 1px solid #E3E8E8;
+  box-shadow: 0px 4px 6px -4px #0000001A, 0px 10px 15px -3px #0000001A;
+}
+.image-badge.image-badge-dark strong { color: #212529; }
+.image-badge.image-badge-dark span { color: #495057; }
 .stats { padding: 48px 0; border-top: 1px solid #eee; background: #fff; }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .stat-item { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
@@ -511,6 +524,17 @@ h1, h2, h3,
   text-decoration: none;
 }
 .footer-legal a:hover { color: rgba(255,255,255,0.9); }
+.footer-developed {
+  width: 100%;
+  text-align: center;
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* RTL (Arabic) layout support */
+[dir="rtl"] .about-list { text-align: right; }
+[dir="rtl"] .about-list.about-list-features { text-align: right; }
 
 /* GSAP: initial hidden state for animated elements */
 .animate-in { opacity: 0; transform: translateY(32px); }
@@ -520,7 +544,7 @@ h1, h2, h3,
 @media (max-width: 1200px) {
   .nav-inner { padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
   .nav-links { order: 3; width: 100%; justify-content: center; }
-  .nav-cta { margin-left: auto; }
+  .nav-right { margin-inline-start: auto; }
   .nav-links { gap: 16px; flex-wrap: wrap; }
   .hero { flex-direction: column; text-align: center; }
   .hero-text { max-width: none; }

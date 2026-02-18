@@ -150,12 +150,8 @@
 }
 
 .service-card-link:hover {
-  color: #00A79E;
-}
-
-.service-card-link:hover {
   gap: 12px;
-  color: #0a7a6e;
+  color: #00A79E;
 }
 
 .service-card-link .arrow {

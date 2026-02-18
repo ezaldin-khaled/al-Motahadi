@@ -26,3 +26,9 @@ export const CTA_DESCRIPTION =
 
 /** WhatsApp button label */
 export const WHATSAPP_LABEL = 'WhatsApp Us';
+
+/** Services page CTA label (Figma: "Don't Hesitate Today!") */
+export const CTA_SECTION_LABEL_SERVICES = "Don't Hesitate Today!";
+
+/** Visit Us button label (e.g. Services page CTA) */
+export const VISIT_US_LABEL = 'Visit Us';

@@ -164,6 +164,16 @@
   border-color: #d1d5db;
 }
 
+.package-card-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pkg-teal);
+  margin-bottom: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 .package-card-title {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
@@ -171,17 +181,23 @@
   font-size: 1.125rem;
   letter-spacing: -0.3px;
   color: var(--pkg-dark);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   line-height: 1.35;
 }
 
-.package-card-desc {
+.package-card-sessions {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--pkg-desc);
+  margin-bottom: 16px;
+}
+
+.package-card-price-note {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  color: var(--pkg-muted);
   margin-bottom: 20px;
-  flex: 1;
 }
 
 .package-card-price {

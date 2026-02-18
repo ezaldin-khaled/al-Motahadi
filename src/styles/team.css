@@ -12,6 +12,16 @@
   z-index: 1;
 }
 
+.team-hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
 .team-hero-title {
   font-size: 3rem;
   font-weight: 700;
@@ -230,8 +240,15 @@
   font-size: 15px;
   line-height: 1.6;
   color: #444;
-  margin: 0 0 20px;
+  margin: 0 0 6px;
   flex: 1;
+}
+
+.team-member-tagline {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 20px;
+  line-height: 1.4;
 }
 
 .team-member-cta {

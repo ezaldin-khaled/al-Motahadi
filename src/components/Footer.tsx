@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -30,6 +31,7 @@ const LinkedInIcon = () => (
 );
 
 export default function Footer() {
+  const { t } = useTranslation();
   const footerRef = useRef<HTMLElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
 
@@ -53,40 +55,41 @@ export default function Footer() {
           <div className="footer-logo-wrap">
             <img src="/SVG.png" alt="" className="footer-logo-img" />
           </div>
-          <span className="footer-logo">AL MOTAHADI</span>
+          <span className="footer-logo">{t('footer.brand')}</span>
           <p className="footer-desc">
-            Medical Rehabilitation Center dedicated to restoring movement and improving lives through expert, compassionate care.
+            {t('footer.description')}
           </p>
           <div className="footer-social">
-            <a href="#" className="footer-social-link" aria-label="Instagram"><InstagramIcon /></a>
-            <a href="#" className="footer-social-link" aria-label="Facebook"><FacebookIcon /></a>
-            <a href="#" className="footer-social-link" aria-label="Twitter"><TwitterIcon /></a>
-            <a href="#" className="footer-social-link" aria-label="LinkedIn"><LinkedInIcon /></a>
+            <a href="#" className="footer-social-link" aria-label={t('footer.instagram')}><InstagramIcon /></a>
+            <a href="#" className="footer-social-link" aria-label={t('footer.facebook')}><FacebookIcon /></a>
+            <a href="#" className="footer-social-link" aria-label={t('footer.twitter')}><TwitterIcon /></a>
+            <a href="#" className="footer-social-link" aria-label={t('footer.linkedin')}><LinkedInIcon /></a>
           </div>
         </div>
         <div className="footer-links">
-          <h4 className="footer-heading">SERVICES</h4>
-          <Link to="/services">Physiotherapy</Link>
-          <Link to="/services">Neurological Rehab</Link>
-          <Link to="/services">Sports Injury</Link>
-          <Link to="/services">Pain Management</Link>
+          <h4 className="footer-heading">{t('footer.servicesHeading')}</h4>
+          <Link to="/services">{t('footer.physiotherapy')}</Link>
+          <Link to="/services">{t('footer.neuroRehab')}</Link>
+          <Link to="/services">{t('footer.sportsInjury')}</Link>
+          <Link to="/services">{t('footer.painManagement')}</Link>
         </div>
         <div className="footer-links">
-          <h4 className="footer-heading">COMPANY</h4>
-          <Link to="/about">About Us</Link>
-          <Link to="/who-we-are">Who We Are</Link>
-          <Link to="/packages">Packages & Pricing</Link>
-          <Link to="/about">Our Process</Link>
-          <Link to="/contact">Contact</Link>
+          <h4 className="footer-heading">{t('footer.companyHeading')}</h4>
+          <Link to="/about">{t('footer.aboutUs')}</Link>
+          <Link to="/who-we-are">{t('footer.whoWeAre')}</Link>
+          <Link to="/packages">{t('footer.packagesPricing')}</Link>
+          <Link to="/about">{t('footer.ourProcess')}</Link>
+          <Link to="/contact">{t('footer.contact')}</Link>
         </div>
         <div className="footer-links footer-links-empty" aria-hidden />
       </div>
       <div className="footer-bottom">
-        <p className="footer-copyright">© 2026 AL MOTAHADI Medical Rehabilitation Center. All rights reserved</p>
+        <p className="footer-copyright">{t('footer.copyright')}</p>
         <div className="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
+          <a href="#">{t('footer.privacyPolicy')}</a>
+          <a href="#">{t('footer.termsOfService')}</a>
         </div>
+        <p className="footer-developed">{t('footer.developedBy')}</p>
       </div>
     </footer>
   );

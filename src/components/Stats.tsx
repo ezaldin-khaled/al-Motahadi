@@ -1,19 +1,21 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { value: '15+', label: 'YEARS EXPERIENCE' },
-  { value: '5k+', label: 'SUCCESS STORIES' },
-  { value: '30+', label: 'SPECIALISTS' },
-  { value: '24/7', label: 'AVAILABILITY' },
-];
-
 export default function Stats() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const stats = [
+    { value: t('stats.yearsExperience'), label: t('stats.yearsLabel') },
+    { value: t('stats.successStories'), label: t('stats.successLabel') },
+    { value: t('stats.patientSupport'), label: t('stats.patientSupportLabel') },
+    { value: t('stats.bespokePlans'), label: t('stats.bespokePlansLabel') },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {

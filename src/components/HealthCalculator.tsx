@@ -1,21 +1,22 @@
 import { useState, FormEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import '../styles/health-calculator.css';
 
-function getBmiCategory(bmi: number) {
-  if (bmi < 18.5) return 'Underweight';
-  if (bmi < 25) return 'Normal Weight';
-  if (bmi < 30) return 'Overweight';
-  return 'Obese';
+function getBmiCategoryKey(bmi: number): 'underweight' | 'normal' | 'overweight' | 'obese' {
+  if (bmi < 18.5) return 'underweight';
+  if (bmi < 25) return 'normal';
+  if (bmi < 30) return 'overweight';
+  return 'obese';
 }
 
 export type HealthCalculatorVariant = 'default' | 'embedded';
 
 type Props = {
-  /** Show "HEALTH TOOLS" label and "Calculate Your Health" title above the form */
   variant?: HealthCalculatorVariant;
 };
 
 export default function HealthCalculator({ variant = 'default' }: Props) {
+  const { t } = useTranslation();
   const [activeCalculator, setActiveCalculator] = useState<'bmi' | 'bmr'>('bmi');
 
   const [bmiWeight, setBmiWeight] = useState('');
@@ -54,8 +55,8 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
     <div className={`health-calculator health-calculator--${variant}`}>
       {variant === 'default' && (
         <>
-          <p className="health-calculator__label">HEALTH TOOLS</p>
-          <h2 className="health-calculator__title">Calculate Your Health</h2>
+          <p className="health-calculator__label">{t('healthCalculator.label')}</p>
+          <h2 className="health-calculator__title">{t('healthCalculator.title')}</h2>
         </>
       )}
 
@@ -65,25 +66,25 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
           className={`health-calculator__tab ${activeCalculator === 'bmi' ? 'health-calculator__tab--active' : ''}`}
           onClick={() => setActiveCalculator('bmi')}
         >
-          BMI Calculator
+          {t('healthCalculator.bmiTab')}
         </button>
         <button
           type="button"
           className={`health-calculator__tab ${activeCalculator === 'bmr' ? 'health-calculator__tab--active' : ''}`}
           onClick={() => setActiveCalculator('bmr')}
         >
-          BMR Calculator
+          {t('healthCalculator.bmrTab')}
         </button>
       </div>
 
       {activeCalculator === 'bmi' && (
-        <form className="health-calculator__form" onSubmit={onBmiSubmit}>
+        <form className="health-calculator__form health-calculator__form--bmi" onSubmit={onBmiSubmit}>
           <div className="health-calculator__fields">
             <div className="health-calculator__field">
-              <label className="health-calculator__field-label">Weight (kg)</label>
+              <label className="health-calculator__field-label">{t('healthCalculator.weightKg')}</label>
               <input
                 type="number"
-                placeholder="e.g. 70"
+                placeholder={t('healthCalculator.placeholderWeight')}
                 className="health-calculator__input"
                 value={bmiWeight}
                 onChange={(e) => setBmiWeight(e.target.value)}
@@ -92,10 +93,10 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
               />
             </div>
             <div className="health-calculator__field">
-              <label className="health-calculator__field-label">Height (cm)</label>
+              <label className="health-calculator__field-label">{t('healthCalculator.heightCm')}</label>
               <input
                 type="number"
-                placeholder="e.g. 175"
+                placeholder={t('healthCalculator.placeholderHeight')}
                 className="health-calculator__input"
                 value={bmiHeight}
                 onChange={(e) => setBmiHeight(e.target.value)}
@@ -105,11 +106,11 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
             </div>
           </div>
           <button type="submit" className="health-calculator__submit">
-            Calculate BMI
+            {t('healthCalculator.calculateBmi')}
           </button>
           {bmiResult !== null && (
             <div className="health-calculator__result">
-              BMI: {bmiResult} - {getBmiCategory(bmiResult)}
+              {t('healthCalculator.bmiResult', { value: bmiResult, category: t(`healthCalculator.bmiCategory.${getBmiCategoryKey(bmiResult)}`) })}
             </div>
           )}
         </form>
@@ -119,10 +120,10 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
         <form className="health-calculator__form" onSubmit={onBmrSubmit}>
           <div className="health-calculator__fields">
             <div className="health-calculator__field">
-              <label className="health-calculator__field-label">Weight (kg)</label>
+              <label className="health-calculator__field-label">{t('healthCalculator.weightKg')}</label>
               <input
                 type="number"
-                placeholder="e.g. 70"
+                placeholder={t('healthCalculator.placeholderWeight')}
                 className="health-calculator__input"
                 value={bmrWeight}
                 onChange={(e) => setBmrWeight(e.target.value)}
@@ -131,10 +132,10 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
               />
             </div>
             <div className="health-calculator__field">
-              <label className="health-calculator__field-label">Height (cm)</label>
+              <label className="health-calculator__field-label">{t('healthCalculator.heightCm')}</label>
               <input
                 type="number"
-                placeholder="e.g. 175"
+                placeholder={t('healthCalculator.placeholderHeight')}
                 className="health-calculator__input"
                 value={bmrHeight}
                 onChange={(e) => setBmrHeight(e.target.value)}
@@ -143,10 +144,10 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
               />
             </div>
             <div className="health-calculator__field">
-              <label className="health-calculator__field-label">Age</label>
+              <label className="health-calculator__field-label">{t('healthCalculator.age')}</label>
               <input
                 type="number"
-                placeholder="e.g. 26"
+                placeholder={t('healthCalculator.placeholderAge')}
                 className="health-calculator__input"
                 value={bmrAge}
                 onChange={(e) => setBmrAge(e.target.value)}
@@ -156,31 +157,31 @@ export default function HealthCalculator({ variant = 'default' }: Props) {
               />
             </div>
             <div className="health-calculator__field">
-              <label className="health-calculator__field-label">Gender</label>
+              <label className="health-calculator__field-label">{t('healthCalculator.gender')}</label>
               <div className="health-calculator__gender">
                 <button
                   type="button"
                   className={`health-calculator__gender-btn ${bmrGender === 'male' ? 'health-calculator__gender-btn--active' : ''}`}
                   onClick={() => setBmrGender('male')}
                 >
-                  Male
+                  {t('healthCalculator.male')}
                 </button>
                 <button
                   type="button"
                   className={`health-calculator__gender-btn ${bmrGender === 'female' ? 'health-calculator__gender-btn--active' : ''}`}
                   onClick={() => setBmrGender('female')}
                 >
-                  Female
+                  {t('healthCalculator.female')}
                 </button>
               </div>
             </div>
           </div>
           <button type="submit" className="health-calculator__submit">
-            Calculate BMR
+            {t('healthCalculator.calculateBmr')}
           </button>
           {bmrResult !== null && (
             <div className="health-calculator__result">
-              BMR: {bmrResult} calories/day
+              {t('healthCalculator.bmrResult', { value: bmrResult })}
             </div>
           )}
         </form>

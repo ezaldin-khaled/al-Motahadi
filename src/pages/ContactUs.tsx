@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../components/Header';
@@ -12,6 +13,7 @@ import '../styles/contact.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactUs() {
+  const { t } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
   const bookingRef = useRef<HTMLElement>(null);
   const calculatorRef = useRef<HTMLElement>(null);
@@ -90,12 +92,12 @@ export default function ContactUs() {
         setBookingEmail('');
         setBookingPhone('');
         setBookingMessage('');
-        alert(result.message || 'Thank you! Your appointment request has been submitted.');
+        alert(result.message || t('contact.successMessage'));
       } else {
         setBookingError(result.error);
       }
     } catch {
-      setBookingError('Failed to send. Please try again or contact us via WhatsApp.');
+      setBookingError(t('contact.errorSend'));
     } finally {
       setBookingSending(false);
     }
@@ -109,22 +111,17 @@ export default function ContactUs() {
     <div className="page-wrapper">
       <Header />
       <main className="main-content">
-        {/* Hero Section */}
         <section className="contact-hero" ref={heroRef}>
           <div className="page-hero-bg" aria-hidden="true" />
           <div className="contact-hero-content">
-            <p className="contact-hero-label">GET STARTED</p>
-            <h1 className="contact-hero-title">Book Your Appointment Now</h1>
-            <p className="contact-hero-desc">
-              Start your treatment journey with us through the online booking form or contact us directly via WhatsApp.
-            </p>
+            <p className="contact-hero-label">{t('contact.heroLabel')}</p>
+            <h1 className="contact-hero-title">{t('contact.heroTitle')}</h1>
+            <p className="contact-hero-desc">{t('contact.heroDesc')}</p>
           </div>
         </section>
 
-        {/* Booking Section */}
         <section className="booking-section" ref={bookingRef}>
           <div className="booking-container">
-            {/* Book Us Form */}
             <div className="booking-card booking-form-card">
               <div className="booking-card-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -134,95 +131,82 @@ export default function ContactUs() {
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
               </div>
-              <h2 className="booking-card-title">Book via Form</h2>
-              <p className="booking-card-desc">Fill out the form below and we'll get back to you shortly</p>
-              
+              <h2 className="booking-card-title">{t('contact.bookViaForm')}</h2>
+              <p className="booking-card-desc">{t('contact.bookViaFormDesc')}</p>
               <form className="booking-form" onSubmit={handleFormSubmit}>
                 {bookingError && (
                   <div className="form-error" role="alert">{bookingError}</div>
                 )}
                 <div className="form-group">
-                  <label className="form-label">Full Name</label>
-                  <input 
-                    type="text" 
-                    placeholder="Enter your full name" 
+                  <label className="form-label">{t('contact.fullName')}</label>
+                  <input
+                    type="text"
+                    placeholder={t('contact.placeholderName')}
                     className="form-input-contact"
                     value={bookingFullName}
                     onChange={(e) => setBookingFullName(e.target.value)}
-                    required 
+                    required
                   />
                 </div>
-
                 <div className="form-group">
-                  <label className="form-label">Email Address</label>
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email" 
+                  <label className="form-label">{t('contact.email')}</label>
+                  <input
+                    type="email"
+                    placeholder={t('contact.placeholderEmail')}
                     className="form-input-contact"
                     value={bookingEmail}
                     onChange={(e) => setBookingEmail(e.target.value)}
-                    required 
+                    required
                   />
                 </div>
-
                 <div className="form-group">
-                  <label className="form-label">Phone Number</label>
-                  <input 
-                    type="tel" 
-                    placeholder="Enter your phone number" 
+                  <label className="form-label">{t('contact.phone')}</label>
+                  <input
+                    type="tel"
+                    placeholder={t('contact.placeholderPhone')}
                     className="form-input-contact"
                     value={bookingPhone}
                     onChange={(e) => setBookingPhone(e.target.value)}
                   />
                 </div>
-
                 <div className="form-group">
-                  <label className="form-label">Message (Optional)</label>
-                  <textarea 
-                    placeholder="Tell us about your condition or any specific requirements" 
+                  <label className="form-label">{t('contact.message')}</label>
+                  <textarea
+                    placeholder={t('contact.placeholderMessage')}
                     className="form-textarea-contact"
                     rows={4}
                     value={bookingMessage}
                     onChange={(e) => setBookingMessage(e.target.value)}
                   />
                 </div>
-
                 <button type="submit" className="btn btn-primary btn-block" disabled={bookingSending}>
-                  {bookingSending ? 'Sending…' : 'Submit'}
+                  {bookingSending ? t('contact.sending') : t('contact.submit')}
                 </button>
               </form>
             </div>
 
-            {/* Book Us WhatsApp */}
             <div className="booking-card booking-whatsapp-card">
               <div className="booking-card-icon whatsapp-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
               </div>
-              <h2 className="booking-card-title">Book via WhatsApp</h2>
-              <p className="booking-card-desc">
-                Prefer a quick chat? Reach us directly on WhatsApp
-              </p>
-              <p className="whatsapp-extra">
-                Connect with our team instantly through WhatsApp for quick responses and easy appointment scheduling.
-              </p>
-
-              <button 
-                type="button" 
-                className="btn btn-whatsapp-green"
-                onClick={handleWhatsAppClick}
-              >
+              <h2 className="booking-card-title">{t('contact.bookViaWhatsApp')}</h2>
+              <p className="booking-card-desc">{t('contact.bookViaWhatsAppDesc')}</p>
+              <p className="whatsapp-extra">{t('contact.whatsappExtra')}</p>
+              <button type="button" className="btn btn-whatsapp-green" onClick={handleWhatsAppClick}>
                 <WhatsAppIcon className="whatsapp-icon" />
-                Book via WhatsApp
+                {t('contact.bookViaWhatsApp')}
               </button>
             </div>
           </div>
         </section>
 
-        {/* Health Calculator Section — unified component */}
-        <section className="calculator-section" ref={calculatorRef}>
-          <HealthCalculator variant="default" />
+        {/* Health Tools — Figma: HEALTH TOOLS label + Calculate Your Health + BMI/BMR tabs */}
+        <section className="calculate-health" ref={calculatorRef}>
+          <div className="calculate-health__container">
+            <HealthCalculator variant="default" />
+          </div>
         </section>
 
         {/* CTA Section (landing-page default) */}

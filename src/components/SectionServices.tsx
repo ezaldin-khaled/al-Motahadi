@@ -1,35 +1,22 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    img: '/service-left.png',
-    title: 'Physical Therapy',
-    desc: 'Restore mobility and reduce pain through evidence-based techniques and personalized exercise programs.',
-    alt: 'Therapist assisting patient with arm exercises in a comfortable setting',
-  },
-  {
-    img: '/service-middle.png',
-    title: 'Neurological & Organic Rehabilitation',
-    desc: 'Specialized programs for neurological and organic conditions with comprehensive, evidence-based care.',
-    alt: 'Neurological and Organic Rehabilitation Services',
-  },
-  {
-    img: '/service-right.png',
-    title: 'Rehabilitation',
-    desc: 'Comprehensive programs for post-surgery, injury, and chronic condition management.',
-    alt: 'Therapist guiding patient with resistance band exercise in wheelchair',
-  },
-];
-
 export default function SectionServices() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const services = [
+    { img: '/service-left.png', title: t('sectionServices.physicalTherapy'), desc: t('sectionServices.physicalTherapyDesc'), alt: t('sectionServices.physicalTherapyAlt') },
+    { img: '/service-middle.png', title: t('sectionServices.neurologicalRehab'), desc: t('sectionServices.neurologicalRehabDesc'), alt: t('sectionServices.neurologicalRehabAlt') },
+    { img: '/service-right.png', title: t('sectionServices.rehabilitation'), desc: t('sectionServices.rehabilitationDesc'), alt: t('sectionServices.rehabilitationAlt') },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -55,9 +42,9 @@ export default function SectionServices() {
     <section className="section section-services" ref={sectionRef}>
       <div className="content-inner">
         <div ref={headingRef}>
-          <p className="section-label">OUR SERVICES</p>
-          <h2 className="section-title">Comprehensive Care Solution</h2>
-          <p className="section-desc section-desc-center">From assessment to recovery, we offer a full range of rehabilitation services designed to meet your unique needs.</p>
+          <p className="section-label">{t('sectionServices.label')}</p>
+          <h2 className="section-title">{t('sectionServices.title')}</h2>
+          <p className="section-desc section-desc-center">{t('sectionServices.description')}</p>
         </div>
         <div className="cards-three">
           {services.map((s, i) => (
@@ -68,8 +55,8 @@ export default function SectionServices() {
             </div>
           ))}
         </div>
-        <p className="section-extra">Our integrated approach ensures you receive coordinated care from initial consultation through to full recovery. We work closely with physicians and families to achieve the best outcomes.</p>
-        <div className="section-cta"><Link to="/services" className="btn btn-primary">View All Services →</Link></div>
+        <p className="section-extra">{t('sectionServices.extra')}</p>
+        <div className="section-cta"><Link to="/services" className="btn btn-primary">{t('sectionServices.viewAllServices')}</Link></div>
       </div>
     </section>
   );

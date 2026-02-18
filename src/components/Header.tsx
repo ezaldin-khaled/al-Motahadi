@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
-import { CONTACT_PATH, PRIMARY_CTA_LABEL } from '../constants/cta';
+import { CONTACT_PATH } from '../constants/cta';
 
 export default function Header() {
+  const { t, i18n } = useTranslation();
   const lineRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -13,7 +15,7 @@ export default function Header() {
   }, []);
   return (
     <>
-      <div className="top-line" ref={lineRef} aria-hidden="true" style={{ transformOrigin: 'left' }} />
+      <div className="top-line" ref={lineRef} aria-hidden="true" style={{ transformOrigin: i18n.language === 'ar' ? 'right' : 'left' }} />
       <header className="nav-header">
         <div className="nav-inner">
           <Link to="/" className="nav-logo">
@@ -23,13 +25,20 @@ export default function Header() {
             AL MOTAHADI
           </Link>
           <nav className="nav-links">
-            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Home</NavLink>
-            <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Services</NavLink>
-            <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Our Team</NavLink>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>About</NavLink>
-            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>Contact Us</NavLink>
+            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.home')}</NavLink>
+            <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.services')}</NavLink>
+            <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.ourTeam')}</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.about')}</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.contactUs')}</NavLink>
           </nav>
-          <Link to={CONTACT_PATH} className="nav-cta btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
+          <div className="nav-right">
+            <div className="nav-lang-switcher" role="group" aria-label="Language">
+              <button type="button" className={`nav-lang-btn ${i18n.language === 'en' ? 'nav-lang-btn--active' : ''}`} onClick={() => i18n.changeLanguage('en')}>EN</button>
+              <span className="nav-lang-sep" aria-hidden>|</span>
+              <button type="button" className={`nav-lang-btn ${i18n.language === 'ar' ? 'nav-lang-btn--active' : ''}`} onClick={() => i18n.changeLanguage('ar')}>العربية</button>
+            </div>
+            <Link to={CONTACT_PATH} className="nav-cta btn btn-primary">{t('nav.bookAppointment')}</Link>
+          </div>
         </div>
       </header>
     </>

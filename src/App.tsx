@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import Home from './pages/Home';
@@ -17,9 +18,20 @@ function ScrollToTop() {
   return null;
 }
 
+function RtlSync() {
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    const isRtl = i18n.language === 'ar';
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <RtlSync />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

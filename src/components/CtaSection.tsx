@@ -1,17 +1,10 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WhatsAppIcon } from './Icons';
 import { Link } from 'react-router-dom';
-import {
-  CONTACT_PATH,
-  CTA_DESCRIPTION,
-  CTA_HEADING,
-  CTA_HEADING_ACCENT,
-  CTA_SECTION_LABEL,
-  PRIMARY_CTA_LABEL_SHORT,
-  WHATSAPP_LABEL,
-} from '../constants/cta';
+import { CONTACT_PATH } from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,55 +34,31 @@ const QualityCareIcon = () => (
   </svg>
 );
 
-const cards = [
-  {
-    icon: <ClockIcon />,
-    title: 'Working Hours',
-    lines: ['Sunday - Thursday', '8:00 AM - 8:00 PM'],
-  },
-  {
-    icon: <PhoneIcon />,
-    title: 'Contact Us',
-    lines: ['+971 XX XXX XXXX', 'info@almotahadi.ae'],
-  },
-  {
-    icon: <LocationIcon />,
-    title: 'Visit Us',
-    lines: ['AL MOTAHADI Medical Center', 'Dubai, United Arab Emirates'],
-  },
-];
-
-/** Services page CTA: design copy — hours 8–10 AM, phone, Visit Us button */
-const cardsServices = [
-  {
-    icon: <ClockIcon />,
-    title: 'Working Hours',
-    lines: ['Sunday - Thursday', '8:00 AM - 10:00 AM'],
-  },
-  {
-    icon: <PhoneIcon />,
-    title: 'Contact Us',
-    lines: ['+971 02 2000 3900', 'info@almotahadi.ae'],
-  },
-  {
-    icon: <LocationIcon />,
-    title: 'Visit Us',
-    lines: ['AL Motahadi Medical Center', 'Dubai, United Arab Emirates'],
-  },
-];
-
-const cardsPackages = [
-  { icon: <QualityCareIcon />, title: 'QUALITY CARE', lines: ['Expert rehabilitation care tailored to your needs.'] },
-  { icon: <QualityCareIcon />, title: 'EXPERIENCED TEAM', lines: ['Our specialists are dedicated to your recovery.'] },
-  { icon: <QualityCareIcon />, title: 'PERSONALIZED APPROACH', lines: ['Customized treatment plans for best outcomes.'] },
-];
-
 type CtaSectionProps = { variant?: 'dark-cards' | 'packages' | 'services' };
 
 export default function CtaSection({ variant }: CtaSectionProps) {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+
+  const cards = [
+    { icon: <ClockIcon />, title: t('cta.workingHours'), lines: [t('cta.hoursDefault'), t('cta.hoursTimeDefault')] },
+    { icon: <PhoneIcon />, title: t('cta.contactUs'), lines: [t('cta.phonePlaceholder'), t('cta.email')] },
+    { icon: <LocationIcon />, title: t('cta.visitUsTitle'), lines: [t('cta.locationLine1'), t('cta.locationLine2')] },
+  ];
+
+  const cardsServices = [
+    { icon: <ClockIcon />, title: t('cta.workingHours'), lines: [t('cta.hoursDefault'), t('cta.hoursTimeServices')] },
+    { icon: <PhoneIcon />, title: t('cta.contactUs'), lines: [t('cta.phoneServices'), t('cta.email')] },
+    { icon: <LocationIcon />, title: t('cta.visitUsTitle'), lines: [t('cta.locationLine1Services'), t('cta.locationLine2')] },
+  ];
+
+  const cardsPackages = [
+    { icon: <QualityCareIcon />, title: t('cta.qualityCare'), lines: [t('cta.qualityCareDesc')] },
+    { icon: <QualityCareIcon />, title: t('cta.experiencedTeam'), lines: [t('cta.experiencedTeamDesc')] },
+    { icon: <QualityCareIcon />, title: t('cta.personalizedApproach'), lines: [t('cta.personalizedApproachDesc')] },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -113,23 +82,19 @@ export default function CtaSection({ variant }: CtaSectionProps) {
   const isServices = variant === 'services';
   const displayCards = isPackages ? cardsPackages : isServices ? cardsServices : cards;
 
-  const ctaDescription = isServices
-    ? 'Take the first step toward restored movement and improved quality of life. Our expert team is ready to create a personalized rehabilitation tailored to your needs.'
-    : CTA_DESCRIPTION;
+  const ctaDescription = isServices ? t('cta.descriptionServices') : t('cta.description');
 
   return (
     <section className={`cta-section ${variant === 'dark-cards' || isServices ? 'cta-section-dark-cards' : ''} ${isPackages ? 'cta-section-packages' : ''}`} ref={sectionRef}>
       <div className="cta-section-bg" aria-hidden />
       <div className="cta-section-inner">
         <div className="cta-content" ref={contentRef}>
-          {!isServices && (
-            <p className="cta-label">
-              <span className="cta-label-line" />
-              {CTA_SECTION_LABEL}
-            </p>
-          )}
+          <p className="cta-label">
+            <span className="cta-label-line" />
+            {isServices ? t('cta.dontHesitate') : t('cta.getStarted')}
+          </p>
           <h2 className="cta-title">
-            {CTA_HEADING} <span className="cta-title-accent">{CTA_HEADING_ACCENT}</span>
+            {t('cta.heading')} <span className="cta-title-accent">{t('cta.headingAccent')}</span>
           </h2>
           <p className="cta-desc">
             {ctaDescription}
@@ -138,37 +103,37 @@ export default function CtaSection({ variant }: CtaSectionProps) {
             {isPackages ? (
               <>
                 <Link to="/services" className="btn btn-primary">
-                  EXPLORE SERVICES
+                  {t('cta.exploreServices')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <Link to={CONTACT_PATH} className="btn btn-outline-light">BOOK A SESSION</Link>
+                <Link to={CONTACT_PATH} className="btn btn-outline-light">{t('cta.bookSession')}</Link>
               </>
             ) : isServices ? (
               <>
                 <Link to={CONTACT_PATH} className="btn btn-primary">
-                  {PRIMARY_CTA_LABEL_SHORT}
+                  {t('cta.bookAppointment')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <a href="#" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
-                  <WhatsAppIcon className="whatsapp-icon" />
-                  {WHATSAPP_LABEL}
-                </a>
+                <Link to={CONTACT_PATH} className="btn btn-secondary" aria-label={t('cta.visitUs')}>
+                  <LocationIcon />
+                  {t('cta.visitUs')}
+                </Link>
               </>
             ) : (
               <>
                 <Link to={CONTACT_PATH} className="btn btn-primary">
-                  {PRIMARY_CTA_LABEL_SHORT}
+                  {t('cta.bookAppointment')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
                 <a href="#" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
                   <WhatsAppIcon className="whatsapp-icon" />
-                  {WHATSAPP_LABEL}
+                  {t('cta.whatsapp')}
                 </a>
               </>
             )}

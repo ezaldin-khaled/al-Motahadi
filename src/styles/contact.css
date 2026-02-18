@@ -218,15 +218,7 @@
   filter: brightness(0) invert(1);
 }
 
-/* Calculator Section — layout only; field styles in health-calculator.css */
-.calculator-section {
-  padding: 64px 80px;
-  background: #fff;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  text-align: center;
-}
+/* Calculator section uses .calculate-health (styles in health-calculator.css, same as About Us) */
 
 /* CTA Section — dark translucent info cards on Contact Us page */
 .cta-section-dark-cards .cta-info-card {
@@ -318,7 +310,6 @@
 @media (max-width: 1024px) {
   .contact-hero,
   .booking-section,
-  .calculator-section,
   .contact-cta-section {
     padding: 48px 40px;
   }
@@ -336,7 +327,6 @@
 @media (max-width: 768px) {
   .contact-hero,
   .booking-section,
-  .calculator-section,
   .contact-cta-section {
     padding: 40px 24px;
   }

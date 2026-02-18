@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SectionDark() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
@@ -24,10 +26,10 @@ export default function SectionDark() {
   return (
     <section className="section section-dark" ref={sectionRef}>
       <div className="content-inner" ref={innerRef}>
-        <p className="section-label section-label-teal">PRICING</p>
-        <h2 className="section-title section-title-light">Tailored Packages</h2>
-        <p className="section-desc section-desc-light section-desc-center">We offer flexible packages to suit different needs and budgets. Choose the plan that fits your recovery journey.</p>
-        <div className="section-cta"><Link to="/packages" className="btn btn-primary">View Packages →</Link></div>
+        <p className="section-label section-label-teal">{t('sectionDark.label')}</p>
+        <h2 className="section-title section-title-light">{t('sectionDark.title')}</h2>
+        <p className="section-desc section-desc-light section-desc-center">{t('sectionDark.description')}</p>
+        <div className="section-cta"><Link to="/packages" className="btn btn-primary">{t('sectionDark.viewPackages')}</Link></div>
       </div>
     </section>
   );

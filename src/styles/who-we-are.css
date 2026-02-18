@@ -2,13 +2,13 @@
 
 .who-we-are-page {
   width: 100%;
-  background: #ffffff;
+  background: #FCFCFC;
 }
 
 /* ===== HERO: WHO WE ARE ===== */
 .wwa-hero {
   width: 100%;
-  background: #ffffff;
+  background: #FCFCFC;
   padding: 80px 0 96px;
 }
 
@@ -98,11 +98,62 @@
 }
 
 .wwa-section-white {
-  background: #ffffff;
+  background: #FCFCFC;
 }
 
 .wwa-section-teal {
-  background: #e5f0ef;
+  background: #E0E8E8;
+}
+
+/* Plan-Based section: light grey-green bg, target icon, teal accent */
+.wwa-section-plan {
+  background: #E9ECEC;
+}
+.wwa-plan-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wwa-plan-icon svg,
+.wwa-plan-icon .wwa-plan-icon-img {
+  display: block;
+  object-fit: contain;
+}
+.wwa-section-plan .wwa-plan-title {
+  color: #212529;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin-bottom: 12px;
+}
+.wwa-plan-subtitle {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #00A595;
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.wwa-section-plan .wwa-plan-desc {
+  color: #495057;
+  margin-bottom: 28px;
+}
+.wwa-plan-cta {
+  border-radius: 999px !important;
+  background: #00A595 !important;
+  color: #FFFFFF !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 165, 149, 0.3);
+}
+.wwa-plan-cta:hover {
+  background: #009285 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(0, 165, 149, 0.35);
 }
 
 .wwa-container {
@@ -122,8 +173,10 @@
   color: #00A79E;
 }
 
-.wwa-section-icon svg {
+.wwa-section-icon svg,
+.wwa-section-icon .wwa-section-icon-img {
   display: block;
+  object-fit: contain;
 }
 
 .wwa-section-title {
@@ -374,6 +427,10 @@
 }
 
 /* ===== HOME THERAPY & TRANSPORTATION (two columns) ===== */
+.wwa-section-two-cols {
+  background: #E8ECEC;
+}
+
 .wwa-cols-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -385,8 +442,65 @@
   padding: 0;
 }
 
-.wwa-col-block .wwa-section-desc:last-of-type {
+/* Icon: rounded square, light teal bg, teal border, teal icon */
+.wwa-col-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #209F8C;
+  background: #EBF5F4;
+  border: 1px solid rgba(32, 159, 140, 0.4);
+  border-radius: 12px;
+}
+
+.wwa-col-icon-wrap svg,
+.wwa-col-icon-wrap .wwa-col-icon-img {
+  display: block;
+  object-fit: contain;
+}
+
+.wwa-col-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  color: #2D3E4F;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.wwa-col-tagline {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #209F8C;
+  margin-bottom: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+}
+
+.wwa-col-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4A5568;
   margin-bottom: 24px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wwa-col-cta {
+  border-radius: 8px !important;
+  background: #209F8C !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(32, 159, 140, 0.3);
+}
+
+.wwa-col-cta:hover {
+  background: #1B8A7A !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(32, 159, 140, 0.35);
 }
 
 /* ===== RESPONSIVE ===== */

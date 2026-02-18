@@ -1,65 +1,137 @@
 /**
- * Unified Health Calculator — field and button styling to match design.
- * Use .health-calculator as the single wrapper; section background is controlled by the page.
+ * Health Calculator — unified across site (About Us, Contact Us, etc.).
+ * Section wrapper: same layout and look everywhere.
+ * Calculator: white/light theme, teal #009688, inactive tab #F5F5F5.
  */
 
+/* ===== Section wrapper (use on every page that shows the calculator) ===== */
+.calculate-health {
+  padding: 96px 0;
+  background: #FFFFFF;
+  width: 100%;
+}
+
+.calculate-health__container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 112px;
+  text-align: center;
+}
+
+.calculate-health__subheading {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666666;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+@media (max-width: 1200px) {
+  .calculate-health__container {
+    padding: 0 64px;
+  }
+}
+
+@media (max-width: 968px) {
+  .calculate-health__container {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .calculate-health {
+    padding: 64px 0;
+  }
+
+  .calculate-health__container {
+    padding: 0 24px;
+  }
+}
+
+/* ===== Calculator component ===== */
 .health-calculator {
   max-width: 560px;
   margin: 0 auto;
   text-align: center;
 }
 
+/* HEALTH TOOLS — small uppercase teal */
 .health-calculator__label {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.15em;
-  color: #00A79E;
+  color: #009688;
   text-transform: uppercase;
   margin-bottom: 12px;
+  font-family: inherit;
 }
 
+/* Calculate Your Health — large serif, dark grey */
 .health-calculator__title {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 700;
-  color: #2c2c2c;
-  margin-bottom: 24px;
+  color: #2C3E50;
+  margin-bottom: 28px;
   line-height: 1.25;
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Tabs — large rounded rectangular buttons; active = white + border, inactive = white + grey text */
+/* Tabs — single segmented control: active = white + border/shadow, inactive = light grey */
 .health-calculator__tabs {
   display: flex;
-  gap: 12px;
+  gap: 0;
   justify-content: center;
   margin-bottom: 28px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F5F5F5;
+  width: 100%;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .health-calculator__tab {
-  padding: 14px 28px;
-  border-radius: 12px;
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 0;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #6b7280;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border: none;
+  min-width: 0;
+  color: #555555;
 }
 
-.health-calculator__tab:hover {
-  border-color: #00A79E;
-  color: #00A79E;
+.health-calculator__tab:first-of-type {
+  border-radius: 10px 0 0 10px;
+}
+
+.health-calculator__tab:last-of-type {
+  border-radius: 0 10px 10px 0;
 }
 
 .health-calculator__tab--active {
-  background: #fff;
-  color: #2c2c2c;
-  border-color: #d1d5db;
+  background: #FFFFFF;
+  color: #555555;
+  border: 1px solid #E0E0E0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
-/* Form — no card background; fields only */
+.health-calculator__tab:not(.health-calculator__tab--active) {
+  background: #F5F5F5;
+  color: #555555;
+}
+
+.health-calculator__tab:not(.health-calculator__tab--active):hover {
+  background: #EEEEEE;
+  color: #555555;
+}
+
+/* Form — left-aligned labels, full-width fields */
 .health-calculator__form {
   text-align: left;
 }
@@ -67,8 +139,13 @@
 .health-calculator__fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 20px 20px;
   margin-bottom: 24px;
+}
+
+/* BMI form: Weight and Height stacked vertically */
+.health-calculator__form--bmi .health-calculator__fields {
+  grid-template-columns: 1fr;
 }
 
 .health-calculator__field {
@@ -77,108 +154,148 @@
   gap: 8px;
 }
 
+/* Labels — bold, dark grey, above inputs */
 .health-calculator__field-label {
   font-size: 14px;
-  font-weight: 500;
-  color: #374151;
+  font-weight: 700;
+  color: #2C3E50;
+  font-family: inherit;
 }
 
-/* Inputs — white, rounded rectangular, light grey border (design mimic) */
+/* Inputs — white, thin light grey border, slightly rounded, spacious padding */
 .health-calculator__input {
   width: 100%;
   padding: 14px 18px;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  min-height: 48px;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
   font-size: 15px;
+  font-weight: 500;
   font-family: inherit;
-  background: #fff;
-  color: #1f2937;
+  background: #FFFFFF;
+  color: #2C3E50;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
 }
 
 .health-calculator__input::placeholder {
-  color: #9ca3af;
+  color: #9CA3AF;
+  font-style: italic;
 }
 
 .health-calculator__input:focus {
   outline: none;
-  border-color: #00A79E;
-  box-shadow: 0 0 0 3px rgba(0, 167, 158, 0.15);
+  border-color: #009688;
+  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.2);
 }
 
-/* Submit — teal, white text, rounded, full width */
+/* Submit — teal, white bold text, pill-shaped (very rounded), full width */
 .health-calculator__submit {
   width: 100%;
   padding: 14px 24px;
-  border-radius: 12px;
+  min-height: 48px;
+  border-radius: 24px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: inherit;
   border: none;
   cursor: pointer;
-  background: #00A79E;
-  color: #fff;
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  background: #009688;
+  color: #FFFFFF;
+  transition: opacity 0.2s, background-color 0.2s;
 }
 
 .health-calculator__submit:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 167, 158, 0.35);
+  opacity: 0.95;
+  background: #00897B;
 }
 
-/* Result — darker teal box, white text, rounded */
+/* Result — full-width bar, darker teal, left-aligned text */
 .health-calculator__result {
   margin-top: 24px;
-  padding: 20px 24px;
-  border-radius: 12px;
+  padding: 18px 24px;
+  min-height: 48px;
+  border-radius: 24px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
-  background: #1e5f5a;
-  color: #fff;
+  display: flex;
+  align-items: center;
+  background: #00796B;
+  color: #FFFFFF;
 }
 
-/* Gender — two rounded buttons; active = teal + white, inactive = white + dark text */
+/* Gender — two equal buttons, same row width as one input field */
 .health-calculator__gender {
   display: flex;
-  gap: 12px;
+  gap: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #FFFFFF;
+  min-height: 48px;
+  border: 1px solid #DDDDDD;
 }
 
 .health-calculator__gender-btn {
   flex: 1;
   padding: 14px 18px;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #4b5563;
-  transition: all 0.2s;
+  border: none;
+  background: #FFFFFF;
+  color: #555555;
+  transition: background 0.2s, color 0.2s;
 }
 
-.health-calculator__gender-btn:hover {
-  border-color: #00A79E;
-  color: #00A79E;
+.health-calculator__gender-btn:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+
+.health-calculator__gender-btn:last-of-type {
+  border-radius: 0 6px 6px 0;
+}
+
+.health-calculator__gender-btn:hover:not(.health-calculator__gender-btn--active) {
+  background: #F5F5F5;
 }
 
 .health-calculator__gender-btn--active {
-  background: #00A79E;
-  color: #fff;
-  border-color: #00A79E;
+  background: #009688;
+  color: #FFFFFF;
 }
 
-/* Embedded variant: no label/title (used inside section that has its own heading) */
+.health-calculator__gender-btn--active:hover {
+  background: #00897B;
+}
+
 .health-calculator--embedded .health-calculator__tabs {
   margin-top: 0;
 }
 
-/* Responsive */
 @media (max-width: 640px) {
   .health-calculator__fields {
     grid-template-columns: 1fr;
+  }
+
+  .health-calculator__tabs {
+    flex-direction: column;
+    border-radius: 10px;
+  }
+
+  .health-calculator__tab,
+  .health-calculator__tab:first-of-type,
+  .health-calculator__tab:last-of-type {
+    border-radius: 0;
+  }
+
+  .health-calculator__tab:first-of-type {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .health-calculator__tab:last-of-type {
+    border-radius: 0 0 10px 10px;
   }
 }

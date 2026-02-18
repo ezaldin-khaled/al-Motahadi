@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { WhatsAppIcon } from './Icons';
-import { CONTACT_PATH, PRIMARY_CTA_LABEL, WHATSAPP_LABEL } from '../constants/cta';
+import { CONTACT_PATH } from '../constants/cta';
 
 export default function Hero() {
+  const { t } = useTranslation();
   const brandRef = useRef<HTMLParagraphElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -30,28 +32,28 @@ export default function Hero() {
     <section className="hero">
       <div className="content-inner">
         <div className="hero-text">
-          <p className="brand" ref={brandRef}>AL MOTAHADI REHABILITATION CENTER</p>
+          <p className="brand" ref={brandRef}>{t('hero.brand')}</p>
           <h1 className="headline" ref={headlineRef}>
-            <span className="headline-dark">Restoring Movement.</span>
-            <span className="headline-accent">Improving Lives.</span>
+            <span className="headline-dark">{t('hero.headlineDark')}</span>
+            <span className="headline-accent">{t('hero.headlineAccent')}</span>
           </h1>
           <p className="description" ref={descRef}>
-            Your journey toward recovery begins here. A compassionate approach in physical rehabilitation for a transformative return to movement, strength, and independence.
+            {t('hero.description')}
           </p>
           <div className="cta-buttons" ref={ctaRef}>
-            <Link to={CONTACT_PATH} className="btn btn-primary">{PRIMARY_CTA_LABEL}</Link>
+            <Link to={CONTACT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
             <a href="#" className="btn btn-secondary btn-whatsapp">
               <WhatsAppIcon className="whatsapp-icon" />
-              {WHATSAPP_LABEL}
+              {t('hero.whatsapp')}
             </a>
           </div>
         </div>
         <div className="hero-image-wrap" ref={imageRef}>
           <div className="hero-image-container">
-            <img src="/hero-image.png" alt="Compassionate rehabilitation care at AL MOTAHADI center — healthcare professional with patient" className="hero-image" />
+            <img src="/hero-image.png" alt={t('hero.heroImageAlt')} className="hero-image" />
             <div className="image-badge image-badge-dark" ref={badgeRef}>
-              <strong>Trusted Healthcare</strong>
-              <span>500+ patients rehabilitated</span>
+              <strong>{t('hero.trustedHealthcare')}</strong>
+              <span>{t('hero.patientsRehabilitated')}</span>
             </div>
           </div>
         </div>
