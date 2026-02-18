@@ -10,13 +10,14 @@
 :root {
   --pkg-teal: #0d9688;
   --pkg-teal-alt: #1a9e7d;
+  --pkg-teal-light: rgba(13, 150, 136, 0.15);
   --pkg-dark: #2c2c2c;
   --pkg-muted: #888888;
   --pkg-desc: #6b7280;
   --pkg-border: #e5e7eb;
   --pkg-gray-bg: #f5f7f8;
-  --pkg-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  --pkg-radius: 12px;
+  --pkg-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --pkg-radius: 20px;
 }
 
 .packages-page {
@@ -74,16 +75,6 @@
   flex-wrap: wrap;
 }
 
-.packages-btn-outline {
-  border: 2px solid var(--pkg-teal-alt) !important;
-  color: var(--pkg-teal-alt) !important;
-  background: #ffffff !important;
-}
-.packages-btn-outline:hover {
-  background: rgba(26, 158, 125, 0.06) !important;
-  border-color: var(--pkg-teal-alt) !important;
-}
-
 /* ===== SECTIONS ===== */
 .packages-section {
   padding: 80px 80px;
@@ -104,11 +95,12 @@
 }
 
 .packages-section-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pkg-muted);
+  color: var(--pkg-teal);
   margin-bottom: 8px;
   text-align: center;
 }
@@ -168,18 +160,22 @@
   display: inline-block;
   font-size: 12px;
   font-weight: 600;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--pkg-teal);
-  margin-bottom: 12px;
+  background: var(--pkg-teal-light);
+  padding: 6px 12px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
   text-transform: none;
   letter-spacing: 0;
+  align-self: flex-start;
 }
 
 .package-card-title {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
-  font-style: normal;
-  font-size: 1.125rem;
-  letter-spacing: -0.3px;
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
   color: var(--pkg-dark);
   margin-bottom: 8px;
   line-height: 1.35;
@@ -193,6 +189,13 @@
   margin-bottom: 16px;
 }
 
+.package-card-price-after {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  color: var(--pkg-muted);
+  margin-bottom: 16px;
+}
+
 .package-card-price-note {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
@@ -201,17 +204,19 @@
 }
 
 .package-card-price {
-  font-size: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.625rem;
   font-weight: 700;
-  color: var(--pkg-dark);
-  margin-bottom: 20px;
+  color: var(--pkg-teal);
+  margin-bottom: 6px;
   line-height: 1.2;
 }
 
 .package-card-currency {
-  font-size: 0.9375rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--pkg-dark);
+  color: var(--pkg-teal);
 }
 
 .package-card-btn {

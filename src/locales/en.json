@@ -335,6 +335,7 @@
     "singleSessionTitle": "Single Therapy Session",
     "singleSessionPrice": "23",
     "currency": "OMR",
+    "priceAfterDiscount": "Price after {{percent}}% discount",
     "bookNow": "Book Your Appointment Now",
     "tawakkalna": "Tawakkalna Package",
     "tawakkalnaSessions": "5 Sessions",

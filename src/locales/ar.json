@@ -335,6 +335,7 @@
     "singleSessionTitle": "جلسة علاج واحدة",
     "singleSessionPrice": "23",
     "currency": "ر.ع",
+    "priceAfterDiscount": "السعر بعد خصم {{percent}}٪",
     "bookNow": "احجز موعدك الآن",
     "tawakkalna": "باقة توكلنا",
     "tawakkalnaSessions": "5 جلسات",
