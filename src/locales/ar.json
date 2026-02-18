@@ -5,7 +5,9 @@
     "ourTeam": "فريقنا",
     "about": "من نحن",
     "contactUs": "اتصل بنا",
-    "bookAppointment": "احجز موعدًا ←"
+    "bookAppointment": "احجز موعدًا ←",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة"
   },
   "hero": {
     "brand": "مركز المتحدي للتأهيل الطبي",
