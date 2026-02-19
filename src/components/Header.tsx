@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
-import { CONTACT_PATH } from '../constants/cta';
+import { CONTACT_PATH, LOGO_PATH } from '../constants/cta';
+import { useTheme } from '../contexts/ThemeContext';
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
@@ -11,6 +12,31 @@ function MenuIcon({ open }: { open: boolean }) {
       <span className={open ? 'nav-hamburger-line nav-hamburger-line--open' : 'nav-hamburger-line'} />
       <span className={open ? 'nav-hamburger-line nav-hamburger-line--open' : 'nav-hamburger-line'} />
     </span>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
+  return (
+    <button
+      type="button"
+      className="nav-theme-toggle"
+      onClick={toggleTheme}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Light mode' : 'Dark mode'}
+    >
+      {isDark ? (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+      ) : (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
   );
 }
 
@@ -49,7 +75,7 @@ export default function Header() {
         <div className="nav-inner">
           <Link to="/" className="nav-logo" onClick={() => setMobileMenuOpen(false)} aria-label="AL MOTAHADI">
             <span className="nav-logo-icon" aria-hidden="true">
-              <img src="/logo.png" alt="" className="nav-logo-img" />
+              <img src={LOGO_PATH} alt="" className="nav-logo-img" />
             </span>
           </Link>
           <nav className="nav-links" aria-label="Main navigation">
@@ -60,6 +86,7 @@ export default function Header() {
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.contactUs')}</NavLink>
           </nav>
           <div className="nav-right">
+            <ThemeToggle />
             <div className="nav-lang-switcher" role="group" aria-label="Language">
               <button type="button" className={`nav-lang-btn ${i18n.language === 'en' ? 'nav-lang-btn--active' : ''}`} onClick={() => i18n.changeLanguage('en')}>EN</button>
               <span className="nav-lang-sep" aria-hidden>|</span>
@@ -96,6 +123,9 @@ export default function Header() {
               <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.contactUs')}</NavLink>
             </nav>
             <div className="nav-mobile-actions">
+              <div className="nav-mobile-theme">
+                <ThemeToggle />
+              </div>
               <div className="nav-lang-switcher" role="group" aria-label="Language">
                 <button type="button" className={`nav-lang-btn ${i18n.language === 'en' ? 'nav-lang-btn--active' : ''}`} onClick={() => i18n.changeLanguage('en')}>EN</button>
                 <span className="nav-lang-sep" aria-hidden>|</span>

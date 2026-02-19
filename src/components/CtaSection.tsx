@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WhatsAppIcon } from './Icons';
 import { Link } from 'react-router-dom';
-import { CONTACT_PATH } from '../constants/cta';
+import { CONTACT_PATH, WHATSAPP_URL } from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,10 +118,10 @@ export default function CtaSection({ variant }: CtaSectionProps) {
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <Link to={CONTACT_PATH} className="btn btn-secondary" aria-label={t('cta.visitUs')}>
-                  <LocationIcon />
-                  {t('cta.visitUs')}
-                </Link>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label={t('cta.whatsapp')}>
+                  <WhatsAppIcon className="whatsapp-icon" />
+                  {t('cta.whatsapp')}
+                </a>
               </>
             ) : (
               <>
@@ -131,7 +131,7 @@ export default function CtaSection({ variant }: CtaSectionProps) {
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <a href="#" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
                   <WhatsAppIcon className="whatsapp-icon" />
                   {t('cta.whatsapp')}
                 </a>

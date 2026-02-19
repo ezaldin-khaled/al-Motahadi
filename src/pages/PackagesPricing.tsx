@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import { WhatsAppIcon } from '../components/Icons';
-import { CONTACT_PATH } from '../constants/cta';
+import { CONTACT_PATH, WHATSAPP_URL } from '../constants/cta';
 import '../styles/packages.css';
 
 type PackageCard = {
@@ -38,8 +38,6 @@ function PackageCardItem({ item, currency, priceAfterLabel }: { item: PackageCar
     </div>
   );
 }
-
-const WHATSAPP_URL = 'https://wa.me/YOUR_PHONE_NUMBER';
 
 export default function PackagesPricing() {
   const { t } = useTranslation();

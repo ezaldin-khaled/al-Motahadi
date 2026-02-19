@@ -5,6 +5,12 @@
 
 export const CONTACT_PATH = '/contact';
 
+/** Logo image path — used in header, footer, and favicon (index.html). */
+export const LOGO_PATH = '/logo.png';
+
+/** WhatsApp chat link (business) — opens in new tab */
+export const WHATSAPP_URL = 'https://wa.me/96892475400';
+
 /** Primary CTA button/link text (with arrow for inline use) */
 export const PRIMARY_CTA_LABEL = 'Book an Appointment →';
 

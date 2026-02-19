@@ -47,21 +47,14 @@ export default function AboutUs() {
           <div className="info-cards-container">
             <div className="info-card">
               <div className="info-card-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
+                <img src="/vision-icon.png" alt="" width={56} height={56} className="info-card-icon-img" aria-hidden />
               </div>
               <h3 className="info-card-title">{t('about.ourVision')}</h3>
               <p className="info-card-text">{t('about.ourVisionText')}</p>
             </div>
             <div className="info-card">
               <div className="info-card-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <circle cx="12" cy="12" r="6"></circle>
-                  <circle cx="12" cy="12" r="2"></circle>
-                </svg>
+                <img src="/mission-icon.png" alt="" width={56} height={56} className="info-card-icon-img" aria-hidden />
               </div>
               <h3 className="info-card-title">{t('about.ourMission')}</h3>
               <p className="info-card-text">{t('about.ourMissionText')}</p>

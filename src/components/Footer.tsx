@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { WHATSAPP_URL, LOGO_PATH } from '../constants/cta';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -71,7 +72,7 @@ export default function Footer() {
       <div className="footer-main" ref={mainRef}>
         <div className="footer-brand">
           <div className="footer-logo-wrap">
-            <img src="/logo.png" alt="" className="footer-logo-img" />
+            <img src={LOGO_PATH} alt="" className="footer-logo-img" />
           </div>
           <span className="footer-logo">{t('footer.brand')}</span>
           <p className="footer-desc">
@@ -82,7 +83,7 @@ export default function Footer() {
             <a href="https://www.facebook.com/almotahadi.physio" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.facebook')}><FacebookIcon /></a>
             <a href="https://x.com/ALMOTAHADI_MED" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.twitter')}><TwitterIcon /></a>
             <a href="https://www.linkedin.com/company/almotahadi" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.linkedin')}><LinkedInIcon /></a>
-            <a href="https://wa.me/96892475400" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.whatsapp')}><WhatsAppIcon /></a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.whatsapp')}><WhatsAppIcon /></a>
           </div>
           <div className="footer-social-others">
             <span className="footer-others-label">{t('footer.others')}</span>
@@ -116,7 +117,7 @@ export default function Footer() {
           <a href="#">{t('footer.privacyPolicy')}</a>
           <a href="#">{t('footer.termsOfService')}</a>
         </div>
-        <p className="footer-developed">{t('footer.developedBy')}</p>
+        <a href="https://www.code-x.io" target="_blank" rel="noopener noreferrer" className="footer-developed">{t('footer.developedBy')}</a>
       </div>
     </footer>
   );

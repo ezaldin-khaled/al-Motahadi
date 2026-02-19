@@ -7,6 +7,7 @@ import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import HealthCalculator from '../components/HealthCalculator';
 import { WhatsAppIcon } from '../components/Icons';
+import { WHATSAPP_URL } from '../constants/cta';
 import { sendContact } from '../lib/api';
 import '../styles/contact.css';
 
@@ -104,7 +105,7 @@ export default function ContactUs() {
   };
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/YOUR_PHONE_NUMBER', '_blank');
+    window.open(WHATSAPP_URL, '_blank');
   };
 
   return (
