@@ -105,6 +105,7 @@ export default function Footer() {
           <h4 className="footer-heading">{t('footer.companyHeading')}</h4>
           <Link to="/about">{t('footer.aboutUs')}</Link>
           <Link to="/who-we-are">{t('footer.whoWeAre')}</Link>
+          <Link to="/blog">{t('footer.blog')}</Link>
           <Link to="/packages">{t('footer.packagesPricing')}</Link>
           <Link to="/about">{t('footer.ourProcess')}</Link>
           <Link to="/contact">{t('footer.contact')}</Link>

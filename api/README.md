@@ -24,11 +24,17 @@ Upload the contents of this `api` folder to **Hostinger** inside `public_html/ap
 
    **If you don’t use Composer:** the script will fall back to PHP `mail()`. On Hostinger, `mail()` often sends through their SMTP for your domain when you use a From address like `contact@almotahadi.com`.
 
-## Endpoint
+## Endpoints
+
+### Contact
 
 - **POST** `/api/contact.php`
   - Body: JSON or form data with `first_name`, `last_name` (or `full_name`), `email`, `phone`, `message`.
   - Response: JSON `{ "success": true, "message": "..." }` or `{ "success": false, "error": "..." }`.
+
+### Blog (stub — implement with database)
+
+- **GET/POST/PUT/DELETE** `/api/blog.php` — see **BLOG_API_SPEC.md** in this folder for the full contract, request/response shapes, and suggested database schema. The stub returns an empty list for GET and 501 for create/update/delete until the database is connected.
 
 ## Security
 

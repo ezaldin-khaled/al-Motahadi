@@ -83,6 +83,7 @@ export default function Header() {
             <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.services')}</NavLink>
             <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.ourTeam')}</NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.about')}</NavLink>
+            <NavLink to="/blog" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.blog')}</NavLink>
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.contactUs')}</NavLink>
           </nav>
           <div className="nav-right">
@@ -120,6 +121,7 @@ export default function Header() {
               <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</NavLink>
               <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.ourTeam')}</NavLink>
               <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</NavLink>
+              <NavLink to="/blog" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.blog')}</NavLink>
               <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.contactUs')}</NavLink>
             </nav>
             <div className="nav-mobile-actions">

@@ -416,6 +416,11 @@ h1, h2, h3,
 .hero .cta-buttons .btn { opacity: 1 !important; visibility: visible !important; }
 .hero .cta-buttons .btn-primary { box-shadow: 0 4px 16px rgba(26, 158, 125, 0.45), 0 2px 4px rgba(0, 0, 0, 0.08); }
 .hero .cta-buttons .btn-secondary { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+/* Blog hero: same universal button treatment */
+.blog-hero .cta-buttons { opacity: 1; visibility: visible; }
+.blog-hero .cta-buttons .btn { opacity: 1 !important; visibility: visible !important; }
+.blog-hero .cta-buttons .btn-primary { box-shadow: 0 4px 16px rgba(26, 158, 125, 0.45), 0 2px 4px rgba(0, 0, 0, 0.08); }
+.blog-hero .cta-buttons .btn-secondary { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
 .hero-image-wrap { flex: 1; max-width: 560px; display: flex; justify-content: flex-end; }
 .hero-image-container {
   position: relative; width: 100%; max-width: 480px; background: var(--bg-card); border-radius: 12px;

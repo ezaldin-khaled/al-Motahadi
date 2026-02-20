@@ -9,6 +9,8 @@ import OurTeam from './pages/OurTeam';
 import Services from './pages/Services';
 import PackagesPricing from './pages/PackagesPricing';
 import WhoWeAre from './pages/WhoWeAre';
+import Blog from './pages/Blog';
+import Dashboard from './pages/Dashboard';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -41,6 +43,9 @@ function App() {
         <Route path="/team" element={<OurTeam />} />
         <Route path="/services" element={<Services />} />
         <Route path="/packages" element={<PackagesPricing />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/blog" element={<Dashboard />} />
       </Routes>
     </Router>
   );
