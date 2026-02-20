@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import '../styles/dashboard.css';
 
 const NAV = [
@@ -10,7 +11,13 @@ const NAV = [
 export default function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const isBlog = location.pathname === '/dashboard/blog';
+
+  function handleLogout() {
+    logout();
+    navigate('/dashboard/login', { replace: true });
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,6 +43,9 @@ export default function Dashboard() {
           ))}
         </nav>
         <div className="dashboard-sidebar-footer">
+          <button type="button" className="dashboard-logout" onClick={handleLogout}>
+            Log out
+          </button>
           <Link to="/" className="dashboard-back">← Back to site</Link>
         </div>
       </aside>
