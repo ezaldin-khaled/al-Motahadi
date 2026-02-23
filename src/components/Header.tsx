@@ -45,6 +45,7 @@ export default function Header() {
   const location = useLocation();
   const lineRef = useRef<HTMLDivElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -55,6 +56,7 @@ export default function Header() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setServicesOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -80,11 +82,30 @@ export default function Header() {
           </Link>
           <nav className="nav-links" aria-label="Main navigation">
             <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.home')}</NavLink>
-            <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.services')}</NavLink>
-            <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.ourTeam')}</NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.about')}</NavLink>
+            <div
+              className={`nav-dropdown ${servicesOpen ? 'nav-dropdown--open' : ''}`}
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+              tabIndex={0}
+            >
+              <span
+                className={`nav-link nav-dropdown-trigger ${location.pathname === '/services' || location.pathname === '/health-tools' ? 'nav-link-active' : ''}`}
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+              >
+                {t('nav.services')}
+                <svg className={`nav-dropdown-arrow ${servicesOpen ? 'nav-dropdown-arrow--open' : ''}`} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+              <div className="nav-dropdown-panel" role="menu" aria-hidden={!servicesOpen}>
+                <Link to="/services" className="nav-dropdown-item" role="menuitem" onClick={() => setServicesOpen(false)}>{t('nav.ourServices')}</Link>
+                <Link to="/health-tools" className="nav-dropdown-item" role="menuitem" onClick={() => setServicesOpen(false)}>{t('nav.healthTools')}</Link>
+              </div>
+            </div>
+            <NavLink to="/packages" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.packagesPricing')}</NavLink>
             <NavLink to="/blog" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.blog')}</NavLink>
-            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'}>{t('nav.contactUs')}</NavLink>
           </nav>
           <div className="nav-right">
             <ThemeToggle />
@@ -118,11 +139,11 @@ export default function Header() {
           <div className="nav-mobile-menu-panel" style={isRtl ? { right: 0, left: 'auto' } : { left: 0, right: 'auto' }}>
             <nav className="nav-mobile-links">
               <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</NavLink>
-              <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</NavLink>
-              <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.ourTeam')}</NavLink>
               <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</NavLink>
+              <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.ourServices')}</NavLink>
+              <NavLink to="/health-tools" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.healthTools')}</NavLink>
+              <NavLink to="/packages" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.packagesPricing')}</NavLink>
               <NavLink to="/blog" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.blog')}</NavLink>
-              <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} onClick={() => setMobileMenuOpen(false)}>{t('nav.contactUs')}</NavLink>
             </nav>
             <div className="nav-mobile-actions">
               <div className="nav-mobile-theme">

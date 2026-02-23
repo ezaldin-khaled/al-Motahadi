@@ -154,7 +154,7 @@ export default function AboutUs() {
             <div className="founder-content">
               <div className="founder-image-wrapper">
                 <div className="founder-image">
-                  <img src="/founder-portrait.png" alt={t('about.founderImageAlt')} />
+                  <img src="/dr-mohammed-reda-al-yazidi.png" alt={t('about.founderImageAlt')} />
                 </div>
               </div>
               <div className="founder-text">

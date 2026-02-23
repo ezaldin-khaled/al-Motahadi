@@ -132,7 +132,7 @@ function OurTeam() {
                 <h3 className="team-member-name">{t('team.drMohammed')}</h3>
                 <p className="team-member-specialization">{t('team.drMohammedSpec')}</p>
                 <p className="team-member-tagline">{t('team.drMohammedTagline')}</p>
-                <Link to="/about" className="btn btn-primary team-member-cta">{t('team.viewProfile')}</Link>
+                <Link to="/team/dr-mohammed-reda-al-yazidi" className="btn btn-primary team-member-cta">{t('team.viewProfile')}</Link>
               </div>
             </div>
             <div className="team-member-card">
@@ -142,7 +142,7 @@ function OurTeam() {
               <div className="team-member-card-content">
                 <h3 className="team-member-name">{t('team.drSafaa')}</h3>
                 <p className="team-member-specialization">{t('team.drSafaaSpec')}</p>
-                <Link to="/about" className="btn btn-primary team-member-cta">{t('team.viewProfile')}</Link>
+                <Link to="/team/dr-safaa-mohammed-mahrez" className="btn btn-primary team-member-cta">{t('team.viewProfile')}</Link>
               </div>
             </div>
             <div className="team-member-card">
@@ -152,7 +152,7 @@ function OurTeam() {
               <div className="team-member-card-content">
                 <h3 className="team-member-name">{t('team.drSirine')}</h3>
                 <p className="team-member-specialization">{t('team.drSirineSpec')}</p>
-                <Link to="/about" className="btn btn-primary team-member-cta">{t('team.viewProfile')}</Link>
+                <Link to="/team/dr-sirine-al-habib-al-qasimi" className="btn btn-primary team-member-cta">{t('team.viewProfile')}</Link>
               </div>
             </div>
           </div>

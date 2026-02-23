@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
-import { CONTACT_PATH } from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,7 +96,7 @@ export default function SectionAlt() {
           ))}
         </div>
         <div className="section-cta section-alt-cta">
-          <Link to={CONTACT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
+          <Link to="/about" className="btn btn-primary">{t('about.learnMore')}</Link>
         </div>
       </div>
     </section>

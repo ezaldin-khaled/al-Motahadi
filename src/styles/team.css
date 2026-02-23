@@ -389,3 +389,128 @@
     padding: 50px 0;
   }
 }
+
+/* ===== Doctor Profile Page ===== */
+.doctor-profile-page {
+  padding-bottom: 48px;
+}
+
+.doctor-profile-not-found {
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.doctor-profile-not-found p {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.doctor-profile-section {
+  padding: 48px 0 64px;
+  background: var(--bg-page);
+  transition: background-color 0.25s ease;
+}
+
+.doctor-profile-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.doctor-profile-back {
+  display: inline-block;
+  margin-bottom: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.doctor-profile-back:hover {
+  color: var(--accent);
+}
+
+.doctor-profile-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.doctor-profile-image-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-section-alt);
+}
+
+.doctor-profile-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+.doctor-profile-content {
+  min-width: 0;
+}
+
+.doctor-profile-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0 0 8px 0;
+}
+
+.doctor-profile-spec {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 8px 0;
+}
+
+.doctor-profile-tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 28px 0;
+}
+
+.doctor-profile-block {
+  margin-bottom: 28px;
+}
+
+.doctor-profile-heading {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+}
+
+.doctor-profile-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin: 0;
+}
+.doctor-profile-text p {
+  margin: 0 0 1em 0;
+}
+.doctor-profile-text p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .doctor-profile-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .doctor-profile-image-wrap {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
