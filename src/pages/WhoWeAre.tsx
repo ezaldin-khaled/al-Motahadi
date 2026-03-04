@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
-import { CONTACT_PATH } from '../constants/cta';
 import '../styles/who-we-are.css';
 
 /* Simple line icons matching the design (flask, person, brain, house, car, star) */
@@ -84,8 +83,8 @@ export default function WhoWeAre() {
                   <p className="wwa-protocols-tagline">{t('whoWeAre.protocolsTagline')}</p>
                   <p className="wwa-section-desc">{t('whoWeAre.protocolsDesc1')}</p>
                   <p className="wwa-section-desc">{t('whoWeAre.protocolsDesc2')}</p>
-                  <Link to={CONTACT_PATH} className="btn btn-primary wwa-protocols-cta">
-                    {t('whoWeAre.bookAppointmentNow')}
+                  <Link to="/research-network" className="btn btn-primary wwa-protocols-cta">
+                    {t('whoWeAre.learnMore')}
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                   </Link>
                 </div>
@@ -115,8 +114,8 @@ export default function WhoWeAre() {
             <h2 id="plan-heading" className="wwa-section-title wwa-plan-title">{t('whoWeAre.planTitle')}</h2>
             <p className="wwa-plan-subtitle">{t('whoWeAre.planSubtitle')}</p>
             <p className="wwa-section-desc wwa-section-desc-center wwa-plan-desc">{t('whoWeAre.planDesc')}</p>
-            <Link to={CONTACT_PATH} className="btn btn-primary wwa-plan-cta">
-              {t('whoWeAre.bookAppointmentNow')}
+            <Link to="/packages" className="btn btn-primary wwa-plan-cta">
+              {t('whoWeAre.learnMore')}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
           </div>
@@ -156,8 +155,8 @@ export default function WhoWeAre() {
                 <h2 className="wwa-col-title">{t('whoWeAre.homeTherapyTitle')}</h2>
                 <p className="wwa-col-tagline">{t('whoWeAre.homeTherapySubtitle')}</p>
                 <p className="wwa-col-desc">{t('whoWeAre.homeTherapyDesc1')}</p>
-                <Link to={CONTACT_PATH} className="btn btn-primary wwa-col-cta">
-                  {t('whoWeAre.bookAppointmentNow')}
+                <Link to="/home-therapy" className="btn btn-primary wwa-col-cta">
+                  {t('whoWeAre.learnMore')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </Link>
               </div>
@@ -166,8 +165,8 @@ export default function WhoWeAre() {
                 <h2 className="wwa-col-title">{t('whoWeAre.transportTitle')}</h2>
                 <p className="wwa-col-tagline">{t('whoWeAre.transportSubtitle')}</p>
                 <p className="wwa-col-desc">{t('whoWeAre.transportDesc1')}</p>
-                <Link to={CONTACT_PATH} className="btn btn-primary wwa-col-cta">
-                  {t('whoWeAre.bookAppointmentNow')}
+                <Link to="/transportation" className="btn btn-primary wwa-col-cta">
+                  {t('whoWeAre.learnMore')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </Link>
               </div>

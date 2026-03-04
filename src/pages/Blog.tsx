@@ -121,10 +121,10 @@ function BlogCard({ post }: { post: BlogPost }) {
           <h2 className="blog-card-title">{t(post.titleKey)}</h2>
           <p className="blog-card-excerpt">{t(post.excerptKey)}</p>
           <p className="blog-card-by">{t('blog.byAuthor')} {authorName}</p>
-          <a href={`#post-${post.slug}`} className="blog-card-read-more">
+          <Link to={`/blog/${post.slug}`} className="blog-card-read-more">
             {t('blog.readMore')}
             <span className="blog-card-read-more-arrow" aria-hidden><ArrowRightIcon /></span>
-          </a>
+          </Link>
         </div>
       </div>
     </article>

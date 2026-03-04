@@ -29,9 +29,8 @@
 .packages-hero {
   position: relative;
   overflow: hidden;
+  width: 100%;
   padding: 128px 80px 80px;
-  max-width: 1440px;
-  margin: 0 auto;
   text-align: center;
 }
 .packages-hero .packages-hero-inner {

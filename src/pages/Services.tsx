@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
@@ -52,6 +53,10 @@ export default function Services() {
                   </div>
                   <div className="service-card-content">
                     <p className="service-card-desc">{t(`servicesPage.s${id}Desc`)}</p>
+                    <Link to={`/services/${id}`} className="service-card-link">
+                      {t('servicesPage.learnMore')}
+                      <span className="arrow" aria-hidden>→</span>
+                    </Link>
                   </div>
                 </article>
               ))}

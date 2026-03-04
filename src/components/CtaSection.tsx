@@ -34,9 +34,9 @@ const QualityCareIcon = () => (
   </svg>
 );
 
-type CtaSectionProps = { variant?: 'dark-cards' | 'packages' | 'services' };
+type CtaSectionProps = { variant?: 'dark-cards' | 'packages' | 'services'; labelKey?: string };
 
-export default function CtaSection({ variant }: CtaSectionProps) {
+export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -91,7 +91,7 @@ export default function CtaSection({ variant }: CtaSectionProps) {
         <div className="cta-content" ref={contentRef}>
           <p className="cta-label">
             <span className="cta-label-line" />
-            {isServices ? t('cta.dontHesitate') : t('cta.getStarted')}
+            {labelKey ? t(labelKey) : isServices ? t('cta.dontHesitate') : t('cta.getStarted')}
           </p>
           <h2 className="cta-title">
             {t('cta.heading')} <span className="cta-title-accent">{t('cta.headingAccent')}</span>

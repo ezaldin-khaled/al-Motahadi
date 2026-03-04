@@ -115,8 +115,9 @@ export default function Footer() {
       <div className="footer-bottom">
         <p className="footer-copyright">{t('footer.copyright')}</p>
         <div className="footer-legal">
-          <a href="#">{t('footer.privacyPolicy')}</a>
-          <a href="#">{t('footer.termsOfService')}</a>
+          <Link to="/privacy">{t('footer.privacyPolicy')}</Link>
+          <Link to="/terms">{t('footer.termsOfService')}</Link>
+          <Link to="/cookies">{t('footer.cookiePolicy')}</Link>
         </div>
         <a href="https://www.code-x.io" target="_blank" rel="noopener noreferrer" className="footer-developed">{t('footer.developedBy')}</a>
       </div>

@@ -52,6 +52,7 @@ export default function SectionServices() {
               <img src={s.img} alt={s.alt} className="card-img" />
               <h3 className="card-title">{s.title}</h3>
               <p className="card-desc">{s.desc}</p>
+              <Link to="/services" className="section-services-learn-more">{t('servicesPage.learnMore')}</Link>
             </div>
           ))}
         </div>

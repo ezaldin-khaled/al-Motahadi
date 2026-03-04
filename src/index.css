@@ -566,6 +566,8 @@ h1, h2, h3,
 .card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
 .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin: 16px 16px 8px; }
 .card-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin: 0 16px 16px; }
+.section-services-learn-more { display: inline-block; margin: 0 16px 20px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+.section-services-learn-more:hover { color: #008c84; text-decoration: underline; }
 .section:not(.about-section):not(.team-section) .section-label,
 .section:not(.about-section):not(.team-section) .section-title { text-align: center; }
 .section:not(.about-section):not(.team-section) .section-desc { margin-left: auto; margin-right: auto; }
@@ -1159,6 +1161,7 @@ h1, h2, h3,
 [data-theme="dark"] .services-page,
 [data-theme="dark"] .team-page,
 [data-theme="dark"] .who-we-are-page,
+[data-theme="dark"] .privacy-page,
 [data-theme="dark"] .who-we-are,
 [data-theme="dark"] .info-cards-section,
 [data-theme="dark"] .our-values,
@@ -1177,8 +1180,189 @@ h1, h2, h3,
 [data-theme="dark"] .wwa-hero,
 [data-theme="dark"] .wwa-section-white,
 [data-theme="dark"] .wwa-section-plan,
-[data-theme="dark"] .calculate-health {
+[data-theme="dark"] .rn-page,
+[data-theme="dark"] .rn-hero,
+[data-theme="dark"] .rn-section-white,
+[data-theme="dark"] .calculate-health,
+[data-theme="dark"] .sd-page,
+[data-theme="dark"] .blog-detail-page,
+[data-theme="dark"] .blog-detail-content-section,
+[data-theme="dark"] .blog-detail-related,
+[data-theme="dark"] .health-tools-page {
   background: var(--bg-page) !important;
+}
+[data-theme="dark"] .rn-section-teal {
+  background: var(--bg-section-services) !important;
+}
+[data-theme="dark"] .rn-hero-title,
+[data-theme="dark"] .rn-section-title,
+[data-theme="dark"] .rn-stat-label,
+[data-theme="dark"] .rn-translate-block-title,
+[data-theme="dark"] .rn-protocol-title,
+[data-theme="dark"] .rn-team-block-title,
+[data-theme="dark"] .rn-patient-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .rn-hero-label {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .rn-hero-desc,
+[data-theme="dark"] .rn-section-intro,
+[data-theme="dark"] .rn-section-desc,
+[data-theme="dark"] .rn-dynamic-desc,
+[data-theme="dark"] .rn-translate-block-desc,
+[data-theme="dark"] .rn-protocol-desc,
+[data-theme="dark"] .rn-team-block-desc,
+[data-theme="dark"] .rn-patient-desc,
+[data-theme="dark"] .rn-stat-sub {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .rn-stat-value {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .rn-stat-card,
+[data-theme="dark"] .rn-protocol-card,
+[data-theme="dark"] .rn-hero-image-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .rn-protocol-icon {
+  background: rgba(0, 167, 158, 0.15) !important;
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .rn-patient-icon {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .ht-page,
+[data-theme="dark"] .ht-hero,
+[data-theme="dark"] .ht-section-white {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .ht-section-grey {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .ht-hero-title,
+[data-theme="dark"] .ht-section-title,
+[data-theme="dark"] .ht-structure-title,
+[data-theme="dark"] .ht-service-card-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .ht-back-link {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .ht-hero-label {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .ht-hero-desc,
+[data-theme="dark"] .ht-section-desc,
+[data-theme="dark"] .ht-service-intro,
+[data-theme="dark"] .ht-service-card-desc,
+[data-theme="dark"] .ht-feature-text {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .ht-hero-image-card,
+[data-theme="dark"] .ht-service-card,
+[data-theme="dark"] .ht-feature-item {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .ht-service-icon,
+[data-theme="dark"] .ht-feature-icon {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .tr-page,
+[data-theme="dark"] .tr-hero,
+[data-theme="dark"] .tr-section-white {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .tr-hero {
+  background: linear-gradient(90deg, var(--bg-section-alt) 0%, var(--bg-page) 50%) !important;
+}
+[data-theme="dark"] .tr-section-grey {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .tr-hero-title,
+[data-theme="dark"] .tr-section-title,
+[data-theme="dark"] .tr-note-label,
+[data-theme="dark"] .tr-feature-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .tr-back-link {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .tr-hero-label {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .tr-hero-desc,
+[data-theme="dark"] .tr-section-desc,
+[data-theme="dark"] .tr-note-text,
+[data-theme="dark"] .tr-distinguish-tagline,
+[data-theme="dark"] .tr-feature-desc,
+[data-theme="dark"] .tr-booking-intro,
+[data-theme="dark"] .tr-booking-item {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .tr-hero-image-card,
+[data-theme="dark"] .tr-feature-card,
+[data-theme="dark"] .tr-note-box {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .tr-feature-icon,
+[data-theme="dark"] .tr-booking-icon {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+/* Service Detail page (sd-*) */
+[data-theme="dark"] .sd-page,
+[data-theme="dark"] .sd-hero,
+[data-theme="dark"] .sd-section-white {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .sd-section-grey {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .sd-hero-title,
+[data-theme="dark"] .sd-section-title,
+[data-theme="dark"] .sd-condition-title,
+[data-theme="dark"] .sd-treatment-text,
+[data-theme="dark"] .sd-benefit-text {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .sd-title-accent {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .sd-back-link {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .sd-hero-label {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .sd-hero-desc,
+[data-theme="dark"] .sd-section-desc,
+[data-theme="dark"] .sd-conditions-intro,
+[data-theme="dark"] .sd-condition-desc {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .sd-hero-image-card,
+[data-theme="dark"] .sd-condition-card,
+[data-theme="dark"] .sd-treatment-item,
+[data-theme="dark"] .sd-benefit-item {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .sd-condition-icon,
+[data-theme="dark"] .sd-benefit-icon {
+  background: rgba(0, 167, 158, 0.15) !important;
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .sd-treatment-icon {
+  color: var(--accent) !important;
 }
 [data-theme="dark"] .wwa-section-teal {
   background: var(--bg-section-services) !important;

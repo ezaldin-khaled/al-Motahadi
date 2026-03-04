@@ -8,9 +8,17 @@ import ContactUs from './pages/ContactUs';
 import OurTeam from './pages/OurTeam';
 import DoctorProfile from './pages/DoctorProfile';
 import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
 import PackagesPricing from './pages/PackagesPricing';
 import WhoWeAre from './pages/WhoWeAre';
 import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
+import CookiePolicy from './pages/CookiePolicy';
+import ResearchProtocols from './pages/ResearchProtocols';
+import HomeTherapy from './pages/HomeTherapy';
+import Transportation from './pages/Transportation';
 import HealthTools from './pages/HealthTools';
 import Dashboard from './pages/Dashboard';
 import DashboardLogin from './pages/DashboardLogin';
@@ -47,9 +55,17 @@ function App() {
         <Route path="/team/:slug" element={<DoctorProfile />} />
         <Route path="/team" element={<OurTeam />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services/:id" element={<ServiceDetail />} />
         <Route path="/health-tools" element={<HealthTools />} />
         <Route path="/packages" element={<PackagesPricing />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/cookies" element={<CookiePolicy />} />
+        <Route path="/research-network" element={<ResearchProtocols />} />
+        <Route path="/home-therapy" element={<HomeTherapy />} />
+        <Route path="/transportation" element={<Transportation />} />
         <Route path="/dashboard/login" element={<DashboardLogin />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/dashboard/blog" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

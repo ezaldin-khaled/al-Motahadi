@@ -9,6 +9,7 @@ export interface BlogPost {
   slug: string;
   titleKey: string;
   excerptKey: string;
+  bodyKey: string; // i18n key for full article body (paragraphs separated by \n\n)
   category: BlogCategory;
   date: string; // YYYY-MM-DD
   readTime: number; // minutes
@@ -23,6 +24,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'importance-of-early-rehabilitation',
     titleKey: 'blog.post1Title',
     excerptKey: 'blog.post1Excerpt',
+    bodyKey: 'blog.post1Body',
     category: 'rehabilitation',
     date: '2025-02-15',
     readTime: 5,
@@ -35,6 +37,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'physical-therapy-at-home',
     titleKey: 'blog.post2Title',
     excerptKey: 'blog.post2Excerpt',
+    bodyKey: 'blog.post2Body',
     category: 'tips',
     date: '2025-02-12',
     readTime: 4,
@@ -46,6 +49,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'recovery-milestones',
     titleKey: 'blog.post3Title',
     excerptKey: 'blog.post3Excerpt',
+    bodyKey: 'blog.post3Body',
     category: 'wellness',
     date: '2025-02-08',
     readTime: 6,
@@ -57,6 +61,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'neuro-rehab-insights',
     titleKey: 'blog.post4Title',
     excerptKey: 'blog.post4Excerpt',
+    bodyKey: 'blog.post4Body',
     category: 'research',
     date: '2025-02-05',
     readTime: 7,
@@ -68,6 +73,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'staying-active-after-injury',
     titleKey: 'blog.post5Title',
     excerptKey: 'blog.post5Excerpt',
+    bodyKey: 'blog.post5Body',
     category: 'wellness',
     date: '2025-02-01',
     readTime: 5,
@@ -79,6 +85,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'center-news-february',
     titleKey: 'blog.post6Title',
     excerptKey: 'blog.post6Excerpt',
+    bodyKey: 'blog.post6Body',
     category: 'news',
     date: '2025-01-28',
     readTime: 3,

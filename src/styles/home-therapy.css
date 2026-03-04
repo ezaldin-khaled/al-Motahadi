@@ -1,0 +1,375 @@
+/* Home Therapy page — exact match to Figma design */
+
+.ht-page {
+  width: 100%;
+  background: #fff;
+}
+
+/* ===== HERO (two columns: text left, image right) ===== */
+.ht-hero {
+  width: 100%;
+  background: #fff;
+  padding: 48px 0 80px;
+}
+
+.ht-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.ht-hero-content {
+  padding-right: 24px;
+}
+
+.ht-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00A79E;
+  text-decoration: none;
+  margin-bottom: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: color 0.2s ease;
+}
+
+.ht-back-link:hover {
+  color: #008c84;
+}
+
+.ht-back-link svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.ht-hero-label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ht-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.ht-hero-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ht-hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ht-hero-image-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  background: #f5f5f5;
+  max-width: 520px;
+  width: 100%;
+}
+
+.ht-hero-image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ===== OVERVIEW (white, centered) ===== */
+.ht-section {
+  width: 100%;
+  padding: 80px 0;
+  box-sizing: border-box;
+}
+
+.ht-section-white {
+  background: #fff;
+}
+
+.ht-section-grey {
+  background: #F0F2F4;
+}
+
+.ht-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.ht-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.ht-section-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #555;
+  margin-bottom: 24px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ht-section-desc:last-child {
+  margin-bottom: 0;
+}
+
+.ht-structure-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.35rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+/* ===== HOME THERAPY SERVICE (light grey, 4 cards) ===== */
+.ht-service-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.ht-service-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 40px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ht-service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.ht-service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.ht-service-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: #00A79E;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.ht-service-icon svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+.ht-service-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.ht-service-card-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== WHAT DISTINGUISHES (white, two columns) ===== */
+.ht-distinguish-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+.ht-distinguish-content .ht-section-title {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.ht-distinguish-content .ht-section-desc {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.ht-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ht-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #F8F9FA;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #eee;
+}
+
+.ht-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #00A79E;
+  color: #fff;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ht-feature-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.ht-feature-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .ht-hero-inner,
+  .ht-container,
+  .ht-service-inner,
+  .ht-distinguish-inner {
+    padding: 0 48px;
+  }
+
+  .ht-service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 968px) {
+  .ht-hero {
+    padding: 40px 0 64px;
+  }
+
+  .ht-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 0 32px;
+    gap: 40px;
+  }
+
+  .ht-hero-content {
+    padding-right: 0;
+  }
+
+  .ht-back-link {
+    justify-content: center;
+  }
+
+  .ht-hero-desc {
+    text-align: center;
+  }
+
+  .ht-section {
+    padding: 64px 0;
+  }
+
+  .ht-container {
+    padding: 0 32px;
+  }
+
+  .ht-distinguish-inner {
+    grid-template-columns: 1fr;
+    padding: 0 32px;
+    gap: 40px;
+  }
+
+  .ht-distinguish-content .ht-section-title,
+  .ht-distinguish-content .ht-section-desc {
+    text-align: center;
+  }
+
+  .ht-service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ht-service-inner {
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ht-hero-inner,
+  .ht-container,
+  .ht-service-inner,
+  .ht-distinguish-inner {
+    padding: 0 24px;
+  }
+
+  .ht-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .ht-section-title {
+    font-size: 1.5rem;
+  }
+}
