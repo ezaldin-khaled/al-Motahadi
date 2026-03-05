@@ -17,6 +17,7 @@ export default function ContactUs() {
   const { t } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
   const bookingRef = useRef<HTMLElement>(null);
+  const findUsRef = useRef<HTMLElement>(null);
   const calculatorRef = useRef<HTMLElement>(null);
 
   const [bookingFullName, setBookingFullName] = useState('');
@@ -49,6 +50,23 @@ export default function ContactUs() {
             stagger: 0.2,
             scrollTrigger: {
               trigger: bookingRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      }
+
+      // Find Us section animation
+      if (findUsRef.current) {
+        gsap.fromTo(findUsRef.current,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            scrollTrigger: {
+              trigger: findUsRef.current,
               start: 'top 80%',
               toggleActions: 'play none none none'
             }
@@ -199,6 +217,23 @@ export default function ContactUs() {
                 <WhatsAppIcon className="whatsapp-icon" />
                 {t('contact.bookViaWhatsApp')}
               </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Find Us — map section */}
+        <section className="find-us-section" ref={findUsRef}>
+          <div className="find-us-container">
+            <h2 className="find-us-title">{t('contact.findUs')}</h2>
+            <div className="find-us-map-wrapper">
+              <iframe
+                className="find-us-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.279751644614!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0x45a57d356c4b7b2e!2sSheikh%20Zayed%20Road%2C%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1709654400000"
+                title={t('contact.findUs')}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </section>

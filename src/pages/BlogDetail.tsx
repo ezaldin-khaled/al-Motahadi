@@ -87,12 +87,13 @@ export default function BlogDetail() {
   }
 
   const authorName = t(post.authorKey);
+  const categoryLabelKey = CATEGORY_FILTER_LABELS[post.category];
   const formattedDate = new Date(post.date).toLocaleDateString(undefined, {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
-  const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 1);
   const bodyParagraphs = t(post.bodyKey).split('\n\n').filter(Boolean);
 
   return (
@@ -103,6 +104,9 @@ export default function BlogDetail() {
           <div className="blog-detail-hero-bg" style={{ backgroundImage: `url(${post.image})` }} aria-hidden />
           <div className="blog-detail-hero-overlay" aria-hidden />
           <div className="blog-detail-hero-content">
+            <span className="blog-detail-hero-category">
+              {t(categoryLabelKey)}
+            </span>
             <h1 className="blog-detail-hero-title">{t(post.titleKey)}</h1>
             <p className="blog-detail-hero-subtitle">{t('blog.heroSubtitle')}</p>
             <p className="blog-detail-hero-meta">
@@ -119,6 +123,9 @@ export default function BlogDetail() {
             >
               {isRtl ? <>{t('blog.detailBack')} →</> : <>← {t('blog.detailBack')}</>}
             </Link>
+            <p className="blog-detail-kicker">
+              {t(categoryLabelKey)}
+            </p>
             <div className="blog-detail-body">
               {bodyParagraphs.map((para, i) => (
                 <p key={i}>{para}</p>

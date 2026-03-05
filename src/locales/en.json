@@ -266,7 +266,8 @@
     "bookViaWhatsAppDesc": "Prefer a quick chat? Reach us directly on WhatsApp",
     "whatsappExtra": "Connect with our team instantly through WhatsApp for quick responses and easy appointment scheduling.",
     "successMessage": "Thank you! Your appointment request has been submitted.",
-    "errorSend": "Failed to send. Please try again or contact us via WhatsApp."
+    "errorSend": "Failed to send. Please try again or contact us via WhatsApp.",
+    "findUs": "Find Us"
   },
   "servicesPage": {
     "heroLabel": "WHAT WE OFFER",
