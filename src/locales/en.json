@@ -513,7 +513,15 @@
     "alAmal": "Al-Amal Package",
     "alAmalSessions": "For Low-income Individuals. Discount of up to 70%, subject to social assessment and supporting documents.",
     "alAmalDiscount": "up to 70% discount",
-    "alAmalPriceNote": "Subject to assessment"
+    "alAmalPriceNote": "Subject to assessment",
+    "forYou": "FOR YOU",
+    "homeTherapySectionTitle": "Home Therapy Packages at AL Motahadi",
+    "homeTherapySectionDesc": "Prefer to continue your rehabilitation in the comfort of your home? Our home therapy packages bring the same level of clinical precision, supervision, and follow-up from the center directly to your doorstep, with flexible scheduling that respects your privacy and daily routine.",
+    "intensiveHomeTherapySectionTitle": "Intensive Home Therapy Packages at AL Motahadi",
+    "intensiveHomeTherapySectionDesc": "For cases that require closer follow-up or accelerated progress, our intensive home therapy programs offer structured, high-frequency sessions supervised by our multidisciplinary team, ensuring that every visit moves you one step closer to your goals.",
+    "comprehensiveHomeRehabSectionTitle": "Comprehensive Home-Based Rehabilitation Program",
+    "comprehensiveHomeRehabSectionDesc": "A fully integrated rehabilitation journey designed for patients who need long-term, continuous care at home. This program combines assessment, treatment, monitoring, and coordination with other medical services to provide a complete, home-based rehabilitation experience.",
+    "viewDetails": "View Details"
   },
   "whoWeAre": {
     "heroLabel": "ABOUT US",

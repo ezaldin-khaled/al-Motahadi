@@ -10,6 +10,7 @@ import DoctorProfile from './pages/DoctorProfile';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
 import PackagesPricing from './pages/PackagesPricing';
+import PackageDetail from './pages/PackageDetail';
 import WhoWeAre from './pages/WhoWeAre';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
@@ -58,6 +59,7 @@ function App() {
         <Route path="/services/:id" element={<ServiceDetail />} />
         <Route path="/health-tools" element={<HealthTools />} />
         <Route path="/packages" element={<PackagesPricing />} />
+        <Route path="/packages/:type" element={<PackageDetail />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />

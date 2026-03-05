@@ -116,6 +116,28 @@
   margin-bottom: 48px;
 }
 
+.packages-section-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+
+.packages-section-actions .btn {
+  min-width: 180px;
+  padding: 14px 32px;
+}
+
+.packages-section-simple-desc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--pkg-desc);
+  max-width: 860px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
 /* ===== GRIDS ===== */
 .packages-grid {
   display: grid;

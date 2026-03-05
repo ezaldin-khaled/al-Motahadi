@@ -101,6 +101,11 @@ export default function PackagesPricing() {
                 <PackageCardItem key={pkg.id} item={pkg} currency={currency} priceAfterLabel={priceAfterLabel} />
               ))}
             </div>
+            <div className="packages-section-actions">
+              <Link to="/packages/individual" className="btn btn-secondary">
+                {t('servicesPage.learnMore')}
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -112,6 +117,11 @@ export default function PackagesPricing() {
               {corporatePackages.map((pkg) => (
                 <PackageCardItem key={pkg.id} item={pkg} currency={currency} priceAfterLabel={priceAfterLabel} />
               ))}
+            </div>
+            <div className="packages-section-actions">
+              <Link to="/packages/corporate" className="btn btn-secondary">
+                {t('servicesPage.learnMore')}
+              </Link>
             </div>
           </div>
         </section>
@@ -125,10 +135,54 @@ export default function PackagesPricing() {
                 <PackageCardItem key={pkg.id} item={pkg} currency={currency} priceAfterLabel={priceAfterLabel} />
               ))}
             </div>
+            <div className="packages-section-actions">
+              <Link to="/packages/community-care" className="btn btn-secondary">
+                {t('servicesPage.learnMore')}
+              </Link>
+            </div>
           </div>
         </section>
 
-        <section className="packages-section packages-section-gray packages-section-single">
+        <section className="packages-section packages-section-gray">
+          <div className="packages-section-inner">
+            <p className="packages-section-label">{t('packages.forYou')}</p>
+            <h2 className="packages-section-title">{t('packages.homeTherapySectionTitle')}</h2>
+            <p className="packages-section-simple-desc">{t('packages.homeTherapySectionDesc')}</p>
+            <div className="packages-section-actions">
+              <Link to="/packages/home-therapy" className="btn btn-primary">
+                {t('packages.viewDetails')}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="packages-section packages-section-white">
+          <div className="packages-section-inner">
+            <p className="packages-section-label">{t('packages.forYou')}</p>
+            <h2 className="packages-section-title">{t('packages.intensiveHomeTherapySectionTitle')}</h2>
+            <p className="packages-section-simple-desc">{t('packages.intensiveHomeTherapySectionDesc')}</p>
+            <div className="packages-section-actions">
+              <Link to="/packages/intensive-home-therapy" className="btn btn-primary">
+                {t('packages.viewDetails')}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="packages-section packages-section-gray">
+          <div className="packages-section-inner">
+            <p className="packages-section-label">{t('packages.forYou')}</p>
+            <h2 className="packages-section-title">{t('packages.comprehensiveHomeRehabSectionTitle')}</h2>
+            <p className="packages-section-simple-desc">{t('packages.comprehensiveHomeRehabSectionDesc')}</p>
+            <div className="packages-section-actions">
+              <Link to="/packages/comprehensive-home-rehab" className="btn btn-primary">
+                {t('packages.viewDetails')}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="packages-section packages-section-white packages-section-single">
           <div className="packages-section-inner">
             <div className="packages-single-wrap">
               <div className="package-card package-card-single">
