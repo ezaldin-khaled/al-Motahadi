@@ -25,6 +25,7 @@ import SocialResponsibility from './pages/SocialResponsibility';
 import BookAppointment from './pages/BookAppointment';
 import Dashboard from './pages/Dashboard';
 import DashboardLogin from './pages/DashboardLogin';
+import Admin from './pages/Admin';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function ScrollToTop() {
@@ -75,6 +76,7 @@ function App() {
         <Route path="/dashboard/login" element={<DashboardLogin />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/dashboard/blog" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

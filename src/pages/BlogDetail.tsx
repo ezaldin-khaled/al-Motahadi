@@ -36,6 +36,7 @@ function RelatedCard({ post }: { post: BlogPost }) {
   const authorName = t(post.authorKey);
   const filterLabelKey = CATEGORY_FILTER_LABELS[post.category];
   const relativeTime = i18n.language === 'ar' ? `${post.readTime} ${t('blog.minRead')}` : formatRelativeTime(post.date);
+  const title = post.titleOverride ?? t(post.titleKey);
 
   return (
     <article className="blog-related-card">
@@ -45,7 +46,7 @@ function RelatedCard({ post }: { post: BlogPost }) {
           <span className="blog-related-card-category">{t(filterLabelKey)}</span>
         </div>
         <div className="blog-related-card-body">
-          <h3 className="blog-related-card-title">{t(post.titleKey)}</h3>
+          <h3 className="blog-related-card-title">{title}</h3>
           <div className="blog-related-card-meta">
             <span>{relativeTime}</span>
             <span className="blog-related-card-sep">·</span>
@@ -88,6 +89,7 @@ export default function BlogDetail() {
 
   const authorName = t(post.authorKey);
   const categoryLabelKey = CATEGORY_FILTER_LABELS[post.category];
+  const title = post.titleOverride ?? t(post.titleKey);
   const formattedDate = new Date(post.date).toLocaleDateString(undefined, {
     month: 'long',
     day: 'numeric',
@@ -101,13 +103,13 @@ export default function BlogDetail() {
       <Header />
       <main className="main-content blog-detail-page">
         <section className="blog-detail-hero" aria-label="Article header">
-          <div className="blog-detail-hero-bg" style={{ backgroundImage: `url(${post.image})` }} aria-hidden />
+          <div className="blog-detail-hero-bg" style={{ backgroundImage: `url(${post.imageLarge ?? post.image})` }} aria-hidden />
           <div className="blog-detail-hero-overlay" aria-hidden />
           <div className="blog-detail-hero-content">
             <span className="blog-detail-hero-category">
               {t(categoryLabelKey)}
             </span>
-            <h1 className="blog-detail-hero-title">{t(post.titleKey)}</h1>
+            <h1 className="blog-detail-hero-title">{title}</h1>
             <p className="blog-detail-hero-subtitle">{t('blog.heroSubtitle')}</p>
             <p className="blog-detail-hero-meta">
               {t('blog.byAuthor')} {authorName} | {formattedDate}

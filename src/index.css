@@ -614,7 +614,7 @@ h1, h2, h3,
 }
 .about-img-inset {
   position: absolute;
-  left: 72%;
+  left: 445px;
   bottom: -32px;
   width: 38%;
   min-width: 220px;
@@ -1000,7 +1000,7 @@ h1, h2, h3,
 .footer-developed:hover { color: rgba(255,255,255,0.8); }
 
 /* RTL (Arabic) layout support */
-[dir="rtl"] .about-img-inset { left: auto; right: 72%; }
+[dir="rtl"] .about-img-inset { left: auto; right: 445px; }
 [dir="rtl"] .about-list { text-align: right; }
 [dir="rtl"] .about-list.about-list-features { text-align: right; }
 [dir="rtl"] .about-list li { flex-direction: row-reverse; }

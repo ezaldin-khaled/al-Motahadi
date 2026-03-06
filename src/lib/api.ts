@@ -48,7 +48,16 @@ export function setStoredToken(token: string | null): void {
   else localStorage.removeItem(AUTH_STORAGE_KEY);
 }
 
+/** Mock credentials for development — replace with real API before launch. */
+const MOCK_ADMIN_USERNAME = 'admin';
+const MOCK_ADMIN_PASSWORD = 'admin';
+
 export async function loginAuth(payload: AuthLoginPayload): Promise<AuthLoginResponse> {
+  // Mock auth: accept admin/admin until backend is connected (remove before launch)
+  if (payload.username === MOCK_ADMIN_USERNAME && payload.password === MOCK_ADMIN_PASSWORD) {
+    return { success: true, token: 'mock_session', user: { username: payload.username } };
+  }
+
   const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || '';
   const res = await fetch(`${API_BASE}/api/auth.php`, {
     method: 'POST',

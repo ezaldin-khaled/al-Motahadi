@@ -10,10 +10,15 @@ export interface BlogPost {
   titleKey: string;
   excerptKey: string;
   bodyKey: string; // i18n key for full article body (paragraphs separated by \n\n)
+  /** Override for display; when set, used instead of t(titleKey). */
+  titleOverride?: string;
+  /** Override for display; when set, used instead of t(excerptKey). */
+  excerptOverride?: string;
   category: BlogCategory;
   date: string; // YYYY-MM-DD
   readTime: number; // minutes
-  image: string;
+  image: string; // small image (card/thumbnail)
+  imageLarge?: string; // main image (article hero) — falls back to image if not set
   authorKey: string; // i18n key for author name
   featured?: boolean;
 }

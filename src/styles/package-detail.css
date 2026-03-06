@@ -105,71 +105,123 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
-}
-
-.pkg-detail-card {
-  border-radius: var(--pkg-radius);
-  border: 1px solid var(--pkg-border);
-  background: #ffffff;
-  box-shadow: var(--pkg-shadow);
-  padding: 28px 24px 24px;
-  display: flex;
-  flex-direction: column;
   align-items: stretch;
 }
 
-.pkg-detail-card-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  font-size: 17px;
-  letter-spacing: -0.02em;
-  color: var(--pkg-dark);
-  margin-bottom: 6px;
-}
-
-.pkg-detail-card-subtitle {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--pkg-muted);
-  margin-bottom: 8px;
-}
-
-.pkg-detail-card-text {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--pkg-desc);
-  margin-bottom: 10px;
-}
-
-.pkg-detail-card-meta {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 13px;
-  color: var(--pkg-muted);
-}
-
-.pkg-detail-card-price {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--pkg-teal);
-}
-
-.pkg-detail-card .btn {
-  margin-top: auto;
-  width: 100%;
-}
-
-.pkg-detail-card-panel {
-  margin: 14px 0 18px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: #f5f7f8;
+/* Card: white, thin light grey border, subtle shadow, generous padding (design spec) */
+.pkg-detail-card {
+  border-radius: 12px;
+  border: 1px solid #D3D3D3;
+  background: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: stretch;
+  min-height: 0;
+  text-align: left;
+}
+
+/* Package title: large, bold, dark grey */
+.pkg-detail-card-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: #333333;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+/* Sessions: teal, slightly smaller than title */
+.pkg-detail-card-sessions {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #00A79E;
+  margin: 0 0 20px;
+  line-height: 1.3;
+}
+
+/* Main description: body text, dark grey */
+.pkg-detail-card-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #555555;
+  margin: 0 0 28px;
+  flex: 1;
+  min-height: 0;
+}
+
+.pkg-detail-card-text--secondary {
+  margin-bottom: 28px;
+  flex: none;
+}
+
+/* Pricing box: light grey bg, two rows with label left / value right */
+.pkg-detail-card-panel {
+  margin: 0 0 28px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background: #F8F8F8;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pkg-detail-card-panel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pkg-detail-card-panel-row:only-child .pkg-detail-card-panel-label {
+  flex: 1;
+}
+
+.pkg-detail-card-panel-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #555555;
+}
+
+/* Session price value: dark; total price value: teal */
+.pkg-detail-card-panel-value {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #00A79E;
+  flex-shrink: 0;
+}
+
+.pkg-detail-card-panel-value--dark {
+  color: #333333;
+}
+
+.pkg-detail-card-panel-row--total .pkg-detail-card-panel-value {
+  color: #00A79E;
+}
+
+/* Button: teal, pill, full width, centered text */
+.pkg-detail-card-btn {
+  margin-top: auto;
+  width: 100%;
+  border-radius: 9999px;
+  padding: 15px 30px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  background: #00A79E;
+  border: none;
+  color: #FFFFFF;
+}
+
+.pkg-detail-card-btn:hover {
+  background: #008f85;
+  color: #FFFFFF;
 }
 
 .pkg-detail-page--comprehensive-home-rehab .pkg-detail-packages-grid {

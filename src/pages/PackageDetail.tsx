@@ -16,10 +16,17 @@ type DetailType =
 
 type PackageItem = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
+  /** Shown in teal, e.g. "5 Sessions" */
+  sessions?: string;
   description: string;
   meta?: string;
   price?: string;
+  /** When set with totalPrice, shows two-row pricing: Session Price (dark) + Total Price (teal) */
+  sessionPrice?: string;
+  totalPrice?: string;
+  /** Paragraph below the pricing box, above the button */
+  secondaryDescription?: string;
 };
 
 type ReasonItem = {
@@ -56,37 +63,52 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
       {
         title: 'Tawakkalna',
         subtitle: 'Starter Package',
+        sessions: '5 Sessions',
         description: 'Ideal for patients beginning their rehabilitation journey or needing a focused plan for a specific condition.',
         meta: 'Includes assessment and 5 treatment-based sessions.',
-        price: 'Special package pricing available at the center.',
+        sessionPrice: '51.400',
+        totalPrice: '257.000',
+        secondaryDescription: 'This package is designed to offer rapid recovery for individuals with serious conditions, ensuring intensive therapeutic care in a short timeframe.',
       },
       {
         title: 'Wathiq',
         subtitle: 'Progressive Package',
+        sessions: '10 Sessions',
         description: 'Designed for patients who require a structured plan with continuous follow-up and measurable milestones.',
         meta: 'Includes assessment and 10 treatment-based sessions.',
-        price: 'Special package pricing available at the center.',
+        sessionPrice: '51.400',
+        totalPrice: '514.000',
+        secondaryDescription: 'This package offers structured rehabilitation with regular reassessment and clear milestones for sustained progress.',
       },
       {
         title: 'Tasallam',
         subtitle: 'Focused Care',
+        sessions: '15 Sessions',
         description: 'Suitable for cases requiring short-term, targeted rehabilitation with clear functional goals.',
         meta: 'Includes assessment and 15 treatment-based sessions.',
-        price: 'Special package pricing available at the center.',
+        sessionPrice: '51.400',
+        totalPrice: '771.000',
+        secondaryDescription: 'Ideal for focused care with defined goals and a clear path to recovery.',
       },
       {
         title: 'Hanit',
         subtitle: 'Extended Program',
+        sessions: '20 Sessions',
         description: 'For patients who need a longer, progressive program with regular reassessment and plan adjustments.',
         meta: 'Includes assessment and 20 treatment-based sessions.',
-        price: 'Special package pricing available at the center.',
+        sessionPrice: '51.400',
+        totalPrice: '1,028.000',
+        secondaryDescription: 'Extended support with ongoing plan adjustments to match your progress.',
       },
       {
         title: 'Al-Motahadi',
         subtitle: 'Comprehensive Program',
+        sessions: '30 Sessions',
         description: 'A complete rehabilitation journey with integrated goals, follow-up, and coordination with your medical team.',
         meta: 'Includes assessment and 30 treatment-based sessions.',
-        price: 'Exclusive package pricing available at the center.',
+        sessionPrice: '51.400',
+        totalPrice: '1,542.000',
+        secondaryDescription: 'Our most comprehensive program for a full rehabilitation journey with full team coordination.',
       },
     ],
     whyTitle: 'Why Choose Our Individual Packages?',
@@ -124,37 +146,57 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
       {
         title: 'Tawakkalna Corporate',
         subtitle: 'Focused Support',
+        sessions: '5 Sessions',
         description:
           'Short-term corporate program for employees requiring initial rehabilitation or targeted functional improvement.',
         meta: 'Includes assessment and 5 treatment-based sessions per enrolled employee.',
+        sessionPrice: '51.400',
+        totalPrice: '257.000',
+        secondaryDescription: 'Ideal for organizations seeking focused support for employees in early rehabilitation.',
       },
       {
         title: 'Wathiq Corporate',
         subtitle: 'Enhanced Care',
+        sessions: '10 Sessions',
         description:
           'Ideal for employees needing structured, mid-term rehabilitation plans after injury or medical leave.',
         meta: 'Includes assessment and 10 treatment-based sessions per enrolled employee.',
+        sessionPrice: '51.400',
+        totalPrice: '514.000',
+        secondaryDescription: 'Structured plans with measurable outcomes for a safe return to work.',
       },
       {
         title: 'Tasallam Corporate',
         subtitle: 'Extended Recovery',
+        sessions: '15 Sessions',
         description:
           'Supports complex cases that require longer follow-up, functional training, and workplace reintegration.',
         meta: 'Includes assessment and 15 treatment-based sessions per enrolled employee.',
+        sessionPrice: '51.400',
+        totalPrice: '771.000',
+        secondaryDescription: 'Extended recovery support with workplace reintegration focus.',
       },
       {
         title: 'Hanit Corporate',
         subtitle: 'Comprehensive Support',
+        sessions: '20 Sessions',
         description:
           'Suitable for organizations that want a long-term, proactive rehabilitation framework for their teams.',
         meta: 'Includes assessment and 20 treatment-based sessions per enrolled employee.',
+        sessionPrice: '51.400',
+        totalPrice: '1,028.000',
+        secondaryDescription: 'Long-term framework for workforce health and proactive care.',
       },
       {
         title: 'Al-Motahadi Corporate',
         subtitle: 'Strategic Partnership',
+        sessions: '30 Sessions',
         description:
           'A comprehensive, collaborative program for organizations that prioritize workforce health and long-term wellbeing.',
         meta: 'Includes assessment and 30 treatment-based sessions per enrolled employee.',
+        sessionPrice: '51.400',
+        totalPrice: '1,542.000',
+        secondaryDescription: 'Strategic partnership for comprehensive workforce rehabilitation and wellbeing.',
       },
     ],
     whyTitle: 'Why Choose Our Corporate Packages?',
@@ -192,30 +234,46 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
       {
         title: 'Al-Ihsan Package',
         subtitle: 'For the Elderly',
+        sessions: '15 Sessions',
         description:
           'Provides dedicated rehabilitation support for older adults, focusing on mobility, balance, and independence.',
         meta: 'Includes 15 treatment-based sessions with a special community discount.',
+        sessionPrice: '34.500',
+        totalPrice: '517.500',
+        secondaryDescription: 'Community discount applied. Eligibility determined through assessment.',
       },
       {
         title: "Al-Ri'ayah Package",
         subtitle: 'For Women',
+        sessions: '10 Sessions',
         description:
           'Tailored rehabilitation for women with conditions that require sensitive, specialized therapeutic care.',
         meta: 'Includes 10 treatment-based sessions with a special community discount.',
+        sessionPrice: '35.700',
+        totalPrice: '357.000',
+        secondaryDescription: 'Community discount applied. Tailored to individual needs.',
       },
       {
         title: 'Khatwa Package',
         subtitle: 'For Persons with Disabilities',
+        sessions: 'As per evaluation',
         description:
           'A flexible rehabilitation framework with a fixed discount, structured according to the initial evaluation and long-term goals.',
         meta: 'Fixed discount on the number of sessions determined by the evaluation.',
+        sessionPrice: '—',
+        totalPrice: 'As per evaluation',
+        secondaryDescription: 'Fixed 40% discount. Session count and total price set after initial assessment.',
       },
       {
         title: 'Al-Amal Package',
         subtitle: 'For Low-Income Individuals',
+        sessions: 'As per assessment',
         description:
           'Designed to remove financial barriers so that those with limited resources can still access essential rehabilitation.',
         meta: 'Discount of up to a defined percentage, subject to social assessment and documentation.',
+        sessionPrice: '—',
+        totalPrice: 'Subject to assessment',
+        secondaryDescription: 'Discount of up to 70% subject to social assessment and supporting documents.',
       },
     ],
     whyTitle: 'Why Choose Our Community Care Programs?',
@@ -272,37 +330,57 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
       {
         title: 'Home Therapy (5 Sessions)',
         subtitle: 'Short Program',
+        sessions: '5 Sessions',
         description:
           'Suitable for cases requiring limited, focused home visits—such as post-hospital follow-up or mobility training.',
         meta: 'Includes 5 home-based treatment sessions after initial assessment.',
+        sessionPrice: '61.200',
+        totalPrice: '306.000',
+        secondaryDescription: 'Home-based care with the same clinical quality as in-center visits.',
       },
       {
         title: 'Home Therapy (10 Sessions)',
         subtitle: 'Standard Program',
+        sessions: '10 Sessions',
         description:
           'Ideal for patients who need a structured home-based plan over several weeks, with measurable goals.',
         meta: 'Includes 10 home-based treatment sessions with scheduled progress reviews.',
+        sessionPrice: '61.200',
+        totalPrice: '612.000',
+        secondaryDescription: 'Structured home plan with progress reviews and measurable goals.',
       },
       {
         title: 'Home Therapy (15 Sessions)',
         subtitle: 'Extended Program',
+        sessions: '15 Sessions',
         description:
           'For conditions requiring extended home rehabilitation and closer coordination with caregivers.',
         meta: 'Includes 15 home-based sessions with ongoing adjustment to the treatment plan.',
+        sessionPrice: '61.200',
+        totalPrice: '918.000',
+        secondaryDescription: 'Extended home rehabilitation with caregiver coordination.',
       },
       {
         title: 'Home Therapy (20 Sessions)',
         subtitle: 'Comprehensive Program',
+        sessions: '20 Sessions',
         description:
           'A complete home-based package for long-term conditions where continuity and consistency are essential.',
         meta: 'Includes 20 home-based sessions as part of a fully planned rehabilitation program.',
+        sessionPrice: '61.200',
+        totalPrice: '1,224.000',
+        secondaryDescription: 'Complete home-based package for long-term continuity of care.',
       },
       {
         title: 'Customized Home Therapy Plan',
         subtitle: 'Tailored to Your Needs',
+        sessions: 'As per plan',
         description:
           'For complex cases, a fully customized home therapy plan can be designed based on your evaluation and environment.',
         meta: 'Number of sessions and schedule determined by the medical team.',
+        sessionPrice: '—',
+        totalPrice: 'As per plan',
+        secondaryDescription: 'Fully customized plan. Session count and pricing determined after evaluation.',
       },
     ],
     whyTitle: 'Why Choose Our Home Therapy Packages?',
@@ -338,32 +416,58 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
     mainTitle: 'Our Intensive Home Therapy Packages',
     packages: [
       {
+        title: 'Intensive Home-Based Tawakkalna Program',
+        sessions: '5 Sessions',
+        description:
+          'The Tawakkalna Program is a short-term but intensive treatment option for advanced cases that require concentrated rehabilitation. With 5 sessions of focused therapy, this program is ideal for those who need immediate intervention for recovery.',
+        sessionPrice: '51.400',
+        totalPrice: '257.000',
+        secondaryDescription:
+          'This package is designed to offer rapid recovery for individuals with serious conditions, ensuring intensive therapeutic care in a short timeframe.',
+      },
+      {
         title: 'Intensive Home-Based Functional Program',
         subtitle: 'Daily or High-Frequency Visits',
+        sessions: 'As per evaluation',
         description:
           'Focused on restoring essential functional abilities through concentrated, high-frequency home sessions.',
         meta: 'Frequency and duration determined by medical evaluation.',
+        sessionPrice: '61.200',
+        totalPrice: 'As per plan',
+        secondaryDescription: 'High-frequency home sessions with frequency set by medical evaluation.',
       },
       {
         title: 'Intensive Home-Based Mobility Program',
         subtitle: 'Mobility & Independence',
+        sessions: '10 Sessions',
         description:
           'Tailored for patients who need intensive gait, balance, and mobility training at home.',
         meta: 'Structured progression plan with clear functional milestones.',
+        sessionPrice: '61.200',
+        totalPrice: '612.000',
+        secondaryDescription: 'Structured progression with clear functional milestones at home.',
       },
       {
         title: 'Intensive Post-Hospital Home Program',
         subtitle: 'Transition from Hospital to Home',
+        sessions: '8 Sessions',
         description:
           'Supports safe transition from hospital or inpatient care to home, reducing complications and readmissions.',
         meta: 'Close coordination with hospital and treating physicians.',
+        sessionPrice: '61.200',
+        totalPrice: '489.600',
+        secondaryDescription: 'Safe transition support with close coordination with your care team.',
       },
       {
         title: 'Intensive Neurological Home Program',
         subtitle: 'Neurological Conditions',
+        sessions: '12 Sessions',
         description:
           'Designed for patients with neurological conditions who require intensive, repetitive training in a familiar environment.',
         meta: 'Exercises and interventions adapted to the home setting.',
+        sessionPrice: '61.200',
+        totalPrice: '734.400',
+        secondaryDescription: 'Intensive neurological rehabilitation adapted to your home environment.',
       },
     ],
     whyTitle: 'Why Choose Our Intensive Home Therapy Packages?',
@@ -401,16 +505,24 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
       {
         title: 'Regular Rehabilitation Visits',
         subtitle: 'Planned Home Sessions',
+        sessions: 'As per program',
         description:
           'Scheduled home visits following a clear rehabilitation plan with progressive goals and measurable outcomes.',
         meta: 'Frequency adjusted over time according to progress and clinical need.',
+        sessionPrice: '61.200',
+        totalPrice: 'As per program',
+        secondaryDescription: 'Long-term program with frequency adjusted to progress and clinical need.',
       },
       {
         title: 'Intensive Phases',
         subtitle: 'Targeted Boost Periods',
+        sessions: 'As per plan',
         description:
           'Short, intensive phases built into the overall program to accelerate progress at key stages.',
         meta: 'Designed and approved by the multidisciplinary team.',
+        sessionPrice: '61.200',
+        totalPrice: 'As per plan',
+        secondaryDescription: 'Intensive phases integrated into your comprehensive program.',
       },
     ],
     additionalTitle: 'Program Details',
@@ -520,16 +632,43 @@ export default function PackageDetail() {
               {config.packages.map((pkg) => (
                 <article key={pkg.title} className="pkg-detail-card">
                   <h3 className="pkg-detail-card-title">{pkg.title}</h3>
-                  <p className="pkg-detail-card-subtitle">{pkg.subtitle}</p>
-                  <p className="pkg-detail-card-text">{pkg.description}</p>
-                  {(pkg.meta || pkg.price) && (
-                    <div className="pkg-detail-card-panel">
-                      {pkg.meta && <p className="pkg-detail-card-meta">{pkg.meta}</p>}
-                      {pkg.price && <p className="pkg-detail-card-price">{pkg.price}</p>}
-                    </div>
+                  {(pkg.sessions ?? pkg.subtitle) && (
+                    <p className="pkg-detail-card-sessions">{pkg.sessions ?? pkg.subtitle}</p>
                   )}
-                  <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">
-                    {t('packages.bookAppointment')}
+                  <p className="pkg-detail-card-text">{pkg.description}</p>
+                  {(pkg.sessionPrice != null && pkg.totalPrice != null) ? (
+                    <div className="pkg-detail-card-panel">
+                      <div className="pkg-detail-card-panel-row">
+                        <span className="pkg-detail-card-panel-label">{t('packages.sessionPriceLabel')}</span>
+                        <span className="pkg-detail-card-panel-value pkg-detail-card-panel-value--dark">
+                          {pkg.sessionPrice} {t('packages.currency')}
+                        </span>
+                      </div>
+                      <div className="pkg-detail-card-panel-row pkg-detail-card-panel-row--total">
+                        <span className="pkg-detail-card-panel-label">{t('packages.totalPriceLabel')}</span>
+                        <span className="pkg-detail-card-panel-value">{pkg.totalPrice} {t('packages.currency')}</span>
+                      </div>
+                    </div>
+                  ) : (pkg.meta || pkg.price) ? (
+                    <div className="pkg-detail-card-panel">
+                      {pkg.meta && (
+                        <div className="pkg-detail-card-panel-row">
+                          <span className="pkg-detail-card-panel-label">{pkg.meta}</span>
+                        </div>
+                      )}
+                      {pkg.price && (
+                        <div className="pkg-detail-card-panel-row pkg-detail-card-panel-row--total">
+                          <span className="pkg-detail-card-panel-label">{t('packages.totalPriceLabel')}</span>
+                          <span className="pkg-detail-card-panel-value">{pkg.price}</span>
+                        </div>
+                      )}
+                    </div>
+                  ) : null}
+                  {pkg.secondaryDescription && (
+                    <p className="pkg-detail-card-text pkg-detail-card-text--secondary">{pkg.secondaryDescription}</p>
+                  )}
+                  <Link to={BOOK_APPOINTMENT_PATH} className="pkg-detail-card-btn btn btn-primary">
+                    {t('packages.bookNow')}
                   </Link>
                 </article>
               ))}

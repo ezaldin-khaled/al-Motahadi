@@ -150,7 +150,7 @@
   margin-bottom: 0;
 }
 
-/* ===== DYNAMIC SYSTEM (light teal, two cols: text + stat cards) ===== */
+/* ===== DYNAMIC SYSTEM (light teal, two cols: text left + 2x2 stat cards right) ===== */
 .rn-dynamic-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -162,9 +162,15 @@
   box-sizing: border-box;
 }
 
-.rn-dynamic-content .rn-section-title {
+.rn-dynamic-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
   text-align: left;
-  margin-bottom: 16px;
 }
 
 .rn-dynamic-content .rn-dynamic-desc {
@@ -173,6 +179,7 @@
   color: #555;
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: left;
 }
 
 .rn-stat-cards {
@@ -182,30 +189,46 @@
   align-items: stretch;
 }
 
+.rn-stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
 .rn-stat-card {
   flex: 1;
-  background: #F0F3F3;
+  background: #fff;
   border-radius: 12px;
-  padding: 24px 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.rn-stat-cards-grid .rn-stat-card {
+  min-height: 100px;
 }
 
 .rn-stat-value {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #00A79E;
+  color: #0D9688;
   line-height: 1.2;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .rn-stat-label {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 4px;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #555;
+  margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -216,28 +239,64 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* ===== TRANSLATE (white, 2x2 grid) ===== */
+/* ===== TRANSLATE (white, title + intro + 2x2 cards + conclusion card) ===== */
+.rn-translate-container {
+  text-align: center;
+}
+
+.rn-translate-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.rn-translate-container #rn-translate-title::after {
+  margin-bottom: 24px;
+}
+
+.rn-translate-intro {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0 0 32px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .rn-translate-wrap {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto 32px;
 }
 
 .rn-translate-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px 48px;
-  margin-top: 8px;
+  gap: 24px 28px;
 }
 
 .rn-translate-block {
   text-align: left;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 28px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .rn-translate-block-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.125rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.0625rem;
   font-weight: 700;
-  color: #333;
+  color: #1a1a1a;
   margin-bottom: 12px;
   line-height: 1.3;
 }
@@ -250,23 +309,81 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* ===== PROTOCOLS (light teal, 4 horizontal cards with circular icons) ===== */
-.rn-protocols-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.rn-translate-conclusion {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 28px 32px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.rn-translate-conclusion-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rn-translate-conclusion-text strong {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* ===== PROTOCOLS (light grey-blue, heading + intro + 4 cards + conclusion box) ===== */
+.rn-protocols-section.rn-section-teal {
+  background: #EBF0F3;
+}
+
+.rn-protocols-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 80px;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.rn-protocols-heading {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.rn-protocols-intro {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0 auto 40px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  max-width: 640px;
+}
+
+.rn-protocols-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-bottom: 40px;
 }
 
 .rn-protocol-card {
   background: #fff;
   border-radius: 12px;
   padding: 28px 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   text-align: center;
 }
 
@@ -275,7 +392,7 @@
   height: 56px;
   border-radius: 50%;
   background: #E8F5F4;
-  color: #00A79E;
+  color: #0D9688;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,10 +406,10 @@
 }
 
 .rn-protocol-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  color: #333;
+  color: #1a1a1a;
   margin-bottom: 12px;
   line-height: 1.3;
 }
@@ -303,6 +420,32 @@
   color: #555;
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+}
+
+.rn-protocols-conclusion {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #DCE3E6;
+  border-radius: 12px;
+  padding: 28px 32px;
+  text-align: center;
+}
+
+.rn-protocols-conclusion-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rn-protocols-conclusion-text strong {
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 /* ===== MEDICAL TEAM ROLE (white, two cols: text + 3 blocks) ===== */
@@ -330,6 +473,12 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+.rn-team-blocks > div {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px 24px;
 }
 
 .rn-team-block-title {
@@ -365,6 +514,9 @@
   flex-direction: column;
   align-items: center;
   text-align: left;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px 24px;
 }
 
 .rn-patient-icon {
@@ -399,7 +551,7 @@
   .rn-hero-inner,
   .rn-container,
   .rn-dynamic-inner,
-  .rn-protocols-grid,
+  .rn-protocols-container,
   .rn-team-inner,
   .rn-patient-grid {
     padding: 0 48px;
@@ -438,7 +590,8 @@
     padding: 64px 0;
   }
 
-  .rn-container {
+  .rn-container,
+  .rn-protocols-container {
     padding: 0 32px;
   }
 
@@ -452,8 +605,16 @@
     flex-direction: column;
   }
 
-  .rn-dynamic-content .rn-section-title {
+  .rn-dynamic-title {
     text-align: center;
+  }
+
+  .rn-dynamic-content .rn-dynamic-desc {
+    text-align: center;
+  }
+
+  .rn-stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .rn-translate-grid {
@@ -463,7 +624,6 @@
 
   .rn-protocols-grid {
     grid-template-columns: 1fr;
-    padding: 0 32px;
   }
 
   .rn-team-inner {
@@ -512,7 +672,7 @@
   .rn-hero-inner,
   .rn-container,
   .rn-dynamic-inner,
-  .rn-protocols-grid,
+  .rn-protocols-container,
   .rn-team-inner,
   .rn-patient-grid {
     padding: 0 24px;
@@ -520,5 +680,9 @@
 
   .rn-hero-title {
     font-size: 1.625rem;
+  }
+
+  .rn-stat-cards-grid {
+    grid-template-columns: 1fr;
   }
 }

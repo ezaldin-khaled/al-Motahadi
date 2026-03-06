@@ -87,24 +87,25 @@ export default function ResearchProtocols() {
         <section className="rn-section rn-section-teal" aria-labelledby="rn-dynamic-title">
           <div className="rn-dynamic-inner">
             <div className="rn-dynamic-content">
-              <h2 id="rn-dynamic-title" className="rn-section-title">{t('researchNetwork.dynamicTitle')}</h2>
+              <h2 id="rn-dynamic-title" className="rn-dynamic-title">{t('researchNetwork.dynamicTitle')}</h2>
               <p className="rn-dynamic-desc">{t('researchNetwork.dynamicDesc')}</p>
             </div>
-            <div className="rn-stat-cards">
+            <div className="rn-stat-cards rn-stat-cards-grid">
               <div className="rn-stat-card">
                 <div className="rn-stat-value">{t('researchNetwork.stat1Value')}</div>
                 <div className="rn-stat-label">{t('researchNetwork.stat1Label')}</div>
-                <p className="rn-stat-sub">{t('researchNetwork.stat1Sub')}</p>
               </div>
               <div className="rn-stat-card">
                 <div className="rn-stat-value">{t('researchNetwork.stat2Value')}</div>
                 <div className="rn-stat-label">{t('researchNetwork.stat2Label')}</div>
-                <p className="rn-stat-sub">{t('researchNetwork.stat2Sub')}</p>
               </div>
               <div className="rn-stat-card">
                 <div className="rn-stat-value">{t('researchNetwork.stat3Value')}</div>
                 <div className="rn-stat-label">{t('researchNetwork.stat3Label')}</div>
-                <p className="rn-stat-sub">{t('researchNetwork.stat3Sub')}</p>
+              </div>
+              <div className="rn-stat-card">
+                <div className="rn-stat-value">{t('researchNetwork.stat4Value')}</div>
+                <div className="rn-stat-label">{t('researchNetwork.stat4Label')}</div>
               </div>
             </div>
           </div>
@@ -112,58 +113,74 @@ export default function ResearchProtocols() {
 
         {/* 4. How Does the Research Network Translate */}
         <section className="rn-section rn-section-white" aria-labelledby="rn-translate-title">
-          <div className="rn-container">
-            <h2 id="rn-translate-title" className="rn-section-title">{t('researchNetwork.translateTitle')}</h2>
-            <p className="rn-section-intro">{t('researchNetwork.translateIntro')}</p>
+          <div className="rn-container rn-translate-container">
+            <h2 id="rn-translate-title" className="rn-translate-title">{t('researchNetwork.translateTitle')}</h2>
+            <p className="rn-translate-intro">{t('researchNetwork.translateIntro')}</p>
             <div className="rn-translate-wrap">
-            <div className="rn-translate-grid">
-              <div className="rn-translate-block">
-                <h3 className="rn-translate-block-title">{t('researchNetwork.translate1Title')}</h3>
-                <p className="rn-translate-block-desc">{t('researchNetwork.translate1Desc')}</p>
-              </div>
-              <div className="rn-translate-block">
-                <h3 className="rn-translate-block-title">{t('researchNetwork.translate2Title')}</h3>
-                <p className="rn-translate-block-desc">{t('researchNetwork.translate2Desc')}</p>
-              </div>
-              <div className="rn-translate-block">
-                <h3 className="rn-translate-block-title">{t('researchNetwork.translate3Title')}</h3>
-                <p className="rn-translate-block-desc">{t('researchNetwork.translate3Desc')}</p>
-              </div>
-              <div className="rn-translate-block">
-                <h3 className="rn-translate-block-title">{t('researchNetwork.translate4Title')}</h3>
-                <p className="rn-translate-block-desc">{t('researchNetwork.translate4Desc')}</p>
+              <div className="rn-translate-grid">
+                <div className="rn-translate-block">
+                  <h3 className="rn-translate-block-title">{t('researchNetwork.translate1Title')}</h3>
+                  <p className="rn-translate-block-desc">{t('researchNetwork.translate1Desc')}</p>
+                </div>
+                <div className="rn-translate-block">
+                  <h3 className="rn-translate-block-title">{t('researchNetwork.translate2Title')}</h3>
+                  <p className="rn-translate-block-desc">{t('researchNetwork.translate2Desc')}</p>
+                </div>
+                <div className="rn-translate-block">
+                  <h3 className="rn-translate-block-title">{t('researchNetwork.translate3Title')}</h3>
+                  <p className="rn-translate-block-desc">{t('researchNetwork.translate3Desc')}</p>
+                </div>
+                <div className="rn-translate-block">
+                  <h3 className="rn-translate-block-title">{t('researchNetwork.translate4Title')}</h3>
+                  <p className="rn-translate-block-desc">{t('researchNetwork.translate4Desc')}</p>
+                </div>
               </div>
             </div>
+            <div className="rn-translate-conclusion">
+              <p className="rn-translate-conclusion-text">
+                {t('researchNetwork.translateConclusionBefore')}
+                <strong>{t('researchNetwork.translateConclusionBold')}</strong>
+                {t('researchNetwork.translateConclusionAfter')}
+              </p>
             </div>
           </div>
         </section>
 
         {/* 5. Dynamic Treatment Protocols... Not Rigid */}
-        <section className="rn-section rn-section-teal" aria-labelledby="rn-protocols-title">
-          <div className="rn-container">
-            <h2 id="rn-protocols-title" className="rn-section-title">{t('researchNetwork.protocolsTitle')}</h2>
-            <p className="rn-section-intro">{t('researchNetwork.protocolsIntro')}</p>
-          </div>
-          <div className="rn-protocols-grid">
-            <div className="rn-protocol-card">
-              <div className="rn-protocol-icon"><IconAssessment /></div>
-              <h3 className="rn-protocol-title">{t('researchNetwork.protocol1Title')}</h3>
-              <p className="rn-protocol-desc">{t('researchNetwork.protocol1Desc')}</p>
+        <section className="rn-section rn-section-teal rn-protocols-section" aria-labelledby="rn-protocols-title">
+          <div className="rn-protocols-container">
+            <h2 id="rn-protocols-title" className="rn-protocols-heading">{t('researchNetwork.protocolsTitle')}</h2>
+            <p className="rn-protocols-intro">{t('researchNetwork.protocolsIntro')}</p>
+            <div className="rn-protocols-grid">
+              <div className="rn-protocol-card">
+                <div className="rn-protocol-icon"><IconAssessment /></div>
+                <h3 className="rn-protocol-title">{t('researchNetwork.protocol1Title')}</h3>
+                <p className="rn-protocol-desc">{t('researchNetwork.protocol1Desc')}</p>
+              </div>
+              <div className="rn-protocol-card">
+                <div className="rn-protocol-icon"><IconGoals /></div>
+                <h3 className="rn-protocol-title">{t('researchNetwork.protocol2Title')}</h3>
+                <p className="rn-protocol-desc">{t('researchNetwork.protocol2Desc')}</p>
+              </div>
+              <div className="rn-protocol-card">
+                <div className="rn-protocol-icon"><IconReview /></div>
+                <h3 className="rn-protocol-title">{t('researchNetwork.protocol3Title')}</h3>
+                <p className="rn-protocol-desc">{t('researchNetwork.protocol3Desc')}</p>
+              </div>
+              <div className="rn-protocol-card">
+                <div className="rn-protocol-icon"><IconCollaboration /></div>
+                <h3 className="rn-protocol-title">{t('researchNetwork.protocol4Title')}</h3>
+                <p className="rn-protocol-desc">{t('researchNetwork.protocol4Desc')}</p>
+              </div>
             </div>
-            <div className="rn-protocol-card">
-              <div className="rn-protocol-icon"><IconGoals /></div>
-              <h3 className="rn-protocol-title">{t('researchNetwork.protocol2Title')}</h3>
-              <p className="rn-protocol-desc">{t('researchNetwork.protocol2Desc')}</p>
-            </div>
-            <div className="rn-protocol-card">
-              <div className="rn-protocol-icon"><IconReview /></div>
-              <h3 className="rn-protocol-title">{t('researchNetwork.protocol3Title')}</h3>
-              <p className="rn-protocol-desc">{t('researchNetwork.protocol3Desc')}</p>
-            </div>
-            <div className="rn-protocol-card">
-              <div className="rn-protocol-icon"><IconCollaboration /></div>
-              <h3 className="rn-protocol-title">{t('researchNetwork.protocol4Title')}</h3>
-              <p className="rn-protocol-desc">{t('researchNetwork.protocol4Desc')}</p>
+            <div className="rn-protocols-conclusion">
+              <p className="rn-protocols-conclusion-text">
+                {t('researchNetwork.protocolsConclusionBefore')}
+                <strong>{t('researchNetwork.protocolsConclusionBold1')}</strong>
+                {t('researchNetwork.protocolsConclusionMid')}
+                <strong>{t('researchNetwork.protocolsConclusionBold2')}</strong>
+                {t('researchNetwork.protocolsConclusionAfter')}
+              </p>
             </div>
           </div>
         </section>

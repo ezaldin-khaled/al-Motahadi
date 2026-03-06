@@ -99,6 +99,8 @@ function BlogCard({ post }: { post: BlogPost }) {
   const { t } = useTranslation();
   const filterLabelKey = CATEGORY_FILTER_LABELS[post.category];
   const authorName = t(post.authorKey);
+  const title = post.titleOverride ?? t(post.titleKey);
+  const excerpt = post.excerptOverride ?? t(post.excerptKey);
 
   return (
     <article id={`post-${post.slug}`} className="blog-card">
@@ -118,8 +120,8 @@ function BlogCard({ post }: { post: BlogPost }) {
               {post.readTime} {t('blog.minRead')}
             </span>
           </div>
-          <h2 className="blog-card-title">{t(post.titleKey)}</h2>
-          <p className="blog-card-excerpt">{t(post.excerptKey)}</p>
+          <h2 className="blog-card-title">{title}</h2>
+          <p className="blog-card-excerpt">{excerpt}</p>
           <p className="blog-card-by">{t('blog.byAuthor')} {authorName}</p>
           <Link to={`/blog/${post.slug}`} className="blog-card-read-more">
             {t('blog.readMore')}
@@ -145,9 +147,9 @@ export default function Blog() {
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       list = list.filter((post) => {
-        const title = t(post.titleKey).toLowerCase();
+        const title = (post.titleOverride ?? t(post.titleKey)).toLowerCase();
         const categoryLabel = t(CATEGORY_FILTER_LABELS[post.category]).toLowerCase();
-        const excerpt = t(post.excerptKey).toLowerCase();
+        const excerpt = (post.excerptOverride ?? t(post.excerptKey)).toLowerCase();
         const author = t(post.authorKey).toLowerCase();
         return title.includes(q) || categoryLabel.includes(q) || excerpt.includes(q) || author.includes(q);
       });
