@@ -1,0 +1,239 @@
+/* Our Social Responsibility Page */
+
+.social-responsibility-page {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* ===== HERO ===== */
+.sr-hero {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  overflow: hidden;
+  padding: 128px 24px 96px;
+  text-align: center;
+}
+
+.sr-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 150, 136, 0.06) 0%,
+    rgba(13, 150, 136, 0.12) 25%,
+    rgba(13, 150, 136, 0.08) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.sr-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sr-hero-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #0D9688;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.sr-hero-title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.sr-hero-desc {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #666666;
+  margin: 0;
+}
+
+/* ===== IHATA PROGRAM ===== */
+.sr-ihata {
+  padding: 96px 24px;
+  background: #ffffff;
+}
+
+.sr-ihata-container {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sr-ihata-heading {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 28px;
+  line-height: 1.25;
+}
+
+.sr-ihata-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #555555;
+  margin-bottom: 20px;
+}
+
+.sr-ihata-text:last-of-type {
+  margin-bottom: 0;
+}
+
+/* ===== PACKAGES ===== */
+.sr-packages {
+  padding: 96px 24px;
+  background: #f5f7f8;
+}
+
+.sr-packages-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sr-packages-heading {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.sr-packages-sub {
+  font-size: 0.9375rem;
+  color: #666666;
+  margin-bottom: 40px;
+}
+
+.sr-packages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.sr-package-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: left;
+  transition: box-shadow 0.2s ease;
+}
+
+.sr-package-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.sr-package-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.sr-package-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #555555;
+  margin: 0;
+}
+
+/* ===== ADDITIONAL INITIATIVES ===== */
+.sr-initiatives {
+  padding: 96px 24px;
+  background: #ffffff;
+}
+
+.sr-initiatives-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sr-initiatives-heading {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.sr-initiatives-sub {
+  font-size: 0.9375rem;
+  color: #666666;
+  margin-bottom: 40px;
+}
+
+.sr-initiatives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sr-initiative-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px 28px;
+  text-align: left;
+}
+
+.sr-initiative-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0D9688;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.sr-initiative-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #555555;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .sr-packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .sr-hero {
+    padding: 96px 20px 72px;
+  }
+
+  .sr-packages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sr-initiative-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

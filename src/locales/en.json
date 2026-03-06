@@ -240,7 +240,31 @@
     "others": "Others",
     "youtube": "YouTube",
     "whatsappChannel": "WhatsApp Channel",
-    "snapchat": "Snapchat"
+    "snapchat": "Snapchat",
+    "ourSocialResponsibility": "Our Social Responsibility"
+  },
+  "socialResponsibility": {
+    "heroLabel": "OUR STORY",
+    "heroTitle": "Our Social Responsibility",
+    "heroDesc": "At Al Motahadi Medical Rehabilitation Center, we believe in giving back to the community. Through our Ihata Program, we are committed to supporting those in need, improving healthcare access, and promoting wellness in the community.",
+    "ihataHeading": "The Ihata Program",
+    "ihataText1": "The Ihata Program is dedicated to providing essential rehabilitation services to underserved populations, including elderly, low-income individuals, women, and people with disabilities. Through this initiative, we strive to enhance their quality of life by providing free or discounted access to critical rehabilitation services.",
+    "ihataText2": "Rooted in the center's commitment of improving health and wellness for all, the Ihata Program goes beyond treatment — it embodies our commitment to building a healthier, more inclusive community where no one is left behind.",
+    "packagesHeading": "Ihata Program Packages",
+    "packagesSub": "Specialized rehabilitation packages for priority groups",
+    "packageIhsaamName": "Ihsaam Package – For Seniors",
+    "packageIhsaamDesc": "Focuses on supporting mobility, independence, and quality of life in advanced age.",
+    "packageCareName": "Care Package – For Women",
+    "packageCareDesc": "Addressing unique physical and emotional health needs through specialized programs.",
+    "packageHopeName": "Hope Package – For Low-Income Individuals",
+    "packageHopeDesc": "Ensuring therapy is accessible and affordable, with reduced costs and support services.",
+    "packageStepName": "Step Package – For People with Disabilities",
+    "packageStepDesc": "Provides encompassing rehabilitation and support, enabling greater independence.",
+    "initiativesHeading": "Additional Initiatives",
+    "initiativesSub": "Beyond the Ihata Program, we extend our commitment through community partnerships and endeavors.",
+    "initiative1": "Offering specialized therapy at local public schools.",
+    "initiative2": "Providing health education workshops for underserved populations, in cooperation with community leaders.",
+    "initiative3": "Organizing workshops and awareness events in cooperation with government, private, and non-profit entities for elderly, young people, and children to promote a culture of wellbeing."
   },
   "about": {
     "heroLabel": "ABOUT US",

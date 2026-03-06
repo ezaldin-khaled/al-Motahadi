@@ -21,6 +21,7 @@ import ResearchProtocols from './pages/ResearchProtocols';
 import HomeTherapy from './pages/HomeTherapy';
 import Transportation from './pages/Transportation';
 import HealthTools from './pages/HealthTools';
+import SocialResponsibility from './pages/SocialResponsibility';
 import BookAppointment from './pages/BookAppointment';
 import Dashboard from './pages/Dashboard';
 import DashboardLogin from './pages/DashboardLogin';
@@ -70,6 +71,7 @@ function App() {
         <Route path="/research-network" element={<ResearchProtocols />} />
         <Route path="/home-therapy" element={<HomeTherapy />} />
         <Route path="/transportation" element={<Transportation />} />
+        <Route path="/social-responsibility" element={<SocialResponsibility />} />
         <Route path="/dashboard/login" element={<DashboardLogin />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/dashboard/blog" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
