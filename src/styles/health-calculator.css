@@ -338,3 +338,287 @@
     font-size: 16px;
   }
 }
+
+/* ===== Health Tools PAGE (Figma: hero, tabs, what is, card, benefits) ===== */
+.ht-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 80px 56px;
+  text-align: center;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+.ht-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(0, 150, 136, 0.06) 0%, rgba(0, 150, 136, 0.02) 40%, #fff 100%);
+}
+.ht-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.ht-hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #009688;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.ht-hero-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.ht-hero-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #555;
+  margin: 0;
+}
+
+.ht-tabs-wrap {
+  padding: 0 80px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.ht-tabs-inner {
+  display: flex;
+  gap: 0;
+  max-width: 560px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f0f2f4;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.ht-tab {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #555;
+  transition: background 0.2s, color 0.2s;
+}
+.ht-tab--active {
+  background: #fff;
+  color: #009688;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.ht-what-section {
+  padding: 0 80px 48px;
+  background: #fff;
+}
+.ht-what-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ht-what-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  line-height: 1.25;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.ht-what-p1,
+.ht-what-p2 {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin: 0 0 16px;
+  text-align: justify;
+}
+.ht-what-p2 { margin-bottom: 0; }
+
+.ht-calc-section {
+  padding: 0 80px 56px;
+  background: #fff;
+}
+.ht-calc-inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.ht-benefits-section {
+  padding: 56px 80px 72px;
+  background: #f8f9fa;
+}
+.ht-benefits-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ht-benefits-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 12px;
+  line-height: 1.25;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.ht-benefits-subtitle {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 auto 32px;
+  max-width: 560px;
+}
+.ht-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  text-align: left;
+}
+.ht-benefit-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+.ht-benefit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.ht-benefit-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ===== Calculator CARD (page variant) ===== */
+.health-calculator--page {
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+}
+.health-calculator__card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 26px 26px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.health-calculator__card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin: 0 0 8px;
+}
+.health-calculator__card-subtitle {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+.health-calculator__form--card .health-calculator__fields {
+  margin-bottom: 20px;
+}
+.health-calculator__fields--row {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.health-calculator__fields--bmr {
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+}
+.health-calculator__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.health-calculator__submit-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.health-calculator__result--bmi {
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: #f0f2f4;
+  color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.health-calculator__result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+.health-calculator__result-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.health-calculator__result-value {
+  font-weight: 700;
+  color: #2c2c2c;
+}
+.health-calculator__disclaimer {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+  margin: 14px 0 0;
+}
+.health-calculator__gender-select {
+  appearance: auto;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .ht-hero,
+  .ht-tabs-wrap,
+  .ht-what-section,
+  .ht-calc-section,
+  .ht-benefits-section {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .ht-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .ht-hero { padding: 48px 24px 40px; }
+  .ht-tabs-wrap { padding: 0 24px 24px; }
+  .ht-what-section { padding: 0 24px 32px; }
+  .ht-calc-section { padding: 0 24px 40px; }
+  .ht-benefits-section { padding: 40px 24px 56px; }
+  .ht-benefits-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .ht-hero { padding: 40px 16px 32px; }
+  .ht-tabs-wrap { padding: 0 16px 20px; }
+  .ht-what-section { padding: 0 16px 24px; }
+  .ht-calc-section { padding: 0 16px 32px; }
+  .ht-benefits-section { padding: 32px 16px 48px; }
+  .health-calculator__fields--row,
+  .health-calculator__fields--bmr {
+    grid-template-columns: 1fr;
+  }
+}

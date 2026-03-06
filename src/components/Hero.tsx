@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { WhatsAppIcon } from './Icons';
-import { CONTACT_PATH } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH } from '../constants/cta';
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ export default function Hero() {
             {t('hero.description')}
           </p>
           <div className="cta-buttons" ref={ctaRef}>
-            <Link to={CONTACT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
+            <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
             <a href="#" className="btn btn-secondary btn-whatsapp">
               <WhatsAppIcon className="whatsapp-icon" />
               {t('hero.whatsapp')}
@@ -50,7 +50,9 @@ export default function Hero() {
         </div>
         <div className="hero-image-wrap" ref={imageRef}>
           <div className="hero-image-container">
-            <img src="/hero-image.png" alt={t('hero.heroImageAlt')} className="hero-image" />
+            <div className="hero-image-clip">
+              <img src="/hero-image.png" alt={t('hero.heroImageAlt')} className="hero-image" />
+            </div>
             <div className="image-badge image-badge-dark" ref={badgeRef}>
               <strong>{t('hero.trustedHealthcare')}</strong>
               <span>{t('hero.patientsRehabilitated')}</span>

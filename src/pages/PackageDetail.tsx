@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { CONTACT_PATH, WHATSAPP_URL } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH, WHATSAPP_URL } from '../constants/cta';
 import '../styles/package-detail.css';
 
 type DetailType =
@@ -528,7 +528,7 @@ export default function PackageDetail() {
                       {pkg.price && <p className="pkg-detail-card-price">{pkg.price}</p>}
                     </div>
                   )}
-                  <Link to={CONTACT_PATH} className="btn btn-primary">
+                  <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">
                     {t('packages.bookAppointment')}
                   </Link>
                 </article>
@@ -593,7 +593,7 @@ export default function PackageDetail() {
                 <p className="pkg-detail-cta-text">{config.ctaText}</p>
               </div>
               <div className="pkg-detail-cta-actions">
-                <Link to={CONTACT_PATH} className="btn btn-primary">
+                <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">
                   {t('packages.bookAppointment')}
                 </Link>
                 <a

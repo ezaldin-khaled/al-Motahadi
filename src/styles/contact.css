@@ -63,49 +63,88 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  align-items: start;
 }
 
 .booking-card {
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.booking-form-card {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  padding: 28px 26px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s;
 }
 
 .booking-card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.booking-card-icon {
-  width: 48px;
-  height: 48px;
-  background: #00A79E;
-  border-radius: 50%;
+.booking-card-header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+  align-items: flex-start;
+  gap: 14px;
   margin-bottom: 20px;
 }
 
+.booking-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.booking-card-icon--form {
+  background: #E0F2F1;
+  color: #26A69A;
+  border-radius: 10px;
+}
+
+.booking-card-icon--whatsapp {
+  background: #C8E6C9;
+  color: #4CAF50;
+  border-radius: 50%;
+}
+
 .booking-card-title {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #2c2c2c;
-  margin-bottom: 8px;
+  margin: 0 0 6px;
 }
 
 .booking-card-desc {
   font-size: 14px;
-  color: #666;
+  color: #555;
   line-height: 1.5;
-  margin-bottom: 24px;
+  margin: 0;
+}
+
+.booking-form-card {
+  background: #fff;
+}
+
+.booking-form-card .booking-form {
+  margin-top: 4px;
+}
+
+.booking-submit-btn {
+  background: #26A69A !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(38, 166, 154, 0.35);
+  margin-top: 4px;
+}
+
+.booking-submit-btn:hover {
+  background: #1e8c82 !important;
+  box-shadow: 0 4px 12px rgba(38, 166, 154, 0.4);
+}
+
+.booking-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 /* Form Styles */
@@ -132,8 +171,8 @@
 
 .form-label {
   font-size: 14px;
-  font-weight: 500;
-  color: #333;
+  font-weight: 700;
+  color: #2c2c2c;
 }
 
 .form-input-contact,
@@ -151,8 +190,8 @@
 .form-input-contact:focus,
 .form-textarea-contact:focus {
   outline: none;
-  border-color: #00A79E;
-  box-shadow: 0 0 0 3px rgba(0, 167, 158, 0.1);
+  border-color: #26A69A;
+  box-shadow: 0 0 0 3px rgba(38, 166, 154, 0.12);
 }
 
 .form-textarea-contact {
@@ -162,60 +201,134 @@
 
 /* Submit / Calculate use global .btn .btn-primary */
 
-/* WhatsApp Card — light green background per design */
+/* WhatsApp Card — light green background per design (#E8F5E9) */
 .booking-whatsapp-card {
-  background: #E6F7ED;
-}
-
-.booking-whatsapp-card .booking-card-icon {
-  background: rgba(37, 211, 102, 0.25);
-  color: #1a9e6f;
-}
-
-.booking-whatsapp-card .booking-card-icon.whatsapp-icon svg {
-  color: #1a9e6f;
+  background: #E8F5E9;
 }
 
 .whatsapp-extra {
   font-size: 14px;
   color: #555;
-  line-height: 1.6;
-  margin-bottom: 24px;
+  line-height: 1.55;
+  margin: 0 0 18px;
 }
 
-/* Bright green WhatsApp button — white text, white icon on left */
+/* WhatsApp button — vibrant green #4CAF50 per design */
 .btn-whatsapp-green {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   min-height: 48px;
-  padding: 14px 28px;
+  padding: 14px 24px;
   font-size: 15px;
   font-weight: 600;
   font-family: inherit;
   border: none;
-  border-radius: 9999px;
+  border-radius: 10px;
   cursor: pointer;
-  background: #25D366;
+  background: #4CAF50;
   color: #fff;
-  box-shadow: 0 2px 12px rgba(37, 211, 102, 0.35);
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 10px rgba(76, 175, 80, 0.35);
+  transition: opacity 0.2s, box-shadow 0.2s;
 }
 
 .btn-whatsapp-green:hover {
   opacity: 0.92;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 4px 14px rgba(76, 175, 80, 0.4);
 }
 
 .btn-whatsapp-green .whatsapp-icon {
   color: #fff;
 }
 
-/* WhatsApp icon image: make white on green button */
 .btn-whatsapp-green img.whatsapp-icon {
   filter: brightness(0) invert(1);
+}
+
+/* Reach Out to Us — same light background as page */
+.booking-reachout {
+  padding: 0;
+}
+
+.booking-reachout-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.booking-reachout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.booking-reachout-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.booking-reachout-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #E0F2F1;
+  color: #26A69A;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.booking-reachout-list strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 2px;
+}
+
+.booking-reachout-list span {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.45;
+}
+
+.booking-follow-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin: 0 0 12px;
+}
+
+.booking-follow-icons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.booking-follow-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #E0F2F1;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  color: #26A69A;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.booking-follow-icon:hover {
+  background: #B2DFDB;
+  color: #1e8c82;
 }
 
 /* Find Us section — map between booking and Calculate Your Health */

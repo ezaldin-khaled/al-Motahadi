@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import { WhatsAppIcon } from '../components/Icons';
-import { CONTACT_PATH, WHATSAPP_URL } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH, WHATSAPP_URL } from '../constants/cta';
 import '../styles/packages.css';
 
 type PackageCard = {
@@ -34,7 +34,7 @@ function PackageCardItem({ item, currency, priceAfterLabel }: { item: PackageCar
         </>
       )}
       {item.priceNote && <p className="package-card-price-note">{item.priceNote}</p>}
-      <Link to={CONTACT_PATH} className="package-card-btn btn btn-primary">{item.buttonLabel}</Link>
+      <Link to={BOOK_APPOINTMENT_PATH} className="package-card-btn btn btn-primary">{item.buttonLabel}</Link>
     </div>
   );
 }
@@ -83,7 +83,7 @@ export default function PackagesPricing() {
             <p className="packages-hero-desc">{t('packages.heroDesc')}</p>
             <p className="packages-hero-desc packages-hero-desc-secondary">{t('packages.heroDescSecondary')}</p>
             <div className="packages-hero-buttons cta-buttons">
-              <Link to={CONTACT_PATH} className="btn btn-primary">{t('packages.bookAppointment')}</Link>
+              <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">{t('packages.bookAppointment')}</Link>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label={t('cta.whatsapp')}>
                 <WhatsAppIcon className="whatsapp-icon" />
                 {t('cta.whatsapp')}
@@ -189,7 +189,7 @@ export default function PackagesPricing() {
                 <h3 className="package-card-title">{t('packages.singleSessionTitle')}</h3>
                 <p className="package-card-price">{t('packages.singleSessionPrice')} <span className="package-card-currency">{currency}</span></p>
                 <div className="package-card-actions">
-                  <Link to={CONTACT_PATH} className="package-card-btn btn btn-primary">{t('packages.bookAppointment')}</Link>
+                  <Link to={BOOK_APPOINTMENT_PATH} className="package-card-btn btn btn-primary">{t('packages.bookAppointment')}</Link>
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label={t('cta.whatsapp')}>
                     <WhatsAppIcon className="whatsapp-icon" />
                     {t('cta.whatsapp')}

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
-import { CONTACT_PATH, LOGO_PATH } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH, LOGO_PATH } from '../constants/cta';
 import { useTheme } from '../contexts/ThemeContext';
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -114,7 +114,7 @@ export default function Header() {
               <span className="nav-lang-sep" aria-hidden>|</span>
               <button type="button" className={`nav-lang-btn ${i18n.language === 'ar' ? 'nav-lang-btn--active' : ''}`} onClick={() => i18n.changeLanguage('ar')}>العربية</button>
             </div>
-            <Link to={CONTACT_PATH} className="nav-cta btn btn-primary">{t('nav.bookAppointment')}</Link>
+            <Link to={BOOK_APPOINTMENT_PATH} className="nav-cta btn btn-primary">{t('nav.bookAppointment')}</Link>
             <button
               type="button"
               className="nav-hamburger"
@@ -154,7 +154,7 @@ export default function Header() {
                 <span className="nav-lang-sep" aria-hidden>|</span>
                 <button type="button" className={`nav-lang-btn ${i18n.language === 'ar' ? 'nav-lang-btn--active' : ''}`} onClick={() => i18n.changeLanguage('ar')}>العربية</button>
               </div>
-              <Link to={CONTACT_PATH} className="btn btn-primary nav-mobile-cta" onClick={() => setMobileMenuOpen(false)}>{t('nav.bookAppointment')}</Link>
+              <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary nav-mobile-cta" onClick={() => setMobileMenuOpen(false)}>{t('nav.bookAppointment')}</Link>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WhatsAppIcon } from './Icons';
 import { Link } from 'react-router-dom';
-import { CONTACT_PATH, WHATSAPP_URL } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH, WHATSAPP_URL } from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -108,11 +108,11 @@ export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <Link to={CONTACT_PATH} className="btn btn-outline-light">{t('cta.bookSession')}</Link>
+                <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-outline-light">{t('cta.bookSession')}</Link>
               </>
             ) : isServices ? (
               <>
-                <Link to={CONTACT_PATH} className="btn btn-primary">
+                <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">
                   {t('cta.bookAppointment')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M5 12h14M12 5l7 7-7 7" />
@@ -125,7 +125,7 @@ export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
               </>
             ) : (
               <>
-                <Link to={CONTACT_PATH} className="btn btn-primary">
+                <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">
                   {t('cta.bookAppointment')}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M5 12h14M12 5l7 7-7 7" />

@@ -5,6 +5,9 @@
 
 export const CONTACT_PATH = '/contact';
 
+/** Book an Appointment page — use for all "Book an Appointment" / "Book a session" CTAs */
+export const BOOK_APPOINTMENT_PATH = '/book-appointment';
+
 /** Logo image path — used in header, footer, and favicon (index.html). */
 export const LOGO_PATH = '/logo.png';
 

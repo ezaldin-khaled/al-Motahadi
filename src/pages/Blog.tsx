@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import { WhatsAppIcon } from '../components/Icons';
-import { CONTACT_PATH, WHATSAPP_URL } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH, WHATSAPP_URL } from '../constants/cta';
 import {
   BLOG_POSTS,
   BLOG_FILTER_TABS,
@@ -165,7 +165,7 @@ export default function Blog() {
             <h1 className="blog-hero-title">{t('blog.heroTitle')}</h1>
             <p className="blog-hero-subtitle">{t('blog.heroSubtitle')}</p>
             <div className="blog-hero-buttons cta-buttons">
-              <Link to={CONTACT_PATH} className="btn btn-primary">
+              <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">
                 {t('nav.bookAppointment')}
               </Link>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label={t('hero.whatsapp')}>

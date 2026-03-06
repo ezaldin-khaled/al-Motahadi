@@ -21,6 +21,7 @@ import ResearchProtocols from './pages/ResearchProtocols';
 import HomeTherapy from './pages/HomeTherapy';
 import Transportation from './pages/Transportation';
 import HealthTools from './pages/HealthTools';
+import BookAppointment from './pages/BookAppointment';
 import Dashboard from './pages/Dashboard';
 import DashboardLogin from './pages/DashboardLogin';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -58,6 +59,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/services/:id" element={<ServiceDetail />} />
         <Route path="/health-tools" element={<HealthTools />} />
+        <Route path="/book-appointment" element={<BookAppointment />} />
         <Route path="/packages" element={<PackagesPricing />} />
         <Route path="/packages/:type" element={<PackageDetail />} />
         <Route path="/blog" element={<Blog />} />

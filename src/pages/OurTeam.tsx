@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
-import { CONTACT_PATH } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH } from '../constants/cta';
 import '../styles/team.css';
 
 function OurTeam() {
@@ -28,7 +28,7 @@ function OurTeam() {
           <h2 className="section-title-team">{t('team.modelTitle')}</h2>
           <p className="section-desc-team">{t('team.modelDesc')}</p>
           <div className="section-cta">
-            <Link to={CONTACT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
+            <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
           </div>
         </div>
       </section>
@@ -102,7 +102,7 @@ function OurTeam() {
             </div>
           </div>
           <div className="team-features-cta">
-            <Link to={CONTACT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
+            <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
           </div>
         </div>
       </section>
@@ -114,7 +114,7 @@ function OurTeam() {
           <p className="section-desc-team">{t('team.philosophyDesc1')}</p>
           <p className="section-desc-team philosophy-extra">{t('team.philosophyDesc2')}</p>
           <div className="section-cta">
-            <Link to={CONTACT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
+            <Link to={BOOK_APPOINTMENT_PATH} className="btn btn-primary">{t('nav.bookAppointment')}</Link>
           </div>
         </div>
       </section>
