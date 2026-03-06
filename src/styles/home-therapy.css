@@ -165,6 +165,10 @@
   box-sizing: border-box;
 }
 
+.ht-service-inner .ht-section-title {
+  text-align: center;
+}
+
 .ht-service-intro {
   font-size: 15px;
   line-height: 1.7;

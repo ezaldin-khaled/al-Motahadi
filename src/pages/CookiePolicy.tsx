@@ -45,10 +45,9 @@ export default function CookiePolicy() {
                 {t('cookies.s2Intro')}
               </p>
               <ul className="privacy-list">
-                <li>{t('cookies.s2Necessary')}</li>
+                <li>{t('cookies.s2Essential')}</li>
                 <li>{t('cookies.s2Performance')}</li>
-                <li>{t('cookies.s2Functional')}</li>
-                <li>{t('cookies.s2Marketing')}</li>
+                <li>{t('cookies.s2Analytical')}</li>
               </ul>
             </div>
 
@@ -76,7 +75,14 @@ export default function CookiePolicy() {
             <div className="privacy-section">
               <h2 className="privacy-section-heading">6. {t('cookies.s6Title')}</h2>
               <p className="privacy-section-text">
-                {t('cookies.s6Content')}
+                {t('cookies.s6Intro')}
+              </p>
+            </div>
+
+            <div className="privacy-section">
+              <h2 className="privacy-section-heading">7. {t('cookies.s7Title')}</h2>
+              <p className="privacy-section-text">
+                {t('cookies.s7Intro')}
               </p>
             </div>
           </div>

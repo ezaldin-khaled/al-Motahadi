@@ -153,6 +153,7 @@ export default function Blog() {
       });
     }
     return list;
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- i18n.language needed so filtered list recomputes when language changes
   }, [filter, searchQuery, t, i18n.language]);
 
   return (

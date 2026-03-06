@@ -182,24 +182,6 @@ export default function PackagesPricing() {
           </div>
         </section>
 
-        <section className="packages-section packages-section-white packages-section-single">
-          <div className="packages-section-inner">
-            <div className="packages-single-wrap">
-              <div className="package-card package-card-single">
-                <h3 className="package-card-title">{t('packages.singleSessionTitle')}</h3>
-                <p className="package-card-price">{t('packages.singleSessionPrice')} <span className="package-card-currency">{currency}</span></p>
-                <div className="package-card-actions">
-                  <Link to={BOOK_APPOINTMENT_PATH} className="package-card-btn btn btn-primary">{t('packages.bookAppointment')}</Link>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label={t('cta.whatsapp')}>
-                    <WhatsAppIcon className="whatsapp-icon" />
-                    {t('cta.whatsapp')}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <CtaSection variant="dark-cards" />
       </main>
       <Footer />

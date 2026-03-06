@@ -77,14 +77,28 @@ export default function Terms() {
             <div className="privacy-section">
               <h2 className="privacy-section-heading">7. {t('terms.s7Title')}</h2>
               <p className="privacy-section-text">
-                {t('terms.s7Content')}
+                {t('terms.s7Intro')}
               </p>
             </div>
 
             <div className="privacy-section">
               <h2 className="privacy-section-heading">8. {t('terms.s8Title')}</h2>
               <p className="privacy-section-text">
-                {t('terms.s8Content')}
+                {t('terms.s8Intro')}
+              </p>
+            </div>
+
+            <div className="privacy-section">
+              <h2 className="privacy-section-heading">9. {t('terms.s9Title')}</h2>
+              <p className="privacy-section-text">
+                {t('terms.s9Intro')}
+              </p>
+            </div>
+
+            <div className="privacy-section">
+              <h2 className="privacy-section-heading">10. {t('terms.s10Title')}</h2>
+              <p className="privacy-section-text">
+                {t('terms.s10Intro')}
               </p>
             </div>
           </div>
