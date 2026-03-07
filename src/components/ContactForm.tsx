@@ -69,7 +69,7 @@ export default function ContactForm() {
             <input type="text" placeholder="Last Name" className="form-input" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
           </div>
           <input type="email" placeholder="Email" className="form-input form-input-full" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input type="tel" placeholder="Phone Number" className="form-input form-input-full" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input type="tel" dir="ltr" placeholder="Phone Number" className="form-input form-input-full" value={phone} onChange={(e) => setPhone(e.target.value)} />
           <textarea placeholder="Your Message" className="form-textarea" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} />
           <button type="submit" className="btn btn-primary btn-block" disabled={sending}>{sending ? 'Sending…' : 'Send Message'}</button>
         </form>

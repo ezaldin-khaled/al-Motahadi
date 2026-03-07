@@ -78,6 +78,12 @@ body {
 }
 body.nav-mobile-menu-open { overflow: hidden; }
 
+/* Phone numbers: always LTR so digit order is correct in RTL languages */
+[dir="rtl"] input[type="tel"] {
+  direction: ltr;
+  text-align: left;
+}
+
 /* ===== TITLES & HEADERS — Playfair Display (paragraphs keep Inter) ===== */
 h1, h2, h3,
 .headline, .headline-dark, .headline-accent,
@@ -373,6 +379,21 @@ h1, h2, h3,
   border-radius: 14px;
 }
 
+/* Nav bar fixed to top when scrolling */
+.nav-sticky-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--bg-nav);
+}
+/* Prevent content from sitting under the fixed nav */
+.page-wrapper > .nav-sticky-wrapper + main,
+.page-wrapper > .nav-sticky-wrapper + section {
+  padding-top: 76px; /* 3px top-line + ~73px header */
+}
 .top-line { width: 100%; height: 3px; background: #7eb8da; }
 .main-content { padding: 0; opacity: 1; width: 100%; }
 .content-inner { max-width: 1280px; margin: 0 auto; padding: 50px 80px 48px; }
@@ -1297,9 +1318,11 @@ h1, h2, h3,
 [data-theme="dark"] .about-page,
 [data-theme="dark"] .contact-page,
 [data-theme="dark"] .booking-section,
+[data-theme="dark"] .book-appointment-page,
 [data-theme="dark"] .packages-page,
 [data-theme="dark"] .services-page,
 [data-theme="dark"] .team-page,
+[data-theme="dark"] .doctor-profile-page,
 [data-theme="dark"] .who-we-are-page,
 [data-theme="dark"] .privacy-page,
 [data-theme="dark"] .who-we-are,
@@ -1309,6 +1332,7 @@ h1, h2, h3,
 [data-theme="dark"] .founder-section,
 [data-theme="dark"] .medical-teams,
 [data-theme="dark"] .social-responsibility,
+[data-theme="dark"] .social-responsibility-page,
 [data-theme="dark"] .services-grid-section,
 [data-theme="dark"] .team-model-section,
 [data-theme="dark"] .team-features-section,
@@ -1317,6 +1341,7 @@ h1, h2, h3,
 [data-theme="dark"] .packages-section,
 [data-theme="dark"] .packages-section-white,
 [data-theme="dark"] .packages-section-gray,
+[data-theme="dark"] .pkg-detail-page,
 [data-theme="dark"] .wwa-hero,
 [data-theme="dark"] .wwa-section-white,
 [data-theme="dark"] .wwa-section-plan,
@@ -1325,6 +1350,7 @@ h1, h2, h3,
 [data-theme="dark"] .rn-section-white,
 [data-theme="dark"] .calculate-health,
 [data-theme="dark"] .sd-page,
+[data-theme="dark"] .blog-page,
 [data-theme="dark"] .blog-detail-page,
 [data-theme="dark"] .blog-detail-content-section,
 [data-theme="dark"] .blog-detail-related,
@@ -1379,6 +1405,9 @@ h1, h2, h3,
 [data-theme="dark"] .ht-section-white {
   background: var(--bg-page) !important;
 }
+[data-theme="dark"] .ht-hero-bg {
+  background: linear-gradient(180deg, rgba(0, 150, 136, 0.12) 0%, rgba(0, 150, 136, 0.06) 40%, var(--bg-page) 100%) !important;
+}
 [data-theme="dark"] .ht-section-grey {
   background: var(--bg-section-alt) !important;
 }
@@ -1392,7 +1421,7 @@ h1, h2, h3,
   color: var(--accent) !important;
 }
 [data-theme="dark"] .ht-hero-label {
-  color: var(--text-muted) !important;
+  color: var(--accent) !important;
 }
 [data-theme="dark"] .ht-hero-desc,
 [data-theme="dark"] .ht-section-desc,
@@ -1412,6 +1441,48 @@ h1, h2, h3,
 [data-theme="dark"] .ht-feature-icon {
   background: var(--accent) !important;
   color: #fff !important;
+}
+/* Health Tools page: tabs, what-is, calc section, benefits */
+[data-theme="dark"] .ht-tabs-inner {
+  background: var(--bg-section-alt) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] .ht-tab {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .ht-tab--active {
+  background: var(--bg-card) !important;
+  color: var(--accent) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 1px 3px var(--shadow-card) !important;
+}
+[data-theme="dark"] .ht-what-section,
+[data-theme="dark"] .ht-calc-section {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .ht-what-title,
+[data-theme="dark"] .ht-benefits-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .ht-what-p1,
+[data-theme="dark"] .ht-what-p2,
+[data-theme="dark"] .ht-benefits-subtitle {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .ht-benefits-section {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .ht-benefit-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 2px 12px var(--shadow-card) !important;
+}
+[data-theme="dark"] .ht-benefit-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .ht-benefit-desc {
+  color: var(--text-muted) !important;
 }
 [data-theme="dark"] .tr-page,
 [data-theme="dark"] .tr-hero,
@@ -1456,6 +1527,169 @@ h1, h2, h3,
 [data-theme="dark"] .tr-booking-icon {
   background: var(--accent) !important;
   color: #fff !important;
+}
+/* Social Responsibility page (sr-*) */
+[data-theme="dark"] .sr-hero,
+[data-theme="dark"] .sr-hero-bg,
+[data-theme="dark"] .sr-ihata,
+[data-theme="dark"] .sr-initiatives {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .sr-hero-bg {
+  background: linear-gradient(180deg, rgba(13, 150, 136, 0.12) 0%, rgba(13, 150, 136, 0.18) 25%, rgba(13, 150, 136, 0.1) 60%, transparent 100%) !important;
+}
+[data-theme="dark"] .sr-packages {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .sr-hero-title,
+[data-theme="dark"] .sr-ihata-heading,
+[data-theme="dark"] .sr-packages-heading,
+[data-theme="dark"] .sr-packages-sub,
+[data-theme="dark"] .sr-initiatives-heading,
+[data-theme="dark"] .sr-initiatives-sub,
+[data-theme="dark"] .sr-package-name,
+[data-theme="dark"] .sr-initiative-text {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .sr-hero-label {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .sr-hero-desc,
+[data-theme="dark"] .sr-ihata-text,
+[data-theme="dark"] .sr-package-desc {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .sr-package-card,
+[data-theme="dark"] .sr-initiative-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .sr-initiative-num {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+/* Package Detail page (pkg-detail-*) */
+[data-theme="dark"] .pkg-detail-hero,
+[data-theme="dark"] .pkg-detail-section-white {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .pkg-detail-section-gray {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .pkg-detail-hero-title,
+[data-theme="dark"] .pkg-detail-section-title,
+[data-theme="dark"] .pkg-detail-card-title,
+[data-theme="dark"] .pkg-detail-reason-title,
+[data-theme="dark"] .pkg-detail-cta-title,
+[data-theme="dark"] .pkg-detail-additional-card-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .pkg-detail-hero-label,
+[data-theme="dark"] .pkg-detail-section-label {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .pkg-detail-hero-desc,
+[data-theme="dark"] .pkg-detail-section-subtitle,
+[data-theme="dark"] .pkg-detail-card-text,
+[data-theme="dark"] .pkg-detail-card-panel-label,
+[data-theme="dark"] .pkg-detail-reason-text,
+[data-theme="dark"] .pkg-detail-cta-text,
+[data-theme="dark"] .pkg-detail-additional-card-text {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .pkg-detail-card-panel-value--dark {
+  color: var(--text-primary) !important;
+}
+[data-theme="dark"] .pkg-detail-card,
+[data-theme="dark"] .pkg-detail-reason-card,
+[data-theme="dark"] .pkg-detail-cta,
+[data-theme="dark"] .pkg-detail-additional-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .pkg-detail-card-panel {
+  background: var(--bg-section-alt) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] .pkg-detail-card-panel-value {
+  color: var(--accent) !important;
+}
+/* Book Appointment page (book-*) */
+[data-theme="dark"] .book-hero,
+[data-theme="dark"] .book-hero-bg,
+[data-theme="dark"] .book-steps {
+  background: var(--bg-page) !important;
+}
+[data-theme="dark"] .book-hero-bg {
+  background: linear-gradient(to bottom right, var(--bg-section-services) 0%, var(--bg-section) 45%, var(--bg-page) 100%) !important;
+}
+[data-theme="dark"] .book-main {
+  background: var(--bg-section-alt) !important;
+}
+[data-theme="dark"] .book-hero-title,
+[data-theme="dark"] .book-step-title,
+[data-theme="dark"] .book-form-title,
+[data-theme="dark"] .book-form-label,
+[data-theme="dark"] .book-side-card-title,
+[data-theme="dark"] .book-side-card-subtitle {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .book-hero-label {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .book-hero-desc,
+[data-theme="dark"] .book-step-desc,
+[data-theme="dark"] .book-side-card-desc {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .book-form-col,
+[data-theme="dark"] .book-side-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .book-form-input,
+[data-theme="dark"] .book-form-select,
+[data-theme="dark"] .book-form-textarea {
+  background: var(--bg-page) !important;
+  border-color: var(--border-input) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="dark"] .book-form-input::placeholder,
+[data-theme="dark"] .book-form-textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .book-form-input:focus,
+[data-theme="dark"] .book-form-select:focus,
+[data-theme="dark"] .book-form-textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(0, 167, 158, 0.2) !important;
+}
+[data-theme="dark"] .book-form-input-icon {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .book-form-error {
+  background: var(--form-error-bg) !important;
+  color: var(--form-error-text) !important;
+}
+[data-theme="dark"] .book-step-icon-wrap {
+  background: rgba(0, 167, 158, 0.15) !important;
+  border-color: var(--accent) !important;
+}
+[data-theme="dark"] .book-step-icon {
+  color: var(--accent) !important;
+}
+[data-theme="dark"] .book-side-whatsapp {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="dark"] .book-side-whatsapp:hover {
+  background: var(--bg-section-alt) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 /* Service Detail page (sd-*) */
 [data-theme="dark"] .sd-page,
@@ -1713,6 +1947,48 @@ h1, h2, h3,
 }
 [data-theme="dark"] .health-calculator__input::placeholder {
   color: var(--text-muted) !important;
+}
+[data-theme="dark"] .health-calculator__card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 2px 16px var(--shadow-card) !important;
+}
+[data-theme="dark"] .health-calculator__card-title {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .health-calculator__card-subtitle {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .health-calculator__result {
+  background: var(--accent-solid) !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .health-calculator__result--bmi {
+  background: var(--bg-section-alt) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] .health-calculator__result-label {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .health-calculator__result-value {
+  color: var(--text-heading) !important;
+}
+[data-theme="dark"] .health-calculator__disclaimer {
+  color: var(--text-muted) !important;
+}
+[data-theme="dark"] .health-calculator__gender-btn {
+  background: var(--bg-card) !important;
+  color: var(--text-muted) !important;
+  border-color: var(--border-input) !important;
+}
+[data-theme="dark"] .health-calculator__gender-btn:hover:not(.health-calculator__gender-btn--active) {
+  background: var(--bg-section-alt) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="dark"] .health-calculator__gender-btn--active {
+  background: var(--accent) !important;
+  color: #fff !important;
 }
 
 /* —— Contact CTA section (stays dark; ensure contrast) —— */

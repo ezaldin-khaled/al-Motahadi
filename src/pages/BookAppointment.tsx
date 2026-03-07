@@ -223,7 +223,7 @@ export default function BookAppointment() {
                     <label className="book-form-label">{t('bookAppointment.formPhone')} <span className="book-form-required">*</span></label>
                     <span className="book-form-input-wrap">
                       <span className="book-form-input-icon" aria-hidden><PhoneInputIcon /></span>
-                      <input type="tel" placeholder={t('bookAppointment.placeholderPhone')} className="book-form-input" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+                      <input type="tel" dir="ltr" placeholder={t('bookAppointment.placeholderPhone')} className="book-form-input" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                     </span>
                   </div>
                   <div className="book-form-group">

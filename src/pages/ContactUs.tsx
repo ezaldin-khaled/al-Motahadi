@@ -186,6 +186,7 @@ export default function ContactUs() {
                   <label className="form-label">{t('contact.phone')}</label>
                   <input
                     type="tel"
+                    dir="ltr"
                     placeholder={t('contact.placeholderPhone')}
                     className="form-input-contact"
                     value={bookingPhone}
@@ -235,7 +236,7 @@ export default function ContactUs() {
                     <span className="booking-reachout-icon" aria-hidden="true">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 5.18 2 2 0 0 1 5.11 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.6 2.5a2 2 0 0 1-.45 2.11L9.1 10.9a16 16 0 0 0 4 4l1.57-1.16a2 2 0 0 1 2.11-.45c.8.28 1.64.48 2.5.6A2 2 0 0 1 22 16.92Z"/></svg>
                     </span>
-                    <div><strong>{t('contact.phoneLabel')}</strong><span>{t('contact.phoneValue')}</span></div>
+                    <div><strong>{t('contact.phoneLabel')}</strong><span dir="ltr">{t('contact.phoneValue')}</span></div>
                   </li>
                   <li>
                     <span className="booking-reachout-icon" aria-hidden="true">

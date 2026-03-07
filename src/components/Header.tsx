@@ -71,7 +71,7 @@ export default function Header() {
   const isRtl = i18n.language === 'ar';
 
   return (
-    <>
+    <div className="nav-sticky-wrapper">
       <div className="top-line" ref={lineRef} aria-hidden="true" style={{ transformOrigin: isRtl ? 'right' : 'left' }} />
       <header className="nav-header">
         <div className="nav-inner">
@@ -159,6 +159,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 }
