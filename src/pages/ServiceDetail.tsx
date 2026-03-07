@@ -103,14 +103,17 @@ export default function ServiceDetail() {
   }
 
   const title = t(`servicesPage.s${serviceId}Title`);
-  const desc = t(`servicesPage.s${serviceId}Desc`);
+  const serviceKeyPrefix = `serviceDetail.s${serviceId}`;
+  const tr = (key: string, fallbackKey: string) => t(key, { defaultValue: t(fallbackKey) });
+
+  const desc = tr(`${serviceKeyPrefix}.heroDesc`, `servicesPage.s${serviceId}Desc`);
   const heroImage = SERVICE_IMAGES[serviceId];
 
   return (
     <div className="page-wrapper">
       <Header />
       <main className="sd-page">
-        {/* Hero: two columns — text left, image right */}
+        {/* Hero: two columns - text left, image right */}
         <section className="sd-hero" aria-label={title}>
           <div className="sd-hero-inner">
             <div className="sd-hero-content">
@@ -132,20 +135,20 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        {/* Restoring Movement, Rebuilding Strength — centered */}
+        {/* Restoring Movement, Rebuilding Strength - centered */}
         <section className="sd-section sd-section-white" aria-labelledby="sd-restoring-title">
           <div className="sd-container sd-container-center">
-            <h2 id="sd-restoring-title" className="sd-section-title">{t('serviceDetail.restoringTitle')}</h2>
-            <p className="sd-section-desc">{t('serviceDetail.restoringP1')}</p>
-            <p className="sd-section-desc">{t('serviceDetail.restoringP2')}</p>
+            <h2 id="sd-restoring-title" className="sd-section-title">{tr(`${serviceKeyPrefix}.restoringTitle`, 'serviceDetail.restoringTitle')}</h2>
+            <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.restoringP1`, 'serviceDetail.restoringP1')}</p>
+            <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.restoringP2`, 'serviceDetail.restoringP2')}</p>
           </div>
         </section>
 
-        {/* Conditions We Treat — 4 cards */}
+        {/* Conditions We Treat - 4 cards */}
         <section className="sd-section sd-section-grey" aria-labelledby="sd-conditions-title">
           <div className="sd-conditions-inner">
-            <h2 id="sd-conditions-title" className="sd-section-title">{t('serviceDetail.conditionsTitle')}</h2>
-            <p className="sd-conditions-intro">{t('serviceDetail.conditionsIntro')}</p>
+            <h2 id="sd-conditions-title" className="sd-section-title">{tr(`${serviceKeyPrefix}.conditionsTitle`, 'serviceDetail.conditionsTitle')}</h2>
+            <p className="sd-conditions-intro">{tr(`${serviceKeyPrefix}.conditionsIntro`, 'serviceDetail.conditionsIntro')}</p>
             <div className="sd-conditions-grid">
               {[1, 2, 3, 4].map((i) => {
                 const IconComponent = CONDITION_ICONS[i - 1];
@@ -154,8 +157,8 @@ export default function ServiceDetail() {
                     <div className="sd-condition-icon" aria-hidden>
                       <IconComponent />
                     </div>
-                    <h3 className="sd-condition-title">{t(`serviceDetail.condition${i}Title`)}</h3>
-                    <p className="sd-condition-desc">{t(`serviceDetail.condition${i}Desc`)}</p>
+                    <h3 className="sd-condition-title">{tr(`${serviceKeyPrefix}.condition${i}Title`, `serviceDetail.condition${i}Title`)}</h3>
+                    <p className="sd-condition-desc">{tr(`${serviceKeyPrefix}.condition${i}Desc`, `serviceDetail.condition${i}Desc`)}</p>
                   </div>
                 );
               })}
@@ -163,47 +166,47 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        {/* Treatment Methodology — two columns */}
+        {/* Treatment Methodology - two columns */}
         <section className="sd-section sd-section-white" aria-labelledby="sd-methodology-title">
           <div className="sd-methodology-inner">
             <div className="sd-methodology-content">
-              <h2 id="sd-methodology-title" className="sd-section-title">{t('serviceDetail.methodologyTitle')}</h2>
-              <p className="sd-section-desc">{t('serviceDetail.methodologyP1')}</p>
-              <p className="sd-section-desc">{t('serviceDetail.methodologyP2')}</p>
+              <h2 id="sd-methodology-title" className="sd-section-title">{tr(`${serviceKeyPrefix}.methodologyTitle`, 'serviceDetail.methodologyTitle')}</h2>
+              <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.methodologyP1`, 'serviceDetail.methodologyP1')}</p>
+              <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.methodologyP2`, 'serviceDetail.methodologyP2')}</p>
             </div>
-            <ul className="sd-treatments-list" aria-label={t('serviceDetail.methodologyTitle')}>
+            <ul className="sd-treatments-list" aria-label={tr(`${serviceKeyPrefix}.methodologyTitle`, 'serviceDetail.methodologyTitle')}>
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <li key={i} className="sd-treatment-item">
                   <span className="sd-treatment-icon" aria-hidden><IconCheck /></span>
-                  <span className="sd-treatment-text">{t(`serviceDetail.treatment${i}`)}</span>
+                  <span className="sd-treatment-text">{tr(`${serviceKeyPrefix}.treatment${i}`, `serviceDetail.treatment${i}`)}</span>
                 </li>
               ))}
             </ul>
           </div>
         </section>
 
-        {/* Patient Benefits & Why Choose Us — two columns */}
+        {/* Patient Benefits & Why Choose Us - two columns */}
         <section className="sd-section sd-section-grey" aria-labelledby="sd-benefits-title">
           <div className="sd-benefits-inner">
             <div className="sd-benefits-list-wrap">
-              <h2 id="sd-benefits-title" className="sd-section-title">{t('serviceDetail.benefitsTitle')}</h2>
+              <h2 id="sd-benefits-title" className="sd-section-title">{tr(`${serviceKeyPrefix}.benefitsTitle`, 'serviceDetail.benefitsTitle')}</h2>
               <ul className="sd-benefits-list">
                 {[1, 2, 3, 4].map((i) => {
                   const IconComponent = BENEFIT_ICONS[i - 1];
                   return (
                     <li key={i} className="sd-benefit-item">
                       <span className="sd-benefit-icon" aria-hidden><IconComponent /></span>
-                      <span className="sd-benefit-text">{t(`serviceDetail.benefit${i}`)}</span>
+                      <span className="sd-benefit-text">{tr(`${serviceKeyPrefix}.benefit${i}`, `serviceDetail.benefit${i}`)}</span>
                     </li>
                   );
                 })}
               </ul>
             </div>
             <div className="sd-why-choose">
-              <h2 className="sd-section-title">{t('serviceDetail.whyChooseTitle')}</h2>
-              <p className="sd-section-desc">{t('serviceDetail.whyChooseP1')}</p>
-              <p className="sd-section-desc">{t('serviceDetail.whyChooseP2')}</p>
-              <p className="sd-section-desc">{t('serviceDetail.whyChooseP3')}</p>
+              <h2 className="sd-section-title">{tr(`${serviceKeyPrefix}.whyChooseTitle`, 'serviceDetail.whyChooseTitle')}</h2>
+              <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.whyChooseP1`, 'serviceDetail.whyChooseP1')}</p>
+              <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.whyChooseP2`, 'serviceDetail.whyChooseP2')}</p>
+              <p className="sd-section-desc">{tr(`${serviceKeyPrefix}.whyChooseP3`, 'serviceDetail.whyChooseP3')}</p>
             </div>
           </div>
         </section>
