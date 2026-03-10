@@ -1,6 +1,6 @@
 # Al Motahadi Rehabilitation Center — Website
 
-A modern marketing website for **Al Motahadi Rehabilitation Center** (Almotahadi Leisure Trust), built with React, TypeScript, and Vite. The site showcases rehabilitation services, the medical team, and provides appointment booking and health tools (BMI calculator).
+A modern marketing website for **Al Motahadi Rehabilitation Center** (Al Motahadi Leisure Trust), built with React, TypeScript, and Vite. The site showcases rehabilitation services, the medical team, and provides appointment booking and health tools (BMI calculator).
 
 ---
 

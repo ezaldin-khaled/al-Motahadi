@@ -52,9 +52,9 @@ type DetailConfig = {
 
 const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
   individual: {
-    heroTitle: 'Individual Treatment Packages at Al-Mutahaddi',
+    heroTitle: 'Individual Treatment Packages at Al Motahadi',
     heroDesc: [
-      'At Al-Mutahaddi Medical Rehabilitation Center, we offer a range of Individual Treatment Packages designed to provide personalized care and rehabilitation to suit each patient\'s unique needs.',
+      'At Al Motahadi Medical Rehabilitation Center, we offer a range of Individual Treatment Packages designed to provide personalized care and rehabilitation to suit each patient\'s unique needs.',
       'These packages are specifically crafted for individuals who require consistent in-center treatment under the direct supervision of our skilled medical team. The treatments are designed to ensure gradual progress with constant monitoring based on your response to therapy, building long-term health and well-being with focused, step-by-step care.',
     ],
     label: 'INDIVIDUAL PROGRAMS',
@@ -109,11 +109,11 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
           'This package is suited for patients who need continuous monitoring and personalized care for recovery from more complex or long-standing conditions. The added free sessions help ensure extended progress and optimal treatment results.',
       },
       {
-        title: 'Al-Mutahaddi',
+        title: 'Al Motahadi',
         subtitle: 'Comprehensive Program',
         sessions: '30 Sessions',
         description:
-          'The Al-Mutahaddi Package is our most comprehensive and extended treatment plan, offering 30 sessions designed for patients requiring intensive and continuous rehabilitation support.',
+          'The Al Motahadi Package is our most comprehensive and extended treatment plan, offering 30 sessions designed for patients requiring intensive and continuous rehabilitation support.',
         meta: 'Session Price: OMR 16,100',
         sessionPrice: '16,100',
         totalPrice: '483,000',
@@ -142,12 +142,12 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
     ],
     ctaTitle: 'Ready to Start Your Rehabilitation Journey?',
     ctaText:
-      'Choose the package that best suits your needs and start your path to recovery with Al-Mutahaddi Medical Rehabilitation Center. Our team of professionals is here to provide you with personalized, expert care every step of the way.',
+      'Choose the package that best suits your needs and start your path to recovery with Al Motahadi Medical Rehabilitation Center. Our team of professionals is here to provide you with personalized, expert care every step of the way.',
   },
   corporate: {
-    heroTitle: 'Corporate Rehabilitation Packages at Al-Mutahaddi',
+    heroTitle: 'Corporate Rehabilitation Packages at Al Motahadi',
     heroDesc: [
-      'At Al-Mutahaddi Medical Rehabilitation Center, we offer specialized Corporate Packages designed to help organizations support the health and well-being of their employees.',
+      'At Al Motahadi Medical Rehabilitation Center, we offer specialized Corporate Packages designed to help organizations support the health and well-being of their employees.',
       'Our tailored rehabilitation and occupational therapy programs are crafted to reduce sick leave, improve physical fitness, and ensure sustainable professional performance within a structured contractual framework.',
     ],
     label: 'CORPORATE SERVICES',
@@ -198,10 +198,10 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
           'With 20 sessions and two free sessions added for further value, this package promotes wellness, reduces employee absenteeism, and supports sustained professional performance.',
       },
       {
-        title: 'Al-Motahadi Corporate',
+        title: 'Al Motahadi Corporate',
         sessions: '30 Sessions',
         description:
-          'The Al-Mutahaddi Corporate Package is our most comprehensive offering, providing 30 sessions for businesses looking to offer extensive rehabilitation services to their employees.',
+          'The Al Motahadi Corporate Package is our most comprehensive offering, providing 30 sessions for businesses looking to offer extensive rehabilitation services to their employees.',
         meta: 'Session Price: OMR 14,950',
         sessionPrice: '14,950',
         totalPrice: '448,500',
@@ -233,9 +233,9 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
       'By investing in your employees\' rehabilitation and wellness, you are investing in the success and productivity of your business. Our Corporate Packages provide a structured, long-term approach to employee care, ensuring sustained performance and a healthier workforce.',
   },
   'community-care': {
-    heroTitle: 'Community Care Program Packages at Al-Mutahaddi',
+    heroTitle: 'Community Care Program Packages at Al Motahadi',
     heroDesc: [
-      'At Al-Mutahaddi Medical Rehabilitation Center, we are deeply committed to providing inclusive and accessible rehabilitation services for specific groups within the community.',
+      'At Al Motahadi Medical Rehabilitation Center, we are deeply committed to providing inclusive and accessible rehabilitation services for specific groups within the community.',
       'Our Community Care Program Packages are designed to support individuals from various walks of life, ensuring they receive the care they need based on their health, social, and financial considerations, while fully maintaining the quality of care and professional standards adopted at the center.',
     ],
     label: 'COMMUNITY CARE',
@@ -323,12 +323,12 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
     ],
     ctaTitle: 'Ready to Begin Your Community Care Journey?',
     ctaText:
-      'At Al-Mutahaddi, we are here to ensure that every individual, regardless of their circumstances, has access to the rehabilitation care they need. Contact us today to learn more about our community-focused programs or to schedule a consultation.',
+      'At Al Motahadi, we are here to ensure that every individual, regardless of their circumstances, has access to the rehabilitation care they need. Contact us today to learn more about our community-focused programs or to schedule a consultation.',
   },
   'home-therapy': {
-    heroTitle: 'Home Therapy Packages at Al-Mutahaddi',
+    heroTitle: 'Home Therapy Packages at Al Motahadi',
     heroDesc: [
-      'At Al-Mutahaddi Medical Rehabilitation Center, we understand that some patients may find it difficult to attend in-center sessions regularly due to mobility issues, distance, or other reasons.',
+      'At Al Motahadi Medical Rehabilitation Center, we understand that some patients may find it difficult to attend in-center sessions regularly due to mobility issues, distance, or other reasons.',
       'That’s why we offer our Home Therapy Packages - a convenient and flexible solution for patients who need professional rehabilitation services at home, with the same high-quality treatment as in our center.',
     ],
     label: 'HOME THERAPY',
@@ -411,12 +411,12 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
     ],
     ctaTitle: 'Ready to Begin Your Home Therapy?',
     ctaText:
-      'At Al-Mutahaddi, we are committed to helping you recover and regain your independence. Choose the package that best suits your needs and let our expert team guide you through every step of your rehabilitation journey.',
+      'At Al Motahadi, we are committed to helping you recover and regain your independence. Choose the package that best suits your needs and let our expert team guide you through every step of your rehabilitation journey.',
   },
   'intensive-home-therapy': {
-    heroTitle: 'Intensive Home Therapy Packages at Al-Mutahaddi',
+    heroTitle: 'Intensive Home Therapy Packages at Al Motahadi',
     heroDesc: [
-      'At Al-Mutahaddi Medical Rehabilitation Center, we understand that certain conditions, such as severe injuries, post-surgical recovery, or neurological disorders, require more focused and extended rehabilitation.',
+      'At Al Motahadi Medical Rehabilitation Center, we understand that certain conditions, such as severe injuries, post-surgical recovery, or neurological disorders, require more focused and extended rehabilitation.',
       'Our Intensive Home Therapy Packages are designed to provide a higher level of therapeutic care, delivered in the comfort of your home, with longer and more intense therapy sessions tailored to advanced recovery needs.',
     ],
     label: 'INTENSIVE CARE',
@@ -499,7 +499,7 @@ const DETAIL_CONFIG: Record<DetailType, DetailConfig> = {
   'comprehensive-home-rehab': {
     heroTitle: 'Comprehensive Home-Based Rehabilitation Program for Three Months',
     heroDesc: [
-      'Thank you for contacting and trusting Al-Mutahaddi Medical Rehabilitation Center. Our comprehensive home-based rehabilitation program is designed to provide you with consistent care and the highest standard of treatment, all from the comfort of your own home.',
+      'Thank you for contacting and trusting Al Motahadi Medical Rehabilitation Center. Our comprehensive home-based rehabilitation program is designed to provide you with consistent care and the highest standard of treatment, all from the comfort of your own home.',
       'Given the nature of conditions such as Parkinson\'s disease with significant motor impairment, we provide structured rehabilitation options over three months to improve mobility, manage symptoms, and enhance quality of life.',
     ],
     label: 'LONG-TERM PROGRAM',

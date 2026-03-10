@@ -27,7 +27,7 @@ export default function Dashboard() {
     <div className="dashboard-page">
       <aside className="dashboard-sidebar">
         <div className="dashboard-sidebar-header">
-          <Link to="/" className="dashboard-logo">AL MOTAHADI</Link>
+          <Link to="/" className="dashboard-logo">Al Motahadi</Link>
           <span className="dashboard-badge">Dashboard</span>
         </div>
         <nav className="dashboard-nav" aria-label="Dashboard navigation">

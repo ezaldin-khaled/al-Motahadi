@@ -10,7 +10,7 @@ Use this doc to find where to edit copy, images, and key content on each page. G
 
 - **File:** `src/components/Header.tsx`
 - **Logo:** `public/SVG.png` (path used: `/SVG.png`)
-- **Logo text:** “AL MOTAHADI” next to the logo
+- **Logo text:** “Al Motahadi” next to the logo
 - **Nav links:** Home, Services, Our Team, About, Contact Us (paths: `/`, `/services`, `/team`, `/about`, `/contact`)
 - **CTA button:** “Book an Appointment →” links to `/contact`
 
@@ -22,7 +22,7 @@ Use this doc to find where to edit copy, images, and key content on each page. G
 - **Services links:** Physical Therapy, Occupational Therapy, Speech Therapy, Pain Management, Post-Surgical Rehab
 - **Contact block:** Address, phone, email
 - **Social:** Facebook, Instagram, Twitter (placeholder `#` links)
-- **Copyright:** “© 2023 AL MOTAHADI. All rights reserved.”
+- **Copyright:** “© 2023 Al Motahadi. All rights reserved.”
 
 ---
 
@@ -33,7 +33,7 @@ Use this doc to find where to edit copy, images, and key content on each page. G
 ### Hero
 
 - **File:** `src/components/Hero.tsx`
-- **Brand line:** “AL MOTAHADI REHABILITATION CENTER”
+- **Brand line:** “Al Motahadi REHABILITATION CENTER”
 - **Headline:** “Restoring Movement.” / “Improving Lives.”
 - **Description paragraph**
 - **Buttons:** “Book an Appointment →”, secondary CTA
@@ -97,7 +97,7 @@ All content is in this one file. Search for section comments:
 - **Who We Are:** “WHO WE ARE” heading, body text, “READ MORE” button
 - **Mission / Vision cards:** Titles and text for “Our Mission” and “Our Vision”
 - **Our Values:** “Our Values” heading, value cards (Care and Compassion, Professionalism, Innovation)
-- **Almotahadi Leisure Trust:** “We Aim To Opening” block, paragraphs, image
+- **Al Motahadi Leisure Trust:** “We Aim To Opening” block, paragraphs, image
 - **About the Founder:** “About the Founder”, founder image, bio paragraphs
 - **Medical Teams:** “Medical Teams” heading, subheading, 3 team images, “READ MORE”
 - **Social Responsibility:** “Our Social Responsibility”, body text, “READ MORE”

@@ -233,7 +233,7 @@ export default function Admin() {
     <div className="admin-page">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-header">
-          <Link to="/" className="admin-logo">AL MOTAHADI</Link>
+          <Link to="/" className="admin-logo">Al Motahadi</Link>
           <span className="admin-badge">Admin</span>
         </div>
         <nav className="admin-nav" aria-label="Admin navigation">
