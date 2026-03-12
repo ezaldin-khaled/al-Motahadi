@@ -8,12 +8,17 @@ if (!isset($config)) {
     $config = require __DIR__ . '/config.php';
 }
 
+$host = $config['db_host'] ?? 'localhost';
+$port = $config['db_port'] ?? null;
 $dsn = sprintf(
     'mysql:host=%s;dbname=%s;charset=%s',
-    $config['db_host'] ?? 'localhost',
+    $host,
     $config['db_name'] ?? '',
     $config['db_charset'] ?? 'utf8mb4'
 );
+if ($port !== null && $port !== '') {
+    $dsn .= ';port=' . (int) $port;
+}
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

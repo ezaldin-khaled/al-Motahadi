@@ -8,7 +8,8 @@ return [
     // =========================================================================
     // Database (MySQL on Hostinger)
     // =========================================================================
-    'db_host' => 'localhost',
+    'db_host' => '127.0.0.1',   // or 127.0.0.1 on same server; no need for port usually
+    'db_port' => null,          // set to 3306 only if your host requires it
     'db_name' => 'YOUR_DATABASE_NAME',
     'db_user' => 'YOUR_DATABASE_USER',
     'db_pass' => 'YOUR_DATABASE_PASSWORD',

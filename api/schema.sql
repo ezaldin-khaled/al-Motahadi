@@ -28,9 +28,9 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Default admin user (password: admin123 — change immediately!)
--- Password hash for 'admin123' using PASSWORD_DEFAULT
+-- Password hash for 'admin123' (PHP password_hash)
 INSERT INTO `users` (`username`, `email`, `password_hash`, `name`, `role`, `is_active`) VALUES
-('admin', 'admin@almotahadi.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', 'admin', 1);
+('admin', 'admin@almotahadi.com', '$2y$12$z5N3ppD5u.saoJP30YswuOTE6PWQQVMwVoBlGaL.Xph.jRvnCrF0e', 'Administrator', 'admin', 1);
 
 -- --------------------------------------------------------------------------
 -- Settings (global site settings as key-value)
@@ -89,7 +89,12 @@ CREATE TABLE `media_files` (
 
 -- --------------------------------------------------------------------------
 -- Pages (page registry for content management)
+-- If running only this section: need to disable FK checks (page_sections references pages).
+-- Better: use Import and run the whole file.
 -- --------------------------------------------------------------------------
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `page_sections`;
 DROP TABLE IF EXISTS `pages`;
 CREATE TABLE `pages` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -141,7 +146,11 @@ CREATE TABLE `page_sections` (
 
 -- --------------------------------------------------------------------------
 -- Blog Posts (metadata for blog entries)
+-- If running only this section: drop child table first (blog_post_translations references blog_posts).
 -- --------------------------------------------------------------------------
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `blog_post_translations`;
 DROP TABLE IF EXISTS `blog_posts`;
 CREATE TABLE `blog_posts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,

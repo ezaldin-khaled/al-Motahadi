@@ -67,15 +67,24 @@ if ($method === 'POST' && $action === '') {
         jsonResponse(['success' => false, 'error' => 'Username and password are required'], 400);
     }
 
-    // Look up user by username or email
-    $stmt = $pdo->prepare('
-        SELECT id, username, name, email, password_hash, role, is_active
-        FROM users
-        WHERE (username = :username OR email = :username)
-        LIMIT 1
-    ');
-    $stmt->execute(['username' => $username]);
-    $user = $stmt->fetch();
+    try {
+        // Look up user by username or email (two params: some PDO drivers need one binding per placeholder)
+        $stmt = $pdo->prepare('
+            SELECT id, username, name, email, password_hash, role, is_active
+            FROM users
+            WHERE (username = :u1 OR email = :u2)
+            LIMIT 1
+        ');
+        $stmt->execute(['u1' => $username, 'u2' => $username]);
+        $user = $stmt->fetch();
+    } catch (PDOException $e) {
+        error_log('Auth login DB error: ' . $e->getMessage());
+        $msg = $e->getMessage();
+        jsonResponse([
+            'success' => false,
+            'error'   => 'Database error: ' . $msg,
+        ], 500);
+    }
 
     if (!$user) {
         jsonResponse(['success' => false, 'error' => 'Invalid credentials'], 401);
@@ -102,9 +111,12 @@ if ($method === 'POST' && $action === '') {
         'role'     => $user['role'],
     ];
 
-    // Update last login timestamp
-    $stmt = $pdo->prepare('UPDATE users SET last_login_at = NOW() WHERE id = :id');
-    $stmt->execute(['id' => $user['id']]);
+    try {
+        $stmt = $pdo->prepare('UPDATE users SET last_login_at = NOW() WHERE id = :id');
+        $stmt->execute(['id' => $user['id']]);
+    } catch (PDOException $e) {
+        // Non-fatal: login still succeeds
+    }
 
     jsonResponse([
         'success' => true,
