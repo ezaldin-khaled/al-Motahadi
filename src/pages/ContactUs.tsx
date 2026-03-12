@@ -5,9 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
-import HealthCalculator from '../components/HealthCalculator';
 import { WhatsAppIcon } from '../components/Icons';
-import { WHATSAPP_URL } from '../constants/cta';
+import { WHATSAPP_URL, GOOGLE_MAPS_EMBED_SRC } from '../constants/cta';
 import { sendContact } from '../lib/api';
 import '../styles/contact.css';
 
@@ -276,7 +275,7 @@ export default function ContactUs() {
             <div className="find-us-map-wrapper">
               <iframe
                 className="find-us-map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.279751644614!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0x45a57d356c4b7b2e!2sSheikh%20Zayed%20Road%2C%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1709654400000"
+                src={GOOGLE_MAPS_EMBED_SRC}
                 title={t('contact.findUs')}
                 allowFullScreen
                 loading="lazy"
@@ -286,10 +285,17 @@ export default function ContactUs() {
           </div>
         </section>
 
-        {/* Health Tools — Figma: HEALTH TOOLS label + Calculate Your Health + BMI/BMR tabs */}
-        <section className="calculate-health" ref={calculatorRef}>
+        {/* Health Tools teaser (links to full tools page) */}
+        <section className="calculate-health calculate-health--teaser" ref={calculatorRef}>
           <div className="calculate-health__container">
-            <HealthCalculator variant="default" />
+            <p className="calculate-health__label">{t('home.healthToolsLabel')}</p>
+            <h2 className="calculate-health__title">{t('home.healthToolsTitle')}</h2>
+            <p className="calculate-health__subheading">
+              {t('home.healthToolsDesc')}
+            </p>
+            <a href="/health-tools" className="calculate-health__cta">
+              {t('home.healthToolsCta')}
+            </a>
           </div>
         </section>
 

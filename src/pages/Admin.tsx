@@ -95,18 +95,18 @@ function ImageUploadField({
           {value ? (
             <img src={value} alt="" className="admin-image-preview-img" />
           ) : (
-            <span className="admin-image-preview-empty">No image</span>
+            <span className="admin-image-preview-empty">{t('admin.fieldNoImage')}</span>
           )}
         </div>
         <div className="admin-image-actions">
           <label className="admin-btn admin-btn--secondary admin-btn--upload">
             <input type="file" accept="image/*" onChange={handleFile} className="admin-input-file" />
-            Upload file
+            {t('admin.fieldUploadFile')}
           </label>
           <input
             type="text"
             className="admin-form-input admin-form-input--sm"
-            placeholder="Or paste image URL"
+            placeholder={t('admin.fieldPasteUrlPlaceholder')}
             value={value}
             onChange={(e) => onChange(e.target.value)}
           />
@@ -233,31 +233,31 @@ export default function Admin() {
     <div className="admin-page">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-header">
-          <Link to="/" className="admin-logo">Al Motahadi</Link>
-          <span className="admin-badge">Admin</span>
+          <Link to="/" className="admin-logo">{t('admin.logo')}</Link>
+          <span className="admin-badge">{t('admin.badge')}</span>
         </div>
         <nav className="admin-nav" aria-label="Admin navigation">
           <div className="admin-nav-section">
-            <span className="admin-nav-section-label">Content</span>
+            <span className="admin-nav-section-label">{t('admin.navContent')}</span>
             <button type="button" className="admin-nav-item admin-nav-item--active" aria-current="page">
               <PostIcon />
-              Blog
+              {t('admin.navBlog')}
             </button>
           </div>
         </nav>
         <div className="admin-sidebar-footer">
           <button type="button" className="admin-logout" onClick={handleLogout}>
-            Log out
+            {t('admin.logout')}
           </button>
-          <Link to="/" className="admin-back">← Back to site</Link>
+          <Link to="/" className="admin-back">{t('admin.backToSite')}</Link>
         </div>
       </aside>
 
       <main className="admin-main">
         <header className="admin-header">
           <div>
-            <h1 className="admin-title">Blog management</h1>
-            <p className="admin-subtitle">Create, edit, and manage your blog posts</p>
+            <h1 className="admin-title">{t('admin.title')}</h1>
+            <p className="admin-subtitle">{t('admin.subtitle')}</p>
           </div>
         </header>
 
@@ -266,18 +266,18 @@ export default function Admin() {
             <span className="admin-stat-icon" aria-hidden><PostIcon /></span>
             <div>
               <span className="admin-stat-value">{posts.length}</span>
-              <span className="admin-stat-label">Total posts</span>
+              <span className="admin-stat-label">{t('admin.statTotal')}</span>
             </div>
           </div>
           <div className="admin-stat-card">
             <span className="admin-stat-icon" aria-hidden><ChartIcon /></span>
             <div>
               <span className="admin-stat-value">{featuredCount}</span>
-              <span className="admin-stat-label">Featured</span>
+              <span className="admin-stat-label">{t('admin.statFeatured')}</span>
             </div>
           </div>
           <div className="admin-stat-card admin-stat-card--wide">
-            <span className="admin-stat-label" style={{ marginBottom: 6 }}>By category</span>
+            <span className="admin-stat-label" style={{ marginBottom: 6 }}>{t('admin.statByCategory')}</span>
             <div className="admin-stat-categories">
               {CATEGORY_OPTIONS.map((cat) => (
                 <span key={cat} className="admin-stat-cat">
@@ -291,10 +291,11 @@ export default function Admin() {
         <section className="admin-content">
           <div className="admin-toolbar">
             <p className="admin-hint">
-              Posts are loaded from <code>src/data/blogPosts.ts</code>. Connect a backend API to persist changes.
+              {t('admin.postsHint')}{' '}
+              <code>src/data/blogPosts.ts</code>.
             </p>
             <button type="button" className="admin-btn admin-btn--primary" onClick={openAdd}>
-              + New post
+              {t('admin.newPost')}
             </button>
           </div>
 
@@ -302,18 +303,21 @@ export default function Admin() {
             {posts.length === 0 ? (
               <div className="admin-empty">
                 <PostIcon />
-                <p>No blog posts yet.</p>
-                <p className="admin-empty-hint">Add posts in <code>src/data/blogPosts.ts</code> or connect an API.</p>
+                <p>{t('admin.emptyTitle')}</p>
+                <p className="admin-empty-hint">
+                  {t('admin.emptyHint')}{' '}
+                  <code>src/data/blogPosts.ts</code>
+                </p>
               </div>
             ) : (
-              <table className="admin-table" aria-label="Blog posts">
+              <table className="admin-table" aria-label={t('admin.tableAria')}>
                 <thead>
                   <tr>
-                    <th>Post</th>
-                    <th>Category</th>
-                    <th>Date</th>
-                    <th>Read</th>
-                    <th>Featured</th>
+                    <th>{t('admin.colPost')}</th>
+                    <th>{t('admin.colCategory')}</th>
+                    <th>{t('admin.colDate')}</th>
+                    <th>{t('admin.colRead')}</th>
+                    <th>{t('admin.colFeatured')}</th>
                     <th aria-label="Actions" />
                   </tr>
                 </thead>
@@ -348,16 +352,16 @@ export default function Admin() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="admin-btn admin-btn--icon"
-                            title="View on site"
-                            aria-label={`View ${post.titleOverride ?? t(post.titleKey)} on site`}
+                            title={t('admin.viewOnSite')}
+                            aria-label={t('admin.viewOnSite')}
                           >
                             <ExternalIcon />
                           </a>
                           <button
                             type="button"
                             className="admin-btn admin-btn--icon"
-                            title="Edit"
-                            aria-label={`Edit ${post.titleOverride ?? t(post.titleKey)}`}
+                            title={t('admin.edit')}
+                            aria-label={t('admin.edit')}
                             onClick={() => openEdit(post)}
                           >
                             <PencilIcon />
@@ -365,8 +369,8 @@ export default function Admin() {
                           <button
                             type="button"
                             className="admin-btn admin-btn--icon admin-btn--danger"
-                            title="Delete"
-                            aria-label={`Delete ${post.titleOverride ?? t(post.titleKey)}`}
+                            title={t('admin.delete')}
+                            aria-label={t('admin.delete')}
                             onClick={() => confirmDelete(post)}
                           >
                             <TrashIcon />
@@ -387,34 +391,34 @@ export default function Admin() {
         <div className="admin-modal-backdrop" onClick={closeEdit} role="presentation">
           <div className="admin-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
             <div className="admin-modal-header">
-              <h2 id="admin-modal-title">Edit post</h2>
-              <button type="button" className="admin-modal-close" onClick={closeEdit} aria-label="Close">×</button>
+              <h2 id="admin-modal-title">{t('admin.editTitle')}</h2>
+              <button type="button" className="admin-modal-close" onClick={closeEdit} aria-label={t('admin.cancel')}>×</button>
             </div>
             <div className="admin-modal-body">
-              <p className="admin-modal-hint">Body content is managed via i18n keys. Use name and description below to override the title and excerpt shown on the site.</p>
+              <p className="admin-modal-hint">{t('admin.editHint')}</p>
               <div className="admin-form">
                 <label className="admin-form-label">
-                  Name (title)
+                  {t('admin.fieldName')}
                   <input
                     type="text"
                     className="admin-form-input"
-                    placeholder="Post title"
+                    placeholder={t('admin.fieldTitlePlaceholder')}
                     value={editForm.titleOverride ?? ''}
                     onChange={(e) => setEditForm((f) => f && { ...f, titleOverride: e.target.value })}
                   />
                 </label>
                 <label className="admin-form-label">
-                  Description (excerpt)
+                  {t('admin.fieldDescription')}
                   <textarea
                     className="admin-form-input admin-form-input--textarea"
-                    placeholder="Short description or excerpt"
+                    placeholder={t('admin.fieldExcerptPlaceholder')}
                     rows={3}
                     value={editForm.excerptOverride ?? ''}
                     onChange={(e) => setEditForm((f) => f && { ...f, excerptOverride: e.target.value })}
                   />
                 </label>
                 <label className="admin-form-label">
-                  Slug
+                  {t('admin.fieldSlug')}
                   <input
                     type="text"
                     className="admin-form-input"
@@ -423,7 +427,7 @@ export default function Admin() {
                   />
                 </label>
                 <label className="admin-form-label">
-                  Category
+                  {t('admin.fieldCategory')}
                   <select
                     className="admin-form-input"
                     value={editForm.category}
@@ -435,7 +439,7 @@ export default function Admin() {
                   </select>
                 </label>
                 <label className="admin-form-label">
-                  Date
+                  {t('admin.fieldDate')}
                   <input
                     type="date"
                     className="admin-form-input"
@@ -444,7 +448,7 @@ export default function Admin() {
                   />
                 </label>
                 <label className="admin-form-label">
-                  Read time (min)
+                  {t('admin.fieldReadTime')}
                   <input
                     type="number"
                     min={1}
@@ -455,14 +459,14 @@ export default function Admin() {
                   />
                 </label>
                 <ImageUploadField
-                  label="Small image (card / thumbnail)"
-                  hint="Shown in blog listing and cards."
+                  label={t('admin.fieldSmallImage')}
+                  hint={t('admin.fieldSmallImageHint')}
                   value={editForm.image}
                   onChange={(url) => setEditForm((f) => f && { ...f, image: url })}
                 />
                 <ImageUploadField
-                  label="Main image (article hero)"
-                  hint="Large image at the top of the article."
+                  label={t('admin.fieldMainImage')}
+                  hint={t('admin.fieldMainImageHint')}
                   value={editForm.imageLarge ?? editForm.image}
                   onChange={(url) => setEditForm((f) => f && { ...f, imageLarge: url })}
                 />
@@ -472,13 +476,13 @@ export default function Admin() {
                     checked={editForm.featured}
                     onChange={(e) => setEditForm((f) => f && { ...f, featured: e.target.checked })}
                   />
-                  <span>Featured</span>
+                  <span>{t('admin.fieldFeatured')}</span>
                 </label>
               </div>
             </div>
             <div className="admin-modal-footer">
-              <button type="button" className="admin-btn admin-btn--secondary" onClick={closeEdit}>Cancel</button>
-              <button type="button" className="admin-btn admin-btn--primary" onClick={saveEdit}>Save changes</button>
+              <button type="button" className="admin-btn admin-btn--secondary" onClick={closeEdit}>{t('admin.cancel')}</button>
+              <button type="button" className="admin-btn admin-btn--primary" onClick={saveEdit}>{t('admin.saveChanges')}</button>
             </div>
           </div>
         </div>
@@ -489,44 +493,44 @@ export default function Admin() {
         <div className="admin-modal-backdrop" onClick={closeAdd} role="presentation">
           <div className="admin-modal admin-modal--wide" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="admin-add-title">
             <div className="admin-modal-header">
-              <h2 id="admin-add-title">New post</h2>
-              <button type="button" className="admin-modal-close" onClick={closeAdd} aria-label="Close">×</button>
+              <h2 id="admin-add-title">{t('admin.addTitle')}</h2>
+              <button type="button" className="admin-modal-close" onClick={closeAdd} aria-label={t('admin.cancel')}>×</button>
             </div>
             <div className="admin-modal-body">
-              <p className="admin-modal-hint">Body uses a placeholder key. Set name and description here; you can also edit locale keys (e.g. blog.postNewTitle) later.</p>
+              <p className="admin-modal-hint">{t('admin.addHint')}</p>
               <div className="admin-form">
                 <label className="admin-form-label">
-                  Name (title)
+                  {t('admin.fieldName')}
                   <input
                     type="text"
                     className="admin-form-input"
-                    placeholder="Post title"
+                    placeholder={t('admin.fieldTitlePlaceholder')}
                     value={addForm.titleOverride ?? ''}
                     onChange={(e) => setAddForm((f) => f && { ...f, titleOverride: e.target.value })}
                   />
                 </label>
                 <label className="admin-form-label">
-                  Description (excerpt)
+                  {t('admin.fieldDescription')}
                   <textarea
                     className="admin-form-input admin-form-input--textarea"
-                    placeholder="Short description or excerpt"
+                    placeholder={t('admin.fieldExcerptPlaceholder')}
                     rows={3}
                     value={addForm.excerptOverride ?? ''}
                     onChange={(e) => setAddForm((f) => f && { ...f, excerptOverride: e.target.value })}
                   />
                 </label>
                 <label className="admin-form-label">
-                  Slug
+                  {t('admin.fieldSlug')}
                   <input
                     type="text"
                     className="admin-form-input"
-                    placeholder="my-new-post"
+                    placeholder={t('admin.fieldSlugPlaceholder')}
                     value={addForm.slug}
                     onChange={(e) => setAddForm((f) => f && { ...f, slug: e.target.value })}
                   />
                 </label>
                 <label className="admin-form-label">
-                  Category
+                  {t('admin.fieldCategory')}
                   <select
                     className="admin-form-input"
                     value={addForm.category}
@@ -538,7 +542,7 @@ export default function Admin() {
                   </select>
                 </label>
                 <label className="admin-form-label">
-                  Date
+                  {t('admin.fieldDate')}
                   <input
                     type="date"
                     className="admin-form-input"
@@ -547,7 +551,7 @@ export default function Admin() {
                   />
                 </label>
                 <label className="admin-form-label">
-                  Read time (min)
+                  {t('admin.fieldReadTime')}
                   <input
                     type="number"
                     min={1}
@@ -558,14 +562,14 @@ export default function Admin() {
                   />
                 </label>
                 <ImageUploadField
-                  label="Small image (card / thumbnail)"
-                  hint="Shown in blog listing and cards."
+                  label={t('admin.fieldSmallImage')}
+                  hint={t('admin.fieldSmallImageHint')}
                   value={addForm.image}
                   onChange={(url) => setAddForm((f) => f && { ...f, image: url })}
                 />
                 <ImageUploadField
-                  label="Main image (article hero)"
-                  hint="Large image at the top of the article."
+                  label={t('admin.fieldMainImage')}
+                  hint={t('admin.fieldMainImageHint')}
                   value={addForm.imageLarge ?? addForm.image}
                   onChange={(url) => setAddForm((f) => f && { ...f, imageLarge: url })}
                 />
@@ -575,14 +579,14 @@ export default function Admin() {
                     checked={addForm.featured}
                     onChange={(e) => setAddForm((f) => f && { ...f, featured: e.target.checked })}
                   />
-                  <span>Featured</span>
+                  <span>{t('admin.fieldFeatured')}</span>
                 </label>
               </div>
             </div>
             <div className="admin-modal-footer">
-              <button type="button" className="admin-btn admin-btn--secondary" onClick={closeAdd}>Cancel</button>
+              <button type="button" className="admin-btn admin-btn--secondary" onClick={closeAdd}>{t('admin.cancel')}</button>
               <button type="button" className="admin-btn admin-btn--primary" onClick={saveNew} disabled={!addForm.slug.trim()}>
-                Create post
+                {t('admin.createPost')}
               </button>
             </div>
           </div>
@@ -594,15 +598,15 @@ export default function Admin() {
         <div className="admin-modal-backdrop" onClick={cancelDelete} role="presentation">
           <div className="admin-modal admin-modal--sm" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="admin-delete-title">
             <div className="admin-modal-header">
-              <h2 id="admin-delete-title">Delete post?</h2>
-              <button type="button" className="admin-modal-close" onClick={cancelDelete} aria-label="Close">×</button>
+              <h2 id="admin-delete-title">{t('admin.deleteTitle')}</h2>
+              <button type="button" className="admin-modal-close" onClick={cancelDelete} aria-label={t('admin.cancel')}>×</button>
             </div>
             <div className="admin-modal-body">
-              <p>This will remove &quot;{deleteConfirm.titleOverride ?? t(deleteConfirm.titleKey)}&quot; from the list. This action cannot be undone (reload the page to restore from source).</p>
+              <p>{t('admin.deleteBody', { title: deleteConfirm.titleOverride ?? t(deleteConfirm.titleKey) })}</p>
             </div>
             <div className="admin-modal-footer">
-              <button type="button" className="admin-btn admin-btn--secondary" onClick={cancelDelete}>Cancel</button>
-              <button type="button" className="admin-btn admin-btn--danger" onClick={doDelete}>Delete</button>
+              <button type="button" className="admin-btn admin-btn--secondary" onClick={cancelDelete}>{t('admin.cancel')}</button>
+              <button type="button" className="admin-btn admin-btn--danger" onClick={doDelete}>{t('admin.delete')}</button>
             </div>
           </div>
         </div>

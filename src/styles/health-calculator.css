@@ -27,6 +27,44 @@
   margin: 0 auto 32px;
 }
 
+/* Teaser variant: description + CTA (no calculator) */
+.calculate-health--teaser .calculate-health__container {
+  max-width: 560px;
+}
+.calculate-health--teaser .calculate-health__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #009688;
+  margin: 0 0 8px;
+}
+.calculate-health--teaser .calculate-health__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+.calculate-health--teaser .calculate-health__subheading {
+  margin-bottom: 24px;
+}
+.calculate-health__cta {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #009688;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.calculate-health__cta:hover {
+  background: #00796b;
+  color: #fff;
+}
+
 @media (max-width: 1200px) {
   .calculate-health__container {
     padding: 0 64px;

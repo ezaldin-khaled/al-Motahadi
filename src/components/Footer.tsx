@@ -95,23 +95,36 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-links">
-          <h4 className="footer-heading">{t('footer.servicesHeading')}</h4>
-          <Link to="/services">{t('footer.physiotherapy')}</Link>
-          <Link to="/services">{t('footer.neuroRehab')}</Link>
-          <Link to="/services">{t('footer.sportsInjury')}</Link>
-          <Link to="/services">{t('footer.painManagement')}</Link>
+          <h4 className="footer-heading">{t('footer.quickLinks')}</h4>
+          <div className="footer-links-columns">
+            <div className="footer-links-column">
+              <p className="footer-links-label">{t('footer.mainPages')}</p>
+              <Link to="/">{t('nav.home')}</Link>
+              <Link to="/about">{t('footer.aboutUs')}</Link>
+              <Link to="/who-we-are">{t('footer.whoWeAre')}</Link>
+              <Link to="/team">{t('nav.ourTeam')}</Link>
+              <Link to="/social-responsibility">{t('footer.ourSocialResponsibility')}</Link>
+              <Link to="/research-network">{t('whoWeAre.protocolsTitle')}</Link>
+              <Link to="/services">{t('nav.services')}</Link>
+              <Link to="/health-tools">{t('nav.healthTools')}</Link>
+              <Link to="/packages">{t('footer.packagesPricing')}</Link>
+              <Link to="/blog">{t('footer.blog')}</Link>
+              <Link to="/contact">{t('footer.contact')}</Link>
+              <Link to="/book-appointment">{t('nav.bookAppointment')}</Link>
+            </div>
+            <div className="footer-links-column">
+              <p className="footer-links-label footer-links-label-sub">{t('footer.subPages')}</p>
+              <Link to="/packages/individual">{t('packages.individualPackages')}</Link>
+              <Link to="/packages/corporate">{t('packages.corporatePackages')}</Link>
+              <Link to="/packages/community-care">{t('packages.ehataPackages')}</Link>
+              <Link to="/packages/home-therapy">{t('packages.homeTherapySectionTitle')}</Link>
+              <Link to="/packages/intensive-home-therapy">{t('packages.intensiveHomeTherapySectionTitle')}</Link>
+              <Link to="/packages/comprehensive-home-rehab">{t('packages.comprehensiveHomeRehabSectionTitle')}</Link>
+              <Link to="/home-therapy">{t('footer.homeTherapyService')}</Link>
+              <Link to="/transportation">{t('footer.transportationService')}</Link>
+            </div>
+          </div>
         </div>
-        <div className="footer-links">
-          <h4 className="footer-heading">{t('footer.companyHeading')}</h4>
-          <Link to="/about">{t('footer.aboutUs')}</Link>
-          <Link to="/social-responsibility">{t('footer.ourSocialResponsibility')}</Link>
-          <Link to="/who-we-are">{t('footer.whoWeAre')}</Link>
-          <Link to="/blog">{t('footer.blog')}</Link>
-          <Link to="/packages">{t('footer.packagesPricing')}</Link>
-          <Link to="/about">{t('footer.ourProcess')}</Link>
-          <Link to="/contact">{t('footer.contact')}</Link>
-        </div>
-        <div className="footer-links footer-links-empty" aria-hidden />
       </div>
       <div className="footer-bottom">
         <p className="footer-copyright">{t('footer.copyright')}</p>

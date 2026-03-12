@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
-import HealthCalculator from '../components/HealthCalculator';
 import '../styles/about.css';
 
 export default function AboutUs() {
@@ -204,10 +203,17 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* Calculate Your Health — Figma: GET STARTED label + Calculate Your Health */}
-        <section className="calculate-health">
+        {/* Health Tools teaser (links to full tools page) */}
+        <section className="calculate-health calculate-health--teaser">
           <div className="calculate-health__container">
-            <HealthCalculator variant="default" />
+            <p className="calculate-health__label">{t('home.healthToolsLabel')}</p>
+            <h2 className="calculate-health__title">{t('home.healthToolsTitle')}</h2>
+            <p className="calculate-health__subheading">
+              {t('home.healthToolsDesc')}
+            </p>
+            <Link to="/health-tools" className="calculate-health__cta">
+              {t('home.healthToolsCta')}
+            </Link>
           </div>
         </section>
 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/dashboard.css';
 
 export default function DashboardLogin() {
+  const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,7 +20,7 @@ export default function DashboardLogin() {
     e.preventDefault();
     setError('');
     if (!username.trim() || !password) {
-      setError('Please enter username and password.');
+      setError(t('dashboardLogin.errorMissing'));
       return;
     }
     setSubmitting(true);
@@ -27,7 +29,7 @@ export default function DashboardLogin() {
     if (result.success) {
       navigate(from, { replace: true });
     } else {
-      setError(result.error ?? 'Invalid credentials.');
+      setError(result.error ?? t('dashboardLogin.errorInvalid'));
     }
   }
 
@@ -35,8 +37,8 @@ export default function DashboardLogin() {
     <div className="dashboard-login-page">
       <div className="dashboard-login-card">
         <div className="dashboard-login-header">
-          <h1 className="dashboard-login-title">Dashboard</h1>
-          <p className="dashboard-login-subtitle">Sign in with your username and password.</p>
+          <h1 className="dashboard-login-title">{t('dashboardLogin.title')}</h1>
+          <p className="dashboard-login-subtitle">{t('dashboardLogin.subtitle')}</p>
         </div>
         <form onSubmit={handleSubmit} className="dashboard-login-form">
           {error && (
@@ -45,7 +47,7 @@ export default function DashboardLogin() {
             </div>
           )}
           <label className="dashboard-login-label">
-            Username
+            {t('dashboardLogin.username')}
             <input
               type="text"
               className="dashboard-login-input"
@@ -57,7 +59,7 @@ export default function DashboardLogin() {
             />
           </label>
           <label className="dashboard-login-label">
-            Password
+            {t('dashboardLogin.password')}
             <input
               type="password"
               className="dashboard-login-input"
@@ -68,11 +70,11 @@ export default function DashboardLogin() {
             />
           </label>
           <button type="submit" className="dashboard-btn dashboard-btn--primary dashboard-login-submit" disabled={submitting}>
-            {submitting ? 'Signing in…' : 'Sign in'}
+            {submitting ? t('dashboardLogin.signingIn') : t('dashboardLogin.signIn')}
           </button>
         </form>
         <p className="dashboard-login-footer">
-          <Link to="/" className="dashboard-login-back">← Back to site</Link>
+          <Link to="/" className="dashboard-login-back">{t('dashboardLogin.backToSite')}</Link>
         </p>
       </div>
     </div>

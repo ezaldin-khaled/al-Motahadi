@@ -148,7 +148,13 @@ export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
               <div className="cta-info-card-body">
                 <h3 className="cta-info-card-title">{card.title}</h3>
                 {card.lines.map((line, lineIdx) => (
-                  <p key={line} className="cta-info-card-line" dir={card.title === t('cta.contactUs') && lineIdx === 0 ? 'ltr' : undefined}>{line}</p>
+                  <p
+                    key={line}
+                    className="cta-info-card-line"
+                    dir={card.title === t('cta.contactUs') && lineIdx === 0 ? 'ltr' : undefined}
+                  >
+                    {line}
+                  </p>
                 ))}
               </div>
             </div>
