@@ -78,6 +78,7 @@ function ImageUploadField({
   onChange: (url: string) => void;
   hint?: string;
 }) {
+  const { t } = useTranslation();
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !file.type.startsWith('image/')) return;

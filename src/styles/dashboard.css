@@ -410,3 +410,241 @@
 .dashboard-login-back:hover {
   color: var(--accent);
 }
+
+/* ===== ADDITIONAL DASHBOARD STYLES ===== */
+
+.dashboard-nav-icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.dashboard-user-info {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dashboard-user-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 2px;
+}
+
+.dashboard-user-role {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.dashboard-loading,
+.dashboard-error,
+.dashboard-empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.dashboard-error {
+  color: var(--form-error-text);
+  background: var(--form-error-bg);
+  border-radius: 8px;
+}
+
+.dashboard-info-box {
+  background: var(--bg-section-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.dashboard-info-box p {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.dashboard-info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.dashboard-info-box ul {
+  margin: 0 0 12px 0;
+  padding-left: 20px;
+}
+
+.dashboard-info-box li {
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.8;
+}
+
+.dashboard-info-box code {
+  font-size: 13px;
+  padding: 2px 6px;
+  background: var(--bg-card);
+  border-radius: 4px;
+  color: var(--text-primary);
+}
+
+.dashboard-status {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.dashboard-status--published {
+  background: rgba(0, 167, 158, 0.15);
+  color: var(--accent-solid);
+}
+
+.dashboard-status--draft {
+  background: rgba(200, 200, 200, 0.2);
+  color: var(--text-muted);
+}
+
+.dashboard-btn--sm {
+  min-height: 32px;
+  padding: 6px 12px;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.dashboard-btn--sm:last-child {
+  margin-right: 0;
+}
+
+.dashboard-btn--danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.dashboard-btn--danger:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.dashboard-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-media-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.dashboard-media-item:hover {
+  box-shadow: 0 4px 16px var(--shadow-card);
+}
+
+.dashboard-media-thumb {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.dashboard-media-info {
+  padding: 12px;
+}
+
+.dashboard-media-name {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+.dashboard-media-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.dashboard-form {
+  max-width: 600px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.dashboard-form-group {
+  margin-bottom: 20px;
+}
+
+.dashboard-form-group:last-of-type {
+  margin-bottom: 24px;
+}
+
+.dashboard-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.dashboard-form-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, background-color 0.25s ease;
+}
+
+.dashboard-form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 167, 158, 0.15);
+}
+
+.dashboard-form-actions {
+  padding-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-nav-icon {
+    margin-right: 0;
+  }
+
+  .dashboard-nav-item {
+    padding: 10px 12px;
+    font-size: 0;
+  }
+
+  .dashboard-nav-icon {
+    font-size: 18px;
+  }
+
+  .dashboard-user-info {
+    display: none;
+  }
+
+  .dashboard-media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .dashboard-form {
+    padding: 20px 16px;
+  }
+}
