@@ -283,6 +283,140 @@ export async function deleteMedia(id: number): Promise<{ success: boolean; error
 }
 
 // =========================================================================
+// Pages / Sections API
+// =========================================================================
+
+export type CmsPage = {
+  id: number;
+  slug: string;
+  name: string;
+  is_active: boolean;
+  sort_order: number;
+};
+
+export type CmsPageSection = {
+  id: number;
+  page_id: number;
+  section_key: string;
+  lang: string;
+  content_type: 'text' | 'html' | 'json';
+  content: string | null;
+  meta_title?: string | null;
+  meta_description?: string | null;
+  meta_keywords?: string | null;
+};
+
+export async function getPages(): Promise<{ success: boolean; pages?: CmsPage[]; error?: string }> {
+  try {
+    const res = await fetch(`${API_BASE}/api/pages.php`, { credentials: 'include' });
+    return (await res.json()) as { success: boolean; pages?: CmsPage[]; error?: string };
+  } catch {
+    return { success: false, error: 'Failed to fetch pages.' };
+  }
+}
+
+export async function getPageSections(pageId: number, lang?: string): Promise<{ success: boolean; sections?: Record<string, Record<string, CmsPageSection>> | CmsPageSection[]; error?: string }> {
+  try {
+    const params = new URLSearchParams();
+    params.set('page_id', String(pageId));
+    if (lang) params.set('lang', lang);
+    const res = await fetch(`${API_BASE}/api/pages.php?${params.toString()}`, { credentials: 'include' });
+    return (await res.json()) as { success: boolean; sections?: Record<string, Record<string, CmsPageSection>> | CmsPageSection[]; error?: string };
+  } catch {
+    return { success: false, error: 'Failed to fetch sections.' };
+  }
+}
+
+export type SavePageSectionPayload = {
+  page_id: number;
+  section_key: string;
+  lang: string;
+  content_type?: 'text' | 'html' | 'json';
+  content: string | Record<string, unknown> | null;
+  meta_title?: string | null;
+  meta_description?: string | null;
+  meta_keywords?: string | null;
+};
+
+export async function savePageSection(payload: SavePageSectionPayload): Promise<{ success: boolean; section?: CmsPageSection; error?: string }> {
+  try {
+    const res = await fetch(`${API_BASE}/api/pages.php`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(payload),
+    });
+    return (await res.json()) as { success: boolean; section?: CmsPageSection; error?: string };
+  } catch {
+    return { success: false, error: 'Failed to save section.' };
+  }
+}
+
+export async function deletePageSection(id: number): Promise<{ success: boolean; error?: string }> {
+  try {
+    const res = await fetch(`${API_BASE}/api/pages.php?id=${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+    return await res.json();
+  } catch {
+    return { success: false, error: 'Failed to delete section.' };
+  }
+}
+
+// =========================================================================
+// Redirects API
+// =========================================================================
+
+export type RedirectRule = {
+  id: number;
+  source_path: string;
+  destination_url: string;
+  status_code: number;
+  is_active: boolean;
+  hit_count: number;
+};
+
+export async function getRedirects(activeOnly?: boolean): Promise<{ success: boolean; redirects?: RedirectRule[]; error?: string }> {
+  try {
+    const params = new URLSearchParams();
+    if (typeof activeOnly === 'boolean') params.set('active', activeOnly ? '1' : '0');
+    const url = `${API_BASE}/api/redirects.php${params.toString() ? `?${params.toString()}` : ''}`;
+    const res = await fetch(url, { credentials: 'include' });
+    return (await res.json()) as { success: boolean; redirects?: RedirectRule[]; error?: string };
+  } catch {
+    return { success: false, error: 'Failed to fetch redirects.' };
+  }
+}
+
+export async function saveRedirect(rule: Partial<RedirectRule>): Promise<{ success: boolean; redirect?: RedirectRule; error?: string }> {
+  try {
+    const method = rule.id ? 'PUT' : 'POST';
+    const res = await fetch(`${API_BASE}/api/redirects.php`, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(rule),
+    });
+    return await res.json();
+  } catch {
+    return { success: false, error: 'Failed to save redirect.' };
+  }
+}
+
+export async function deleteRedirect(id: number): Promise<{ success: boolean; error?: string }> {
+  try {
+    const res = await fetch(`${API_BASE}/api/redirects.php?id=${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+    return await res.json();
+  } catch {
+    return { success: false, error: 'Failed to delete redirect.' };
+  }
+}
+
+// =========================================================================
 // Users API (admin only)
 // =========================================================================
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
@@ -7,12 +7,11 @@ import Footer from '../components/Footer';
 import { WhatsAppIcon } from '../components/Icons';
 import { BOOK_APPOINTMENT_PATH, WHATSAPP_URL } from '../constants/cta';
 import {
-  BLOG_POSTS,
   BLOG_FILTER_TABS,
   CATEGORY_FILTER_LABELS,
-  type BlogPost,
   type BlogFilterId,
 } from '../data/blogPosts';
+import { getBlogPosts, type BlogPostData } from '../lib/api';
 import '../styles/blog.css';
 
 function SearchIcon() {
@@ -95,18 +94,18 @@ const FILTER_ICONS: Record<BlogFilterId, React.ReactNode> = {
   news: <NewsIcon />,
 };
 
-function BlogCard({ post }: { post: BlogPost }) {
+function BlogCard({ post }: { post: BlogPostData }) {
   const { t } = useTranslation();
-  const filterLabelKey = CATEGORY_FILTER_LABELS[post.category];
-  const authorName = t(post.authorKey);
-  const title = post.titleOverride ?? t(post.titleKey);
-  const excerpt = post.excerptOverride ?? t(post.excerptKey);
+  const filterLabelKey = CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news;
+  const authorName = post.author_name || t('blog.defaultAuthor');
+  const title = post.title_en;
+  const excerpt = post.excerpt_en;
 
   return (
     <article id={`post-${post.slug}`} className="blog-card">
       <div className="blog-card-inner">
         <div className="blog-card-image-wrap">
-          <img src={post.image} alt="" className="blog-card-image" loading="lazy" />
+          <img src={post.image} alt={post.title_en} className="blog-card-image" loading="lazy" />
           <span className="blog-card-category-tag">{t(filterLabelKey)}</span>
         </div>
         <div className="blog-card-body">
@@ -117,7 +116,7 @@ function BlogCard({ post }: { post: BlogPost }) {
             <span className="blog-card-sep">·</span>
             <span className="blog-card-meta-read">
               <span className="blog-card-clock" aria-hidden><ClockIcon /></span>
-              {post.readTime} {t('blog.minRead')}
+              {post.read_time} {t('blog.minRead')}
             </span>
           </div>
           <h2 className="blog-card-title">{title}</h2>
@@ -137,26 +136,72 @@ export default function Blog() {
   const { t, i18n } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<BlogFilterId>('all');
+  const [posts, setPosts] = useState<BlogPostData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const loadPosts = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    const res = await getBlogPosts({ status: 'published' });
+    if (res.success && 'posts' in res) {
+      setPosts(res.posts);
+    } else if (!res.success && 'error' in res) {
+      setError(res.error || 'Failed to load posts');
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    loadPosts();
+  }, [loadPosts]);
+
   const filteredPosts = useMemo(() => {
-    let list = filter === 'all' ? BLOG_POSTS : BLOG_POSTS.filter((p) => p.category === filter);
+    let list =
+      filter === 'all'
+        ? posts
+        : posts.filter((p) => p.category === filter);
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       list = list.filter((post) => {
-        const title = (post.titleOverride ?? t(post.titleKey)).toLowerCase();
-        const categoryLabel = t(CATEGORY_FILTER_LABELS[post.category]).toLowerCase();
-        const excerpt = (post.excerptOverride ?? t(post.excerptKey)).toLowerCase();
-        const author = t(post.authorKey).toLowerCase();
+        const title = (post.title_en || post.slug).toLowerCase();
+        const categoryLabel = t(CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news).toLowerCase();
+        const excerpt = (post.excerpt_en || '').toLowerCase();
+        const author = (post.author_name || '').toLowerCase();
         return title.includes(q) || categoryLabel.includes(q) || excerpt.includes(q) || author.includes(q);
       });
     }
     return list;
   // eslint-disable-next-line react-hooks/exhaustive-deps -- i18n.language needed so filtered list recomputes when language changes
   }, [filter, searchQuery, t, i18n.language]);
+
+  if (loading) {
+    return (
+      <div className="page-wrapper">
+        <Header />
+        <main className="blog-page">
+          <p className="blog-empty">{t('blog.loading', 'Loading posts...')}</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="page-wrapper">
+        <Header />
+        <main className="blog-page">
+          <p className="blog-empty">{error}</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="page-wrapper">

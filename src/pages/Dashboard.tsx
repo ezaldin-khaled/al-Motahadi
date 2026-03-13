@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import {
   getBlogPosts,
+  saveBlogPost,
   deleteBlogPost,
   getSettings,
   saveSettings,
@@ -12,10 +13,20 @@ import {
   deleteMedia,
   getUsers,
   toggleUserActive,
+  getPages,
+  getPageSections,
+  savePageSection,
+  deletePageSection,
+  getRedirects,
+  saveRedirect,
+  deleteRedirect,
   type BlogPostData,
   type MediaFile,
   type AdminUser,
   type SiteSettings,
+  type CmsPage,
+  type CmsPageSection,
+  type RedirectRule,
 } from '../lib/api';
 import '../styles/dashboard.css';
 
@@ -163,6 +174,7 @@ function BlogTab() {
   const [posts, setPosts] = useState<BlogPostData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [editing, setEditing] = useState<BlogPostData | null>(null);
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
@@ -190,6 +202,54 @@ function BlogTab() {
     }
   };
 
+  const openNew = () => {
+    setEditing({
+      slug: '',
+      title_en: '',
+      title_ar: '',
+      excerpt_en: '',
+      excerpt_ar: '',
+      body_en: '',
+      body_ar: '',
+      category: 'news',
+      date: new Date().toISOString().slice(0, 10),
+      read_time: 5,
+      image: '',
+      image_large: '',
+      status: 'draft',
+      featured: false,
+      meta_title: '',
+      meta_description: '',
+      meta_keywords: '',
+    });
+  };
+
+  const openEdit = (post: BlogPostData) => {
+    setEditing(post);
+  };
+
+  const closeEdit = () => {
+    setEditing(null);
+  };
+
+  const handleSave = async () => {
+    if (!editing) return;
+    const payload: Partial<BlogPostData> = { ...editing };
+    const res = await saveBlogPost(payload);
+    if (!res.success || !res.post) {
+      alert(res.error || 'Failed to save post');
+      return;
+    }
+    setPosts(prev => {
+      const exists = prev.find(p => p.id === res.post!.id);
+      if (exists) {
+        return prev.map(p => (p.id === res.post!.id ? res.post! : p));
+      }
+      return [res.post!, ...prev];
+    });
+    setEditing(null);
+  };
+
   if (loading) return <p className="dashboard-loading">Loading...</p>;
   if (error) return <p className="dashboard-error">{error}</p>;
 
@@ -197,7 +257,7 @@ function BlogTab() {
     <>
       <p className="dashboard-welcome">{t('dashboard.blogIntro')}</p>
       <div className="dashboard-toolbar">
-        <button type="button" className="dashboard-btn dashboard-btn--primary">
+        <button type="button" className="dashboard-btn dashboard-btn--primary" onClick={openNew}>
           {t('dashboard.newPost')}
         </button>
       </div>
@@ -231,7 +291,7 @@ function BlogTab() {
                     </span>
                   </td>
                   <td>
-                    <button type="button" className="dashboard-btn dashboard-btn--sm">Edit</button>
+                    <button type="button" className="dashboard-btn dashboard-btn--sm" onClick={() => openEdit(post)}>Edit</button>
                     <button type="button" className="dashboard-btn dashboard-btn--sm dashboard-btn--danger" onClick={() => post.id && handleDelete(post.id)}>Delete</button>
                   </td>
                 </tr>
@@ -240,26 +300,284 @@ function BlogTab() {
           </tbody>
         </table>
       </div>
+      {editing && (
+        <div className="dashboard-modal-backdrop" onClick={closeEdit} role="presentation">
+          <div className="dashboard-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+            <div className="dashboard-modal-header">
+              <h2>{editing.id ? 'Edit Post' : 'New Post'}</h2>
+              <button type="button" className="dashboard-modal-close" onClick={closeEdit}>
+                ×
+              </button>
+            </div>
+            <div className="dashboard-modal-body">
+              <div className="dashboard-form">
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Slug</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={editing.slug}
+                    onChange={e => setEditing(prev => prev && { ...prev, slug: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Title (EN)</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={editing.title_en}
+                    onChange={e => setEditing(prev => prev && { ...prev, title_en: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Title (AR)</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={editing.title_ar}
+                    onChange={e => setEditing(prev => prev && { ...prev, title_ar: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Excerpt (EN)</label>
+                  <textarea
+                    className="dashboard-form-input"
+                    rows={3}
+                    value={editing.excerpt_en}
+                    onChange={e => setEditing(prev => prev && { ...prev, excerpt_en: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Excerpt (AR)</label>
+                  <textarea
+                    className="dashboard-form-input"
+                    rows={3}
+                    value={editing.excerpt_ar}
+                    onChange={e => setEditing(prev => prev && { ...prev, excerpt_ar: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Category</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={editing.category}
+                    onChange={e => setEditing(prev => prev && { ...prev, category: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Status</label>
+                  <select
+                    className="dashboard-form-input"
+                    value={editing.status}
+                    onChange={e => setEditing(prev => prev && { ...prev, status: e.target.value as BlogPostData['status'] })}
+                  >
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                  </select>
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Featured</label>
+                  <input
+                    type="checkbox"
+                    checked={editing.featured}
+                    onChange={e => setEditing(prev => prev && { ...prev, featured: e.target.checked })}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="dashboard-modal-footer">
+              <button type="button" className="dashboard-btn" onClick={closeEdit}>
+                Cancel
+              </button>
+              <button type="button" className="dashboard-btn dashboard-btn--primary" onClick={handleSave}>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
 
 function PagesTab() {
   const { t } = useTranslation();
+  const [pages, setPages] = useState<CmsPage[]>([]);
+  const [selectedPageId, setSelectedPageId] = useState<number | null>(null);
+  const [sections, setSections] = useState<CmsPageSection[]>([]);
+  const [lang, setLang] = useState<'en' | 'ar'>('en');
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  const loadPages = useCallback(async () => {
+    setLoading(true);
+    const res = await getPages();
+    if (res.success && res.pages) {
+      setPages(res.pages);
+      if (!selectedPageId && res.pages.length > 0) {
+        setSelectedPageId(res.pages[0].id);
+      }
+    }
+    setLoading(false);
+  }, [selectedPageId]);
+
+  const loadSections = useCallback(
+    async (pageId: number, currentLang: string) => {
+      const res = await getPageSections(pageId, currentLang);
+      if (res.success && res.sections) {
+        if (Array.isArray(res.sections)) {
+          setSections(res.sections as CmsPageSection[]);
+        } else {
+          const flat: CmsPageSection[] = [];
+          Object.values(res.sections).forEach(byLang => {
+            Object.values(byLang).forEach(sec => flat.push(sec as CmsPageSection));
+          });
+          setSections(flat);
+        }
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    loadPages();
+  }, [loadPages]);
+
+  useEffect(() => {
+    if (selectedPageId) {
+      loadSections(selectedPageId, lang);
+    }
+  }, [selectedPageId, lang, loadSections]);
+
+  const handleSelectPage = (id: number) => {
+    setSelectedPageId(id);
+  };
+
+  const handleSectionChange = (id: number, field: keyof CmsPageSection, value: string) => {
+    setSections(prev => prev.map(s => (s.id === id ? { ...s, [field]: value } : s)));
+  };
+
+  const handleSaveSection = async (section: CmsPageSection) => {
+    setSaving(true);
+    const res = await savePageSection({
+      page_id: section.page_id,
+      section_key: section.section_key,
+      lang: section.lang,
+      content_type: section.content_type,
+      content: section.content ?? '',
+      meta_title: section.meta_title ?? null,
+      meta_description: section.meta_description ?? null,
+      meta_keywords: section.meta_keywords ?? null,
+    });
+    if (!res.success || !res.section) {
+      alert(res.error || 'Failed to save section');
+    } else {
+      setSections(prev => prev.map(s => (s.id === section.id ? (res.section as CmsPageSection) : s)));
+    }
+    setSaving(false);
+  };
+
+  const handleDeleteSection = async (id: number) => {
+    if (!confirm('Delete this section?')) return;
+    const res = await deletePageSection(id);
+    if (res.success) {
+      setSections(prev => prev.filter(s => s.id !== id));
+    } else {
+      alert(res.error || 'Failed to delete section');
+    }
+  };
+
+  if (loading) return <p className="dashboard-loading">Loading...</p>;
 
   return (
-    <>
-      <p className="dashboard-welcome">{t('dashboard.pagesIntro', 'Edit page content, hero sections, and SEO metadata for each page.')}</p>
-      <div className="dashboard-info-box">
-        <p>Pages content management allows you to edit:</p>
-        <ul>
-          <li>Hero sections (headings, descriptions)</li>
-          <li>Page-specific content blocks</li>
-          <li>SEO metadata (title, description, keywords)</li>
+    <div className="dashboard-pages">
+      <div className="dashboard-pages-sidebar">
+        <h2 className="dashboard-pages-title">{t('dashboard.pagesListTitle', 'Pages')}</h2>
+        <ul className="dashboard-pages-list">
+          {pages.map(page => (
+            <li key={page.id}>
+              <button
+                type="button"
+                className={`dashboard-pages-item ${selectedPageId === page.id ? 'dashboard-pages-item--active' : ''}`}
+                onClick={() => handleSelectPage(page.id)}
+              >
+                {page.name} <span className="dashboard-pages-slug">/{page.slug}</span>
+              </button>
+            </li>
+          ))}
         </ul>
-        <p>Connect the <code>api/pages.php</code> endpoint to your database to enable editing.</p>
       </div>
-    </>
+      <div className="dashboard-pages-main">
+        {!selectedPageId ? (
+          <p className="dashboard-empty">Select a page to edit its sections.</p>
+        ) : (
+          <>
+            <div className="dashboard-pages-toolbar">
+              <span>Language:</span>
+              <select value={lang} onChange={e => setLang(e.target.value as 'en' | 'ar')}>
+                <option value="en">English</option>
+                <option value="ar">Arabic</option>
+              </select>
+            </div>
+            <div className="dashboard-table-wrap">
+              <table className="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Section Key</th>
+                    <th>Content</th>
+                    <th>Meta Title</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sections
+                    .filter(s => s.lang === lang)
+                    .map(section => (
+                      <tr key={section.id}>
+                        <td>{section.section_key}</td>
+                        <td>
+                          <textarea
+                            className="dashboard-form-input"
+                            rows={3}
+                            value={section.content || ''}
+                            onChange={e => handleSectionChange(section.id, 'content', e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            className="dashboard-form-input"
+                            value={section.meta_title || ''}
+                            onChange={e => handleSectionChange(section.id, 'meta_title', e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            className="dashboard-btn dashboard-btn--sm"
+                            onClick={() => handleSaveSection(section)}
+                            disabled={saving}
+                          >
+                            Save
+                          </button>
+                          <button
+                            type="button"
+                            className="dashboard-btn dashboard-btn--sm dashboard-btn--danger"
+                            onClick={() => handleDeleteSection(section.id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -504,19 +822,190 @@ function UsersTab() {
 
 function RedirectsTab() {
   const { t } = useTranslation();
+  const [redirects, setRedirects] = useState<RedirectRule[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState<RedirectRule | null>(null);
+
+  const loadRedirects = useCallback(async () => {
+    setLoading(true);
+    const res = await getRedirects();
+    if (res.success && res.redirects) {
+      setRedirects(res.redirects);
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    loadRedirects();
+  }, [loadRedirects]);
+
+  const openNew = () => {
+    setEditing({
+      id: 0,
+      source_path: '',
+      destination_url: '',
+      status_code: 301,
+      is_active: true,
+      hit_count: 0,
+    });
+  };
+
+  const openEdit = (rule: RedirectRule) => {
+    setEditing(rule);
+  };
+
+  const closeEdit = () => {
+    setEditing(null);
+  };
+
+  const handleSave = async () => {
+    if (!editing) return;
+    const payload: Partial<RedirectRule> = { ...editing };
+    if (editing.id === 0) {
+      delete payload.id;
+    }
+    const res = await saveRedirect(payload);
+    if (!res.success || !res.redirect) {
+      alert(res.error || 'Failed to save redirect');
+      return;
+    }
+    setRedirects(prev => {
+      const exists = prev.find(r => r.id === res.redirect!.id);
+      if (exists) {
+        return prev.map(r => (r.id === res.redirect!.id ? res.redirect! : r));
+      }
+      return [res.redirect!, ...prev];
+    });
+    setEditing(null);
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('Delete this redirect?')) return;
+    const res = await deleteRedirect(id);
+    if (res.success) {
+      setRedirects(prev => prev.filter(r => r.id !== id));
+    } else {
+      alert(res.error || 'Failed to delete redirect');
+    }
+  };
+
+  if (loading) return <p className="dashboard-loading">Loading...</p>;
 
   return (
     <>
       <p className="dashboard-welcome">{t('dashboard.redirectsIntro', 'Manage URL redirects.')}</p>
-      <div className="dashboard-info-box">
-        <p>Redirects management allows you to:</p>
-        <ul>
-          <li>Create 301/302 redirects for moved pages</li>
-          <li>Track redirect hit counts</li>
-          <li>Enable/disable redirects</li>
-        </ul>
-        <p>Connect the <code>api/redirects.php</code> endpoint to enable this feature.</p>
+      <div className="dashboard-toolbar">
+        <button type="button" className="dashboard-btn dashboard-btn--primary" onClick={openNew}>
+          + Add Redirect
+        </button>
       </div>
+      <div className="dashboard-table-wrap">
+        <table className="dashboard-table">
+          <thead>
+            <tr>
+              <th>Source Path</th>
+              <th>Destination URL</th>
+              <th>Status Code</th>
+              <th>Active</th>
+              <th>Hits</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {redirects.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="dashboard-table-empty">
+                  No redirects defined.
+                </td>
+              </tr>
+            ) : (
+              redirects.map(r => (
+                <tr key={r.id}>
+                  <td>{r.source_path}</td>
+                  <td>{r.destination_url}</td>
+                  <td>{r.status_code}</td>
+                  <td>{r.is_active ? 'Yes' : 'No'}</td>
+                  <td>{r.hit_count}</td>
+                  <td>
+                    <button type="button" className="dashboard-btn dashboard-btn--sm" onClick={() => openEdit(r)}>
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="dashboard-btn dashboard-btn--sm dashboard-btn--danger"
+                      onClick={() => handleDelete(r.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {editing && (
+        <div className="dashboard-modal-backdrop" onClick={closeEdit} role="presentation">
+          <div className="dashboard-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+            <div className="dashboard-modal-header">
+              <h2>{editing.id ? 'Edit Redirect' : 'New Redirect'}</h2>
+              <button type="button" className="dashboard-modal-close" onClick={closeEdit}>
+                ×
+              </button>
+            </div>
+            <div className="dashboard-modal-body">
+              <div className="dashboard-form">
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Source Path</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={editing.source_path}
+                    onChange={e => setEditing(prev => prev && { ...prev, source_path: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Destination URL</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={editing.destination_url}
+                    onChange={e => setEditing(prev => prev && { ...prev, destination_url: e.target.value })}
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Status Code</label>
+                  <input
+                    type="number"
+                    className="dashboard-form-input"
+                    value={editing.status_code}
+                    onChange={e =>
+                      setEditing(prev => prev && { ...prev, status_code: Number(e.target.value) || 301 })
+                    }
+                  />
+                </div>
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Active</label>
+                  <input
+                    type="checkbox"
+                    checked={editing.is_active}
+                    onChange={e => setEditing(prev => prev && { ...prev, is_active: e.target.checked })}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="dashboard-modal-footer">
+              <button type="button" className="dashboard-btn" onClick={closeEdit}>
+                Cancel
+              </button>
+              <button type="button" className="dashboard-btn dashboard-btn--primary" onClick={handleSave}>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

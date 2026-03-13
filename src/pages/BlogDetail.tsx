@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CtaSection from '../components/CtaSection';
-import {
-  BLOG_POSTS,
-  CATEGORY_FILTER_LABELS,
-  type BlogPost,
-} from '../data/blogPosts';
+import { CATEGORY_FILTER_LABELS } from '../data/blogPosts';
+import { getBlogPost, getBlogPosts, type BlogPostData } from '../lib/api';
 import '../styles/blog.css';
 
 function ArrowRightIcon() {
@@ -31,18 +28,18 @@ function formatRelativeTime(dateStr: string): string {
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-function RelatedCard({ post }: { post: BlogPost }) {
+function RelatedCard({ post }: { post: BlogPostData }) {
   const { t, i18n } = useTranslation();
-  const authorName = t(post.authorKey);
-  const filterLabelKey = CATEGORY_FILTER_LABELS[post.category];
-  const relativeTime = i18n.language === 'ar' ? `${post.readTime} ${t('blog.minRead')}` : formatRelativeTime(post.date);
-  const title = post.titleOverride ?? t(post.titleKey);
+  const authorName = post.author_name || t('blog.defaultAuthor');
+  const filterLabelKey = CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news;
+  const relativeTime = i18n.language === 'ar' ? `${post.read_time} ${t('blog.minRead')}` : formatRelativeTime(post.date);
+  const title = post.title_en;
 
   return (
     <article className="blog-related-card">
       <Link to={`/blog/${post.slug}`} className="blog-related-card-link">
         <div className="blog-related-card-image-wrap">
-          <img src={post.image} alt="" className="blog-related-card-image" loading="lazy" />
+          <img src={post.image} alt={post.title_en} className="blog-related-card-image" loading="lazy" />
           <span className="blog-related-card-category">{t(filterLabelKey)}</span>
         </div>
         <div className="blog-related-card-body">
@@ -65,20 +62,58 @@ function RelatedCard({ post }: { post: BlogPost }) {
 export default function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const [post, setPost] = useState<BlogPostData | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPostData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const isRtl = i18n.language === 'ar';
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (!post) {
+  useEffect(() => {
+    const load = async () => {
+      if (!slug) return;
+      setLoading(true);
+      setError('');
+      const res = await getBlogPost(slug);
+      if (res.success && res.post) {
+        setPost(res.post);
+        const listRes = await getBlogPosts({ status: 'published' });
+        if (listRes.success && 'posts' in listRes) {
+          setRelatedPosts(listRes.posts.filter(p => p.slug !== slug).slice(0, 1));
+        }
+      } else {
+        const msg = !res.success && 'error' in res ? res.error : 'Post not found';
+        setError(msg);
+      }
+      setLoading(false);
+    };
+    load();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="page-wrapper">
+        <Header />
+        <main className="main-content blog-detail-page">
+          <div className="content-inner">
+            <p>{t('blog.loading', 'Loading post...')}</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!post || error) {
     return (
       <div className="page-wrapper">
         <Header />
         <main className="main-content blog-detail-page">
           <div className="blog-detail-not-found content-inner">
-            <p>{t('blog.detailNotFound')}</p>
+            <p>{error || t('blog.detailNotFound')}</p>
             <Link to="/blog" className="btn btn-primary">{t('blog.detailBack')}</Link>
           </div>
         </main>
@@ -87,23 +122,22 @@ export default function BlogDetail() {
     );
   }
 
-  const authorName = t(post.authorKey);
-  const categoryLabelKey = CATEGORY_FILTER_LABELS[post.category];
-  const title = post.titleOverride ?? t(post.titleKey);
+  const authorName = post.author_name || t('blog.defaultAuthor');
+  const categoryLabelKey = CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news;
+  const title = post.title_en;
   const formattedDate = new Date(post.date).toLocaleDateString(undefined, {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
-  const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 1);
-  const bodyParagraphs = t(post.bodyKey).split('\n\n').filter(Boolean);
+  const bodyParagraphs = (post.body_en || '').split('\n\n').filter(Boolean);
 
   return (
     <div className="page-wrapper">
       <Header />
       <main className="main-content blog-detail-page">
         <section className="blog-detail-hero" aria-label="Article header">
-          <div className="blog-detail-hero-bg" style={{ backgroundImage: `url(${post.imageLarge ?? post.image})` }} aria-hidden />
+          <div className="blog-detail-hero-bg" style={{ backgroundImage: `url(${post.image_large ?? post.image})` }} aria-hidden />
           <div className="blog-detail-hero-overlay" aria-hidden />
           <div className="blog-detail-hero-content">
             <span className="blog-detail-hero-category">
