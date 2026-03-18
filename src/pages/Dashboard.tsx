@@ -700,15 +700,102 @@ function PagesTab() {
     setSections(prev => prev.map(s => (s.id === id ? { ...s, [field]: value } : s)));
   };
 
+  const normalizeSectionKey = (key: string): string => key.trim().toLowerCase();
+
   const safeParseJsonObject = (raw: string | null | undefined): Record<string, unknown> => {
     if (!raw) return {};
     try {
-      const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) return parsed;
+      let parsed: unknown = JSON.parse(raw);
+      if (typeof parsed === 'string') {
+        // Sometimes DB stores a JSON-string-of-a-JSON-object.
+        try {
+          parsed = JSON.parse(parsed);
+        } catch {
+          // keep parsed as-is; will return {}
+        }
+      }
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) return parsed as Record<string, unknown>;
       return {};
     } catch {
       return {};
     }
+  };
+
+  const isPrimitive = (v: unknown): v is string | number | boolean => {
+    const t = typeof v;
+    return t === 'string' || t === 'number' || t === 'boolean';
+  };
+
+  const isImageUrlKey = (key: string): boolean => {
+    const lower = key.toLowerCase();
+    const looksLikeImage = lower.includes('image') || lower.includes('img');
+    const isAlt = lower.includes('alt') || lower.endsWith('_alt');
+    return looksLikeImage && !isAlt;
+  };
+
+  const prettifyKey = (key: string): string => {
+    const noUnderscore = key.replace(/_/g, ' ');
+    const withSpaces = noUnderscore.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+    const parts = withSpaces.split(' ').filter(Boolean);
+    const upper = parts.map((p) => {
+      const l = p.toLowerCase();
+      if (l === 'cta') return 'CTA';
+      if (l === 'url') return 'URL';
+      if (l === 'id') return 'ID';
+      return l.charAt(0).toUpperCase() + l.slice(1);
+    });
+    return upper.join(' ');
+  };
+
+  const renderValueEditor = (
+    scope: 'new' | 'section',
+    sectionId: number | undefined,
+    fieldKey: string,
+    value: unknown
+  ) => {
+    const rawStr =
+      value === null || value === undefined
+        ? ''
+        : typeof value === 'string'
+          ? value
+          : isPrimitive(value)
+            ? String(value)
+            : '';
+
+    const looksMultiline =
+      typeof value === 'string' &&
+      (rawStr.includes('\n') || rawStr.length > 120) ||
+      fieldKey.toLowerCase().includes('description') ||
+      fieldKey.toLowerCase().includes('body') ||
+      fieldKey.toLowerCase().includes('content');
+
+    if (looksMultiline) {
+      return (
+        <textarea
+          className="dashboard-form-input"
+          rows={4}
+          value={rawStr}
+          onChange={(e) => {
+            const next = e.target.value;
+            if (scope === 'section' && sectionId) setJsonFieldForSection(sectionId, fieldKey, next);
+            if (scope === 'new') setJsonFieldForNew(fieldKey, next);
+          }}
+        />
+      );
+    }
+
+    return (
+      <input
+        type="text"
+        className="dashboard-form-input"
+        value={rawStr}
+        onChange={(e) => {
+          const next = e.target.value;
+          if (scope === 'section' && sectionId) setJsonFieldForSection(sectionId, fieldKey, next);
+          if (scope === 'new') setJsonFieldForNew(fieldKey, next);
+        }}
+      />
+    );
   };
 
   const buildDefaultItemForFields = (fields: JsonField[]): Record<string, unknown> => {
@@ -1196,6 +1283,237 @@ function PagesTab() {
     }
   };
 
+  const renderGenericJsonEditor = (
+    scope: 'new' | 'section',
+    sectionId: number | undefined,
+    obj: Record<string, unknown>
+  ) => {
+    const keys = Object.keys(obj);
+
+    const setField = (fieldKey: string, value: unknown) => {
+      if (scope === 'section' && sectionId) setJsonFieldForSection(sectionId, fieldKey, value);
+      if (scope === 'new') setJsonFieldForNew(fieldKey, value);
+    };
+
+    const setArrayField = (arrayFieldKey: string, nextArr: unknown[]) => {
+      setField(arrayFieldKey, nextArr);
+    };
+
+    const updatePrimitiveArrayItem = (arrayFieldKey: string, index: number, value: unknown) => {
+      const current = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+      const nextArr = current.map((v, i) => (i === index ? value : v));
+      setArrayField(arrayFieldKey, nextArr);
+    };
+
+    return (
+      <>
+        {keys.map((key) => {
+          const val = obj[key];
+
+          // Image URL slots (choose from Media + manual URL)
+          if (isImageUrlKey(key)) {
+            const url = typeof val === 'string' ? val : '';
+            return (
+              <div key={key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{prettifyKey(key)}</label>
+                <div className="dashboard-image-picker">
+                  {url ? <img src={url} alt={key} className="dashboard-image-preview" /> : <div className="dashboard-image-placeholder">No image selected</div>}
+                  <div style={{ flex: 1 }}>
+                    <input
+                      type="text"
+                      className="dashboard-form-input"
+                      value={url}
+                      placeholder="/uploads/.../image.jpg"
+                      onChange={(e) => setField(key, e.target.value)}
+                    />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+                      <button
+                        type="button"
+                        className="dashboard-btn"
+                        onClick={() => {
+                          if (scope === 'section' && sectionId) {
+                            setPageMediaPickerTarget({ scope: 'section', sectionId, fieldKey: key });
+                          } else {
+                            setPageMediaPickerTarget({ scope: 'new', fieldKey: key });
+                          }
+                        }}
+                      >
+                        Choose
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
+          // Arrays
+          if (Array.isArray(val)) {
+            const arr = val;
+
+            // Primitive array editor
+            if (arr.length === 0 || typeof arr[0] !== 'object' || arr[0] === null) {
+              const strings = arr.map((x) => (typeof x === 'string' ? x : String(x)));
+              return (
+                <div key={key} className="dashboard-form-group">
+                  <label className="dashboard-form-label">{prettifyKey(key)}</label>
+                  <div className="dashboard-array-list">
+                    {strings.map((s, index) => (
+                      <div key={`${key}-${index}`} className="dashboard-array-item">
+                        <div className="dashboard-array-item-top">
+                          <span className="dashboard-array-item-title">{`Item ${index + 1}`}</span>
+                          <button type="button" className="dashboard-btn dashboard-btn--sm dashboard-btn--danger" onClick={() => setArrayField(key, strings.filter((_, i) => i !== index))}>
+                            Remove
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          className="dashboard-form-input"
+                          value={s}
+                          onChange={(e) => updatePrimitiveArrayItem(key, index, e.target.value)}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      className="dashboard-btn dashboard-btn--sm dashboard-btn--primary"
+                      onClick={() => setArrayField(key, [...strings, ''])}
+                    >
+                      Add item
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+
+            // Array of objects: render each item as a card, and allow image slots inside.
+            const firstObj = arr.find((x) => x && typeof x === 'object' && !Array.isArray(x)) as Record<string, unknown> | undefined;
+            const itemKeys = firstObj ? Object.keys(firstObj) : [];
+            return (
+              <div key={key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{prettifyKey(key)}</label>
+                <div className="dashboard-array-list">
+                  {arr.map((item, index) => {
+                    const itemObj = item && typeof item === 'object' && !Array.isArray(item) ? (item as Record<string, unknown>) : {};
+                    return (
+                      <div key={`${key}-${index}`} className="dashboard-array-item">
+                        <div className="dashboard-array-item-top">
+                          <span className="dashboard-array-item-title">{`Item ${index + 1}`}</span>
+                          <button
+                            type="button"
+                            className="dashboard-btn dashboard-btn--sm dashboard-btn--danger"
+                            onClick={() => setArrayField(key, arr.filter((_, i) => i !== index))}
+                          >
+                            Remove
+                          </button>
+                        </div>
+
+                        {itemKeys.map((itemFieldKey) => {
+                          const itemVal = itemObj[itemFieldKey];
+                          if (isImageUrlKey(itemFieldKey)) {
+                            const imgUrl = typeof itemVal === 'string' ? itemVal : '';
+                            return (
+                              <div key={itemFieldKey} className="dashboard-form-group">
+                                <label className="dashboard-form-label">{prettifyKey(itemFieldKey)}</label>
+                                <div className="dashboard-image-picker">
+                                  {imgUrl ? <img src={imgUrl} alt={itemFieldKey} className="dashboard-image-preview" /> : <div className="dashboard-image-placeholder">No image selected</div>}
+                                  <div style={{ flex: 1 }}>
+                                    <input type="text" className="dashboard-form-input" value={imgUrl} placeholder="/uploads/.../image.jpg" onChange={(e) => {
+                                      if (scope === 'section' && sectionId) {
+                                        updateJsonArrayItemField(sectionId, key, index, itemFieldKey, e.target.value);
+                                      } else {
+                                        updateNewJsonArrayItemField(key, index, itemFieldKey, e.target.value);
+                                      }
+                                    }} />
+                                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+                                      <button type="button" className="dashboard-btn" onClick={() => {
+                                        if (scope === 'section' && sectionId) {
+                                          setPageMediaPickerTarget({ scope: 'section', sectionId, arrayFieldKey: key, index, itemFieldKey });
+                                        } else {
+                                          setPageMediaPickerTarget({ scope: 'new', arrayFieldKey: key, index, itemFieldKey });
+                                        }
+                                      }}>
+                                        Choose
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <div key={itemFieldKey} className="dashboard-form-group">
+                              <label className="dashboard-form-label">{prettifyKey(itemFieldKey)}</label>
+                              {typeof itemVal === 'string' && (itemVal.includes('\n') || itemVal.length > 120) ? (
+                                <textarea
+                                  className="dashboard-form-input"
+                                  rows={4}
+                                  value={String(itemVal)}
+                                  onChange={(e) => {
+                                    if (scope === 'section' && sectionId) {
+                                      updateJsonArrayItemField(sectionId, key, index, itemFieldKey, e.target.value);
+                                    } else {
+                                      updateNewJsonArrayItemField(key, index, itemFieldKey, e.target.value);
+                                    }
+                                  }}
+                                />
+                              ) : (
+                                <input
+                                  type="text"
+                                  className="dashboard-form-input"
+                                  value={itemVal === null || itemVal === undefined ? '' : String(itemVal)}
+                                  onChange={(e) => {
+                                    if (scope === 'section' && sectionId) {
+                                      updateJsonArrayItemField(sectionId, key, index, itemFieldKey, e.target.value);
+                                    } else {
+                                      updateNewJsonArrayItemField(key, index, itemFieldKey, e.target.value);
+                                    }
+                                  }}
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          }
+
+          // Primitives
+          if (isPrimitive(val) || val === null || val === undefined) {
+            return (
+              <div key={key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{prettifyKey(key)}</label>
+                {renderValueEditor(scope, sectionId, key, val)}
+              </div>
+            );
+          }
+
+          // Nested objects: fallback (rare)
+          return (
+            <div key={key} className="dashboard-form-group">
+              <label className="dashboard-form-label">{prettifyKey(key)}</label>
+              <textarea
+                className="dashboard-form-input"
+                rows={4}
+                value={typeof val === 'string' ? val : JSON.stringify(val)}
+                onChange={(e) => setField(key, e.target.value)}
+                placeholder="Nested object"
+              />
+              <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 6 }}>
+                This section has nested data. If needed, use HTML mode for that section.
+              </div>
+            </div>
+          );
+        })}
+      </>
+    );
+  };
+
   if (loading) return <p className="dashboard-loading">Loading...</p>;
 
   return (
@@ -1314,20 +1632,10 @@ function PagesTab() {
                     />
                   ) : newSectionContentType === 'json' ? (
                     (() => {
-                      const schema = SECTION_SCHEMAS[newSectionKey];
+                      const schema = SECTION_SCHEMAS[normalizeSectionKey(newSectionKey)];
                       const obj = safeParseJsonObject(newSectionContent);
-                      if (!schema) {
-                        return (
-                          <textarea
-                            className="dashboard-form-input"
-                            rows={4}
-                            value={newSectionContent}
-                            onChange={(e) => setNewSectionContent(e.target.value)}
-                            placeholder="Enter JSON..."
-                          />
-                        );
-                      }
-                      return renderJsonSchemaFields(schema, obj, 'new');
+                      if (schema) return renderJsonSchemaFields(schema, obj, 'new');
+                      return renderGenericJsonEditor('new', undefined, obj);
                     })()
                   ) : (
                     <textarea
@@ -1410,21 +1718,10 @@ function PagesTab() {
                           />
                         ) : section.content_type === 'json' ? (
                           (() => {
-                            const schema = SECTION_SCHEMAS[section.section_key];
+                            const schema = SECTION_SCHEMAS[normalizeSectionKey(section.section_key)];
                             const obj = safeParseJsonObject(section.content);
-                            if (!schema) {
-                              return (
-                                <textarea
-                                  className="dashboard-form-input"
-                                  rows={5}
-                                  value={section.content || ''}
-                                  onChange={e => handleSectionChange(section.id, 'content', e.target.value)}
-                                  placeholder="Custom JSON section — edit JSON manually"
-                                />
-                              );
-                            }
-
-                            return renderJsonSchemaFields(schema, obj, 'section', section.id);
+                            if (schema) return renderJsonSchemaFields(schema, obj, 'section', section.id);
+                            return renderGenericJsonEditor('section', section.id, obj);
                           })()
                         ) : (
                           <textarea
