@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import {
@@ -31,6 +31,7 @@ import {
 } from '../lib/api';
 import HtmlEditor, { type HtmlEditorHandle } from '../components/HtmlEditor';
 import MediaPickerModal from '../components/MediaPickerModal';
+import { SECTION_SCHEMAS, type JsonField, type SectionSchema, buildDefaultJsonForSchema } from '../config/sectionSchemas';
 import '../styles/dashboard.css';
 
 type TabId = 'overview' | 'blog' | 'pages' | 'images' | 'settings' | 'users' | 'redirects';
@@ -361,7 +362,7 @@ function BlogTab() {
       </div>
       {editing && (
         <div className="dashboard-modal-backdrop" onClick={closeEdit} role="presentation">
-          <div className="dashboard-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
+          <div className="dashboard-modal dashboard-modal--blog" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
             <div className="dashboard-modal-header">
               <h2>{editing.id ? 'Edit Post' : 'New Post'}</h2>
               <button type="button" className="dashboard-modal-close" onClick={closeEdit}>
@@ -380,6 +381,14 @@ function BlogTab() {
                   />
                 </div>
 
+                <div style={{ margin: '8px 0 10px' }}>
+                  <span style={{ fontWeight: 900, color: 'var(--text-heading)' }}>
+                    Editing: {editorLang === 'en' ? 'English' : 'Arabic'}
+                  </span>
+                  <div style={{ marginTop: 6, fontSize: 13, color: 'var(--text-muted)' }}>
+                    Tip: Use <strong>H1</strong> for the main title, <strong>H2</strong> for sections, and <strong>H3</strong> for sub-sections.
+                  </div>
+                </div>
                 <div className="dashboard-lang-tabs" role="tablist" aria-label="Blog language">
                   <button
                     type="button"
@@ -632,6 +641,16 @@ function PagesTab() {
   const [newSectionKey, setNewSectionKey] = useState('');
   const [newSectionContentType, setNewSectionContentType] = useState<CmsPageSection['content_type']>('text');
   const [newSectionContent, setNewSectionContent] = useState('');
+  const schemaKeys = useMemo(() => Object.keys(SECTION_SCHEMAS), []);
+  const [newSectionSchemaKey, setNewSectionSchemaKey] = useState<string>(() => schemaKeys[0] ?? 'home_hero');
+
+  const [pageMediaPickerTarget, setPageMediaPickerTarget] = useState<
+    | null
+    | { scope: 'new'; fieldKey: string }
+    | { scope: 'section'; sectionId: number; fieldKey: string }
+    | { scope: 'new'; arrayFieldKey: string; index: number; itemFieldKey: string }
+    | { scope: 'section'; sectionId: number; arrayFieldKey: string; index: number; itemFieldKey: string }
+  >(null);
 
   const loadPages = useCallback(async () => {
     setLoading(true);
@@ -679,6 +698,419 @@ function PagesTab() {
 
   const handleSectionChange = (id: number, field: keyof CmsPageSection, value: string) => {
     setSections(prev => prev.map(s => (s.id === id ? { ...s, [field]: value } : s)));
+  };
+
+  const safeParseJsonObject = (raw: string | null | undefined): Record<string, unknown> => {
+    if (!raw) return {};
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) return parsed;
+      return {};
+    } catch {
+      return {};
+    }
+  };
+
+  const buildDefaultItemForFields = (fields: JsonField[]): Record<string, unknown> => {
+    const obj: Record<string, unknown> = {};
+    for (const field of fields) {
+      if (field.type === 'array') {
+        obj[field.key] = [];
+      } else {
+        obj[field.key] = '';
+      }
+    }
+    return obj;
+  };
+
+  const setJsonFieldForSection = (sectionId: number, fieldKey: string, value: unknown) => {
+    setSections(prev =>
+      prev.map(s => {
+        if (s.id !== sectionId) return s;
+        const obj = safeParseJsonObject(s.content);
+        obj[fieldKey] = value;
+        return { ...s, content: JSON.stringify(obj) };
+      })
+    );
+  };
+
+  const updateJsonArrayItemField = (
+    sectionId: number,
+    arrayFieldKey: string,
+    index: number,
+    itemFieldKey: string,
+    value: unknown
+  ) => {
+    setSections(prev =>
+      prev.map(s => {
+        if (s.id !== sectionId) return s;
+        const obj = safeParseJsonObject(s.content);
+        const arr = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+        const nextArr = arr.map((item, i) => {
+          if (i !== index) return item;
+          const nextItem =
+            item && typeof item === 'object' && !Array.isArray(item)
+              ? { ...(item as Record<string, unknown>) }
+              : {};
+          (nextItem as Record<string, unknown>)[itemFieldKey] = value;
+          return nextItem;
+        });
+        obj[arrayFieldKey] = nextArr;
+        return { ...s, content: JSON.stringify(obj) };
+      })
+    );
+  };
+
+  const addJsonArrayItem = (sectionId: number, arrayFieldKey: string, itemFields: JsonField[]) => {
+    setSections(prev =>
+      prev.map(s => {
+        if (s.id !== sectionId) return s;
+        const obj = safeParseJsonObject(s.content);
+        const arr = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+        const nextArr = [...arr, buildDefaultItemForFields(itemFields)];
+        obj[arrayFieldKey] = nextArr;
+        return { ...s, content: JSON.stringify(obj) };
+      })
+    );
+  };
+
+  const removeJsonArrayItem = (sectionId: number, arrayFieldKey: string, index: number) => {
+    setSections(prev =>
+      prev.map(s => {
+        if (s.id !== sectionId) return s;
+        const obj = safeParseJsonObject(s.content);
+        const arr = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+        const nextArr = arr.filter((_, i) => i !== index);
+        obj[arrayFieldKey] = nextArr;
+        return { ...s, content: JSON.stringify(obj) };
+      })
+    );
+  };
+
+  const setJsonFieldForNew = (fieldKey: string, value: unknown) => {
+    const obj = safeParseJsonObject(newSectionContent);
+    obj[fieldKey] = value;
+    setNewSectionContent(JSON.stringify(obj));
+  };
+
+  const updateNewJsonArrayItemField = (
+    arrayFieldKey: string,
+    index: number,
+    itemFieldKey: string,
+    value: unknown
+  ) => {
+    const obj = safeParseJsonObject(newSectionContent);
+    const arr = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+    const nextArr = arr.map((item, i) => {
+      if (i !== index) return item;
+      const nextItem =
+        item && typeof item === 'object' && !Array.isArray(item)
+          ? { ...(item as Record<string, unknown>) }
+          : {};
+      (nextItem as Record<string, unknown>)[itemFieldKey] = value;
+      return nextItem;
+    });
+    obj[arrayFieldKey] = nextArr;
+    setNewSectionContent(JSON.stringify(obj));
+  };
+
+  const addNewJsonArrayItem = (arrayFieldKey: string, itemFields: JsonField[]) => {
+    const obj = safeParseJsonObject(newSectionContent);
+    const arr = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+    const nextArr = [...arr, buildDefaultItemForFields(itemFields)];
+    obj[arrayFieldKey] = nextArr;
+    setNewSectionContent(JSON.stringify(obj));
+  };
+
+  const removeNewJsonArrayItem = (arrayFieldKey: string, index: number) => {
+    const obj = safeParseJsonObject(newSectionContent);
+    const arr = Array.isArray(obj[arrayFieldKey]) ? (obj[arrayFieldKey] as unknown[]) : [];
+    const nextArr = arr.filter((_, i) => i !== index);
+    obj[arrayFieldKey] = nextArr;
+    setNewSectionContent(JSON.stringify(obj));
+  };
+
+  const handlePageMediaSelect = (file: MediaFile) => {
+    if (!pageMediaPickerTarget) return;
+    const url = file.url;
+    const target = pageMediaPickerTarget;
+
+    if ('arrayFieldKey' in target) {
+      if (target.scope === 'section') {
+        updateJsonArrayItemField(target.sectionId, target.arrayFieldKey, target.index, target.itemFieldKey, url);
+      } else {
+        updateNewJsonArrayItemField(target.arrayFieldKey, target.index, target.itemFieldKey, url);
+      }
+    } else {
+      if (target.scope === 'section') {
+        setJsonFieldForSection(target.sectionId, target.fieldKey, url);
+      } else {
+        setJsonFieldForNew(target.fieldKey, url);
+      }
+    }
+
+    setPageMediaPickerTarget(null);
+  };
+
+  const renderJsonSchemaFields = (
+    schema: SectionSchema,
+    obj: Record<string, unknown>,
+    scope: 'new' | 'section',
+    sectionId?: number
+  ) => {
+    return (
+      <>
+        {schema.fields.map((field) => {
+          const rawValue = obj[field.key];
+          const valueStr =
+            rawValue === null || rawValue === undefined
+              ? ''
+              : typeof rawValue === 'string'
+                ? rawValue
+                : String(rawValue);
+
+          if (field.type === 'text') {
+            return (
+              <div key={field.key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{field.label}</label>
+                <input
+                  type="text"
+                  className="dashboard-form-input"
+                  value={valueStr}
+                  placeholder={field.placeholder}
+                  onChange={(e) => {
+                    if (scope === 'section' && sectionId) setJsonFieldForSection(sectionId, field.key, e.target.value);
+                    if (scope === 'new') setJsonFieldForNew(field.key, e.target.value);
+                  }}
+                />
+              </div>
+            );
+          }
+
+          if (field.type === 'textarea') {
+            return (
+              <div key={field.key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{field.label}</label>
+                <textarea
+                  className="dashboard-form-input"
+                  rows={field.rows ?? 4}
+                  value={valueStr}
+                  placeholder={field.placeholder}
+                  onChange={(e) => {
+                    if (scope === 'section' && sectionId) setJsonFieldForSection(sectionId, field.key, e.target.value);
+                    if (scope === 'new') setJsonFieldForNew(field.key, e.target.value);
+                  }}
+                />
+              </div>
+            );
+          }
+
+          if (field.type === 'image') {
+            return (
+              <div key={field.key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{field.label}</label>
+                <div className="dashboard-image-picker">
+                  {valueStr ? (
+                    <img src={valueStr} alt={field.label} className="dashboard-image-preview" />
+                  ) : (
+                    <div className="dashboard-image-placeholder">No image selected</div>
+                  )}
+                  <div style={{ flex: 1 }}>
+                    <input
+                      type="text"
+                      className="dashboard-form-input"
+                      value={valueStr}
+                      placeholder="/uploads/.../image.jpg"
+                      onChange={(e) => {
+                        if (scope === 'section' && sectionId) setJsonFieldForSection(sectionId, field.key, e.target.value);
+                        if (scope === 'new') setJsonFieldForNew(field.key, e.target.value);
+                      }}
+                    />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+                      <button
+                        type="button"
+                        className="dashboard-btn"
+                        onClick={() => {
+                          if (scope === 'section' && sectionId) {
+                            setPageMediaPickerTarget({ scope: 'section', sectionId, fieldKey: field.key });
+                          } else {
+                            setPageMediaPickerTarget({ scope: 'new', fieldKey: field.key });
+                          }
+                        }}
+                      >
+                        Choose
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
+          if (field.type === 'array') {
+            const arr = Array.isArray(rawValue) ? rawValue : [];
+            return (
+              <div key={field.key} className="dashboard-form-group">
+                <label className="dashboard-form-label">{field.label}</label>
+                <div className="dashboard-array-list">
+                  {arr.map((item, index) => {
+                    const itemObj =
+                      item && typeof item === 'object' && !Array.isArray(item)
+                        ? (item as Record<string, unknown>)
+                        : {};
+                    return (
+                      <div key={`${field.key}-${index}`} className="dashboard-array-item">
+                        <div className="dashboard-array-item-top">
+                          <span className="dashboard-array-item-title">{`Item ${index + 1}`}</span>
+                          <button
+                            type="button"
+                            className="dashboard-btn dashboard-btn--sm dashboard-btn--danger"
+                            onClick={() => {
+                              if (scope === 'section' && sectionId) removeJsonArrayItem(sectionId, field.key, index);
+                              if (scope === 'new') removeNewJsonArrayItem(field.key, index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        </div>
+
+                        {field.itemFields.map((itemField) => {
+                          const itemFieldRaw = itemObj[itemField.key];
+                          const itemFieldStr =
+                            itemFieldRaw === null || itemFieldRaw === undefined
+                              ? ''
+                              : typeof itemFieldRaw === 'string'
+                                ? itemFieldRaw
+                                : String(itemFieldRaw);
+
+                          if (itemField.type === 'text') {
+                            return (
+                              <div key={itemField.key} className="dashboard-form-group">
+                                <label className="dashboard-form-label">{itemField.label}</label>
+                                <input
+                                  type="text"
+                                  className="dashboard-form-input"
+                                  value={itemFieldStr}
+                                  placeholder={itemField.placeholder}
+                                  onChange={(e) => {
+                                    if (scope === 'section' && sectionId) {
+                                      updateJsonArrayItemField(sectionId, field.key, index, itemField.key, e.target.value);
+                                    }
+                                    if (scope === 'new') {
+                                      updateNewJsonArrayItemField(field.key, index, itemField.key, e.target.value);
+                                    }
+                                  }}
+                                />
+                              </div>
+                            );
+                          }
+
+                          if (itemField.type === 'textarea') {
+                            return (
+                              <div key={itemField.key} className="dashboard-form-group">
+                                <label className="dashboard-form-label">{itemField.label}</label>
+                                <textarea
+                                  className="dashboard-form-input"
+                                  rows={itemField.rows ?? 3}
+                                  value={itemFieldStr}
+                                  placeholder={itemField.placeholder}
+                                  onChange={(e) => {
+                                    if (scope === 'section' && sectionId) {
+                                      updateJsonArrayItemField(sectionId, field.key, index, itemField.key, e.target.value);
+                                    }
+                                    if (scope === 'new') {
+                                      updateNewJsonArrayItemField(field.key, index, itemField.key, e.target.value);
+                                    }
+                                  }}
+                                />
+                              </div>
+                            );
+                          }
+
+                          if (itemField.type === 'image') {
+                            const imgUrl = itemFieldStr;
+                            return (
+                              <div key={itemField.key} className="dashboard-form-group">
+                                <label className="dashboard-form-label">{itemField.label}</label>
+                                <div className="dashboard-image-picker">
+                                  {imgUrl ? (
+                                    <img src={imgUrl} alt={itemField.label} className="dashboard-image-preview" />
+                                  ) : (
+                                    <div className="dashboard-image-placeholder">No image selected</div>
+                                  )}
+                                  <div style={{ flex: 1 }}>
+                                    <input
+                                      type="text"
+                                      className="dashboard-form-input"
+                                      value={imgUrl}
+                                      placeholder="/uploads/.../image.jpg"
+                                      onChange={(e) => {
+                                        const nextVal = e.target.value;
+                                        if (scope === 'section' && sectionId) {
+                                          updateJsonArrayItemField(sectionId, field.key, index, itemField.key, nextVal);
+                                        }
+                                        if (scope === 'new') {
+                                          updateNewJsonArrayItemField(field.key, index, itemField.key, nextVal);
+                                        }
+                                      }}
+                                    />
+                                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+                                      <button
+                                        type="button"
+                                        className="dashboard-btn"
+                                        onClick={() => {
+                                          if (scope === 'section' && sectionId) {
+                                            setPageMediaPickerTarget({
+                                              scope: 'section',
+                                              sectionId,
+                                              arrayFieldKey: field.key,
+                                              index,
+                                              itemFieldKey: itemField.key,
+                                            });
+                                          } else {
+                                            setPageMediaPickerTarget({
+                                              scope: 'new',
+                                              arrayFieldKey: field.key,
+                                              index,
+                                              itemFieldKey: itemField.key,
+                                            });
+                                          }
+                                        }}
+                                      >
+                                        Choose
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          return null;
+                        })}
+                      </div>
+                    );
+                  })}
+
+                  <button
+                    type="button"
+                    className="dashboard-btn dashboard-btn--sm dashboard-btn--primary"
+                    onClick={() => {
+                      if (scope === 'section' && sectionId) addJsonArrayItem(sectionId, field.key, field.itemFields);
+                      if (scope === 'new') addNewJsonArrayItem(field.key, field.itemFields);
+                    }}
+                  >
+                    {field.addButtonLabel ?? 'Add item'}
+                  </button>
+                </div>
+              </div>
+            );
+          }
+
+          return null;
+        })}
+      </>
+    );
   };
 
   const handleSaveSection = async (section: CmsPageSection) => {
@@ -790,7 +1222,7 @@ function PagesTab() {
         ) : (
           <>
             <div className="dashboard-pages-toolbar">
-              <span>Language:</span>
+              <span>Editing: {lang === 'en' ? 'English' : 'Arabic'}</span>
               <div className="dashboard-lang-tabs">
                 <button
                   type="button"
@@ -820,14 +1252,52 @@ function PagesTab() {
                     value={newSectionKey}
                     onChange={e => setNewSectionKey(e.target.value)}
                     placeholder="e.g. services_intro"
+                    readOnly={newSectionContentType === 'json'}
                   />
+                  {newSectionContentType === 'json' && (
+                    <div style={{ marginTop: 10 }}>
+                      <label className="dashboard-form-label">Template</label>
+                      <select
+                        className="dashboard-form-input"
+                        value={newSectionSchemaKey}
+                        onChange={(e) => {
+                          const nextKey = e.target.value;
+                          const schema = SECTION_SCHEMAS[nextKey];
+                          if (!schema) return;
+                          setNewSectionSchemaKey(nextKey);
+                          setNewSectionKey(nextKey);
+                          setNewSectionContent(JSON.stringify(buildDefaultJsonForSchema(schema)));
+                        }}
+                      >
+                        {schemaKeys.map((k) => (
+                          <option key={k} value={k}>
+                            {SECTION_SCHEMAS[k].title}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label className="dashboard-form-label">Content Type</label>
                   <select
                     className="dashboard-form-input"
                     value={newSectionContentType}
-                    onChange={e => setNewSectionContentType(e.target.value as CmsPageSection['content_type'])}
+                    onChange={(e) => {
+                      const nextType = e.target.value as CmsPageSection['content_type'];
+                      setNewSectionContentType(nextType);
+                      if (nextType === 'json') {
+                        const schema = SECTION_SCHEMAS[newSectionSchemaKey];
+                        if (schema) {
+                          setNewSectionKey(schema.key);
+                          setNewSectionContent(JSON.stringify(buildDefaultJsonForSchema(schema)));
+                        }
+                      } else if (nextType === 'html') {
+                        setNewSectionContent('');
+                      } else {
+                        setNewSectionContent('');
+                      }
+                    }}
                   >
                     <option value="text">text</option>
                     <option value="html">html</option>
@@ -842,6 +1312,23 @@ function PagesTab() {
                       placeholder="Write HTML..."
                       minHeight={200}
                     />
+                  ) : newSectionContentType === 'json' ? (
+                    (() => {
+                      const schema = SECTION_SCHEMAS[newSectionKey];
+                      const obj = safeParseJsonObject(newSectionContent);
+                      if (!schema) {
+                        return (
+                          <textarea
+                            className="dashboard-form-input"
+                            rows={4}
+                            value={newSectionContent}
+                            onChange={(e) => setNewSectionContent(e.target.value)}
+                            placeholder="Enter JSON..."
+                          />
+                        );
+                      }
+                      return renderJsonSchemaFields(schema, obj, 'new');
+                    })()
                   ) : (
                     <textarea
                       className="dashboard-form-input"
@@ -921,6 +1408,24 @@ function PagesTab() {
                             placeholder="Write HTML..."
                             minHeight={220}
                           />
+                        ) : section.content_type === 'json' ? (
+                          (() => {
+                            const schema = SECTION_SCHEMAS[section.section_key];
+                            const obj = safeParseJsonObject(section.content);
+                            if (!schema) {
+                              return (
+                                <textarea
+                                  className="dashboard-form-input"
+                                  rows={5}
+                                  value={section.content || ''}
+                                  onChange={e => handleSectionChange(section.id, 'content', e.target.value)}
+                                  placeholder="Custom JSON section — edit JSON manually"
+                                />
+                              );
+                            }
+
+                            return renderJsonSchemaFields(schema, obj, 'section', section.id);
+                          })()
                         ) : (
                           <textarea
                             className="dashboard-form-input"
@@ -962,6 +1467,19 @@ function PagesTab() {
                   </div>
                 ))}
             </div>
+
+            <MediaPickerModal
+              open={pageMediaPickerTarget !== null}
+              title={
+                pageMediaPickerTarget
+                  ? pageMediaPickerTarget.scope === 'section'
+                    ? 'Pick Image'
+                    : 'Pick Image'
+                  : 'Pick Image'
+              }
+              onClose={() => setPageMediaPickerTarget(null)}
+              onSelect={handlePageMediaSelect}
+            />
           </>
         )}
       </div>
@@ -1023,6 +1541,9 @@ function ImagesTab() {
   return (
     <>
       <p className="dashboard-welcome">{t('dashboard.imagesIntro', 'Upload and manage media files.')}</p>
+      <p className="dashboard-hint">
+        Images are uploaded to <code>/uploads/</code> (organized by year/month, e.g. <code>/uploads/2026/03/</code>). Use the image picker in Blog/Pages, or copy the URL below when you need the direct link.
+      </p>
       <div className="dashboard-toolbar">
         <label className="dashboard-btn dashboard-btn--primary">
           {uploading ? 'Uploading...' : 'Upload Image'}
@@ -1038,6 +1559,7 @@ function ImagesTab() {
               <img src={file.url} alt={file.alt_text || file.original_name} className="dashboard-media-thumb" />
               <div className="dashboard-media-info">
                 <span className="dashboard-media-name">{file.original_name}</span>
+                <div className="dashboard-media-url">{file.url}</div>
                 <div className="dashboard-media-actions">
                   <button type="button" className="dashboard-btn dashboard-btn--sm" onClick={() => copyUrl(file.url)}>Copy URL</button>
                   <button type="button" className="dashboard-btn dashboard-btn--sm dashboard-btn--danger" onClick={() => handleDelete(file.id)}>Delete</button>
