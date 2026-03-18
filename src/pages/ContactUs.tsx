@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import { WhatsAppIcon } from '../components/Icons';
 import { WHATSAPP_URL, GOOGLE_MAPS_EMBED_SRC } from '../constants/cta';
 import { sendContact } from '../lib/api';
+import { useCmsPageContent } from '../hooks/useCmsPageContent';
 import '../styles/contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +26,10 @@ export default function ContactUs() {
   const [bookingMessage, setBookingMessage] = useState('');
   const [bookingSending, setBookingSending] = useState(false);
   const [bookingError, setBookingError] = useState('');
+
+  const { getSectionValue } = useCmsPageContent('contact');
+  const heroContent = getSectionValue('contact_hero') as Record<string, unknown> | null;
+  const reachoutContent = getSectionValue('contact_reachout') as Record<string, unknown> | null;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -132,9 +137,9 @@ export default function ContactUs() {
         <section className="contact-hero" ref={heroRef}>
           <div className="page-hero-bg" aria-hidden="true" />
           <div className="contact-hero-content">
-            <p className="contact-hero-label">{t('contact.heroLabel')}</p>
-            <h1 className="contact-hero-title">{t('contact.heroTitle')}</h1>
-            <p className="contact-hero-desc">{t('contact.heroDesc')}</p>
+            <p className="contact-hero-label">{typeof heroContent?.label === 'string' ? heroContent.label : t('contact.heroLabel')}</p>
+            <h1 className="contact-hero-title">{typeof heroContent?.title === 'string' ? heroContent.title : t('contact.heroTitle')}</h1>
+            <p className="contact-hero-desc">{typeof heroContent?.description === 'string' ? heroContent.description : t('contact.heroDesc')}</p>
           </div>
         </section>
 
@@ -229,31 +234,43 @@ export default function ContactUs() {
               </div>
 
               <div className="booking-reachout">
-                <h2 className="booking-reachout-title">{t('contact.reachOutTitle')}</h2>
+                <h2 className="booking-reachout-title">{typeof reachoutContent?.title === 'string' ? reachoutContent.title : t('contact.reachOutTitle')}</h2>
                 <ul className="booking-reachout-list">
                   <li>
                     <span className="booking-reachout-icon" aria-hidden="true">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 5.18 2 2 0 0 1 5.11 3h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.6 2.5a2 2 0 0 1-.45 2.11L9.1 10.9a16 16 0 0 0 4 4l1.57-1.16a2 2 0 0 1 2.11-.45c.8.28 1.64.48 2.5.6A2 2 0 0 1 22 16.92Z"/></svg>
                     </span>
-                    <div><strong>{t('contact.phoneLabel')}</strong><span dir="ltr">{t('contact.phoneValue')}</span></div>
+                    <div>
+                      <strong>{typeof reachoutContent?.phoneLabel === 'string' ? reachoutContent.phoneLabel : t('contact.phoneLabel')}</strong>
+                      <span dir="ltr">{t('contact.phoneValue')}</span>
+                    </div>
                   </li>
                   <li>
                     <span className="booking-reachout-icon" aria-hidden="true">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M4 8l8 5 8-5"/><path d="M4 8v12h16V8"/></svg>
                     </span>
-                    <div><strong>{t('contact.emailLabel')}</strong><span>{t('contact.emailValue')}</span></div>
+                    <div>
+                      <strong>{typeof reachoutContent?.emailLabel === 'string' ? reachoutContent.emailLabel : t('contact.emailLabel')}</strong>
+                      <span>{t('contact.emailValue')}</span>
+                    </div>
                   </li>
                   <li>
                     <span className="booking-reachout-icon" aria-hidden="true">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                     </span>
-                    <div><strong>{t('contact.addressLabel')}</strong><span>{t('contact.addressValue')}</span></div>
+                    <div>
+                      <strong>{typeof reachoutContent?.addressLabel === 'string' ? reachoutContent.addressLabel : t('contact.addressLabel')}</strong>
+                      <span>{t('contact.addressValue')}</span>
+                    </div>
                   </li>
                   <li>
                     <span className="booking-reachout-icon" aria-hidden="true">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                     </span>
-                    <div><strong>{t('contact.hoursLabel')}</strong><span>{t('contact.hoursValue')}</span></div>
+                    <div>
+                      <strong>{typeof reachoutContent?.hoursLabel === 'string' ? reachoutContent.hoursLabel : t('contact.hoursLabel')}</strong>
+                      <span>{t('contact.hoursValue')}</span>
+                    </div>
                   </li>
                 </ul>
                 <p className="booking-follow-label">{t('contact.followUs')}</p>

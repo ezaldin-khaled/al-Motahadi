@@ -133,11 +133,19 @@ export type BlogPostData = {
   image: string;
   image_large?: string;
   author_name?: string;
+  thumbnail_media_id?: number | null;
+  hero_media_id?: number | null;
   status: 'draft' | 'published';
   featured: boolean;
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
+  meta_title_en?: string | null;
+  meta_description_en?: string | null;
+  meta_keywords_en?: string | null;
+  meta_title_ar?: string | null;
+  meta_description_ar?: string | null;
+  meta_keywords_ar?: string | null;
 };
 
 export type BlogListResponse =
@@ -152,23 +160,82 @@ export type BlogSaveResponse =
   | { success: true; post: BlogPostData }
   | { success: false; error: string };
 
-export async function getBlogPosts(filters?: { status?: string; category?: string }): Promise<BlogListResponse> {
+export async function getBlogPosts(filters?: { status?: string; category?: string; lang?: string; featured?: boolean }): Promise<BlogListResponse> {
   try {
     const params = new URLSearchParams();
     if (filters?.status) params.set('status', filters.status);
     if (filters?.category) params.set('category', filters.category);
+    if (filters?.lang) params.set('lang', filters.lang);
+    if (typeof filters?.featured === 'boolean') params.set('featured', filters.featured ? '1' : '0');
     const url = `${API_BASE}/api/blog.php${params.toString() ? '?' + params.toString() : ''}`;
     const res = await fetch(url, { credentials: 'include' });
-    return (await res.json()) as BlogListResponse;
+    const data = (await res.json()) as BlogListResponse | { success: true; posts: Array<Record<string, unknown>> };
+    if (!('success' in data) || !data.success) return data as BlogListResponse;
+
+    const lang = filters?.lang || 'en';
+    const posts = (data as { success: true; posts: Array<Record<string, unknown>> }).posts.map((raw) => {
+      const rawTitle = (raw as any).title as string | undefined;
+      const rawExcerpt = (raw as any).excerpt as string | undefined;
+      const title_en = lang === 'en' ? (rawTitle || '') : '';
+      const title_ar = lang === 'ar' ? (rawTitle || '') : '';
+      const excerpt_en = lang === 'en' ? (rawExcerpt || '') : '';
+      const excerpt_ar = lang === 'ar' ? (rawExcerpt || '') : '';
+
+      const dateRaw =
+        (raw as any).published_at ||
+        (raw as any).date ||
+        (raw as any).created_at ||
+        (raw as any).updated_at ||
+        new Date().toISOString();
+      return {
+        ...(raw as any),
+        title_en,
+        title_ar,
+        excerpt_en,
+        excerpt_ar,
+        // backend list query provides hero URL as image_large, and thumb URL as image
+        image_large: (raw as any).image_large ?? undefined,
+        image: (raw as any).image ?? '',
+        date: String(dateRaw).slice(0, 10),
+        read_time: typeof (raw as any).read_time === 'number' ? (raw as any).read_time : 5,
+        featured: Boolean((raw as any).featured),
+      } as BlogPostData;
+    });
+
+    return { success: true, posts };
   } catch {
     return { success: false, error: 'Failed to fetch posts.' };
   }
 }
 
-export async function getBlogPost(id: number | string): Promise<BlogSingleResponse> {
+export async function getBlogPost(id: number | string, _lang?: 'en' | 'ar'): Promise<BlogSingleResponse> {
   try {
     const res = await fetch(`${API_BASE}/api/blog.php?id=${id}`, { credentials: 'include' });
-    return (await res.json()) as BlogSingleResponse;
+    const data = (await res.json()) as BlogSingleResponse & { success?: boolean; post?: any };
+    if (!data.success || !data.post) return data as BlogSingleResponse;
+
+    const raw = data.post as any;
+    const dateRaw =
+      raw.published_at ||
+      raw.date ||
+      raw.created_at ||
+      raw.updated_at ||
+      new Date().toISOString();
+
+    const date = String(dateRaw).slice(0, 10);
+
+    const normalized: BlogPostData = {
+      ...(raw as any),
+      date,
+      read_time: typeof raw.read_time === 'number' ? raw.read_time : 5,
+      image: raw.image ?? raw.thumb_url ?? '',
+      image_large: raw.image_large ?? undefined,
+      thumbnail_media_id: raw.thumbnail_media_id ?? null,
+      hero_media_id: raw.hero_media_id ?? null,
+      featured: Boolean(raw.featured),
+    };
+
+    return { success: true, post: normalized };
   } catch {
     return { success: false, error: 'Failed to fetch post.' };
   }
@@ -306,6 +373,8 @@ export type CmsPageSection = {
   meta_keywords?: string | null;
 };
 
+export type CmsPageSectionsMap = Record<string, Record<string, CmsPageSection>>;
+
 export async function getPages(): Promise<{ success: boolean; pages?: CmsPage[]; error?: string }> {
   try {
     const res = await fetch(`${API_BASE}/api/pages.php`, { credentials: 'include' });
@@ -324,6 +393,18 @@ export async function getPageSections(pageId: number, lang?: string): Promise<{ 
     return (await res.json()) as { success: boolean; sections?: Record<string, Record<string, CmsPageSection>> | CmsPageSection[]; error?: string };
   } catch {
     return { success: false, error: 'Failed to fetch sections.' };
+  }
+}
+
+export async function getPageSectionsBySlug(slug: string, lang?: string): Promise<{ success: boolean; page_id?: number; sections?: CmsPageSectionsMap; error?: string }> {
+  try {
+    const params = new URLSearchParams();
+    params.set('slug', slug);
+    if (lang) params.set('lang', lang);
+    const res = await fetch(`${API_BASE}/api/pages.php?${params.toString()}`, { credentials: 'include' });
+    return (await res.json()) as { success: boolean; page_id?: number; sections?: CmsPageSectionsMap; error?: string };
+  } catch {
+    return { success: false, error: 'Failed to fetch page content.' };
   }
 }
 

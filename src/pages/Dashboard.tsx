@@ -1,9 +1,10 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import {
   getBlogPosts,
+  getBlogPost,
   saveBlogPost,
   deleteBlogPost,
   getSettings,
@@ -28,6 +29,8 @@ import {
   type CmsPageSection,
   type RedirectRule,
 } from '../lib/api';
+import HtmlEditor, { type HtmlEditorHandle } from '../components/HtmlEditor';
+import MediaPickerModal from '../components/MediaPickerModal';
 import '../styles/dashboard.css';
 
 type TabId = 'overview' | 'blog' | 'pages' | 'images' | 'settings' | 'users' | 'redirects';
@@ -175,6 +178,10 @@ function BlogTab() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [editing, setEditing] = useState<BlogPostData | null>(null);
+  const [editorLang, setEditorLang] = useState<'en' | 'ar'>('en');
+  const [mediaPicker, setMediaPicker] = useState<null | 'thumbnail' | 'hero' | 'inline-en' | 'inline-ar'>(null);
+  const editorEnRef = useRef<HtmlEditorHandle | null>(null);
+  const editorArRef = useRef<HtmlEditorHandle | null>(null);
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
@@ -218,14 +225,31 @@ function BlogTab() {
       image_large: '',
       status: 'draft',
       featured: false,
+      thumbnail_media_id: null,
+      hero_media_id: null,
       meta_title: '',
       meta_description: '',
       meta_keywords: '',
+      meta_title_en: '',
+      meta_description_en: '',
+      meta_keywords_en: '',
+      meta_title_ar: '',
+      meta_description_ar: '',
+      meta_keywords_ar: '',
     });
   };
 
-  const openEdit = (post: BlogPostData) => {
-    setEditing(post);
+  const openEdit = async (post: BlogPostData) => {
+    if (!post.id) return;
+    const res = await getBlogPost(post.id);
+    if (res.success && res.post) {
+      setEditing(res.post);
+      setEditorLang('en');
+      setMediaPicker(null);
+    } else {
+      const msg = 'error' in res ? res.error : 'Failed to load post';
+      alert(msg);
+    }
   };
 
   const closeEdit = () => {
@@ -234,10 +258,20 @@ function BlogTab() {
 
   const handleSave = async () => {
     if (!editing) return;
-    const payload: Partial<BlogPostData> = { ...editing };
+    const payload: any = { ...editing };
+    payload.meta_title = editing.meta_title_en ?? editing.meta_title ?? null;
+    payload.meta_description = editing.meta_description_en ?? editing.meta_description ?? null;
+    payload.meta_keywords = editing.meta_keywords_en ?? editing.meta_keywords ?? null;
+    if (editing.status === 'published') {
+      payload.published_at = editing.date ? `${editing.date} 00:00:00` : undefined;
+    } else {
+      payload.published_at = null;
+    }
+
     const res = await saveBlogPost(payload);
-    if (!res.success || !res.post) {
-      alert(res.error || 'Failed to save post');
+    if (!res.success || !('post' in res) || !res.post) {
+      const msg = 'error' in res ? res.error : 'Failed to save post';
+      alert(msg);
       return;
     }
     setPosts(prev => {
@@ -249,6 +283,31 @@ function BlogTab() {
     });
     setEditing(null);
   };
+
+  const handleSelectMedia = (file: MediaFile) => {
+    if (!editing) return;
+    const alt = file.alt_text || file.original_name || 'image';
+    const imgHtml = `<p><img src="${file.url}" alt="${alt}" style="max-width:100%; height:auto;" /></p>`;
+    if (mediaPicker === 'thumbnail') {
+      setEditing(prev => (prev ? { ...prev, thumbnail_media_id: file.id, image: file.url } : prev));
+    } else if (mediaPicker === 'hero') {
+      setEditing(prev => (prev ? { ...prev, hero_media_id: file.id, image_large: file.url } : prev));
+    } else if (mediaPicker === 'inline-en') {
+      editorEnRef.current?.insertHtml(imgHtml);
+    } else if (mediaPicker === 'inline-ar') {
+      editorArRef.current?.insertHtml(imgHtml);
+    }
+    setMediaPicker(null);
+  };
+
+  const mediaPickerTitle =
+    mediaPicker === 'thumbnail'
+      ? t('dashboard.pickThumbnail', 'Pick Thumbnail Image')
+      : mediaPicker === 'hero'
+        ? t('dashboard.pickHero', 'Pick Hero Image')
+        : mediaPicker === 'inline-en' || mediaPicker === 'inline-ar'
+          ? t('dashboard.insertImage', 'Insert Image')
+          : 'Pick Image';
 
   if (loading) return <p className="dashboard-loading">Loading...</p>;
   if (error) return <p className="dashboard-error">{error}</p>;
@@ -320,51 +379,163 @@ function BlogTab() {
                     onChange={e => setEditing(prev => prev && { ...prev, slug: e.target.value })}
                   />
                 </div>
-                <div className="dashboard-form-group">
-                  <label className="dashboard-form-label">Title (EN)</label>
-                  <input
-                    type="text"
-                    className="dashboard-form-input"
-                    value={editing.title_en}
-                    onChange={e => setEditing(prev => prev && { ...prev, title_en: e.target.value })}
-                  />
+
+                <div className="dashboard-lang-tabs" role="tablist" aria-label="Blog language">
+                  <button
+                    type="button"
+                    className={`dashboard-lang-tab ${editorLang === 'en' ? 'dashboard-lang-tab--active' : ''}`}
+                    onClick={() => setEditorLang('en')}
+                    role="tab"
+                    aria-selected={editorLang === 'en'}
+                  >
+                    EN
+                  </button>
+                  <button
+                    type="button"
+                    className={`dashboard-lang-tab ${editorLang === 'ar' ? 'dashboard-lang-tab--active' : ''}`}
+                    onClick={() => setEditorLang('ar')}
+                    role="tab"
+                    aria-selected={editorLang === 'ar'}
+                  >
+                    AR
+                  </button>
                 </div>
-                <div className="dashboard-form-group">
-                  <label className="dashboard-form-label">Title (AR)</label>
-                  <input
-                    type="text"
-                    className="dashboard-form-input"
-                    value={editing.title_ar}
-                    onChange={e => setEditing(prev => prev && { ...prev, title_ar: e.target.value })}
-                  />
-                </div>
-                <div className="dashboard-form-group">
-                  <label className="dashboard-form-label">Excerpt (EN)</label>
-                  <textarea
-                    className="dashboard-form-input"
-                    rows={3}
-                    value={editing.excerpt_en}
-                    onChange={e => setEditing(prev => prev && { ...prev, excerpt_en: e.target.value })}
-                  />
-                </div>
-                <div className="dashboard-form-group">
-                  <label className="dashboard-form-label">Excerpt (AR)</label>
-                  <textarea
-                    className="dashboard-form-input"
-                    rows={3}
-                    value={editing.excerpt_ar}
-                    onChange={e => setEditing(prev => prev && { ...prev, excerpt_ar: e.target.value })}
-                  />
-                </div>
+
+                {editorLang === 'en' ? (
+                  <>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Title (EN)</label>
+                      <input
+                        type="text"
+                        className="dashboard-form-input"
+                        value={editing.title_en}
+                        onChange={e => setEditing(prev => prev && { ...prev, title_en: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Excerpt (EN)</label>
+                      <textarea
+                        className="dashboard-form-input"
+                        rows={3}
+                        value={editing.excerpt_en}
+                        onChange={e => setEditing(prev => prev && { ...prev, excerpt_en: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Body (EN)</label>
+                      <HtmlEditor
+                        ref={editorEnRef}
+                        value={editing.body_en || ''}
+                        placeholder="Write blog body..."
+                        onChange={(v) => setEditing(prev => (prev ? { ...prev, body_en: v } : prev))}
+                        minHeight={280}
+                        onRequestImage={() => setMediaPicker('inline-en')}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Meta Title (EN)</label>
+                      <input
+                        type="text"
+                        className="dashboard-form-input"
+                        value={editing.meta_title_en ?? ''}
+                        onChange={e => setEditing(prev => prev && { ...prev, meta_title_en: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Meta Description (EN)</label>
+                      <textarea
+                        className="dashboard-form-input"
+                        rows={3}
+                        value={editing.meta_description_en ?? ''}
+                        onChange={e => setEditing(prev => prev && { ...prev, meta_description_en: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Meta Keywords (EN)</label>
+                      <input
+                        type="text"
+                        className="dashboard-form-input"
+                        value={editing.meta_keywords_en ?? ''}
+                        onChange={e => setEditing(prev => prev && { ...prev, meta_keywords_en: e.target.value })}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Title (AR)</label>
+                      <input
+                        type="text"
+                        className="dashboard-form-input"
+                        value={editing.title_ar}
+                        onChange={e => setEditing(prev => prev && { ...prev, title_ar: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Excerpt (AR)</label>
+                      <textarea
+                        className="dashboard-form-input"
+                        rows={3}
+                        value={editing.excerpt_ar}
+                        onChange={e => setEditing(prev => prev && { ...prev, excerpt_ar: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Body (AR)</label>
+                      <HtmlEditor
+                        ref={editorArRef}
+                        value={editing.body_ar || ''}
+                        placeholder="اكتب محتوى المقال..."
+                        onChange={(v) => setEditing(prev => (prev ? { ...prev, body_ar: v } : prev))}
+                        minHeight={280}
+                        onRequestImage={() => setMediaPicker('inline-ar')}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Meta Title (AR)</label>
+                      <input
+                        type="text"
+                        className="dashboard-form-input"
+                        value={editing.meta_title_ar ?? ''}
+                        onChange={e => setEditing(prev => prev && { ...prev, meta_title_ar: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Meta Description (AR)</label>
+                      <textarea
+                        className="dashboard-form-input"
+                        rows={3}
+                        value={editing.meta_description_ar ?? ''}
+                        onChange={e => setEditing(prev => prev && { ...prev, meta_description_ar: e.target.value })}
+                      />
+                    </div>
+                    <div className="dashboard-form-group">
+                      <label className="dashboard-form-label">Meta Keywords (AR)</label>
+                      <input
+                        type="text"
+                        className="dashboard-form-input"
+                        value={editing.meta_keywords_ar ?? ''}
+                        onChange={e => setEditing(prev => prev && { ...prev, meta_keywords_ar: e.target.value })}
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div className="dashboard-form-group">
                   <label className="dashboard-form-label">Category</label>
-                  <input
-                    type="text"
+                  <select
                     className="dashboard-form-input"
                     value={editing.category}
                     onChange={e => setEditing(prev => prev && { ...prev, category: e.target.value })}
-                  />
+                  >
+                    <option value="news">news</option>
+                    <option value="rehabilitation">rehabilitation</option>
+                    <option value="tips">tips</option>
+                    <option value="wellness">wellness</option>
+                    <option value="research">research</option>
+                  </select>
                 </div>
+
                 <div className="dashboard-form-group">
                   <label className="dashboard-form-label">Status</label>
                   <select
@@ -376,6 +547,7 @@ function BlogTab() {
                     <option value="published">Published</option>
                   </select>
                 </div>
+
                 <div className="dashboard-form-group">
                   <label className="dashboard-form-label">Featured</label>
                   <input
@@ -384,8 +556,56 @@ function BlogTab() {
                     onChange={e => setEditing(prev => prev && { ...prev, featured: e.target.checked })}
                   />
                 </div>
+
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Publish date</label>
+                  <input
+                    type="date"
+                    className="dashboard-form-input"
+                    value={editing.date}
+                    onChange={e => setEditing(prev => prev && { ...prev, date: e.target.value })}
+                  />
+                </div>
+
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Read time (minutes)</label>
+                  <input
+                    type="number"
+                    min={1}
+                    className="dashboard-form-input"
+                    value={editing.read_time}
+                    onChange={e => setEditing(prev => prev && { ...prev, read_time: Number(e.target.value) || 1 })}
+                  />
+                </div>
+
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Thumbnail (small)</label>
+                  <div className="dashboard-image-picker">
+                    {editing.image ? <img src={editing.image} alt="thumbnail preview" className="dashboard-image-preview" /> : <div className="dashboard-image-placeholder">No image</div>}
+                    <button type="button" className="dashboard-btn" onClick={() => setMediaPicker('thumbnail')}>
+                      Choose
+                    </button>
+                  </div>
+                </div>
+
+                <div className="dashboard-form-group">
+                  <label className="dashboard-form-label">Hero (large)</label>
+                  <div className="dashboard-image-picker">
+                    {editing.image_large ? <img src={editing.image_large} alt="hero preview" className="dashboard-image-preview" /> : <div className="dashboard-image-placeholder">No image</div>}
+                    <button type="button" className="dashboard-btn" onClick={() => setMediaPicker('hero')}>
+                      Choose
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <MediaPickerModal
+              open={mediaPicker !== null}
+              title={mediaPickerTitle}
+              onClose={() => setMediaPicker(null)}
+              onSelect={handleSelectMedia}
+            />
             <div className="dashboard-modal-footer">
               <button type="button" className="dashboard-btn" onClick={closeEdit}>
                 Cancel
@@ -409,6 +629,9 @@ function PagesTab() {
   const [lang, setLang] = useState<'en' | 'ar'>('en');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [newSectionKey, setNewSectionKey] = useState('');
+  const [newSectionContentType, setNewSectionContentType] = useState<CmsPageSection['content_type']>('text');
+  const [newSectionContent, setNewSectionContent] = useState('');
 
   const loadPages = useCallback(async () => {
     setLoading(true);
@@ -478,6 +701,59 @@ function PagesTab() {
     setSaving(false);
   };
 
+  const handleCreateSection = async () => {
+    if (!selectedPageId) return;
+    const key = newSectionKey.trim();
+    if (!key) {
+      alert('Section key is required');
+      return;
+    }
+    setSaving(true);
+    const res = await savePageSection({
+      page_id: selectedPageId,
+      section_key: key,
+      lang,
+      content_type: newSectionContentType,
+      content: newSectionContent,
+      meta_title: null,
+      meta_description: null,
+      meta_keywords: null,
+    });
+    if (!res.success || !res.section) {
+      alert(res.error || 'Failed to create section');
+      setSaving(false);
+      return;
+    }
+
+    setNewSectionKey('');
+    setNewSectionContent('');
+    setNewSectionContentType('text');
+    await loadSections(selectedPageId, lang);
+    setSaving(false);
+  };
+
+  const handleCopyToOtherLanguage = async (section: CmsPageSection) => {
+    if (!selectedPageId) return;
+    const targetLang = lang === 'en' ? 'ar' : 'en';
+    setSaving(true);
+    const res = await savePageSection({
+      page_id: section.page_id,
+      section_key: section.section_key,
+      lang: targetLang,
+      content_type: section.content_type,
+      content: section.content ?? '',
+      meta_title: section.meta_title ?? null,
+      meta_description: section.meta_description ?? null,
+      meta_keywords: section.meta_keywords ?? null,
+    });
+    if (!res.success) {
+      alert(res.error || 'Failed to copy section');
+    } else {
+      alert('Copied!');
+    }
+    setSaving(false);
+  };
+
   const handleDeleteSection = async (id: number) => {
     if (!confirm('Delete this section?')) return;
     const res = await deletePageSection(id);
@@ -515,64 +791,176 @@ function PagesTab() {
           <>
             <div className="dashboard-pages-toolbar">
               <span>Language:</span>
-              <select value={lang} onChange={e => setLang(e.target.value as 'en' | 'ar')}>
-                <option value="en">English</option>
-                <option value="ar">Arabic</option>
-              </select>
+              <div className="dashboard-lang-tabs">
+                <button
+                  type="button"
+                  className={`dashboard-lang-tab ${lang === 'en' ? 'dashboard-lang-tab--active' : ''}`}
+                  onClick={() => setLang('en')}
+                >
+                  EN
+                </button>
+                <button
+                  type="button"
+                  className={`dashboard-lang-tab ${lang === 'ar' ? 'dashboard-lang-tab--active' : ''}`}
+                  onClick={() => setLang('ar')}
+                >
+                  AR
+                </button>
+              </div>
             </div>
-            <div className="dashboard-table-wrap">
-              <table className="dashboard-table">
-                <thead>
-                  <tr>
-                    <th>Section Key</th>
-                    <th>Content</th>
-                    <th>Meta Title</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sections
-                    .filter(s => s.lang === lang)
-                    .map(section => (
-                      <tr key={section.id}>
-                        <td>{section.section_key}</td>
-                        <td>
+
+            <div className="dashboard-pages-new-section">
+              <h3 className="dashboard-pages-new-section-title">New Section</h3>
+              <div className="dashboard-pages-new-section-grid">
+                <div>
+                  <label className="dashboard-form-label">Key</label>
+                  <input
+                    type="text"
+                    className="dashboard-form-input"
+                    value={newSectionKey}
+                    onChange={e => setNewSectionKey(e.target.value)}
+                    placeholder="e.g. services_intro"
+                  />
+                </div>
+                <div>
+                  <label className="dashboard-form-label">Content Type</label>
+                  <select
+                    className="dashboard-form-input"
+                    value={newSectionContentType}
+                    onChange={e => setNewSectionContentType(e.target.value as CmsPageSection['content_type'])}
+                  >
+                    <option value="text">text</option>
+                    <option value="html">html</option>
+                    <option value="json">json</option>
+                  </select>
+                </div>
+                <div style={{ gridColumn: '1 / -1' }}>
+                  {newSectionContentType === 'html' ? (
+                    <HtmlEditor
+                      value={newSectionContent}
+                      onChange={setNewSectionContent}
+                      placeholder="Write HTML..."
+                      minHeight={200}
+                    />
+                  ) : (
+                    <textarea
+                      className="dashboard-form-input"
+                      rows={4}
+                      value={newSectionContent}
+                      onChange={e => setNewSectionContent(e.target.value)}
+                      placeholder="Enter content..."
+                    />
+                  )}
+                </div>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+                <button
+                  type="button"
+                  className="dashboard-btn dashboard-btn--primary"
+                  disabled={saving}
+                  onClick={handleCreateSection}
+                >
+                  Add Section
+                </button>
+              </div>
+            </div>
+
+            <div className="dashboard-sections-grid">
+              {sections
+                .filter(s => s.lang === lang)
+                .map(section => (
+                  <div key={section.id} className="dashboard-section-card">
+                    <div className="dashboard-section-card-header">
+                      <div className="dashboard-section-card-key">{section.section_key}</div>
+                      <div className="dashboard-section-card-actions">
+                        <button
+                          type="button"
+                          className="dashboard-btn dashboard-btn--sm dashboard-btn--primary"
+                          onClick={() => handleSaveSection(section)}
+                          disabled={saving}
+                        >
+                          Save
+                        </button>
+                        <button
+                          type="button"
+                          className="dashboard-btn dashboard-btn--sm"
+                          onClick={() => handleCopyToOtherLanguage(section)}
+                          disabled={saving}
+                        >
+                          Copy to {lang === 'en' ? 'AR' : 'EN'}
+                        </button>
+                        <button
+                          type="button"
+                          className="dashboard-btn dashboard-btn--sm dashboard-btn--danger"
+                          onClick={() => handleDeleteSection(section.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="dashboard-section-card-body">
+                      <div className="dashboard-form-group" style={{ marginBottom: 10 }}>
+                        <label className="dashboard-form-label">Content Type</label>
+                        <select
+                          className="dashboard-form-input"
+                          value={section.content_type}
+                          onChange={e => handleSectionChange(section.id, 'content_type', e.target.value as CmsPageSection['content_type'])}
+                        >
+                          <option value="text">text</option>
+                          <option value="html">html</option>
+                          <option value="json">json</option>
+                        </select>
+                      </div>
+
+                      <div className="dashboard-form-group" style={{ marginBottom: 10 }}>
+                        {section.content_type === 'html' ? (
+                          <HtmlEditor
+                            value={section.content || ''}
+                            onChange={(v) => handleSectionChange(section.id, 'content', v)}
+                            placeholder="Write HTML..."
+                            minHeight={220}
+                          />
+                        ) : (
                           <textarea
                             className="dashboard-form-input"
-                            rows={3}
+                            rows={5}
                             value={section.content || ''}
                             onChange={e => handleSectionChange(section.id, 'content', e.target.value)}
                           />
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            className="dashboard-form-input"
-                            value={section.meta_title || ''}
-                            onChange={e => handleSectionChange(section.id, 'meta_title', e.target.value)}
-                          />
-                        </td>
-                        <td>
-                          <button
-                            type="button"
-                            className="dashboard-btn dashboard-btn--sm"
-                            onClick={() => handleSaveSection(section)}
-                            disabled={saving}
-                          >
-                            Save
-                          </button>
-                          <button
-                            type="button"
-                            className="dashboard-btn dashboard-btn--sm dashboard-btn--danger"
-                            onClick={() => handleDeleteSection(section.id)}
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+                        )}
+                      </div>
+
+                      <div className="dashboard-form-group">
+                        <label className="dashboard-form-label">Meta Title</label>
+                        <input
+                          type="text"
+                          className="dashboard-form-input"
+                          value={section.meta_title || ''}
+                          onChange={e => handleSectionChange(section.id, 'meta_title', e.target.value)}
+                        />
+                      </div>
+                      <div className="dashboard-form-group">
+                        <label className="dashboard-form-label">Meta Description</label>
+                        <textarea
+                          className="dashboard-form-input"
+                          rows={3}
+                          value={section.meta_description || ''}
+                          onChange={e => handleSectionChange(section.id, 'meta_description', e.target.value)}
+                        />
+                      </div>
+                      <div className="dashboard-form-group">
+                        <label className="dashboard-form-label">Meta Keywords</label>
+                        <input
+                          type="text"
+                          className="dashboard-form-input"
+                          value={section.meta_keywords || ''}
+                          onChange={e => handleSectionChange(section.id, 'meta_keywords', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
           </>
         )}

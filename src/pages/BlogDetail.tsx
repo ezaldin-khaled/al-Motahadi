@@ -33,13 +33,13 @@ function RelatedCard({ post }: { post: BlogPostData }) {
   const authorName = post.author_name || t('blog.defaultAuthor');
   const filterLabelKey = CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news;
   const relativeTime = i18n.language === 'ar' ? `${post.read_time} ${t('blog.minRead')}` : formatRelativeTime(post.date);
-  const title = post.title_en;
+  const title = i18n.language === 'ar' ? post.title_ar || post.title_en || post.slug : post.title_en || post.title_ar || post.slug;
 
   return (
     <article className="blog-related-card">
       <Link to={`/blog/${post.slug}`} className="blog-related-card-link">
         <div className="blog-related-card-image-wrap">
-          <img src={post.image} alt={post.title_en} className="blog-related-card-image" loading="lazy" />
+          <img src={post.image} alt={title} className="blog-related-card-image" loading="lazy" />
           <span className="blog-related-card-category">{t(filterLabelKey)}</span>
         </div>
         <div className="blog-related-card-body">
@@ -80,7 +80,10 @@ export default function BlogDetail() {
       const res = await getBlogPost(slug);
       if (res.success && res.post) {
         setPost(res.post);
-        const listRes = await getBlogPosts({ status: 'published' });
+        const listRes = await getBlogPosts({
+          status: 'published',
+          lang: i18n.language === 'ar' ? 'ar' : 'en',
+        });
         if (listRes.success && 'posts' in listRes) {
           setRelatedPosts(listRes.posts.filter(p => p.slug !== slug).slice(0, 1));
         }
@@ -91,7 +94,7 @@ export default function BlogDetail() {
       setLoading(false);
     };
     load();
-  }, [slug]);
+  }, [slug, i18n.language]);
 
   if (loading) {
     return (
@@ -124,13 +127,13 @@ export default function BlogDetail() {
 
   const authorName = post.author_name || t('blog.defaultAuthor');
   const categoryLabelKey = CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news;
-  const title = post.title_en;
+  const title = isRtl ? post.title_ar || post.title_en || post.slug : post.title_en || post.title_ar || post.slug;
   const formattedDate = new Date(post.date).toLocaleDateString(undefined, {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   });
-  const bodyParagraphs = (post.body_en || '').split('\n\n').filter(Boolean);
+  const bodyHtml = isRtl ? post.body_ar || '' : post.body_en || '';
 
   return (
     <div className="page-wrapper">
@@ -163,9 +166,7 @@ export default function BlogDetail() {
               {t(categoryLabelKey)}
             </p>
             <div className="blog-detail-body">
-              {bodyParagraphs.map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
+              <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
             </div>
           </div>
         </section>

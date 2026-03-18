@@ -6,17 +6,34 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SectionServices() {
+type SectionServiceItem = {
+  img: string;
+  title: string;
+  desc: string;
+  alt?: string;
+};
+
+type SectionServicesContent = {
+  label?: string;
+  title?: string;
+  description?: string;
+  extra?: string;
+  ctaLabel?: string;
+  items?: SectionServiceItem[];
+};
+
+export default function SectionServices({ content }: { content?: SectionServicesContent }) {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const services = [
-    { img: '/service-left.png', title: t('sectionServices.physicalTherapy'), desc: t('sectionServices.physicalTherapyDesc'), alt: t('sectionServices.physicalTherapyAlt') },
-    { img: '/service-middle.png', title: t('sectionServices.neurologicalRehab'), desc: t('sectionServices.neurologicalRehabDesc'), alt: t('sectionServices.neurologicalRehabAlt') },
-    { img: '/service-right.png', title: t('sectionServices.rehabilitation'), desc: t('sectionServices.rehabilitationDesc'), alt: t('sectionServices.rehabilitationAlt') },
-  ];
+  const services =
+    content?.items ?? [
+      { img: '/service-left.png', title: t('sectionServices.physicalTherapy'), desc: t('sectionServices.physicalTherapyDesc'), alt: t('sectionServices.physicalTherapyAlt') },
+      { img: '/service-middle.png', title: t('sectionServices.neurologicalRehab'), desc: t('sectionServices.neurologicalRehabDesc'), alt: t('sectionServices.neurologicalRehabAlt') },
+      { img: '/service-right.png', title: t('sectionServices.rehabilitation'), desc: t('sectionServices.rehabilitationDesc'), alt: t('sectionServices.rehabilitationAlt') },
+    ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,22 +59,22 @@ export default function SectionServices() {
     <section className="section section-services" ref={sectionRef}>
       <div className="content-inner">
         <div ref={headingRef}>
-          <p className="section-label">{t('sectionServices.label')}</p>
-          <h2 className="section-title">{t('sectionServices.title')}</h2>
-          <p className="section-desc section-desc-center">{t('sectionServices.description')}</p>
+          <p className="section-label">{content?.label ?? t('sectionServices.label')}</p>
+          <h2 className="section-title">{content?.title ?? t('sectionServices.title')}</h2>
+          <p className="section-desc section-desc-center">{content?.description ?? t('sectionServices.description')}</p>
         </div>
         <div className="cards-three">
           {services.map((s, i) => (
             <div className="card" key={s.title} ref={(el) => { cardsRef.current[i] = el; }}>
-              <img src={s.img} alt={s.alt} className="card-img" />
+              <img src={s.img} alt={s.alt ?? s.title} className="card-img" />
               <h3 className="card-title">{s.title}</h3>
               <p className="card-desc">{s.desc}</p>
               <Link to="/services" className="section-services-learn-more">{t('servicesPage.learnMore')}</Link>
             </div>
           ))}
         </div>
-        <p className="section-extra">{t('sectionServices.extra')}</p>
-        <div className="section-cta"><Link to="/services" className="btn btn-primary">{t('sectionServices.viewAllServices')}</Link></div>
+        <p className="section-extra">{content?.extra ?? t('sectionServices.extra')}</p>
+        <div className="section-cta"><Link to="/services" className="btn btn-primary">{content?.ctaLabel ?? t('sectionServices.viewAllServices')}</Link></div>
       </div>
     </section>
   );

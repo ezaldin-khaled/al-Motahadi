@@ -4,10 +4,18 @@ import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
+import { useCmsPageContent } from '../hooks/useCmsPageContent';
 import '../styles/about.css';
 
 export default function AboutUs() {
   const { t } = useTranslation();
+  const { getSectionValue } = useCmsPageContent('about');
+  const heroContent = getSectionValue('about_hero') as Record<string, unknown> | null;
+  const introContent = getSectionValue('about_intro') as Record<string, unknown> | null;
+  const storyContent = getSectionValue('about_story') as Record<string, unknown> | null;
+  const founderContent = getSectionValue('about_founder') as Record<string, unknown> | null;
+  const teamContent = getSectionValue('about_team') as Record<string, unknown> | null;
+  const responsibilityContent = getSectionValue('about_responsibility') as Record<string, unknown> | null;
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -20,15 +28,19 @@ export default function AboutUs() {
           <div className="about-hero-bg" aria-hidden="true" />
           <div className="about-hero-inner">
             <div className="about-hero-content">
-              <span className="about-hero-label">{t('about.heroLabel')}</span>
+              <span className="about-hero-label">{typeof heroContent?.label === 'string' ? heroContent.label : t('about.heroLabel')}</span>
               <h1 className="about-hero-title">
-                {t('about.heroTitle')} <span className="text-accent">{t('about.heroTitleAccent')}</span>
+                {typeof heroContent?.title === 'string' ? heroContent.title : t('about.heroTitle')}{' '}
+                <span className="text-accent">{typeof heroContent?.titleAccent === 'string' ? heroContent.titleAccent : t('about.heroTitleAccent')}</span>
               </h1>
-              <p className="about-hero-desc">{t('about.heroDesc')}</p>
+              <p className="about-hero-desc">{typeof heroContent?.description === 'string' ? heroContent.description : t('about.heroDesc')}</p>
             </div>
             <div className="about-hero-image">
               <div className="hero-image-card">
-                <img src="/rehab-about-hero.png" alt={t('about.heroImageAlt')} />
+                <img
+                  src={typeof heroContent?.image === 'string' ? heroContent.image : '/rehab-about-hero.png'}
+                  alt={typeof heroContent?.imageAlt === 'string' ? heroContent.imageAlt : t('about.heroImageAlt')}
+                />
               </div>
             </div>
           </div>
@@ -36,9 +48,9 @@ export default function AboutUs() {
 
         <section className="who-we-are">
           <div className="who-we-are-container">
-            <h2 className="section-heading">{t('about.whoWeAreHeading')}</h2>
-            <p className="who-we-are-text">{t('about.whoWeAreText')}</p>
-            <Link to="/who-we-are" className="btn btn-primary">{t('about.learnMore')}</Link>
+            <h2 className="section-heading">{typeof introContent?.heading === 'string' ? introContent.heading : t('about.whoWeAreHeading')}</h2>
+            <p className="who-we-are-text">{typeof introContent?.body === 'string' ? introContent.body : t('about.whoWeAreText')}</p>
+            <Link to="/who-we-are" className="btn btn-primary">{typeof introContent?.ctaLabel === 'string' ? introContent.ctaLabel : t('about.learnMore')}</Link>
           </div>
         </section>
 
@@ -137,12 +149,15 @@ export default function AboutUs() {
           <div className="trust-container">
             <div className="trust-content">
               <div className="trust-header">
-                <p className="trust-label">{t('about.ourStoryLabel')}</p>
-                <h2 id="our-story-heading" className="trust-heading">{t('about.ourStoryHeading')}</h2>
+                <p className="trust-label">{typeof storyContent?.label === 'string' ? storyContent.label : t('about.ourStoryLabel')}</p>
+                <h2 id="our-story-heading" className="trust-heading">{typeof storyContent?.heading === 'string' ? storyContent.heading : t('about.ourStoryHeading')}</h2>
               </div>
-              <p className="trust-desc trust-desc-justify">{t('about.ourStoryText')}</p>
+              <p className="trust-desc trust-desc-justify">{typeof storyContent?.body === 'string' ? storyContent.body : t('about.ourStoryText')}</p>
               <div className="trust-image">
-                <img src="/almotahadi-opening-ceremony.png" alt={t('about.ourStoryImageAlt')} />
+                <img
+                  src={typeof storyContent?.image === 'string' ? storyContent.image : '/almotahadi-opening-ceremony.png'}
+                  alt={typeof storyContent?.imageAlt === 'string' ? storyContent.imageAlt : t('about.ourStoryImageAlt')}
+                />
               </div>
             </div>
           </div>
@@ -153,15 +168,18 @@ export default function AboutUs() {
             <div className="founder-content">
               <div className="founder-image-wrapper">
                 <div className="founder-image">
-                  <img src="/dr-mohammed-reda-al-yazidi.png" alt={t('about.founderImageAlt')} />
+                  <img
+                    src={typeof founderContent?.image === 'string' ? founderContent.image : '/dr-mohammed-reda-al-yazidi.png'}
+                    alt={typeof founderContent?.imageAlt === 'string' ? founderContent.imageAlt : t('about.founderImageAlt')}
+                  />
                 </div>
               </div>
               <div className="founder-text">
-                <p className="founder-label">{t('about.leadershipLabel')}</p>
-                <h2 id="founder-heading" className="founder-heading">{t('about.founderHeading')}</h2>
-                <p className="founder-desc">{t('about.founderDesc1')}</p>
-                <p className="founder-desc">{t('about.founderDesc2')}</p>
-                <p className="founder-desc">{t('about.founderDesc3')}</p>
+                <p className="founder-label">{typeof founderContent?.label === 'string' ? founderContent.label : t('about.leadershipLabel')}</p>
+                <h2 id="founder-heading" className="founder-heading">{typeof founderContent?.heading === 'string' ? founderContent.heading : t('about.founderHeading')}</h2>
+                <p className="founder-desc">{typeof founderContent?.body1 === 'string' ? founderContent.body1 : t('about.founderDesc1')}</p>
+                <p className="founder-desc">{typeof founderContent?.body2 === 'string' ? founderContent.body2 : t('about.founderDesc2')}</p>
+                <p className="founder-desc">{typeof founderContent?.body3 === 'string' ? founderContent.body3 : t('about.founderDesc3')}</p>
               </div>
             </div>
           </div>
@@ -171,16 +189,19 @@ export default function AboutUs() {
           <div className="medical-teams-container">
             <div className="medical-teams-content">
               <div className="medical-teams-text">
-                <p className="medical-teams-label">{t('about.ourExpertsLabel')}</p>
-                <h2 id="medical-team-heading" className="medical-teams-title">{t('about.medicalTeamHeading')}</h2>
-                <p className="medical-teams-desc">{t('about.medicalTeamDesc1')}</p>
-                <p className="medical-teams-desc">{t('about.medicalTeamDesc2')}</p>
-                <p className="medical-teams-desc">{t('about.medicalTeamDesc3')}</p>
-                <Link to="/who-we-are" className="btn btn-primary">{t('about.meetMedicalTeam')}</Link>
+                <p className="medical-teams-label">{typeof teamContent?.label === 'string' ? teamContent.label : t('about.ourExpertsLabel')}</p>
+                <h2 id="medical-team-heading" className="medical-teams-title">{typeof teamContent?.heading === 'string' ? teamContent.heading : t('about.medicalTeamHeading')}</h2>
+                <p className="medical-teams-desc">{typeof teamContent?.body1 === 'string' ? teamContent.body1 : t('about.medicalTeamDesc1')}</p>
+                <p className="medical-teams-desc">{typeof teamContent?.body2 === 'string' ? teamContent.body2 : t('about.medicalTeamDesc2')}</p>
+                <p className="medical-teams-desc">{typeof teamContent?.body3 === 'string' ? teamContent.body3 : t('about.medicalTeamDesc3')}</p>
+                <Link to="/who-we-are" className="btn btn-primary">{typeof teamContent?.ctaLabel === 'string' ? teamContent.ctaLabel : t('about.meetMedicalTeam')}</Link>
               </div>
               <div className="medical-teams-image-wrap">
                 <div className="medical-teams-image">
-                  <img src="/medical-team.png" alt={t('about.medicalTeamImageAlt')} />
+                  <img
+                    src={typeof teamContent?.image === 'string' ? teamContent.image : '/medical-team.png'}
+                    alt={typeof teamContent?.imageAlt === 'string' ? teamContent.imageAlt : t('about.medicalTeamImageAlt')}
+                  />
                 </div>
               </div>
             </div>
@@ -189,15 +210,15 @@ export default function AboutUs() {
 
         <section className="social-responsibility" aria-labelledby="responsibility-heading">
           <div className="responsibility-container">
-            <p className="responsibility-label">{t('about.givingBackLabel')}</p>
-            <h2 id="responsibility-heading" className="responsibility-heading">{t('about.socialResponsibilityHeading')}</h2>
+            <p className="responsibility-label">{typeof responsibilityContent?.label === 'string' ? responsibilityContent.label : t('about.givingBackLabel')}</p>
+            <h2 id="responsibility-heading" className="responsibility-heading">{typeof responsibilityContent?.heading === 'string' ? responsibilityContent.heading : t('about.socialResponsibilityHeading')}</h2>
             <div className="responsibility-card">
               <div className="responsibility-content">
-                <p className="responsibility-text">{t('about.socialResponsibilityText1')}</p>
-                <p className="responsibility-text">{t('about.socialResponsibilityText2')}</p>
+                <p className="responsibility-text">{typeof responsibilityContent?.body1 === 'string' ? responsibilityContent.body1 : t('about.socialResponsibilityText1')}</p>
+                <p className="responsibility-text">{typeof responsibilityContent?.body2 === 'string' ? responsibilityContent.body2 : t('about.socialResponsibilityText2')}</p>
               </div>
               <div className="responsibility-cta">
-                <Link to="/who-we-are" className="btn btn-primary">{t('about.discoverCommunityInitiatives')}</Link>
+                <Link to="/who-we-are" className="btn btn-primary">{typeof responsibilityContent?.ctaLabel === 'string' ? responsibilityContent.ctaLabel : t('about.discoverCommunityInitiatives')}</Link>
               </div>
             </div>
           </div>

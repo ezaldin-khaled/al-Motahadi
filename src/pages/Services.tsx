@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
+import { useCmsPageContent } from '../hooks/useCmsPageContent';
 import '../styles/services.css';
 
 const SERVICE_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -24,6 +25,11 @@ const SERVICE_IMAGES: Record<number, string> = {
 
 export default function Services() {
   const { t } = useTranslation();
+  const { getSectionValue } = useCmsPageContent('services');
+  const heroContent = getSectionValue('services_hero') as Record<string, unknown> | null;
+  const cardsContent = getSectionValue('services_cards') as Record<string, unknown> | null;
+  const cardItems = Array.isArray((cardsContent as any)?.items) ? ((cardsContent as any).items as any[]) : null;
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -35,10 +41,10 @@ export default function Services() {
         <section className="services-hero">
           <div className="page-hero-bg" aria-hidden="true" />
           <div className="services-hero-content">
-            <p className="services-hero-label">{t('servicesPage.heroLabel')}</p>
-            <h1 className="services-hero-title">{t('servicesPage.heroTitle')}</h1>
-            <p className="services-hero-desc">{t('servicesPage.heroDesc1')}</p>
-            <p className="services-hero-desc">{t('servicesPage.heroDesc2')}</p>
+            <p className="services-hero-label">{typeof heroContent?.label === 'string' ? heroContent.label : t('servicesPage.heroLabel')}</p>
+            <h1 className="services-hero-title">{typeof heroContent?.title === 'string' ? heroContent.title : t('servicesPage.heroTitle')}</h1>
+            <p className="services-hero-desc">{typeof heroContent?.description1 === 'string' ? heroContent.description1 : t('servicesPage.heroDesc1')}</p>
+            <p className="services-hero-desc">{typeof heroContent?.description2 === 'string' ? heroContent.description2 : t('servicesPage.heroDesc2')}</p>
           </div>
         </section>
 
@@ -48,11 +54,24 @@ export default function Services() {
               {SERVICE_IDS.map((id) => (
                 <article key={id} className="service-card">
                   <div className="service-card-image">
-                    <img src={SERVICE_IMAGES[id]} alt={t(`servicesPage.s${id}Title`)} />
-                    <h3 className="service-card-title-overlay">{t(`servicesPage.s${id}Title`)}</h3>
+                    {(() => {
+                      const cmsItem = cardItems?.find(it => Number(it?.id) === id);
+                      const img = typeof cmsItem?.image === 'string' ? cmsItem.image : SERVICE_IMAGES[id];
+                      const title = typeof cmsItem?.title === 'string' ? cmsItem.title : t(`servicesPage.s${id}Title`);
+                      return (
+                        <>
+                          <img src={img} alt={title} />
+                          <h3 className="service-card-title-overlay">{title}</h3>
+                        </>
+                      );
+                    })()}
                   </div>
                   <div className="service-card-content">
-                    <p className="service-card-desc">{t(`servicesPage.s${id}Desc`)}</p>
+                    {(() => {
+                      const cmsItem = cardItems?.find(it => Number(it?.id) === id);
+                      const desc = typeof cmsItem?.description === 'string' ? cmsItem.description : (t(`servicesPage.s${id}Desc`) as string);
+                      return <p className="service-card-desc">{desc}</p>;
+                    })()}
                     <Link to={`/services/${id}`} className="service-card-link">
                       {t('servicesPage.learnMore')}
                       <span className="arrow" aria-hidden>→</span>

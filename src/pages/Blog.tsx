@@ -95,17 +95,18 @@ const FILTER_ICONS: Record<BlogFilterId, React.ReactNode> = {
 };
 
 function BlogCard({ post }: { post: BlogPostData }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const filterLabelKey = CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news;
   const authorName = post.author_name || t('blog.defaultAuthor');
-  const title = post.title_en;
-  const excerpt = post.excerpt_en;
+  const isArabic = i18n.language === 'ar';
+  const title = isArabic ? post.title_ar || post.title_en || post.slug : post.title_en || post.title_ar || post.slug;
+  const excerpt = isArabic ? post.excerpt_ar || post.excerpt_en || '' : post.excerpt_en || post.excerpt_ar || '';
 
   return (
     <article id={`post-${post.slug}`} className="blog-card">
       <div className="blog-card-inner">
         <div className="blog-card-image-wrap">
-          <img src={post.image} alt={post.title_en} className="blog-card-image" loading="lazy" />
+          <img src={post.image} alt={title} className="blog-card-image" loading="lazy" />
           <span className="blog-card-category-tag">{t(filterLabelKey)}</span>
         </div>
         <div className="blog-card-body">
@@ -147,14 +148,14 @@ export default function Blog() {
   const loadPosts = useCallback(async () => {
     setLoading(true);
     setError('');
-    const res = await getBlogPosts({ status: 'published' });
+    const res = await getBlogPosts({ status: 'published', lang: i18n.language === 'ar' ? 'ar' : 'en' });
     if (res.success && 'posts' in res) {
       setPosts(res.posts);
     } else if (!res.success && 'error' in res) {
       setError(res.error || 'Failed to load posts');
     }
     setLoading(false);
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     loadPosts();
@@ -168,9 +169,11 @@ export default function Blog() {
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       list = list.filter((post) => {
-        const title = (post.title_en || post.slug).toLowerCase();
+        const localizedTitle = i18n.language === 'ar' ? (post.title_ar || post.title_en || post.slug) : (post.title_en || post.title_ar || post.slug);
+        const localizedExcerpt = i18n.language === 'ar' ? (post.excerpt_ar || post.excerpt_en || '') : (post.excerpt_en || post.excerpt_ar || '');
+        const title = localizedTitle.toLowerCase();
         const categoryLabel = t(CATEGORY_FILTER_LABELS[post.category as keyof typeof CATEGORY_FILTER_LABELS] ?? CATEGORY_FILTER_LABELS.news).toLowerCase();
-        const excerpt = (post.excerpt_en || '').toLowerCase();
+        const excerpt = localizedExcerpt.toLowerCase();
         const author = (post.author_name || '').toLowerCase();
         return title.includes(q) || categoryLabel.includes(q) || excerpt.includes(q) || author.includes(q);
       });
