@@ -476,6 +476,17 @@ h1, h2, h3,
 .hero .cta-buttons .btn { opacity: 1 !important; visibility: visible !important; }
 .hero .cta-buttons .btn-primary { box-shadow: 0 4px 16px rgba(26, 158, 125, 0.45), 0 2px 4px rgba(0, 0, 0, 0.08); }
 .hero .cta-buttons .btn-secondary { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+.hero .cta-buttons .btn-whatsapp {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+@media (min-width: 1024px) {
+  .hero .cta-buttons .hero-find-us-btn {
+    flex-basis: 100%;
+    width: fit-content;
+    margin-inline: auto;
+  }
+}
 /* Blog hero: same universal button treatment */
 .blog-hero .cta-buttons { opacity: 1; visibility: visible; }
 .blog-hero .cta-buttons .btn { opacity: 1 !important; visibility: visible !important; }
