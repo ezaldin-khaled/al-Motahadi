@@ -184,7 +184,36 @@ function BlogTab() {
   const [mediaLibrary, setMediaLibrary] = useState<MediaFile[]>([]);
   const [mediaLibraryLoading, setMediaLibraryLoading] = useState(false);
   const editorEnRef = useRef<HtmlEditorHandle | null>(null);
+
   const editorArRef = useRef<HtmlEditorHandle | null>(null);
+
+  const uniqueMediaLibrary = useMemo(() => {
+    const seen = new Set<string>();
+    const out: MediaFile[] = [];
+    for (const file of mediaLibrary) {
+      const key = `${file.id}|${file.url}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(file);
+    }
+    return out;
+  }, [mediaLibrary]);
+
+  const thumbnailQuickOptions = useMemo(
+    () =>
+      uniqueMediaLibrary
+        .filter((f) => f.id !== editing?.thumbnail_media_id && f.url !== editing?.image)
+        .slice(0, 6),
+    [uniqueMediaLibrary, editing?.thumbnail_media_id, editing?.image]
+  );
+
+  const heroQuickOptions = useMemo(
+    () =>
+      uniqueMediaLibrary
+        .filter((f) => f.id !== editing?.hero_media_id && f.url !== editing?.image_large)
+        .slice(0, 6),
+    [uniqueMediaLibrary, editing?.hero_media_id, editing?.image_large]
+  );
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
@@ -615,10 +644,10 @@ function BlogTab() {
                   <div className="dashboard-media-quick-list">
                     {mediaLibraryLoading ? (
                       <div className="dashboard-media-quick-empty">Loading uploaded images...</div>
-                    ) : mediaLibrary.length === 0 ? (
-                      <div className="dashboard-media-quick-empty">No uploaded images yet.</div>
+                    ) : thumbnailQuickOptions.length === 0 ? (
+                      <div className="dashboard-media-quick-empty">No other uploaded images.</div>
                     ) : (
-                      mediaLibrary.slice(0, 6).map((file) => (
+                      thumbnailQuickOptions.map((file) => (
                         <button
                           key={`thumb-${file.id}`}
                           type="button"
@@ -643,10 +672,10 @@ function BlogTab() {
                   <div className="dashboard-media-quick-list">
                     {mediaLibraryLoading ? (
                       <div className="dashboard-media-quick-empty">Loading uploaded images...</div>
-                    ) : mediaLibrary.length === 0 ? (
-                      <div className="dashboard-media-quick-empty">No uploaded images yet.</div>
+                    ) : heroQuickOptions.length === 0 ? (
+                      <div className="dashboard-media-quick-empty">No other uploaded images.</div>
                     ) : (
-                      mediaLibrary.slice(0, 6).map((file) => (
+                      heroQuickOptions.map((file) => (
                         <button
                           key={`hero-${file.id}`}
                           type="button"
