@@ -181,6 +181,8 @@ function BlogTab() {
   const [editing, setEditing] = useState<BlogPostData | null>(null);
   const [editorLang, setEditorLang] = useState<'en' | 'ar'>('en');
   const [mediaPicker, setMediaPicker] = useState<null | 'thumbnail' | 'hero' | 'inline-en' | 'inline-ar'>(null);
+  const [mediaLibrary, setMediaLibrary] = useState<MediaFile[]>([]);
+  const [mediaLibraryLoading, setMediaLibraryLoading] = useState(false);
   const editorEnRef = useRef<HtmlEditorHandle | null>(null);
   const editorArRef = useRef<HtmlEditorHandle | null>(null);
 
@@ -199,6 +201,21 @@ function BlogTab() {
   useEffect(() => {
     loadPosts();
   }, [loadPosts]);
+
+  useEffect(() => {
+    const loadMediaLibrary = async () => {
+      if (!editing) return;
+      setMediaLibraryLoading(true);
+      const res = await getMediaFiles();
+      if (res.success && res.files) {
+        setMediaLibrary(res.files);
+      } else {
+        setMediaLibrary([]);
+      }
+      setMediaLibraryLoading(false);
+    };
+    loadMediaLibrary();
+  }, [editing]);
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this post?')) return;
@@ -595,6 +612,24 @@ function BlogTab() {
                       Choose
                     </button>
                   </div>
+                  <div className="dashboard-media-quick-list">
+                    {mediaLibraryLoading ? (
+                      <div className="dashboard-media-quick-empty">Loading uploaded images...</div>
+                    ) : mediaLibrary.length === 0 ? (
+                      <div className="dashboard-media-quick-empty">No uploaded images yet.</div>
+                    ) : (
+                      mediaLibrary.slice(0, 6).map((file) => (
+                        <button
+                          key={`thumb-${file.id}`}
+                          type="button"
+                          className={`dashboard-media-quick-item ${editing.thumbnail_media_id === file.id ? 'dashboard-media-quick-item--active' : ''}`}
+                          onClick={() => setEditing(prev => (prev ? { ...prev, thumbnail_media_id: file.id, image: file.url } : prev))}
+                        >
+                          <img src={file.url} alt={file.alt_text || file.original_name} />
+                        </button>
+                      ))
+                    )}
+                  </div>
                 </div>
 
                 <div className="dashboard-form-group">
@@ -604,6 +639,24 @@ function BlogTab() {
                     <button type="button" className="dashboard-btn" onClick={() => setMediaPicker('hero')}>
                       Choose
                     </button>
+                  </div>
+                  <div className="dashboard-media-quick-list">
+                    {mediaLibraryLoading ? (
+                      <div className="dashboard-media-quick-empty">Loading uploaded images...</div>
+                    ) : mediaLibrary.length === 0 ? (
+                      <div className="dashboard-media-quick-empty">No uploaded images yet.</div>
+                    ) : (
+                      mediaLibrary.slice(0, 6).map((file) => (
+                        <button
+                          key={`hero-${file.id}`}
+                          type="button"
+                          className={`dashboard-media-quick-item ${editing.hero_media_id === file.id ? 'dashboard-media-quick-item--active' : ''}`}
+                          onClick={() => setEditing(prev => (prev ? { ...prev, hero_media_id: file.id, image_large: file.url } : prev))}
+                        >
+                          <img src={file.url} alt={file.alt_text || file.original_name} />
+                        </button>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>

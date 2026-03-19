@@ -1106,3 +1106,38 @@
   color: var(--text-heading);
 }
 
+.dashboard-media-quick-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 8px;
+}
+
+.dashboard-media-quick-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  height: 56px;
+}
+
+.dashboard-media-quick-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dashboard-media-quick-item--active {
+  border-color: rgba(0, 167, 158, 0.7);
+  box-shadow: 0 0 0 2px rgba(0, 167, 158, 0.18);
+}
+
+.dashboard-media-quick-empty {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
