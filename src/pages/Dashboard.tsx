@@ -641,6 +641,7 @@ function BlogTab() {
                       Choose
                     </button>
                   </div>
+                  <p className="dashboard-media-quick-label">Choose from uploaded images:</p>
                   <div className="dashboard-media-quick-list">
                     {mediaLibraryLoading ? (
                       <div className="dashboard-media-quick-empty">Loading uploaded images...</div>
@@ -653,8 +654,10 @@ function BlogTab() {
                           type="button"
                           className={`dashboard-media-quick-item ${editing.thumbnail_media_id === file.id ? 'dashboard-media-quick-item--active' : ''}`}
                           onClick={() => setEditing(prev => (prev ? { ...prev, thumbnail_media_id: file.id, image: file.url } : prev))}
+                          title={`Uploaded image: ${file.original_name}`}
                         >
                           <img src={file.url} alt={file.alt_text || file.original_name} />
+                          <span className="dashboard-media-quick-name">{file.original_name}</span>
                         </button>
                       ))
                     )}
@@ -669,6 +672,7 @@ function BlogTab() {
                       Choose
                     </button>
                   </div>
+                  <p className="dashboard-media-quick-label">Choose from uploaded images:</p>
                   <div className="dashboard-media-quick-list">
                     {mediaLibraryLoading ? (
                       <div className="dashboard-media-quick-empty">Loading uploaded images...</div>
@@ -681,8 +685,10 @@ function BlogTab() {
                           type="button"
                           className={`dashboard-media-quick-item ${editing.hero_media_id === file.id ? 'dashboard-media-quick-item--active' : ''}`}
                           onClick={() => setEditing(prev => (prev ? { ...prev, hero_media_id: file.id, image_large: file.url } : prev))}
+                          title={`Uploaded image: ${file.original_name}`}
                         >
                           <img src={file.url} alt={file.alt_text || file.original_name} />
+                          <span className="dashboard-media-quick-name">{file.original_name}</span>
                         </button>
                       ))
                     )}
