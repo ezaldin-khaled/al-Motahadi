@@ -6,7 +6,7 @@
     "ourServices": "Our Services",
     "healthTools": "Health Tools",
     "packagesPricing": "Package & Pricing",
-    "blog": "Blog",
+    "blog": "Medical Articals",
     "ourTeam": "Our Team",
     "contactUs": "Contact Us",
     "bookAppointment": "Book an Appointment →",
@@ -226,7 +226,7 @@
     "companyHeading": "COMPANY",
     "aboutUs": "About Us",
     "whoWeAre": "Who We Are",
-    "blog": "Blog",
+    "blog": "Medical Articals",
     "packagesPricing": "Packages & Pricing",
     "ourProcess": "Our Process",
     "contact": "Contact",
@@ -1177,7 +1177,7 @@
     "patient4Desc": "Knowing that your care is grounded in the latest science and delivered by a team invested in research gives you confidence in your recovery journey."
   },
   "blog": {
-    "heroTitle": "Rehabilitation Insights",
+    "heroTitle": "Medical Articals",
     "heroSubtitle": "Empowering your recovery journey with expert advice, inspiring stories, and the latest research in rehabilitation.",
     "searchPlaceholder": "Search articles...",
     "filterAllPosts": "All Posts",
