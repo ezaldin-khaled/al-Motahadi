@@ -194,8 +194,8 @@ export async function getBlogPosts(filters?: { status?: string; category?: strin
         excerpt_en,
         excerpt_ar,
         // backend list query provides hero URL as image_large, and thumb URL as image
-        image_large: (raw as any).image_large ?? undefined,
-        image: (raw as any).image ?? '',
+        image_large: (raw as any).image_large ?? (raw as any).image ?? '/hero-image.png',
+        image: (raw as any).image ?? (raw as any).image_large ?? '/hero-image.png',
         date: String(dateRaw).slice(0, 10),
         read_time: typeof (raw as any).read_time === 'number' ? (raw as any).read_time : 5,
         featured: Boolean((raw as any).featured),
@@ -210,7 +210,11 @@ export async function getBlogPosts(filters?: { status?: string; category?: strin
 
 export async function getBlogPost(id: number | string, _lang?: 'en' | 'ar'): Promise<BlogSingleResponse> {
   try {
-    const res = await fetch(`${API_BASE}/api/blog.php?id=${id}`, { credentials: 'include' });
+    const param =
+      typeof id === 'number' || /^\d+$/.test(String(id))
+        ? `id=${encodeURIComponent(String(id))}`
+        : `slug=${encodeURIComponent(String(id))}`;
+    const res = await fetch(`${API_BASE}/api/blog.php?${param}`, { credentials: 'include' });
     const data = (await res.json()) as BlogSingleResponse & { success?: boolean; post?: any };
     if (!data.success || !data.post) return data as BlogSingleResponse;
 
@@ -228,8 +232,8 @@ export async function getBlogPost(id: number | string, _lang?: 'en' | 'ar'): Pro
       ...(raw as any),
       date,
       read_time: typeof raw.read_time === 'number' ? raw.read_time : 5,
-      image: raw.image ?? raw.thumb_url ?? '',
-      image_large: raw.image_large ?? undefined,
+      image: raw.image ?? raw.thumb_url ?? raw.image_large ?? '/hero-image.png',
+      image_large: raw.image_large ?? raw.image ?? '/hero-image.png',
       thumbnail_media_id: raw.thumbnail_media_id ?? null,
       hero_media_id: raw.hero_media_id ?? null,
       featured: Boolean(raw.featured),
