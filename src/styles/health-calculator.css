@@ -263,6 +263,128 @@
   color: #FFFFFF;
 }
 
+.health-calculator__result--rich {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.health-calculator--page .health-calculator__result--rich {
+  background: #f4f7f7;
+  color: #1f2937;
+  border: 1px solid #d6e4e3;
+  border-radius: 14px;
+  padding: 18px 20px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__result-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #e5efee;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__result-row:last-of-type {
+  margin-bottom: 8px;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__result-label {
+  color: #4b5563;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__result-value {
+  color: #0f172a;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__smart-message {
+  color: #0f172a;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__smart-detail,
+.health-calculator--page .health-calculator__result--rich .health-calculator__smart-list {
+  color: #374151;
+  font-size: 14px;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__smart-list {
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__smart-list li {
+  margin-bottom: 4px;
+}
+
+.health-calculator--page .health-calculator__result--rich .health-calculator__smart-warning {
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px dashed #c7dcda;
+  color: #4b5563;
+  font-size: 12px;
+}
+
+/* Better readability for Arabic/RTL layouts */
+[dir="rtl"] .health-calculator--page .health-calculator__result--rich {
+  text-align: right;
+}
+
+[dir="rtl"] .health-calculator--page .health-calculator__result--rich .health-calculator__result-row {
+  grid-template-columns: auto 1fr;
+}
+
+[dir="rtl"] .health-calculator--page .health-calculator__result--rich .health-calculator__result-label {
+  text-align: right;
+}
+
+[dir="rtl"] .health-calculator--page .health-calculator__result--rich .health-calculator__result-value {
+  text-align: left;
+}
+
+[dir="rtl"] .health-calculator--page .health-calculator__result--rich .health-calculator__smart-list {
+  padding-right: 20px;
+  padding-left: 0;
+}
+
+.health-calculator__smart-message {
+  margin: 6px 0 0;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.health-calculator__smart-detail {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.health-calculator__smart-list {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.health-calculator__smart-warning {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.92;
+  color: inherit;
+}
+
 /* Gender — two equal buttons, same row width as one input field */
 .health-calculator__gender {
   display: flex;
@@ -599,6 +721,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+.health-calculator__result--bmi .health-calculator__smart-warning {
+  color: #666;
 }
 .health-calculator__result-row {
   display: flex;

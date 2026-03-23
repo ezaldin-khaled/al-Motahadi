@@ -155,6 +155,20 @@
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
+    "activityLevel": "Activity Level",
+    "goal": "Goal",
+    "activityOptions": {
+      "sedentary": "Sedentary",
+      "light": "Light Activity",
+      "moderate": "Moderate Activity",
+      "active": "Active",
+      "very_active": "Very Active"
+    },
+    "goalOptions": {
+      "lose": "Lose Weight",
+      "maintain": "Maintain Weight",
+      "gain": "Gain Weight"
+    },
     "placeholderWeight": "e.g. 70",
     "placeholderHeight": "e.g. 175",
     "placeholderAge": "e.g. 26",
@@ -167,6 +181,146 @@
       "normal": "Normal Weight",
       "overweight": "Overweight",
       "obese": "Obese"
+    },
+    "smart": {
+      "riskLabel": "Risk Level",
+      "risk": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "very_high": "Very High"
+      },
+      "nutritionLabel": "Nutrition Strategy",
+      "behaviorLabel": "Behavior Trigger",
+      "quickStartLabel": "Quick Start",
+      "goalStrategyLabel": "Goal Strategy",
+      "quickActionLabel": "Quick Action",
+      "warningGeneral": "This tool is for general awareness only and is not a medical diagnosis.",
+      "bmi": {
+        "underweight_mild": {
+          "category_label": "Underweight (Mild)",
+          "smart_message": "Your body needs better energy support, but this is still manageable.",
+          "body_analysis": "This is often related to irregular meals or low muscle mass.",
+          "action_plan_1": "Keep 3 main meals daily.",
+          "action_plan_2": "Add 2 snacks.",
+          "action_plan_3": "Do not stay over 4 hours without food.",
+          "nutrition_strategy": "Include protein, carbs, and healthy fats in each meal.",
+          "behavior_trigger": "If you forget meals, anchor them to fixed daily times.",
+          "quick_start": "Add one fixed meal daily for 7 days."
+        },
+        "underweight_severe": {
+          "category_label": "Underweight (Severe)",
+          "smart_message": "Your body shows a real energy deficit that can affect immunity and daily energy.",
+          "body_analysis": "Calorie intake is likely low, with possible low muscle mass.",
+          "action_plan_1": "Increase calories gradually.",
+          "action_plan_2": "Add energy-dense foods.",
+          "action_plan_3": "Support daily protein intake.",
+          "nutrition_strategy": "Energy-dense meals plus frequent snacks.",
+          "behavior_trigger": "If you get full quickly, use smaller frequent portions.",
+          "quick_start": "Add 2 daily snacks."
+        },
+        "normal": {
+          "category_label": "Normal Weight",
+          "smart_message": "Your status is good. The challenge is consistency, not reaching.",
+          "body_analysis": "Your energy intake and expenditure are generally balanced.",
+          "action_plan_1": "Keep your current routine.",
+          "action_plan_2": "Track gradual changes.",
+          "action_plan_3": "Maintain regular activity.",
+          "nutrition_strategy": "Balanced variety with less random eating.",
+          "behavior_trigger": "If eating out increases, track frequency first.",
+          "quick_start": "Keep the same routine for one week."
+        },
+        "overweight_low": {
+          "category_label": "Overweight (Early)",
+          "smart_message": "This is the best stage for early intervention.",
+          "body_analysis": "A small daily calorie surplus is likely accumulating.",
+          "action_plan_1": "Reduce hidden calories.",
+          "action_plan_2": "Improve one habit per day.",
+          "action_plan_3": "Increase movement gradually.",
+          "nutrition_strategy": "Lower sugar and improve meal quality.",
+          "behavior_trigger": "Sugary drinks are often the main cause.",
+          "quick_start": "Remove one sugary drink daily."
+        },
+        "overweight_high": {
+          "category_label": "Overweight (High)",
+          "smart_message": "Your body is consistently storing more energy than it needs.",
+          "body_analysis": "There is a clear daily calorie surplus.",
+          "action_plan_1": "Reduce portions gradually.",
+          "action_plan_2": "Structure meal timing.",
+          "action_plan_3": "Add daily activity.",
+          "nutrition_strategy": "Increase fiber and reduce refined carbs.",
+          "behavior_trigger": "If you eat without hunger, the issue is behavioral too.",
+          "quick_start": "Stop eating after 9 PM."
+        },
+        "obesity_1_low": {
+          "category_label": "Obesity - Class I",
+          "smart_message": "Weight has started affecting body performance, but change is very possible.",
+          "body_analysis": "Energy storage is ongoing and burn is lower than intake.",
+          "action_plan_1": "Use a moderate calorie deficit.",
+          "action_plan_2": "Keep regular activity.",
+          "action_plan_3": "Stabilize core habits.",
+          "nutrition_strategy": "Protein + fiber with lower high-calorie foods.",
+          "behavior_trigger": "Fast eating can increase intake without awareness.",
+          "quick_start": "Make each meal last at least 10 minutes."
+        },
+        "obesity_1_high": {
+          "category_label": "Obesity - Class I (High)",
+          "smart_message": "Structured action now helps prevent progression.",
+          "body_analysis": "There is a persistent surplus with weak portion control.",
+          "action_plan_1": "Follow a clear calorie plan.",
+          "action_plan_2": "Track emotional eating triggers.",
+          "action_plan_3": "Build daily movement consistency.",
+          "nutrition_strategy": "Strict meal structure with lower-calorie density.",
+          "behavior_trigger": "When stress drives eating, address stress first.",
+          "quick_start": "Log everything you eat for 3 days."
+        },
+        "obesity_2": {
+          "category_label": "Obesity - Class II",
+          "smart_message": "Your body is under clear pressure and needs a structured plan.",
+          "body_analysis": "There is a clear energy balance disruption.",
+          "action_plan_1": "Start a structured nutrition plan.",
+          "action_plan_2": "Review progress weekly.",
+          "action_plan_3": "Increase activity gradually.",
+          "nutrition_strategy": "Calorie reduction with strict meal organization.",
+          "behavior_trigger": "If stress is driving food choices, treat the root trigger.",
+          "quick_start": "Track all intake for 3 days."
+        },
+        "obesity_3": {
+          "category_label": "Severe Obesity",
+          "smart_message": "This needs serious intervention, and every small improvement matters.",
+          "body_analysis": "A large and ongoing calorie surplus is present.",
+          "action_plan_1": "Start a structured intervention plan.",
+          "action_plan_2": "Fix core habits first.",
+          "action_plan_3": "Seek specialist supervision.",
+          "nutrition_strategy": "Low-calorie, high-quality structured eating.",
+          "behavior_trigger": "Start by regular meal timing before cutting portions.",
+          "quick_start": "Set 3 fixed meal times daily."
+        }
+      },
+      "bmr": {
+        "bmrLabel": "BMR",
+        "dailyCaloriesLabel": "Suggested Daily Calories",
+        "smart_interpretation": "This number is the minimum energy your body needs to stay alive.",
+        "energy_balance_analysis": "Weight changes come from the gap between your intake and your actual energy needs.",
+        "hidden_cause_overweight": "The common cause is not one meal, but a small daily surplus that accumulates.",
+        "hidden_cause_underweight": "The issue is often irregular nutrition, not appetite alone.",
+        "hidden_cause_neutral": "Weight stability depends on keeping intake and expenditure balanced.",
+        "goal_strategy": {
+          "maintain": "Keep balance between what you eat and what your body uses.",
+          "lose": "Create a small, sustainable calorie deficit.",
+          "gain": "Increase calories gradually while supporting muscle mass."
+        },
+        "behavior_trigger": {
+          "lose": "The biggest failure point is consistency, not diet perfection.",
+          "maintain": "Consistency with daily habits matters more than perfect days.",
+          "gain": "Healthy gain needs structure, not random eating."
+        },
+        "quick_action": {
+          "lose": "Start by reducing 300-500 calories/day.",
+          "gain": "Add 300 calories/day.",
+          "maintain": "Keep your current eating pattern stable."
+        }
+      }
     }
   },
   "healthToolsPage": {
