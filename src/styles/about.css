@@ -378,6 +378,55 @@
   vertical-align: middle;
 }
 
+/* Our Story slider (no dependency) */
+.trust-slider {
+  position: relative;
+}
+
+/* Smooth fade on slide change */
+.trust-slider img {
+  animation: trustSliderFade 420ms ease-in-out;
+  will-change: opacity, transform;
+}
+
+@keyframes trustSliderFade {
+  from {
+    opacity: 0.0;
+    transform: scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.trust-slider__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(6px);
+}
+
+.trust-slider__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 0;
+}
+
+.trust-slider__dot.is-active {
+  background: rgba(255, 255, 255, 0.95);
+}
+
 /* ===== ABOUT THE FOUNDER SECTION — design match (no visible container) ===== */
 .founder-section {
   padding: 96px 24px;

@@ -49,6 +49,12 @@ const SnapchatIcon = () => (
   </svg>
 );
 
+const TikTokIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.73h-3.28v13.86a2.89 2.89 0 1 1-2-2.75V9.74a6.17 6.17 0 1 0 5.28 6.08V8.79a8.13 8.13 0 0 0 4.77 1.54V6.69z" />
+  </svg>
+);
+
 export default function Footer() {
   const { t } = useTranslation();
   const footerRef = useRef<HTMLElement>(null);
@@ -91,6 +97,7 @@ export default function Footer() {
               <a href="https://www.youtube.com/@ALMOTAHADIPHYSIO" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.youtube')}><YouTubeIcon /></a>
               <a href="https://www.whatsapp.com/channel/0029VaoU14I9MF8sor12mO2b" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.whatsappChannel')}><WhatsAppIcon /></a>
               <a href="https://www.snapchat.com/add/almotahadicente" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.snapchat')}><SnapchatIcon /></a>
+              <a href="https://www.tiktok.com/@almotahadi.medical" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={t('footer.tiktok')}><TikTokIcon /></a>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
@@ -6,6 +6,10 @@ import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import { useCmsPageContent } from '../hooks/useCmsPageContent';
 import '../styles/about.css';
+import storySlide1 from '../../assets/our story slider/WhatsApp Image 2026-03-25 at 07.26.21.jpeg';
+import storySlide2 from '../../assets/our story slider/WhatsApp Image 2026-03-25 at 07.26.21(1).jpeg';
+import storySlide3 from '../../assets/our story slider/WhatsApp Image 2026-03-25 at 07.26.21(2).jpeg';
+import storySlide4 from '../../assets/our story slider/WhatsApp Image 2026-03-25 at 07.26.22.jpeg';
 
 export default function AboutUs() {
   const { t } = useTranslation();
@@ -16,9 +20,22 @@ export default function AboutUs() {
   const founderContent = getSectionValue('about_founder') as Record<string, unknown> | null;
   const teamContent = getSectionValue('about_team') as Record<string, unknown> | null;
   const responsibilityContent = getSectionValue('about_responsibility') as Record<string, unknown> | null;
+  const storySlides = useMemo(() => [storySlide1, storySlide2, storySlide3, storySlide4], []);
+  const [storySlideIndex, setStorySlideIndex] = useState(0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setStorySlideIndex((current) => (current + 1) % storySlides.length);
+    }, 4500);
+
+    return () => window.clearInterval(intervalId);
+  }, [storySlides.length]);
+
+  const storyImageAlt = typeof storyContent?.imageAlt === 'string' ? storyContent.imageAlt : t('about.ourStoryImageAlt');
 
   return (
     <div className="page-wrapper">
@@ -154,10 +171,21 @@ export default function AboutUs() {
               </div>
               <p className="trust-desc trust-desc-justify">{typeof storyContent?.body === 'string' ? storyContent.body : t('about.ourStoryText')}</p>
               <div className="trust-image">
-                <img
-                  src={typeof storyContent?.image === 'string' ? storyContent.image : '/almotahadi-opening-ceremony.png'}
-                  alt={typeof storyContent?.imageAlt === 'string' ? storyContent.imageAlt : t('about.ourStoryImageAlt')}
-                />
+                <div className="trust-slider" aria-roledescription="carousel" aria-label={t('about.ourStoryHeading')}>
+                  <img key={storySlideIndex} src={storySlides[storySlideIndex]} alt={storyImageAlt} loading="lazy" />
+                  <div className="trust-slider__dots" role="tablist" aria-label={t('about.ourStoryHeading')}>
+                    {storySlides.map((_, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        className={`trust-slider__dot ${idx === storySlideIndex ? 'is-active' : ''}`}
+                        onClick={() => setStorySlideIndex(idx)}
+                        aria-label={`Slide ${idx + 1}`}
+                        aria-current={idx === storySlideIndex ? 'true' : undefined}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

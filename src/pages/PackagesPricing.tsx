@@ -169,19 +169,6 @@ export default function PackagesPricing() {
           </div>
         </section>
 
-        <section className="packages-section packages-section-gray">
-          <div className="packages-section-inner">
-            <p className="packages-section-label">{t('packages.forYou')}</p>
-            <h2 className="packages-section-title">{t('packages.comprehensiveHomeRehabSectionTitle')}</h2>
-            <p className="packages-section-simple-desc">{t('packages.comprehensiveHomeRehabSectionDesc')}</p>
-            <div className="packages-section-actions">
-              <Link to="/packages/comprehensive-home-rehab" className="btn btn-primary">
-                {t('packages.viewDetails')}
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <CtaSection variant="dark-cards" />
       </main>
       <Footer />

@@ -894,6 +894,10 @@ a.cta-info-card-link:hover {
   color: var(--text-heading);
   margin-bottom: 6px;
 }
+
+.cta-section .cta-info-card-title {
+  color: #ffffff !important;
+}
 .cta-info-card-line {
   font-size: 14px;
   color: var(--text-muted);
@@ -901,6 +905,7 @@ a.cta-info-card-link:hover {
   margin: 0;
 }
 .cta-info-card-line + .cta-info-card-line { margin-top: 2px; }
+
 /* For dark sections only: use with .btn — transparent, white border + text (pill shape) */
 .btn.btn-outline-light {
   background: transparent;

@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WhatsAppIcon } from './Icons';
 import { Link } from 'react-router-dom';
-import { BOOK_APPOINTMENT_PATH, WHATSAPP_URL } from '../constants/cta';
+import { BOOK_APPOINTMENT_PATH, GOOGLE_MAPS_PLACE_URL, WHATSAPP_URL } from '../constants/cta';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,13 +44,13 @@ export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
 
   const cards = [
     { icon: <ClockIcon />, title: t('cta.workingHours'), lines: [t('cta.hoursDefault'), t('cta.hoursTimeDefault')] },
-    { icon: <PhoneIcon />, title: t('cta.contactUs'), lines: [t('cta.phonePlaceholder'), t('cta.email')] },
+    { icon: <PhoneIcon />, title: t('cta.contactUs'), lines: [t('cta.phonePlaceholder'), t('cta.phoneSecondary'), t('cta.email')] },
     { icon: <LocationIcon />, title: t('cta.visitUsTitle'), lines: [t('cta.locationLine1'), t('cta.locationLine2')] },
   ];
 
   const cardsServices = [
     { icon: <ClockIcon />, title: t('cta.workingHours'), lines: [t('cta.hoursDefault'), t('cta.hoursTimeServices')] },
-    { icon: <PhoneIcon />, title: t('cta.contactUs'), lines: [t('cta.phoneServices'), t('cta.email')] },
+    { icon: <PhoneIcon />, title: t('cta.contactUs'), lines: [t('cta.phoneServices'), t('cta.phoneSecondary'), t('cta.email')] },
     { icon: <LocationIcon />, title: t('cta.visitUsTitle'), lines: [t('cta.locationLine1Services'), t('cta.locationLine2')] },
   ];
 
@@ -122,6 +122,13 @@ export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
                   <WhatsAppIcon className="whatsapp-icon" />
                   {t('cta.whatsapp')}
                 </a>
+                <a href={GOOGLE_MAPS_PLACE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary hero-find-us-btn" aria-label={t('cta.findUs')}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  {t('cta.findUs')}
+                </a>
               </>
             ) : (
               <>
@@ -134,6 +141,13 @@ export default function CtaSection({ variant, labelKey }: CtaSectionProps) {
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-whatsapp" aria-label="WhatsApp">
                   <WhatsAppIcon className="whatsapp-icon" />
                   {t('cta.whatsapp')}
+                </a>
+                <a href={GOOGLE_MAPS_PLACE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary hero-find-us-btn" aria-label={t('cta.findUs')}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  {t('cta.findUs')}
                 </a>
               </>
             )}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import teamImage from '../../assets/ChatGPT Image Mar 25, 2026, 02_48_23 PM.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,7 +41,7 @@ export default function TeamSection() {
           <Link to="/team" className="btn btn-primary">{t('teamSection.meetTeam')}</Link>
         </div>
         <div className="team-image-wrap" ref={imageRef}>
-          <img src="/team-image.png" alt={t('teamSection.teamImageAlt')} className="team-image" />
+          <img src={teamImage} alt={t('teamSection.teamImageAlt')} className="team-image" />
         </div>
       </div>
     </section>
