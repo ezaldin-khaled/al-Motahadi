@@ -125,7 +125,6 @@ export default function Footer() {
               <Link to="/packages/corporate">{t('packages.corporatePackages')}</Link>
               <Link to="/packages/community-care">{t('packages.ehataPackages')}</Link>
               <Link to="/packages/home-therapy">{t('packages.homeTherapySectionTitle')}</Link>
-              <Link to="/packages/intensive-home-therapy">{t('packages.intensiveHomeTherapySectionTitle')}</Link>
               <Link to="/packages/comprehensive-home-rehab">{t('packages.comprehensiveHomeRehabSectionTitle')}</Link>
               <Link to="/home-therapy">{t('footer.homeTherapyService')}</Link>
               <Link to="/transportation">{t('footer.transportationService')}</Link>

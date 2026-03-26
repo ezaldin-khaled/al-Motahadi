@@ -16,7 +16,6 @@ export default function AboutUs() {
   const { getSectionValue } = useCmsPageContent('about');
   const heroContent = getSectionValue('about_hero') as Record<string, unknown> | null;
   const introContent = getSectionValue('about_intro') as Record<string, unknown> | null;
-  const storyContent = getSectionValue('about_story') as Record<string, unknown> | null;
   const founderContent = getSectionValue('about_founder') as Record<string, unknown> | null;
   const teamContent = getSectionValue('about_team') as Record<string, unknown> | null;
   const responsibilityContent = getSectionValue('about_responsibility') as Record<string, unknown> | null;
@@ -35,7 +34,7 @@ export default function AboutUs() {
     return () => window.clearInterval(intervalId);
   }, [storySlides.length]);
 
-  const storyImageAlt = typeof storyContent?.imageAlt === 'string' ? storyContent.imageAlt : t('about.ourStoryImageAlt');
+  const storyImageAlt = t('about.ourStoryImageAlt');
 
   return (
     <div className="page-wrapper">
@@ -166,10 +165,10 @@ export default function AboutUs() {
           <div className="trust-container">
             <div className="trust-content">
               <div className="trust-header">
-                <p className="trust-label">{typeof storyContent?.label === 'string' ? storyContent.label : t('about.ourStoryLabel')}</p>
-                <h2 id="our-story-heading" className="trust-heading">{typeof storyContent?.heading === 'string' ? storyContent.heading : t('about.ourStoryHeading')}</h2>
+                <p className="trust-label">{t('about.ourStoryLabel')}</p>
+                <h2 id="our-story-heading" className="trust-heading">{t('about.ourStoryHeading')}</h2>
               </div>
-              <p className="trust-desc trust-desc-justify">{typeof storyContent?.body === 'string' ? storyContent.body : t('about.ourStoryText')}</p>
+              <p className="trust-desc trust-desc-justify">{t('about.ourStoryText')}</p>
               <div className="trust-image">
                 <div className="trust-slider" aria-roledescription="carousel" aria-label={t('about.ourStoryHeading')}>
                   <img key={storySlideIndex} src={storySlides[storySlideIndex]} alt={storyImageAlt} loading="lazy" />
@@ -227,7 +226,7 @@ export default function AboutUs() {
               <div className="medical-teams-image-wrap">
                 <div className="medical-teams-image">
                   <img
-                    src={typeof teamContent?.image === 'string' ? teamContent.image : '/medical-team.png'}
+                    src={typeof teamContent?.image === 'string' ? teamContent.image : '/team-image.png'}
                     alt={typeof teamContent?.imageAlt === 'string' ? teamContent.imageAlt : t('about.medicalTeamImageAlt')}
                   />
                 </div>

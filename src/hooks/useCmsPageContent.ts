@@ -19,12 +19,19 @@ function parseSectionValue(section?: CmsPageSection): SectionValue {
 export function useCmsPageContent(slug: string) {
   const { i18n } = useTranslation();
   const lang = i18n.language.startsWith('ar') ? 'ar' : 'en';
+  const cmsEnabled = String(import.meta.env.VITE_ENABLE_CMS_CONTENT || '').toLowerCase() === 'true';
 
   const [sectionsMap, setSectionsMap] = useState<CmsPageSectionsMap>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const load = useCallback(async () => {
+    if (!cmsEnabled) {
+      setSectionsMap({});
+      setError('');
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError('');
     const res = await getPageSectionsBySlug(slug, lang);
@@ -34,7 +41,7 @@ export function useCmsPageContent(slug: string) {
       setError(res.error || 'Failed to load page content.');
     }
     setLoading(false);
-  }, [slug, lang]);
+  }, [slug, lang, cmsEnabled]);
 
   useEffect(() => {
     load();
@@ -69,6 +76,7 @@ export function useCmsPageContent(slug: string) {
     loading,
     error,
     reload: load,
+    cmsEnabled,
   };
 }
 
