@@ -497,7 +497,7 @@ const DETAIL_CONFIG_EN: Record<DetailType, DetailConfig> = {
       'Our Intensive Home Therapy Packages are designed to offer the highest level of care for individuals who require specialized treatment. Contact us today to discuss which package is best suited for your needs or to schedule a consultation with our rehabilitation team.',
   },
   'comprehensive-home-rehab': {
-    heroTitle: 'Comprehensive Home-Based Rehabilitation Program for Three Months',
+    heroTitle: 'Intensive home therapy packages',
     heroDesc: [
       'Thank you for contacting and trusting Al Motahadi Medical Rehabilitation Center. Our comprehensive home-based rehabilitation program is designed to provide you with consistent care and the highest standard of treatment, all from the comfort of your own home.',
       'Given the nature of conditions such as Parkinson\'s disease with significant motor impairment, we provide structured rehabilitation options over three months to improve mobility, manage symptoms, and enhance quality of life.',
@@ -1034,7 +1034,7 @@ const DETAIL_CONFIG_AR: Record<DetailType, DetailConfig> = {
       'تواصل معنا لاختيار البرنامج الأنسب لحالتك أو حجز استشارة مع فريق التأهيل.',
   },
   'comprehensive-home-rehab': {
-    heroTitle: 'برنامج تأهيل منزلي شامل لمدة ثلاثة أشهر',
+    heroTitle: 'باقات العلاج المنزلي المكثف',
     heroDesc: [
       'شكرًا لتواصلك وثقتك بمركز المتحدي للتأهيل الطبي. صُمّم هذا البرنامج المنزلي الشامل ليقدّم لك رعاية مستمرة وفق أعلى المعايير من راحة منزلك.',
       'نراعي في هذا البرنامج طبيعة الحالات مثل مرض باركنسون مع تأثر حركي ملحوظ، لذلك نوفر خيارات تأهيلية منظمة على مدى ثلاثة أشهر لتحسين الحركة والتحكّم في الأعراض وتعزيز جودة الحياة.',

@@ -221,7 +221,7 @@ export default function AboutUs() {
                 <p className="medical-teams-desc">{typeof teamContent?.body1 === 'string' ? teamContent.body1 : t('about.medicalTeamDesc1')}</p>
                 <p className="medical-teams-desc">{typeof teamContent?.body2 === 'string' ? teamContent.body2 : t('about.medicalTeamDesc2')}</p>
                 <p className="medical-teams-desc">{typeof teamContent?.body3 === 'string' ? teamContent.body3 : t('about.medicalTeamDesc3')}</p>
-                <Link to="/who-we-are" className="btn btn-primary">{typeof teamContent?.ctaLabel === 'string' ? teamContent.ctaLabel : t('about.meetMedicalTeam')}</Link>
+                <Link to="/team" className="btn btn-primary">{typeof teamContent?.ctaLabel === 'string' ? teamContent.ctaLabel : t('about.meetMedicalTeam')}</Link>
               </div>
               <div className="medical-teams-image-wrap">
                 <div className="medical-teams-image">

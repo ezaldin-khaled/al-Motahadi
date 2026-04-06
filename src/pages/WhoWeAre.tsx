@@ -126,7 +126,7 @@ export default function WhoWeAre() {
             <div className="wwa-team-grid">
               <div className="wwa-team-image-wrap">
                 <div className="wwa-team-image">
-                  <img src="/medical-team.png" alt={t('whoWeAre.teamImageAlt')} />
+                  <img src="/team-image.png" alt={t('whoWeAre.teamImageAlt')} />
                 </div>
               </div>
               <div className="wwa-team-content">
